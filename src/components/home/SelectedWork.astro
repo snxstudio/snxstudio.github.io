@@ -1,9 +1,11 @@
 ---
 import Mark from '../Marks.astro';
+import ProjectSketch from '../ProjectSketch.astro';
 
 const projects = [
   {
     idx: '01',
+    sketch: 'logistics',
     title: 'Logistics Intelligence Platform',
     sector: 'Freight · AI · Multi-tenant SaaS',
     year: '2024 — Now',
@@ -21,6 +23,7 @@ const projects = [
   },
   {
     idx: '02',
+    sketch: 'meter',
     title: 'Smart Energy Telemetry',
     sector: 'Industrial IoT · Embedded · Research',
     year: '2017 — 2019',
@@ -38,6 +41,7 @@ const projects = [
   },
   {
     idx: '03',
+    sketch: 'searoute',
     title: 'Maritime Routing Engine',
     sector: 'Open Source · Geo · TypeScript',
     year: '2023 — Now',
@@ -56,6 +60,7 @@ const projects = [
   },
   {
     idx: '04',
+    sketch: 'prompt',
     title: 'Promptbucket',
     sector: 'Open Source · AI · Web app',
     year: '2025 — Now',
@@ -74,6 +79,7 @@ const projects = [
   },
   {
     idx: '05',
+    sketch: 'agritech',
     title: 'Agritech Sensor Mesh',
     sector: 'IoT · AgriTech · Research',
     year: '2018',
@@ -91,6 +97,7 @@ const projects = [
   },
   {
     idx: '06',
+    sketch: 'lastmile',
     title: 'Last-Mile Cargo OS',
     sector: 'Marketplace · Logistics · Mission',
     year: '2019 — 2021',
@@ -127,60 +134,84 @@ const projects = [
       </p>
     </header>
 
-    <ol class="work-list" role="list">
+    <p class="work-hint serif-italic">
+      <Mark name="arrow-r" class="work-hint-arrow" />
+      <span>Drag a card. Throw it. The studio cleans up after itself.</span>
+    </p>
+
+    <ol class="work-list" role="list" id="work-list">
       {projects.map((p, i) => (
-        <li class="work-row reveal" style={`--tilt:${p.tilt}deg`}>
-          <a
-            href={p.link}
-            target={p.external ? '_blank' : undefined}
-            rel={p.external ? 'noopener noreferrer' : undefined}
-            class="work-link"
-          >
-            <!-- Top metadata row, like a folder tab -->
-            <div class="work-row-top">
-              <span class="work-folder-tab">
-                <span class="work-idx numeral">{p.idx}</span>
-                <span class="work-folder-rule"></span>
-                <span class="work-sector">{p.sector}</span>
-              </span>
-              <span class="work-row-meta">
-                <span>{p.year}</span>
-                <span class="work-row-meta-dot">·</span>
-                <span class="serif-italic">{p.role}</span>
-              </span>
-            </div>
+        <li class="work-row reveal" style={`--tilt:${p.tilt}deg`} data-draggable>
+          <article class="work-card">
+            <!-- Drag handle / grab bar -->
+            <span class="work-grab" aria-hidden="true" data-grab>
+              <span class="grab-dot"></span>
+              <span class="grab-dot"></span>
+              <span class="grab-dot"></span>
+              <span class="grab-dot"></span>
+              <span class="grab-dot"></span>
+              <span class="grab-dot"></span>
+            </span>
 
-            <!-- Title + stamp -->
-            <div class="work-title-row">
-              <h3 class="work-title">
-                {p.title}
-                {p.external && (
-                  <span class="work-ext" aria-hidden="true">
-                    <Mark name="arrow-r" />
-                  </span>
-                )}
-              </h3>
-              <span class="work-stamp stamp">
-                {p.stamp}
-              </span>
-            </div>
+            <a
+              href={p.link}
+              target={p.external ? '_blank' : undefined}
+              rel={p.external ? 'noopener noreferrer' : undefined}
+              class="work-link"
+            >
+              <!-- Top metadata row, like a folder tab -->
+              <div class="work-row-top">
+                <span class="work-folder-tab">
+                  <span class="work-idx numeral">{p.idx}</span>
+                  <span class="work-folder-rule"></span>
+                  <span class="work-sector">{p.sector}</span>
+                </span>
+                <span class="work-row-meta">
+                  <span>{p.year}</span>
+                  <span class="work-row-meta-dot">·</span>
+                  <span class="serif-italic">{p.role}</span>
+                </span>
+              </div>
 
-            <p class="work-summary">{p.summary}</p>
+              <!-- Two-column body: sketch + content -->
+              <div class="work-body">
+                <div class="work-sketch">
+                  <ProjectSketch name={p.sketch} />
+                  <span class="work-sketch-tag">— sketch · ledger —</span>
+                </div>
 
-            <div class="work-row-bottom">
-              <ul class="work-metrics receipt-strip" role="list">
-                {p.metrics.map(m => (
-                  <li>
-                    <span class="metric-val numeral">{m.value}</span>
-                    <span class="metric-label">{m.label}</span>
-                  </li>
-                ))}
-              </ul>
-              <ul class="work-stack" role="list">
-                {p.stack.map(s => <li>{s}</li>)}
-              </ul>
-            </div>
-          </a>
+                <div class="work-content">
+                  <div class="work-title-row">
+                    <h3 class="work-title">
+                      {p.title}
+                      {p.external && (
+                        <span class="work-ext" aria-hidden="true">
+                          <Mark name="arrow-r" />
+                        </span>
+                      )}
+                    </h3>
+                    <span class="work-stamp stamp">{p.stamp}</span>
+                  </div>
+
+                  <p class="work-summary">{p.summary}</p>
+
+                  <div class="work-row-bottom">
+                    <ul class="work-metrics receipt-strip" role="list">
+                      {p.metrics.map(m => (
+                        <li>
+                          <span class="metric-val numeral">{m.value}</span>
+                          <span class="metric-label">{m.label}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <ul class="work-stack" role="list">
+                      {p.stack.map(s => <li>{s}</li>)}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>
         </li>
       ))}
     </ol>
@@ -253,16 +284,48 @@ const projects = [
     gap: clamp(1.5rem, 3vw, 2.5rem);
   }
 
+  .work-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px dashed var(--border-strong);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink-2);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+  .work-hint-arrow { color: var(--accent); width: 36px; height: 14px; }
+
   .work-row {
+    position: relative;
+    transform: rotate(var(--tilt, 0deg));
+    transition:
+      transform 0.45s cubic-bezier(0.2, 0.85, 0.2, 1),
+      box-shadow 0.45s ease;
+    will-change: transform;
+  }
+  .work-row.dragging {
+    transition: none;
+    cursor: grabbing;
+    z-index: 50;
+  }
+  .work-row.settling {
+    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .work-card {
+    position: relative;
     background: var(--bg);
     border: 1.5px solid var(--ink);
     border-radius: 4px;
-    transform: rotate(var(--tilt, 0deg));
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
     box-shadow: 0 4px 0 -2px var(--ink);
-    position: relative;
+    transition: box-shadow 0.4s ease;
   }
-  .work-row::before {
+  .work-card::before {
     content: '';
     position: absolute;
     top: -10px;
@@ -277,17 +340,89 @@ const projects = [
     transform: rotate(-3deg);
     box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     z-index: 2;
+    pointer-events: none;
   }
-  .work-row:hover {
-    transform: rotate(0deg) translateY(-4px);
-    box-shadow: 0 12px 0 -2px var(--ink), 0 18px 30px rgba(0,0,0,0.12);
+  .work-row:hover .work-card {
+    box-shadow: 0 14px 0 -2px var(--ink), 0 20px 36px rgba(0,0,0,0.14);
   }
+
+  /* Grab handle — six dots in the top-right corner */
+  .work-grab {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 4px);
+    gap: 4px;
+    padding: 8px;
+    background: var(--bg-alt);
+    border: 1px dashed var(--border-strong);
+    border-radius: 3px;
+    cursor: grab;
+    z-index: 5;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .work-grab:hover { background: var(--accent-tint); border-color: var(--accent); }
+  .work-grab:active, .work-row.dragging .work-grab { cursor: grabbing; background: var(--accent); border-color: var(--accent); }
+  .grab-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .work-row.dragging .grab-dot { background: var(--bg); }
 
   .work-link {
     display: block;
     padding: clamp(2rem, 3vw, 2.75rem) clamp(1.5rem, 3vw, 2.5rem);
     color: var(--ink);
   }
+
+  /* Two-column body */
+  .work-body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+
+  /* Sketch panel */
+  .work-sketch {
+    position: relative;
+    aspect-ratio: 200 / 140;
+    background: var(--bg-alt);
+    border: 1px dashed var(--border-strong);
+    border-radius: 3px;
+    padding: 0.75rem;
+    color: var(--ink);
+    transform: rotate(-1deg);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .work-sketch::before {
+    /* faint blueprint grid */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(20,19,26,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(20,19,26,0.05) 1px, transparent 1px);
+    background-size: 16px 16px;
+    pointer-events: none;
+  }
+  .work-sketch-tag {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .work-row:hover .work-sketch { color: var(--accent); }
+
+  .work-content { min-width: 0; }
 
   /* Folder tab top */
   .work-row-top {
@@ -467,6 +602,10 @@ const projects = [
     flex-wrap: wrap;
   }
 
+  @media (max-width: 1024px) {
+    .work-body { grid-template-columns: 160px 1fr; gap: 1.5rem; }
+  }
+
   @media (max-width: 880px) {
     .work-row-bottom {
       grid-template-columns: 1fr;
@@ -474,6 +613,9 @@ const projects = [
     }
     .work-stack { justify-self: start; }
     .work-row { transform: rotate(0deg); }
+    .work-body { grid-template-columns: 1fr; }
+    .work-sketch { max-width: 240px; }
+    .work-grab { display: none; }
   }
 
   @media (max-width: 560px) {
@@ -485,3 +627,124 @@ const projects = [
     }
   }
 </style>
+
+<script>
+  // Drag physics — grab a card by its handle, drag it around, throw it.
+  // It rotates with horizontal velocity, then springs back to its original
+  // tilt (set in --tilt) when released. Pointer events only, no library.
+
+  type DragState = {
+    el: HTMLElement;
+    startX: number;
+    startY: number;
+    lastX: number;
+    lastY: number;
+    lastT: number;
+    vx: number;
+    vy: number;
+    baseTilt: number;
+    pointerId: number;
+  };
+
+  const list = document.getElementById('work-list');
+  if (list && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let active: DragState | null = null;
+
+    function readBaseTilt(el: HTMLElement): number {
+      const v = getComputedStyle(el).getPropertyValue('--tilt').trim();
+      const num = parseFloat(v);
+      return Number.isFinite(num) ? num : 0;
+    }
+
+    function applyTransform(el: HTMLElement, dx: number, dy: number, rot: number) {
+      el.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+    }
+
+    list.addEventListener('pointerdown', (e) => {
+      const target = e.target as HTMLElement;
+      const grab = target.closest<HTMLElement>('[data-grab]');
+      if (!grab) return;
+      const row = grab.closest<HTMLElement>('[data-draggable]');
+      if (!row) return;
+
+      e.preventDefault();
+      grab.setPointerCapture((e as PointerEvent).pointerId);
+
+      const baseTilt = readBaseTilt(row);
+      row.classList.add('dragging');
+      row.classList.remove('settling');
+
+      active = {
+        el: row,
+        startX: e.clientX,
+        startY: e.clientY,
+        lastX: e.clientX,
+        lastY: e.clientY,
+        lastT: performance.now(),
+        vx: 0,
+        vy: 0,
+        baseTilt,
+        pointerId: (e as PointerEvent).pointerId,
+      };
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!active) return;
+      const dx = e.clientX - active.startX;
+      const dy = e.clientY - active.startY;
+      const now = performance.now();
+      const dt = Math.max(8, now - active.lastT);
+      active.vx = (e.clientX - active.lastX) / dt;
+      active.vy = (e.clientY - active.lastY) / dt;
+      active.lastX = e.clientX;
+      active.lastY = e.clientY;
+      active.lastT = now;
+
+      // Rotation: base tilt + horizontal velocity influence + slight drag bias
+      const rot = active.baseTilt + (active.vx * 8) + (dx * 0.02);
+      applyTransform(active.el, dx, dy, Math.max(-22, Math.min(22, rot)));
+    }, { passive: true });
+
+    function release() {
+      if (!active) return;
+      const a = active;
+      active = null;
+
+      // Throw — short physics run that decays, then settle back to origin
+      let dx = a.lastX - a.startX;
+      let dy = a.lastY - a.startY;
+      let vx = a.vx * 14;       // ms-velocity → px/frame-ish at 60fps
+      let vy = a.vy * 14;
+
+      const friction = 0.92;
+      const settleAfter = 220;  // ms of physics before springing home
+      const tStart = performance.now();
+
+      function step() {
+        const t = performance.now() - tStart;
+        if (t < settleAfter && Math.hypot(vx, vy) > 0.4) {
+          dx += vx;
+          dy += vy;
+          vx *= friction;
+          vy *= friction;
+          const rot = a.baseTilt + vx * 4 + dx * 0.02;
+          applyTransform(a.el, dx, dy, rot);
+          requestAnimationFrame(step);
+        } else {
+          // Spring back to origin tilt
+          a.el.classList.remove('dragging');
+          a.el.classList.add('settling');
+          a.el.style.transform = `rotate(${a.baseTilt}deg)`;
+          setTimeout(() => {
+            a.el.classList.remove('settling');
+            a.el.style.transform = '';
+          }, 750);
+        }
+      }
+      step();
+    }
+
+    window.addEventListener('pointerup', release);
+    window.addEventListener('pointercancel', release);
+  }
+</script>
