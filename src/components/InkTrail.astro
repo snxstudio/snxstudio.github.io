@@ -1,9 +1,42 @@
 ---
-// Cursor ink-trail. Renders a tapered, jittery brush stroke that follows the
-// pointer and decays. No-op on touch devices and when prefers-reduced-motion.
+// Pen-quality cursor ink. Three layers:
+//   1. Bleed halo  — thick, very low alpha, slight blur
+//   2. Wet stroke  — calligraphic curve through smoothed points
+//   3. Splatter    — small offset droplets emitted at high speed and on click
+//
+// Custom cursor: a small pen-nib SVG that replaces the system arrow.
+// All effects no-op on touch and prefers-reduced-motion.
 ---
 
 <canvas id="ink-trail" aria-hidden="true"></canvas>
+
+<div id="ink-cursor" aria-hidden="true">
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Pen barrel -->
+    <path
+      d="M 6 4 L 12 10 L 22 28 L 26 26 L 12 18 L 14 16 L 28 24 L 30 20 L 12 10 Z"
+      fill="var(--accent)"
+      stroke="var(--ink)"
+      stroke-width="1.2"
+      stroke-linejoin="round"
+    />
+    <!-- Nib slit -->
+    <path
+      d="M 11 9 L 18 16"
+      stroke="var(--ink)"
+      stroke-width="1"
+      stroke-linecap="round"
+    />
+    <!-- Highlight on barrel -->
+    <path
+      d="M 16 10 L 24 14"
+      stroke="rgba(255,255,255,0.6)"
+      stroke-width="0.8"
+      stroke-linecap="round"
+    />
+  </svg>
+  <span class="ink-cursor-dot"></span>
+</div>
 
 <style>
   #ink-trail {
@@ -12,19 +45,64 @@
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    z-index: 9996;
+    z-index: 9994;
     mix-blend-mode: multiply;
   }
   :global(.dark) #ink-trail { mix-blend-mode: screen; }
+
+  #ink-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate3d(-100px, -100px, 0) rotate(-12deg);
+    will-change: transform;
+    transform-origin: 6px 6px;
+    transition: transform 0.06s linear, opacity 0.25s ease;
+    opacity: 0;
+  }
+  #ink-cursor.active { opacity: 1; }
+  #ink-cursor svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.18));
+  }
+  .ink-cursor-dot {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--ink);
+    transform: scale(0);
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  #ink-cursor.pressing .ink-cursor-dot { transform: scale(1); }
+
+  /* Hide the system cursor across the page only when our cursor is active */
+  :global(html.has-ink-cursor),
+  :global(html.has-ink-cursor *) {
+    cursor: none !important;
+  }
+
   @media (hover: none), (prefers-reduced-motion: reduce) {
-    #ink-trail { display: none; }
+    #ink-trail, #ink-cursor { display: none; }
   }
 </style>
 
 <script>
   const canvas = document.getElementById('ink-trail') as HTMLCanvasElement | null;
-  if (canvas && window.matchMedia('(hover: hover)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const cursorEl = document.getElementById('ink-cursor') as HTMLDivElement | null;
+  const supportsHover = window.matchMedia('(hover: hover)').matches;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (canvas && cursorEl && supportsHover && !reduce) {
+    document.documentElement.classList.add('has-ink-cursor');
 
     const ctx = canvas.getContext('2d')!;
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -38,76 +116,191 @@
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    function inkColor() {
+    function readColors() {
       const styles = getComputedStyle(document.documentElement);
-      const c = styles.getPropertyValue('--accent').trim() || '#C9311E';
-      return c;
+      const ink = (styles.getPropertyValue('--accent').trim() || '#C9311E');
+      const inkDeep = (styles.getPropertyValue('--accent-deep').trim() || '#9D2818');
+      return { ink, inkDeep };
     }
 
-    type Pt = { x: number; y: number; t: number; w: number; jx: number; jy: number; };
+    type Pt = { x: number; y: number; t: number; w: number; };
+    type Splat = { x: number; y: number; r: number; born: number; life: number; vx: number; vy: number; };
+
     const pts: Pt[] = [];
-    const MAX_AGE = 1500;          // ms — full decay
-    const MAX_PTS = 220;
-    let lastX = -1, lastY = -1;
+    const splats: Splat[] = [];
+    const MAX_AGE = 1700;     // wet stroke decay (ms)
+    const SPLAT_AGE = 1200;
+    const MAX_PTS = 80;       // smoothing window
+    let lastX = -1, lastY = -1, lastT = 0;
     let lastEmit = 0;
 
-    function jitter() {
-      return (Math.random() - 0.5) * 1.6;
+    // Cursor follow with a touch of easing for smoothness
+    let cx = -100, cy = -100;
+    let tx = -100, ty = -100;
+    let lastAngle = -12;
+
+    function emitSplat(x: number, y: number, speed: number) {
+      const count = Math.min(4, Math.floor(speed * 0.06));
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 4 + Math.random() * 12;
+        splats.push({
+          x: x + Math.cos(angle) * dist,
+          y: y + Math.sin(angle) * dist,
+          r: 0.6 + Math.random() * 1.6,
+          born: performance.now(),
+          life: 600 + Math.random() * 600,
+          vx: Math.cos(angle) * (0.4 + Math.random() * 0.6),
+          vy: Math.sin(angle) * (0.4 + Math.random() * 0.6),
+        });
+      }
+    }
+
+    function clickBurst(x: number, y: number) {
+      for (let i = 0; i < 12; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 0.6 + Math.random() * 2.2;
+        splats.push({
+          x, y,
+          r: 0.8 + Math.random() * 2.2,
+          born: performance.now(),
+          life: 700 + Math.random() * 700,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+        });
+      }
     }
 
     window.addEventListener('pointermove', (e) => {
       if ((e as PointerEvent).pointerType === 'touch') return;
+      tx = e.clientX;
+      ty = e.clientY;
+      cursorEl!.classList.add('active');
+
       const now = performance.now();
-      if (now - lastEmit < 8) return;     // ~120fps cap on emit rate
+      if (now - lastEmit < 6) return;
       lastEmit = now;
 
-      const x = e.clientX, y = e.clientY;
       let speed = 0;
       if (lastX >= 0) {
-        const dx = x - lastX, dy = y - lastY;
-        speed = Math.min(Math.hypot(dx, dy), 60);
+        const dx = e.clientX - lastX;
+        const dy = e.clientY - lastY;
+        const dt = Math.max(8, now - lastT);
+        speed = Math.hypot(dx, dy) / dt * 16;  // px/frame-ish
       }
-      lastX = x; lastY = y;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastT = now;
 
-      // Width tapers with speed: faster = thinner
-      const w = Math.max(1.5, 8 - speed * 0.12);
-      pts.push({ x, y, t: now, w, jx: jitter(), jy: jitter() });
+      // Variable pressure: slow movement = wider, fast = thinner with bleed
+      const w = Math.max(1.4, 9 - Math.min(speed, 60) * 0.13);
+      pts.push({ x: e.clientX, y: e.clientY, t: now, w });
       if (pts.length > MAX_PTS) pts.splice(0, pts.length - MAX_PTS);
+
+      // Splatter at high velocity
+      if (speed > 26) emitSplat(e.clientX, e.clientY, speed);
     }, { passive: true });
 
-    function frame() {
+    window.addEventListener('pointerleave', () => {
+      cursorEl!.classList.remove('active');
+    });
+    window.addEventListener('pointerenter', () => {
+      cursorEl!.classList.add('active');
+    });
+    window.addEventListener('pointerdown', (e) => {
+      if ((e as PointerEvent).pointerType === 'touch') return;
+      cursorEl!.classList.add('pressing');
+      clickBurst(e.clientX, e.clientY);
+    });
+    window.addEventListener('pointerup', () => cursorEl!.classList.remove('pressing'));
+
+    /**
+     * Catmull-Rom curve through points, drawn with variable width.
+     * We render each segment as multiple sub-segments to allow width interpolation.
+     */
+    function strokePath(pass: 'bleed' | 'wet') {
       const now = performance.now();
-      ctx.clearRect(0, 0, canvas!.width / dpr, canvas!.height / dpr);
+      if (pts.length < 2) return;
 
-      // Drop dead points
-      while (pts.length && now - pts[0].t > MAX_AGE) pts.shift();
-      if (pts.length < 2) { requestAnimationFrame(frame); return; }
-
-      const color = inkColor();
-
-      // Render a smoothed polyline as many short tapered segments
+      const { ink, inkDeep } = readColors();
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.strokeStyle = color;
+      ctx.strokeStyle = pass === 'bleed' ? inkDeep : ink;
 
       for (let i = 1; i < pts.length; i++) {
-        const a = pts[i - 1], b = pts[i];
-        const age = (now - b.t) / MAX_AGE;       // 0 fresh -> 1 dead
-        const alpha = Math.max(0, 1 - age);
-        const width = Math.max(0.3, ((a.w + b.w) / 2) * (1 - age * 0.85));
+        const p0 = pts[i - 2] || pts[i - 1];
+        const p1 = pts[i - 1];
+        const p2 = pts[i];
+        const p3 = pts[i + 1] || pts[i];
 
-        ctx.globalAlpha = alpha * 0.9;
-        ctx.lineWidth = width;
+        const age = (now - p2.t) / MAX_AGE;
+        if (age >= 1) continue;
+        const alpha = 1 - age;
+
+        // Catmull-Rom → cubic Bezier control points
+        const c1x = p1.x + (p2.x - p0.x) / 6;
+        const c1y = p1.y + (p2.y - p0.y) / 6;
+        const c2x = p2.x - (p3.x - p1.x) / 6;
+        const c2y = p2.y - (p3.y - p1.y) / 6;
+
+        const baseWidth = (p1.w + p2.w) / 2;
+        const widthMul = pass === 'bleed' ? 2.6 : 1;
+        const alphaMul = pass === 'bleed' ? 0.18 : 0.92;
+
+        ctx.globalAlpha = alpha * alphaMul;
+        ctx.lineWidth = Math.max(0.4, baseWidth * widthMul * (1 - age * 0.7));
         ctx.beginPath();
-        ctx.moveTo(a.x + a.jx * (1 - alpha) * 2, a.y + a.jy * (1 - alpha) * 2);
-        // Quadratic between points to soften the line
-        const mx = (a.x + b.x) / 2;
-        const my = (a.y + b.y) / 2;
-        ctx.quadraticCurveTo(a.x, a.y, mx, my);
-        ctx.lineTo(b.x + b.jx * (1 - alpha) * 2, b.y + b.jy * (1 - alpha) * 2);
+        ctx.moveTo(p1.x, p1.y);
+        ctx.bezierCurveTo(c1x, c1y, c2x, c2y, p2.x, p2.y);
         ctx.stroke();
       }
       ctx.globalAlpha = 1;
+    }
+
+    function drawSplats() {
+      const now = performance.now();
+      const { ink } = readColors();
+      ctx.fillStyle = ink;
+      for (let i = splats.length - 1; i >= 0; i--) {
+        const s = splats[i];
+        const age = (now - s.born) / s.life;
+        if (age >= 1) { splats.splice(i, 1); continue; }
+        // Drift the droplet
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vx *= 0.94;
+        s.vy *= 0.94;
+        ctx.globalAlpha = (1 - age) * 0.85;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * (1 - age * 0.3), 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function frame() {
+      // Clear
+      ctx.clearRect(0, 0, canvas!.width / dpr, canvas!.height / dpr);
+
+      // Drop dead points
+      const now = performance.now();
+      while (pts.length && now - pts[0].t > MAX_AGE) pts.shift();
+
+      // Two-pass stroke: bleed under, wet on top
+      strokePath('bleed');
+      strokePath('wet');
+      drawSplats();
+
+      // Cursor easing
+      cx += (tx - cx) * 0.42;
+      cy += (ty - cy) * 0.42;
+      const angVx = (tx - cx);
+      const angVy = (ty - cy);
+      // Pen tilts based on direction of motion
+      const targetAngle = -12 + Math.atan2(angVy, angVx) * (180 / Math.PI) * 0.15;
+      lastAngle += (targetAngle - lastAngle) * 0.2;
+      cursorEl!.style.transform = `translate3d(${cx - 6}px, ${cy - 6}px, 0) rotate(${lastAngle}deg)`;
+
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
