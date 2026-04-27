@@ -95,8 +95,26 @@ const services = [
     stack: ['AWS', 'GCP', 'Terraform', 'Kubernetes', 'Datadog'],
   },
   {
-    id: 'advisory',
+    id: 'agritech',
     num: '06',
+    title: 'AgriTech &amp; Sustainable Systems',
+    lede: 'Sensors, soil, sky — and the dashboard the field officer actually opens.',
+    body: [
+      'Low-power sensor meshes, edge intelligence on cheap hardware, and dashboards built for the low-bandwidth realities of rural deployments. We treat the regional advisor as the primary user, not the farmer — because they are the one making the irrigation call.',
+      'We bring the lessons from a published agritech sensor deployment that delivered a ~38% water-use reduction across pilot farms.',
+    ],
+    deliverables: [
+      'LoRa / LoRaWAN sensor architecture',
+      'Soil moisture &amp; micro-climate telemetry',
+      'Low-bandwidth advisor dashboards',
+      'On-device decisioning &amp; alerts',
+      'Pilot design &amp; field instrumentation',
+    ],
+    stack: ['Arduino', 'LoRaWAN', 'InfluxDB', 'Grafana', 'Edge ML'],
+  },
+  {
+    id: 'advisory',
+    num: '07',
     title: 'CTO-as-a-Partner',
     lede: 'A senior brain in your founders\' room. Fractional, but never absent.',
     body: [
@@ -123,7 +141,7 @@ const services = [
       <div class="container-wide">
         <span class="label label-mark animate-fade-in-up">Services</span>
         <h1 class="page-h1 animate-fade-in-up delay-200">
-          Six disciplines.<br/>
+          Seven disciplines.<br/>
           <span class="serif-italic accent">One studio.</span> One brain.
         </h1>
         <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
