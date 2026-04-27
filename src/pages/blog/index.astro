@@ -1,0 +1,250 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const featured = posts.find(p => p.data.featured) ?? posts[0];
+const rest = posts.filter(p => p !== featured);
+
+const categories = ['All', 'Teardown', 'AI', 'Engineering', 'IoT', 'Design'];
+---
+
+<Layout title="Field Notes — SNX Studio" description="Theses, teardowns, and field notes from a working AI &amp; technology studio.">
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container-wide">
+        <span class="label label-mark animate-fade-in-up">Field notes</span>
+        <h1 class="page-h1 animate-fade-in-up delay-200">
+          Theses, teardowns,<br/>
+          <span class="serif-italic accent">and other opinions</span><br/>
+          you didn't ask for.
+        </h1>
+        <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
+          Long-form writing about the systems we admire, the ones we'd redesign, and the ones
+          we wish someone would take a saw to. Slow-published, often uncomfortable.
+        </p>
+      </div>
+    </section>
+
+    <!-- Filter bar -->
+    <section class="filter-bar">
+      <div class="container-wide">
+        <div class="filter-inner animate-fade-in-up delay-300">
+          {categories.map((cat, i) => (
+            <button
+              class:list={['filter-btn', { active: cat === 'All' }]}
+              data-category={cat.toLowerCase()}
+            >
+              <span class="filter-num">0{i + 1}</span>
+              <span>{cat}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    {featured && (
+      <section class="featured-section">
+        <div class="container-wide">
+          <article class="featured reveal" data-post-category={featured.data.category.toLowerCase()}>
+            <a href={`/blog/${featured.id}`} class="featured-link">
+              <header class="featured-head">
+                <span class="featured-tag">★ Featured · {featured.data.category}</span>
+                <span class="featured-meta">
+                  <span>{new Date(featured.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' })}</span>
+                  {featured.data.readTime && <span>· {featured.data.readTime}</span>}
+                </span>
+              </header>
+              <h2 class="featured-title">{featured.data.title}</h2>
+              <p class="featured-desc serif-italic">{featured.data.description}</p>
+              <span class="featured-read">
+                Read the full teardown
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"/>
+                  <polyline points="7,7 17,7 17,17"/>
+                </svg>
+              </span>
+            </a>
+          </article>
+        </div>
+      </section>
+    )}
+
+    <!-- Posts list -->
+    <section class="section-sm">
+      <div class="container-wide">
+        <ol class="posts-list" role="list">
+          {rest.map((post, i) => (
+            <li class="reveal" style={`transition-delay: ${i * 60}ms`} data-post-category={post.data.category.toLowerCase()}>
+              <BlogCard
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.date}
+                category={post.data.category}
+                slug={post.id}
+                readTime={post.data.readTime}
+                index={i + 1}
+              />
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    margin-top: 1.5rem;
+  }
+  .page-h1 .accent { color: var(--accent); }
+
+  /* Filter */
+  .filter-bar {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .filter-inner {
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    scrollbar-width: none;
+  }
+  .filter-inner::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: transparent;
+    border: 0;
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    white-space: nowrap;
+  }
+  .filter-num { color: var(--accent); }
+  .filter-btn:last-child { border-right: none; }
+  .filter-btn:hover { color: var(--accent); background: var(--bg-alt); }
+  .filter-btn.active { color: var(--ink); background: var(--bg-alt); }
+  .filter-btn.active .filter-num { color: var(--accent); }
+
+  /* Featured */
+  .featured-section {
+    padding: clamp(2.5rem, 5vw, 4rem) 0 0;
+  }
+  .featured {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+  }
+  .featured-link {
+    display: block;
+    padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 3vw, 2rem);
+    color: var(--ink);
+  }
+  .featured-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .featured-tag { color: var(--accent); }
+  .featured-meta { display: inline-flex; gap: 0.4rem; }
+
+  .featured-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 6vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    text-wrap: balance;
+    max-width: 1100px;
+    transition: color 0.3s ease;
+  }
+  .featured:hover .featured-title { color: var(--accent); }
+  .featured-desc {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
+  .featured-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .featured-read svg { transition: transform 0.3s ease; }
+  .featured:hover .featured-read svg { transform: translate(3px, -3px); }
+
+  .posts-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--ink);
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const category = btn.getAttribute('data-category');
+      const posts = document.querySelectorAll<HTMLElement>('[data-post-category]');
+
+      posts.forEach(post => {
+        if (category === 'all' || post.getAttribute('data-post-category') === category) {
+          post.style.display = '';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

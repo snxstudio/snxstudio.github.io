@@ -1,0 +1,204 @@
+---
+import Mark from '../Marks.astro';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Diagnose',
+    role: 'Listen, audit, draw the system.',
+    desc: 'A working week of stakeholder interviews, system maps, and assumptions held up to the light. We refuse to estimate before we understand.',
+    out: ['System map', 'Risk register', 'Re-framed brief'],
+  },
+  {
+    num: '02',
+    title: 'Architect',
+    role: 'Decide the bones before the pixels.',
+    desc: 'Architecture proposals on paper first — model choice, data flow, deploy targets. Every diagram has a sibling document explaining the trade-offs.',
+    out: ['ADR set', 'Schema + API', 'UX skeleton'],
+  },
+  {
+    num: '03',
+    title: 'Ship',
+    role: 'Production from week one.',
+    desc: 'Vertical slice in front of users in the first sprint. Continuous delivery, tight feedback loops, telemetry from day one. No big-bang reveals.',
+    out: ['Public preview', 'Telemetry', 'Weekly demo'],
+  },
+  {
+    num: '04',
+    title: 'Hand over',
+    role: 'You own it. We back it up.',
+    desc: 'Documentation pairs with the code. We train your team, sit in their pull requests, and stay on call until you decide we don\'t need to be.',
+    out: ['Runbooks', 'Onboarding', 'Office hours'],
+  },
+];
+---
+
+<section class="process section" id="process">
+  <div class="container-wide">
+    <header class="process-header">
+      <span class="tape tape-tilt-r">— how we work —</span>
+      <h2 class="process-h2">
+        Four moves, in
+        <span class="proc-circled">
+          <span class="serif-italic">order.</span>
+          <span class="proc-circle-mark"><Mark name="ink-circle" /></span>
+        </span>
+        <br/>
+        No theatre.
+      </h2>
+    </header>
+
+    <ol class="process-grid" role="list">
+      {steps.map((step, i) => (
+        <li class="process-step reveal" style={`transition-delay: ${i * 80}ms`}>
+          <div class="step-head">
+            <span class="step-num numeral">{step.num}</span>
+            <span class="step-tick" aria-hidden="true">/</span>
+          </div>
+          <h3 class="step-title">{step.title}</h3>
+          <p class="step-role serif-italic">{step.role}</p>
+          <p class="step-desc">{step.desc}</p>
+          <ul class="step-out" role="list">
+            {step.out.map(o => (
+              <li>
+                <Mark name="check" class="step-check" />
+                <span>{o}</span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    background-color: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .process-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    max-width: 880px;
+  }
+  .process-header .label { display: inline-flex; }
+  .process-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5.5vw, 4.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    margin-top: 1.25rem;
+  }
+  .process-h2 .accent { color: var(--accent); }
+  .proc-circled {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.18em;
+  }
+  .proc-circled .serif-italic { color: var(--accent); }
+  .proc-circle-mark {
+    position: absolute;
+    inset: -0.18em -0.4em -0.22em -0.45em;
+    color: var(--accent);
+    transform: rotate(-1.5deg);
+  }
+  .step-check { width: 18px; height: 18px; color: var(--accent); }
+
+  .process-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .process-step {
+    padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.25rem, 2vw, 2rem);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: background-color 0.4s ease;
+  }
+  .process-step:last-child { border-right: none; }
+  .process-step:hover { background-color: var(--bg-alt); }
+
+  .step-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .step-num {
+    font-size: 1.25rem;
+    color: var(--accent);
+  }
+  .step-tick {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--border-strong);
+    font-size: 1.5rem;
+  }
+
+  .step-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .step-role {
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    color: var(--muted);
+  }
+
+  .step-desc {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+  }
+
+  .step-out {
+    list-style: none;
+    margin: auto 0 0;
+    padding: 1rem 0 0;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .step-out li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .step-out svg { color: var(--accent); flex-shrink: 0; }
+
+  @media (max-width: 1024px) {
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-step:nth-child(2n) { border-right: none; }
+    .process-step:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+  }
+
+  @media (max-width: 560px) {
+    .process-grid { grid-template-columns: 1fr; }
+    .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+    .process-step:last-child { border-bottom: none; }
+  }
+</style>

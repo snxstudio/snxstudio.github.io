@@ -1,0 +1,299 @@
+---
+import Mark from '../Marks.astro';
+
+const services = [
+  {
+    num: '01',
+    title: 'Claude-native AI Engineering',
+    role: 'Build with the smartest model in the room.',
+    desc: 'Production agents, RAG systems, prompt-cached pipelines, tool-use orchestration. We build on Claude as a first-class platform — not a wrapper.',
+    stack: ['Anthropic SDK', 'Claude Agent SDK', 'MCP servers', 'Tool use', 'Prompt caching'],
+    href: '/services#ai',
+  },
+  {
+    num: '02',
+    title: 'Industrial IoT & Edge Systems',
+    role: 'Hardware to dashboard, no missing layer.',
+    desc: 'Sensor meshes, edge intelligence, telemetry pipelines. Built on field-tested architectures — including a smart-metering platform recognised by the Ministry of Power.',
+    stack: ['MQTT', 'TimescaleDB', 'Rust on edge', 'C / C++', 'Kubernetes'],
+    href: '/services#iot',
+  },
+  {
+    num: '03',
+    title: 'Web Platforms & Product Engineering',
+    role: 'Senior full-stack, end-to-end.',
+    desc: 'TypeScript-first apps, type-safe APIs, infra-as-code. We ship production from week one and refuse to leave a half-finished platform behind.',
+    stack: ['Next.js', 'NestJS', 'Astro', 'Postgres', 'GraphQL'],
+    href: '/services#web',
+  },
+  {
+    num: '04',
+    title: 'Design Systems & UX Audits',
+    role: 'Opinions backed by craft.',
+    desc: 'Token-driven design systems, accessibility audits, and full UX teardowns of broken flows — the kind we publish as theses (the IRCTC Tatkal one is coming).',
+    stack: ['Figma', 'Storybook', 'WCAG 2.2', 'Heuristic audits', 'Design tokens'],
+    href: '/services#design',
+  },
+  {
+    num: '05',
+    title: 'Cloud Infrastructure & DevEx',
+    role: 'Boring infra, beautiful pipelines.',
+    desc: 'Multi-cloud architecture, CI/CD that actually catches things, observability that someone reads. Designed to be invisible — until you need it to save you.',
+    stack: ['AWS · GCP', 'Terraform', 'Kubernetes', 'Docker', 'Datadog · Grafana'],
+    href: '/services#cloud',
+  },
+  {
+    num: '06',
+    title: 'CTO-as-a-Partner',
+    role: 'A senior brain in your founders\' room.',
+    desc: 'For early-stage teams: architecture reviews, hiring strategy, technical due diligence, and a genuine fractional partner — not a consultancy.',
+    stack: ['Tech audits', 'DD reports', 'Roadmaps', 'Hiring', 'Investor decks'],
+    href: '/services#advisory',
+  },
+];
+---
+
+<section class="services section" id="services-preview">
+  <div class="container-wide">
+    <header class="services-header">
+      <div class="services-header-left">
+        <span class="tape tape-tilt-l">— what we do —</span>
+        <h2 class="services-h2">
+          Six disciplines.<br/>
+          <span class="services-h2-circled">
+            <span class="serif-italic accent">One studio.</span>
+            <span class="services-h2-mark"><Mark name="ink-circle" /></span>
+          </span>
+          One brain.
+        </h2>
+      </div>
+      <div class="services-header-right">
+        <p>
+          We're not a generalist agency. We're a focused team that ships
+          production AI, IoT, and web platforms — and pairs every engagement
+          with the design intuition required to make it land.
+        </p>
+        <a href="/services" class="services-link">
+          Full service map
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"/>
+            <polyline points="7,7 17,7 17,17"/>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <ul class="services-list" role="list">
+      {services.map((service) => (
+        <li class="service-row reveal">
+          <a href={service.href} class="service-row-link">
+            <span class="service-num numeral">{service.num}</span>
+            <div class="service-body">
+              <h3 class="service-title">{service.title}</h3>
+              <p class="service-role serif-italic">{service.role}</p>
+            </div>
+            <div class="service-desc">
+              <p>{service.desc}</p>
+              <ul class="service-stack" role="list">
+                {service.stack.map(s => <li>{s}</li>)}
+              </ul>
+            </div>
+            <span class="service-arrow" aria-hidden="true">
+              <Mark name="arrow-r" />
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services {
+    background-color: var(--bg);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: end;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .services-header-left .label {
+    margin-bottom: 1.25rem;
+    display: inline-flex;
+  }
+
+  .services-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5.5vw, 4.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-top: 1.25rem;
+  }
+  .services-h2 .accent { color: var(--accent); }
+  .services-h2-circled {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.18em;
+  }
+  .services-h2-mark {
+    position: absolute;
+    inset: -0.18em -0.4em -0.22em -0.45em;
+    color: var(--accent);
+    transform: rotate(-1.5deg);
+  }
+
+  .services-header-right {
+    max-width: 460px;
+    color: var(--ink-2);
+  }
+  .services-header-right p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin-bottom: 1.5rem;
+  }
+  .services-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .services-link svg { transition: transform 0.3s ease; }
+  .services-link:hover svg { transform: translate(2px, -2px); }
+
+  .services-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--ink);
+  }
+
+  .service-row {
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.4s ease;
+  }
+  .service-row:hover {
+    background-color: var(--bg-alt);
+  }
+
+  .service-row-link {
+    display: grid;
+    grid-template-columns: 90px 1.3fr 1.7fr 40px;
+    gap: clamp(1.25rem, 3vw, 3rem);
+    align-items: start;
+    padding: clamp(1.75rem, 3vw, 2.5rem) clamp(0.5rem, 2vw, 1.5rem);
+    color: var(--ink);
+    transition: padding 0.4s ease;
+  }
+  .service-row:hover .service-row-link {
+    padding-left: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .service-num {
+    font-size: 1.25rem;
+    color: var(--muted);
+    padding-top: 0.4rem;
+    transition: color 0.3s ease;
+  }
+  .service-row:hover .service-num { color: var(--accent); }
+
+  .service-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .service-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .service-role {
+    color: var(--muted);
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+  }
+
+  .service-desc {
+    color: var(--ink-2);
+  }
+  .service-desc p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+    max-width: 540px;
+  }
+  .service-stack {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .service-stack li {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+  }
+
+  .service-arrow {
+    color: var(--muted);
+    padding-top: 0.4rem;
+    justify-self: end;
+    width: 64px;
+    height: 22px;
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.3s ease, color 0.3s ease, transform 0.4s ease;
+  }
+  .service-row:hover .service-arrow {
+    color: var(--accent);
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 880px) {
+    .services-header {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .service-row-link {
+      grid-template-columns: 60px 1fr 28px;
+    }
+    .service-desc {
+      grid-column: 2 / -1;
+      padding-top: 0.5rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .service-row-link {
+      grid-template-columns: 48px 1fr;
+      gap: 1rem;
+    }
+    .service-arrow { display: none; }
+    .service-desc {
+      grid-column: 1 / -1;
+      padding-left: 0;
+    }
+  }
+</style>

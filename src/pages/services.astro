@@ -1,0 +1,400 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const services = [
+  {
+    id: 'ai',
+    num: '01',
+    title: 'Claude-native AI Engineering',
+    lede: 'Build with the smartest model in the room — and the best architecture around it.',
+    body: [
+      'We build production AI systems on Anthropic\'s Claude as a first-class platform — not a thin wrapper around a chat completion. That means prompt-cached pipelines, MCP-shaped tool surfaces, structured outputs, and agents with explicit guardrails.',
+      'Whether you\'re embedding intelligence inside an existing product or shipping an agent from scratch, we bring the patterns that survived our own production builds — including a freight-forwarding platform that runs on Claude every day.',
+    ],
+    deliverables: [
+      'Claude-native agents, with hard tool boundaries',
+      'Prompt-cached RAG pipelines',
+      'MCP servers for proprietary data',
+      'Evals, observability, drift monitoring',
+      'Cost &amp; latency tuning (Claude 4.7 Opus, Sonnet, Haiku)',
+    ],
+    stack: ['Anthropic SDK', 'Claude Agent SDK', 'MCP', 'TypeScript', 'Python'],
+  },
+  {
+    id: 'iot',
+    num: '02',
+    title: 'Industrial IoT &amp; Edge Systems',
+    lede: 'Hardware to dashboard. No missing layer, no mystery telemetry.',
+    body: [
+      'Connected devices generate enormous potential — and enormous complexity. We bridge the physical and the digital with reliable, observable pipelines: edge intelligence on cheap hardware, compressed transit over flaky networks, and dashboards that operations actually opens.',
+      'We bring the lessons from a smart-energy-meter platform recognised by the Ministry of Power &amp; Coal, and an agritech sensor mesh that landed a research paper.',
+    ],
+    deliverables: [
+      'Sensor &amp; gateway architecture',
+      'Edge compute with Rust / C++',
+      'MQTT &amp; LoRa transport',
+      'Time-series storage (TimescaleDB / InfluxDB)',
+      'Operations dashboards &amp; alerting',
+    ],
+    stack: ['Embedded C', 'Rust', 'MQTT', 'LoRaWAN', 'Kubernetes'],
+  },
+  {
+    id: 'web',
+    num: '03',
+    title: 'Web Platforms &amp; Product Engineering',
+    lede: 'Type-safe, production-first, designed to outlast the team that built it.',
+    body: [
+      'Modern web apps that perform under load and survive their fifth product manager. We pick the right tool per layer — Next.js when it earns its complexity, Astro when it doesn\'t, NestJS where structure pays off, edge functions where they actually cost less.',
+      'We pair architecture with thoughtful UI engineering, so the product feels considered the moment a user touches it.',
+    ],
+    deliverables: [
+      'Greenfield web platforms (Next.js / Astro)',
+      'Type-safe APIs (GraphQL, tRPC, REST)',
+      'Postgres schemas you won\'t regret',
+      'Background jobs, queues, schedulers',
+      'Performance &amp; SEO foundations',
+    ],
+    stack: ['Next.js', 'NestJS', 'Astro', 'PostgreSQL', 'GraphQL'],
+  },
+  {
+    id: 'design',
+    num: '04',
+    title: 'Design Systems &amp; UX Audits',
+    lede: 'Opinions backed by craft. Sometimes the kind that ends up as a public teardown.',
+    body: [
+      'Design systems aren\'t component libraries — they\'re shared languages. We build token-driven systems that encode brand, accessibility, and interaction at the same level as code.',
+      'We also do UX teardowns: structured, evidence-based audits of broken flows. The kind of work that becomes our public field-notes (the IRCTC Tatkal essay is in flight).',
+    ],
+    deliverables: [
+      'Token-driven design system',
+      'Component library &amp; Storybook',
+      'WCAG 2.2 audit',
+      'Heuristic UX review &amp; teardown',
+      'Figma libraries kept in sync with code',
+    ],
+    stack: ['Figma', 'Storybook', 'Design Tokens', 'WCAG 2.2', 'Tailwind'],
+  },
+  {
+    id: 'cloud',
+    num: '05',
+    title: 'Cloud Infrastructure &amp; DevEx',
+    lede: 'Boring infra, beautiful pipelines. Invisible — until it saves you.',
+    body: [
+      'Reliable infrastructure does its job and gets out of the way. We design cloud architectures that scale without surprises, with infrastructure-as-code, automated deploys, and observability that someone actually reads.',
+      'Cost optimisation, security and compliance are not bolt-ons. They are part of the bones.',
+    ],
+    deliverables: [
+      'AWS / GCP architecture',
+      'Terraform infrastructure-as-code',
+      'CI/CD pipelines that catch things',
+      'Container orchestration (Kubernetes)',
+      'Observability stack (Datadog · Grafana)',
+    ],
+    stack: ['AWS', 'GCP', 'Terraform', 'Kubernetes', 'Datadog'],
+  },
+  {
+    id: 'advisory',
+    num: '06',
+    title: 'CTO-as-a-Partner',
+    lede: 'A senior brain in your founders\' room. Fractional, but never absent.',
+    body: [
+      'For early-stage teams: architecture reviews, hiring strategy, technical due diligence, and a real fractional partner — not a consultancy with a deck.',
+      'We help you avoid the architectural decisions you\'ll regret in 18 months, the hires you\'ll regret in 6, and the integrations you\'ll regret in 2.',
+    ],
+    deliverables: [
+      'Architecture &amp; tech-stack reviews',
+      'Independent technical due diligence',
+      'Engineering hiring strategy',
+      'Investor-ready technical narratives',
+      'Office hours &amp; weekly check-ins',
+    ],
+    stack: ['Audits', 'DD reports', 'Roadmaps', 'Hiring', 'Decks'],
+  },
+];
+---
+
+<Layout title="Services — SNX Studio" description="Claude-native AI, industrial IoT, web platforms, cloud, design systems &amp; UX audits, and fractional CTO partnership.">
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container-wide">
+        <span class="label label-mark animate-fade-in-up">Services</span>
+        <h1 class="page-h1 animate-fade-in-up delay-200">
+          Six disciplines.<br/>
+          <span class="serif-italic accent">One studio.</span> One brain.
+        </h1>
+        <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
+          We're not a generalist agency. We're a focused team built around senior engineering,
+          opinionated design, and a deep bet on Claude as the foundation of the next decade.
+        </p>
+      </div>
+    </section>
+
+    <!-- Anchor nav -->
+    <section class="services-anchor-bar">
+      <div class="container-wide services-anchor-inner">
+        {services.map(s => (
+          <a href={`#${s.id}`} class="anchor">
+            <span class="anchor-num">{s.num}</span>
+            <span set:html={s.title}></span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Service blocks -->
+    {services.map((s, i) => (
+      <section id={s.id} class={`service-block ${i % 2 === 1 ? 'bg-surface-alt' : ''}`}>
+        <div class="container-wide service-block-inner reveal">
+          <aside class="service-meta">
+            <span class="service-meta-num numeral">{s.num}</span>
+            <span class="label label-mark">Service</span>
+          </aside>
+
+          <div class="service-body-col">
+            <h2 class="service-h2" set:html={s.title}></h2>
+            <p class="service-lede serif-italic">{s.lede}</p>
+            {s.body.map(p => <p class="service-para" set:html={p}></p>)}
+
+            <div class="service-deliverables">
+              <h4 class="label">Deliverables</h4>
+              <ul role="list">
+                {s.deliverables.map(d => <li set:html={d}></li>)}
+              </ul>
+            </div>
+
+            <ul class="service-stack" role="list">
+              {s.stack.map(t => <li>{t}</li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- CTA -->
+    <section class="section bg-deep services-cta">
+      <div class="container">
+        <h2 class="services-cta-h2">
+          Ready to <span class="serif-italic">try a real partner?</span>
+        </h2>
+        <p class="services-cta-sub">
+          Tell us what you're building — we reply within one working day, from a real person.
+        </p>
+        <a href="/contact" class="services-cta-btn">
+          Start a project
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"/>
+            <polyline points="7,7 17,7 17,17"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    margin-top: 1.5rem;
+  }
+  .page-h1 .accent { color: var(--accent); }
+
+  /* Anchor nav */
+  .services-anchor-bar {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 78px;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+  }
+  .services-anchor-inner {
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    scrollbar-width: none;
+  }
+  .services-anchor-inner::-webkit-scrollbar { display: none; }
+  .anchor {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+  .anchor-num { color: var(--accent); }
+  .anchor:last-child { border-right: none; }
+  .anchor:hover { color: var(--accent); background-color: var(--bg-alt); }
+
+  /* Service blocks */
+  .service-block {
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .service-block-inner {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .service-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: sticky;
+    top: 160px;
+  }
+  .service-meta-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(4rem, 9vw, 7rem);
+    line-height: 0.85;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+
+  .service-body-col {
+    max-width: 760px;
+  }
+  .service-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin-bottom: 1.25rem;
+    text-wrap: balance;
+  }
+  .service-lede {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+    line-height: 1.45;
+    color: var(--ink-2);
+    margin-bottom: 2rem;
+  }
+  .service-para {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin-bottom: 1.25rem;
+  }
+
+  .service-deliverables {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--border);
+  }
+  .service-deliverables h4 { display: inline-block; margin-bottom: 1rem; }
+  .service-deliverables ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.5rem 1.5rem;
+  }
+  .service-deliverables li {
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .service-deliverables li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .service-stack {
+    margin-top: 2rem;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .service-stack li {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+  }
+
+  /* CTA */
+  .services-cta { color: var(--bg); --ink: #F0EBE0; --ink-2: #C4BFB4; }
+  .services-cta-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    color: var(--bg);
+    margin-bottom: 1.5rem;
+  }
+  .services-cta-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.125rem, 1.6vw, 1.4rem);
+    line-height: 1.5;
+    color: rgba(240,235,224,0.7);
+    margin-bottom: 2rem;
+    max-width: 560px;
+  }
+  .services-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1rem 1.5rem 1rem 1.75rem;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    border-radius: 999px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .services-cta-btn:hover { background: var(--accent-deep); transform: translateY(-1px); }
+  .services-cta-btn svg { transition: transform 0.3s ease; }
+  .services-cta-btn:hover svg { transform: translate(2px, -2px); }
+
+  @media (max-width: 880px) {
+    .service-block-inner {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .service-meta {
+      position: static;
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: string;
+  category: string;
+  slug: string;
+  readTime?: string;
+  featured?: boolean;
+  index?: number;
+}
+
+const { title, description, date, category, slug, readTime, featured = false, index = 0 } = Astro.props;
+
+const d = new Date(date);
+const formattedDate = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
+const num = `N°${String(index + 1).padStart(2, '0')}`;
+---
+
+<article class:list={['note-card', { featured }]}>
+  <a href={`/blog/${slug}`} class="note-card-link">
+    <header class="note-card-head">
+      <span class="note-card-num numeral">{num}</span>
+      <span class="note-card-cat serif-italic">{category}</span>
+      <span class="note-card-meta">
+        <span>{formattedDate}</span>
+        {readTime && <span>· {readTime}</span>}
+      </span>
+    </header>
+
+    <h3 class="note-card-title">{title}</h3>
+    <p class="note-card-desc">{description}</p>
+
+    <span class="note-card-read">
+      Read the note
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="7" y1="17" x2="17" y2="7"/>
+        <polyline points="7,7 17,7 17,17"/>
+      </svg>
+    </span>
+  </a>
+</article>
+
+<style>
+  .note-card {
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.4s ease;
+  }
+  .note-card:hover { background-color: var(--bg-alt); }
+
+  .note-card-link {
+    display: block;
+    padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+    color: var(--ink);
+    transition: padding 0.4s ease;
+  }
+  .note-card:hover .note-card-link {
+    padding-left: clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+
+  .note-card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .note-card-num { color: var(--accent); font-family: var(--font-display); font-weight: 700; letter-spacing: 0; font-size: 0.95rem; }
+  .note-card-cat {
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--ink-2);
+  }
+  .note-card-meta { margin-left: auto; display: inline-flex; gap: 0.4rem; }
+
+  .note-card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    text-wrap: balance;
+    transition: color 0.3s ease;
+  }
+  .featured .note-card-title { font-size: clamp(1.875rem, 4.5vw, 3.5rem); }
+  .note-card:hover .note-card-title { color: var(--accent); }
+
+  .note-card-desc {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 720px;
+    margin-bottom: 1rem;
+  }
+
+  .note-card-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .note-card-read svg { transition: transform 0.3s ease; }
+  .note-card:hover .note-card-read svg { transform: translate(3px, -3px); }
+</style>

@@ -1,0 +1,113 @@
+---
+// Hand-drawn SNX studio mark — strokes itself on first paint, then drifts.
+// Sits absolutely positioned; parent decides where.
+---
+
+<div class="studio-mark" aria-hidden="true">
+  <svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3"/>
+        <feDisplacementMap in="SourceGraphic" scale="1.4"/>
+      </filter>
+    </defs>
+
+    <g class="sm-group" filter="url(#rough)">
+      <!-- Outer rough circle — the stamp -->
+      <path class="sm-stroke sm-circle"
+            d="M 180 28
+               C 268 28, 332 92, 332 180
+               C 332 268, 268 332, 180 332
+               C 92 332, 28 268, 28 180
+               C 28 92, 92 28, 180 28 Z" />
+
+      <!-- Inner second pass for ink-bleed effect -->
+      <path class="sm-stroke sm-circle sm-circle-2"
+            d="M 178 34
+               C 264 30, 326 96, 326 178
+               C 328 268, 268 326, 180 328
+               C 92 330, 32 264, 34 180
+               C 30 96, 92 32, 178 34 Z" />
+
+      <!-- The big hand-drawn X — two crossing strokes -->
+      <path class="sm-stroke sm-x"
+            d="M 92 92 C 130 138, 180 180, 268 268" />
+      <path class="sm-stroke sm-x"
+            d="M 268 92 C 220 138, 180 180, 92 268" />
+
+      <!-- Crosshair tick marks at the cardinal points -->
+      <g class="sm-ticks">
+        <path class="sm-stroke sm-tick" d="M 180 8  L 180 22"/>
+        <path class="sm-stroke sm-tick" d="M 180 338 L 180 352"/>
+        <path class="sm-stroke sm-tick" d="M 8 180  L 22 180"/>
+        <path class="sm-stroke sm-tick" d="M 338 180 L 352 180"/>
+      </g>
+
+      <!-- N° serial top-left -->
+      <text class="sm-serial" x="48" y="78"
+            font-family="JetBrains Mono, ui-monospace, monospace"
+            font-size="14" letter-spacing="2" fill="currentColor">N°XII</text>
+
+      <!-- est. bottom-right -->
+      <text class="sm-serial" x="232" y="312"
+            font-family="JetBrains Mono, ui-monospace, monospace"
+            font-size="13" letter-spacing="2" fill="currentColor">EST · 2014</text>
+
+      <!-- Center dot -->
+      <circle class="sm-dot" cx="180" cy="180" r="6" fill="currentColor"/>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .studio-mark {
+    width: 100%;
+    height: 100%;
+    color: var(--accent);
+    transform-origin: center;
+    animation: smDrift 18s ease-in-out infinite;
+  }
+  .studio-mark svg { width: 100%; height: 100%; display: block; }
+
+  /* Stroke-draw setup — every path gets dasharray + offset */
+  .sm-stroke {
+    stroke: currentColor;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: smDraw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+  .sm-circle    { stroke-width: 3.4; animation-delay: 0.05s; }
+  .sm-circle-2  { stroke-width: 1.5; opacity: 0.55; animation-delay: 0.45s; }
+  .sm-x         { stroke-width: 5.5; animation-delay: 0.85s; animation-duration: 1.2s; }
+  .sm-tick      { stroke-width: 2.4; stroke-dasharray: 30; stroke-dashoffset: 30; animation: smDraw 0.5s ease-out forwards; }
+  .sm-ticks .sm-tick:nth-child(1) { animation-delay: 1.7s; }
+  .sm-ticks .sm-tick:nth-child(2) { animation-delay: 1.8s; }
+  .sm-ticks .sm-tick:nth-child(3) { animation-delay: 1.9s; }
+  .sm-ticks .sm-tick:nth-child(4) { animation-delay: 2.0s; }
+
+  .sm-serial { opacity: 0; animation: smFade 0.6s ease-out 2.0s forwards; }
+  .sm-dot    { opacity: 0; transform: scale(0.4); transform-origin: 180px 180px; animation: smPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 1.6s forwards; }
+
+  @keyframes smDraw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes smFade {
+    to { opacity: 1; }
+  }
+  @keyframes smPop {
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes smDrift {
+    0%, 100% { transform: rotate(-2deg) translate(0, 0); }
+    50%      { transform: rotate(2deg)  translate(6px, -8px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sm-stroke { stroke-dashoffset: 0; animation: none; }
+    .sm-serial, .sm-dot { opacity: 1; transform: none; animation: none; }
+    .studio-mark { animation: none; }
+  }
+</style>

@@ -1,0 +1,448 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const cases = [
+  {
+    idx: '01',
+    title: 'Logistics Intelligence Platform',
+    sector: 'Freight · AI · Multi-tenant SaaS',
+    year: '2024 — Now',
+    role: 'CTO &amp; founding architect',
+    challenge: 'A growing freight forwarder still ran the world\'s most expensive cargo on email threads and spreadsheets. Quoting took days, document handling took longer, and every customer felt it.',
+    approach: 'A Claude-native platform: agentic quoting that pulls live carrier data and explains its work, document classification with prompt-cached pipelines, multi-tenant operations console, and SOC2-shaped infra from day one.',
+    result: 'Quoting cycles dropped by 14×. 92% of inbound shipping documents are now classified end-to-end without a human. The platform now powers daily ops for a growing book of enterprise customers.',
+    metrics: [
+      { value: '14×', label: 'Faster quoting cycle' },
+      { value: '92%', label: 'OCR-to-shipment automation' },
+      { value: 'SOC2', label: 'Compliance in flight' },
+    ],
+    stack: ['Claude · Anthropic SDK', 'Claude Agent SDK', 'NestJS', 'Next.js', 'PostgreSQL', 'AWS'],
+  },
+  {
+    idx: '02',
+    title: 'Smart Energy Telemetry',
+    sector: 'Industrial IoT · Embedded · Research',
+    year: '2017 — 2019',
+    role: 'Lead engineer &amp; researcher',
+    challenge: 'Legacy distribution grids in tier-2 cities had little real-time visibility on consumption, theft, or load. Replacing the meters wholesale was politically and economically impossible.',
+    approach: 'A drop-in smart-energy meter — a small embedded board paired with the existing analogue meter — and a telemetry / analytics stack that ingested everything into a central operations dashboard.',
+    result: 'Recognition from the Ministry of Power &amp; Coal. Smart India Hackathon finalist. Underlying research published in IJCA (2017). Six years on, the architecture still reads cleanly.',
+    metrics: [
+      { value: '99.9%', label: 'Telemetry uptime' },
+      { value: 'IJCA', label: 'Published research' },
+      { value: 'MoP', label: 'Ministry recognition' },
+    ],
+    stack: ['Embedded C', 'Raspberry Pi', 'MQTT', 'TimescaleDB', 'Angular'],
+  },
+  {
+    idx: '03',
+    title: 'Maritime Routing Engine (OSS)',
+    sector: 'Open Source · Geo · TypeScript',
+    year: '2023 — Now',
+    role: 'Author &amp; maintainer',
+    challenge: 'Most sea-route libraries were either commercial, slow, or wildly inaccurate around canals and chokepoints. Logistics teams kept reinventing the same broken Dijkstra over and over.',
+    approach: 'Open-source it. searoute-ts ships an MIT-licensed library, sub-5ms median compute, accurate handling of canals (Suez, Panama, Malacca), and a stable NPM API used in production.',
+    result: 'Adopted into commercial logistics platforms across the world. Continues to be maintained — the open-source backbone of the studio\'s logistics work.',
+    metrics: [
+      { value: 'OSS', label: 'MIT-licensed, public NPM' },
+      { value: '60+', label: 'Production integrations' },
+      { value: '< 5ms', label: 'Median route compute' },
+    ],
+    stack: ['TypeScript', 'GeoJSON', 'Dijkstra', 'NPM', 'GitHub Actions'],
+    external: 'https://github.com/mayurrawte/searoute-ts',
+  },
+  {
+    idx: '04',
+    title: 'Agritech Sensor Mesh',
+    sector: 'IoT · AgriTech · Research',
+    year: '2018',
+    role: 'Co-author &amp; systems engineer',
+    challenge: 'Small-holder farms could not justify the cost of conventional precision-agriculture stacks, but were exposed to climate volatility that the larger farms had instruments to ride out.',
+    approach: 'A LoRa-powered sensor mesh — soil moisture, micro-climate, irrigation status — with a low-bandwidth dashboard for regional advisors who were the actual decision-makers, not the farmers.',
+    result: 'Pilot reduced water use by ~38% across participating farms. The work led to a published research paper and influenced the design of larger agritech rollouts.',
+    metrics: [
+      { value: '38%', label: 'Water-use reduction' },
+      { value: 'LoRa', label: 'Low-power mesh' },
+      { value: 'Paper', label: 'Published research' },
+    ],
+    stack: ['Arduino', 'LoRaWAN', 'Node.js', 'InfluxDB', 'Grafana'],
+  },
+  {
+    idx: '05',
+    title: 'Last-Mile Cargo OS',
+    sector: 'Marketplace · Logistics · Mission',
+    year: '2019 — 2021',
+    role: 'Founding engineer',
+    challenge: 'A women-led, women-driven last-mile delivery startup needed a dispatch core, payments, and operator app — built fast, cheap, and reliable enough to put real income in real hands.',
+    approach: 'Built the platform from zero: order routing, dispatch, payments, partner integrations, rider-facing PWA. Architected for low-spec phones and patchy networks.',
+    result: 'Hundreds of riders onboarded. Platform supported the operating model through scale-up and into a Series A. Arguably the most rewarding code we\'ve shipped.',
+    metrics: [
+      { value: '0→1', label: 'Built from scratch' },
+      { value: '500+', label: 'Active riders' },
+      { value: 'Impact', label: 'Mission-led startup' },
+    ],
+    stack: ['Node.js', 'Angular', 'Firebase', 'GCP', 'Twilio'],
+  },
+];
+
+const oss = [
+  {
+    name: 'searoute-ts',
+    desc: 'Shortest sea-route between any two coordinates on Earth. MIT, production-grade.',
+    lang: 'TypeScript',
+    url: 'https://github.com/mayurrawte/searoute-ts',
+  },
+  {
+    name: 'lit-pigeon',
+    desc: 'Lightweight, type-safe pub/sub for modern TypeScript apps. Studio-maintained.',
+    lang: 'TypeScript',
+    url: 'https://github.com/mayurrawte',
+  },
+  {
+    name: 'github-angular-actions',
+    desc: 'GitHub Action that pre-installs Angular CLI for fast CI builds.',
+    lang: 'TypeScript',
+    url: 'https://github.com/mayurrawte/github-angular-actions',
+  },
+];
+---
+
+<Layout title="Work — SNX Studio" description="Selected case studies and open-source contributions. AI freight, smart energy IoT, maritime routing, agritech sensors, last-mile cargo.">
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container-wide">
+        <span class="label label-mark animate-fade-in-up">Selected work</span>
+        <h1 class="page-h1 animate-fade-in-up delay-200">
+          Things that<br/>
+          <span class="serif-italic accent">actually</span> shipped.
+        </h1>
+        <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
+          A working CTO doesn't get the luxury of vapourware. Every project below ran in
+          production, served real users, and survived the messy bit after launch.
+        </p>
+      </div>
+    </section>
+
+    <!-- Cases -->
+    <section class="cases-section">
+      <div class="container-wide">
+        {cases.map((c) => (
+          <article class="case reveal">
+            <header class="case-head">
+              <span class="case-idx numeral">{c.idx}</span>
+              <div class="case-head-meta">
+                <span class="case-sector">{c.sector}</span>
+                <span class="case-year">{c.year}</span>
+                <span class="case-role serif-italic" set:html={`— ${c.role}`}></span>
+              </div>
+            </header>
+
+            <h2 class="case-title">
+              {c.title}
+              {c.external && (
+                <a href={c.external} target="_blank" rel="noopener noreferrer" class="case-ext" aria-label="Open repository">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"/>
+                    <polyline points="7,7 17,7 17,17"/>
+                  </svg>
+                </a>
+              )}
+            </h2>
+
+            <div class="case-body">
+              <div class="case-narrative">
+                <div class="case-section">
+                  <h4 class="case-label">Challenge</h4>
+                  <p set:html={c.challenge}></p>
+                </div>
+                <div class="case-section">
+                  <h4 class="case-label">Approach</h4>
+                  <p set:html={c.approach}></p>
+                </div>
+                <div class="case-section">
+                  <h4 class="case-label">Result</h4>
+                  <p set:html={c.result}></p>
+                </div>
+              </div>
+
+              <aside class="case-aside">
+                <ul class="case-metrics" role="list">
+                  {c.metrics.map(m => (
+                    <li>
+                      <span class="case-metric-val numeral">{m.value}</span>
+                      <span class="case-metric-label">{m.label}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <ul class="case-stack" role="list">
+                  {c.stack.map(s => <li>{s}</li>)}
+                </ul>
+              </aside>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Open Source -->
+    <section class="section bg-surface-alt">
+      <div class="container-wide">
+        <header class="oss-header">
+          <span class="label label-mark">Open source</span>
+          <h2 class="oss-h2">
+            Tools we keep <span class="serif-italic accent">in the open.</span>
+          </h2>
+        </header>
+
+        <div class="oss-grid">
+          {oss.map(o => (
+            <a href={o.url} target="_blank" rel="noopener noreferrer" class="oss-card reveal">
+              <h3 class="oss-name">{o.name}</h3>
+              <p class="oss-desc">{o.desc}</p>
+              <div class="oss-meta">
+                <span class="oss-lang">{o.lang}</span>
+                <span class="oss-arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <a href="/opensource" class="oss-link">
+          See the full open-source archive
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"/>
+            <polyline points="7,7 17,7 17,17"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    margin-top: 1.5rem;
+  }
+  .page-h1 .accent { color: var(--accent); }
+
+  .cases-section { padding: 0 0 clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--ink); }
+
+  .case {
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .case-idx {
+    font-size: 1rem;
+    color: var(--accent);
+  }
+  .case-head-meta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .case-role {
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--ink-2);
+  }
+
+  .case-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 6vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .case-ext { color: var(--muted); transition: color 0.3s ease, transform 0.3s ease; }
+  .case-ext:hover { color: var(--accent); transform: translate(4px, -4px); }
+
+  .case-body {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .case-narrative {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .case-label {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .case-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+
+  .case-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.75rem;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .case-metrics {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .case-metrics li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed var(--border);
+  }
+  .case-metrics li:last-child { border-bottom: none; padding-bottom: 0; }
+  .case-metric-val {
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .case-metric-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .case-stack {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .case-stack li {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding: 0.3rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg);
+  }
+
+  /* OSS preview */
+  .oss-header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .oss-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .oss-h2 .accent { color: var(--accent); }
+  .oss-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .oss-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.75rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--ink);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .oss-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .oss-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.025em;
+  }
+  .oss-desc {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+    flex: 1;
+  }
+  .oss-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .oss-arrow { color: var(--accent); font-size: 1rem; }
+  .oss-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .oss-link svg { transition: transform 0.3s ease; }
+  .oss-link:hover svg { transform: translate(3px, -3px); }
+
+  @media (max-width: 880px) {
+    .case-body { grid-template-columns: 1fr; }
+    .oss-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,270 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contact — SNX Studio" description="Tell us what you're building. We reply within one working day, from a real human.">
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container-wide">
+        <span class="tape tape-tilt-l animate-fade-in">— send a real brief —</span>
+        <h1 class="page-h1 animate-fade-in-up delay-200">
+          Tell us what<br/>
+          <span class="serif-italic accent">you're building.</span>
+        </h1>
+        <p class="lede animate-fade-in-up delay-400" style="max-width: 640px; margin-top: 1.5rem;">
+          We pick a small number of partnerships each quarter. The more honest you can be in
+          this first message, the faster we can decide whether we're the right team for it.
+        </p>
+      </div>
+    </section>
+
+    <!-- Form + Sidebar -->
+    <section class="section-sm">
+      <div class="container-wide">
+        <div class="contact-grid">
+          <form class="contact-form reveal" id="contact-form" method="POST" action="#">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name" class="form-label"><span class="form-num">01</span> Your name</label>
+                <input type="text" id="name" name="name" required class="form-input" placeholder="Type your name" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label"><span class="form-num">02</span> Email</label>
+                <input type="email" id="email" name="email" required class="form-input" placeholder="you@company.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="company" class="form-label"><span class="form-num">03</span> Company <span class="form-optional">— optional</span></label>
+                <input type="text" id="company" name="company" class="form-input" placeholder="Where you work" autocomplete="organization" />
+              </div>
+              <div class="form-group">
+                <label for="budget" class="form-label"><span class="form-num">04</span> Budget range</label>
+                <select id="budget" name="budget" class="form-input form-select">
+                  <option>$25k — $50k</option>
+                  <option>$50k — $100k</option>
+                  <option>$100k — $250k</option>
+                  <option>$250k+</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="kind" class="form-label"><span class="form-num">05</span> What are we talking about?</label>
+              <div class="form-pills" role="group" aria-label="Project type">
+                {['Claude / AI build', 'IoT system', 'Web platform', 'Design system', 'UX audit', 'Fractional CTO', 'Something else'].map(t => (
+                  <label class="form-pill">
+                    <input type="checkbox" name="kind" value={t} />
+                    <span>{t}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label"><span class="form-num">06</span> The brief</label>
+              <textarea id="message" name="message" required class="form-input form-textarea" placeholder="What you're building, who it's for, and what's already broken." rows="6"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary form-submit">
+              Send the message
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7,7 17,7 17,17"/>
+              </svg>
+            </button>
+          </form>
+
+          <aside class="contact-side reveal delay-200">
+            <div class="contact-block">
+              <h3 class="contact-block-title">Direct line</h3>
+              <a href="mailto:hello@wearesnx.studio" class="contact-block-mail">hello@wearesnx.studio</a>
+              <p class="contact-block-desc serif-italic">
+                We reply within one business day, in plain English, from a real person.
+              </p>
+            </div>
+
+            <div class="contact-block">
+              <h3 class="contact-block-title">Studio</h3>
+              <p class="contact-block-desc">
+                Bengaluru, India · Working with teams across IST, GMT &amp; PST.
+              </p>
+            </div>
+
+            <div class="contact-block">
+              <h3 class="contact-block-title">Already know what you need?</h3>
+              <ul class="contact-block-list">
+                <li><a href="/services#ai" class="link-underline">Claude-native AI engagement</a></li>
+                <li><a href="/services#design" class="link-underline">UX teardown / audit</a></li>
+                <li><a href="/services#advisory" class="link-underline">Fractional CTO partnership</a></li>
+              </ul>
+            </div>
+
+            <div class="contact-block">
+              <h3 class="contact-block-title">Open work</h3>
+              <a href="https://github.com/mayurrawte" target="_blank" rel="noopener noreferrer" class="link-underline">github.com/mayurrawte ↗</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    margin-top: 1.5rem;
+  }
+  .page-h1 .accent { color: var(--accent); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+    border-top: 1px solid var(--ink);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 0.625rem; }
+  .form-label {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .form-num { color: var(--accent); }
+  .form-optional { color: var(--muted); text-transform: lowercase; letter-spacing: 0; }
+
+  .form-input {
+    width: 100%;
+    padding: 0.95rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .form-input::placeholder { color: var(--muted); }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .form-textarea { resize: vertical; min-height: 160px; }
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%2376747F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='1 1 6 6 11 1'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+
+  .form-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .form-pill {
+    display: inline-flex;
+    cursor: pointer;
+  }
+  .form-pill input { display: none; }
+  .form-pill span {
+    padding: 0.55rem 0.95rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .form-pill input:checked + span {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  .form-submit { align-self: flex-start; margin-top: 0.5rem; }
+
+  /* Sidebar */
+  .contact-side {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.75rem;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .contact-block { display: flex; flex-direction: column; gap: 0.625rem; }
+  .contact-block-title {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .contact-block-mail {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    transition: color 0.25s ease;
+  }
+  .contact-block-mail:hover { color: var(--accent); }
+  .contact-block-desc {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .contact-block-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .contact-block-list a {
+    font-size: 0.9375rem;
+    color: var(--accent);
+  }
+
+  @media (max-width: 880px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>

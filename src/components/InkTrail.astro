@@ -1,0 +1,115 @@
+---
+// Cursor ink-trail. Renders a tapered, jittery brush stroke that follows the
+// pointer and decays. No-op on touch devices and when prefers-reduced-motion.
+---
+
+<canvas id="ink-trail" aria-hidden="true"></canvas>
+
+<style>
+  #ink-trail {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9996;
+    mix-blend-mode: multiply;
+  }
+  :global(.dark) #ink-trail { mix-blend-mode: screen; }
+  @media (hover: none), (prefers-reduced-motion: reduce) {
+    #ink-trail { display: none; }
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('ink-trail') as HTMLCanvasElement | null;
+  if (canvas && window.matchMedia('(hover: hover)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+
+    const ctx = canvas.getContext('2d')!;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas!.width = window.innerWidth * dpr;
+      canvas!.height = window.innerHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    function inkColor() {
+      const styles = getComputedStyle(document.documentElement);
+      const c = styles.getPropertyValue('--accent').trim() || '#C9311E';
+      return c;
+    }
+
+    type Pt = { x: number; y: number; t: number; w: number; jx: number; jy: number; };
+    const pts: Pt[] = [];
+    const MAX_AGE = 1500;          // ms — full decay
+    const MAX_PTS = 220;
+    let lastX = -1, lastY = -1;
+    let lastEmit = 0;
+
+    function jitter() {
+      return (Math.random() - 0.5) * 1.6;
+    }
+
+    window.addEventListener('pointermove', (e) => {
+      if ((e as PointerEvent).pointerType === 'touch') return;
+      const now = performance.now();
+      if (now - lastEmit < 8) return;     // ~120fps cap on emit rate
+      lastEmit = now;
+
+      const x = e.clientX, y = e.clientY;
+      let speed = 0;
+      if (lastX >= 0) {
+        const dx = x - lastX, dy = y - lastY;
+        speed = Math.min(Math.hypot(dx, dy), 60);
+      }
+      lastX = x; lastY = y;
+
+      // Width tapers with speed: faster = thinner
+      const w = Math.max(1.5, 8 - speed * 0.12);
+      pts.push({ x, y, t: now, w, jx: jitter(), jy: jitter() });
+      if (pts.length > MAX_PTS) pts.splice(0, pts.length - MAX_PTS);
+    }, { passive: true });
+
+    function frame() {
+      const now = performance.now();
+      ctx.clearRect(0, 0, canvas!.width / dpr, canvas!.height / dpr);
+
+      // Drop dead points
+      while (pts.length && now - pts[0].t > MAX_AGE) pts.shift();
+      if (pts.length < 2) { requestAnimationFrame(frame); return; }
+
+      const color = inkColor();
+
+      // Render a smoothed polyline as many short tapered segments
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = color;
+
+      for (let i = 1; i < pts.length; i++) {
+        const a = pts[i - 1], b = pts[i];
+        const age = (now - b.t) / MAX_AGE;       // 0 fresh -> 1 dead
+        const alpha = Math.max(0, 1 - age);
+        const width = Math.max(0.3, ((a.w + b.w) / 2) * (1 - age * 0.85));
+
+        ctx.globalAlpha = alpha * 0.9;
+        ctx.lineWidth = width;
+        ctx.beginPath();
+        ctx.moveTo(a.x + a.jx * (1 - alpha) * 2, a.y + a.jy * (1 - alpha) * 2);
+        // Quadratic between points to soften the line
+        const mx = (a.x + b.x) / 2;
+        const my = (a.y + b.y) / 2;
+        ctx.quadraticCurveTo(a.x, a.y, mx, my);
+        ctx.lineTo(b.x + b.jx * (1 - alpha) * 2, b.y + b.jy * (1 - alpha) * 2);
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+</script>

@@ -1,0 +1,515 @@
+---
+import Mark from '../Marks.astro';
+import StudioMark from '../StudioMark.astro';
+
+const capabilities = [
+  'Claude-native AI',
+  'Industrial IoT',
+  'Web Platforms',
+  'Design Systems',
+  'UX Teardowns',
+  'Cloud / DevEx',
+  'Fractional CTO',
+];
+---
+
+<section class="hero" id="hero">
+  <!-- Paper rules background -->
+  <div class="hero-bg" aria-hidden="true">
+    <svg class="hero-rules" viewBox="0 0 1440 900" preserveAspectRatio="none">
+      <g stroke="var(--ink)" stroke-width="0.6" opacity="0.10">
+        <line x1="0" y1="180" x2="1440" y2="180" stroke-dasharray="3 6"/>
+        <line x1="0" y1="360" x2="1440" y2="360" stroke-dasharray="3 6"/>
+        <line x1="0" y1="540" x2="1440" y2="540" stroke-dasharray="3 6"/>
+        <line x1="0" y1="720" x2="1440" y2="720" stroke-dasharray="3 6"/>
+      </g>
+      <g stroke="var(--ink)" stroke-width="0.4" opacity="0.05">
+        <line x1="320" y1="0" x2="320" y2="900"/>
+        <line x1="640" y1="0" x2="640" y2="900"/>
+        <line x1="960" y1="0" x2="960" y2="900"/>
+        <line x1="1200" y1="0" x2="1200" y2="900"/>
+      </g>
+    </svg>
+    <span class="hero-corner hero-corner-tl"><Mark name="corner-tl" /></span>
+    <span class="hero-corner hero-corner-tr"><Mark name="corner-tl" rotate={90} /></span>
+    <span class="hero-corner hero-corner-bl"><Mark name="corner-tl" rotate={-90} /></span>
+    <span class="hero-corner hero-corner-br"><Mark name="corner-tl" rotate={180} /></span>
+  </div>
+
+  <div class="hero-inner">
+    <!-- Top meta bar (full width) -->
+    <div class="hero-meta animate-fade-in delay-100">
+      <span class="tape tape-tilt-l">Studio note · No°1</span>
+      <span class="hero-meta-rule" aria-hidden="true"></span>
+      <span class="hero-meta-text serif-italic">
+        A small AI &amp; technology studio. Bengaluru &amp; the next deploy.
+      </span>
+      <span class="hero-meta-spacer"></span>
+      <span class="hero-meta-coords serif-italic">
+        12.97°N · 77.59°E
+      </span>
+    </div>
+
+    <!-- Two-column composition -->
+    <div class="hero-grid">
+      <!-- Headline column -->
+      <div class="hero-headline-wrap">
+        <h1 class="hero-headline">
+          <span class="hl-row hl-row-1 animate-fade-in-up delay-200">
+            We design, build
+            <span class="hl-amp serif-italic">&amp;</span>
+          </span>
+
+          <span class="hl-row hl-row-2 animate-fade-in-up delay-300">
+            ship the
+            <span class="hl-circled">
+              <span class="hl-circled-inner serif-italic">intelligent</span>
+              <span class="hl-circle-mark"><Mark name="ink-circle" /></span>
+            </span>
+          </span>
+
+          <span class="hl-row hl-row-3 animate-fade-in-up delay-400">
+            systems behind
+            <span class="hl-strike ink-strike">good</span>
+            <span class="hl-replaced">
+              <span>great</span>
+              <Mark name="underline-wave" class="hl-replaced-wave" />
+            </span>
+            products<span class="hl-asterisk">*</span>
+          </span>
+        </h1>
+
+        <!-- Lede + actions sit under the headline -->
+        <div class="hero-belt animate-fade-in-up delay-500">
+          <p class="hero-lede">
+            A workshop built around <em>senior</em> engineering, opinionated
+            design, and a deep bet on Claude as the foundation for the next
+            generation of software.
+          </p>
+          <div class="hero-actions">
+            <a href="/contact" class="btn-primary">
+              Start a conversation
+              <Mark name="arrow-r" class="btn-mark" />
+            </a>
+            <a href="/work" class="btn-ghost">See the archive</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: studio mark + meta bits -->
+      <aside class="hero-aside" aria-label="Studio mark">
+        <div class="hero-mark-wrap animate-fade-in delay-300">
+          <StudioMark />
+        </div>
+
+        <!-- Annotation arrow + footnote text pointing at the mark -->
+        <div class="hero-annotation animate-fade-in delay-1000">
+          <Mark name="arrow-curly" class="hero-anno-arrow" />
+          <p>
+            <span class="serif-italic">our mark.</span><br/>
+            drawn the moment<br/>
+            you arrived.
+          </p>
+        </div>
+
+        <!-- Receipt of disciplines -->
+        <div class="hero-receipt animate-fade-in-up delay-800">
+          <div class="hero-receipt-head">
+            <span>Disciplines</span>
+            <span class="numeral">×04</span>
+          </div>
+          <ul class="hero-receipt-list" role="list">
+            <li><Mark name="check" /><span>AI &amp; Claude engineering</span></li>
+            <li><Mark name="check" /><span>Industrial IoT &amp; edge</span></li>
+            <li><Mark name="check" /><span>Web platforms &amp; UX</span></li>
+            <li><Mark name="check" /><span>Cloud, DevEx &amp; advisory</span></li>
+          </ul>
+          <div class="hero-receipt-foot">
+            <span>— one room —</span>
+            <span>SNX × YOU</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Stat band along the foot -->
+    <div class="hero-stats animate-fade-in delay-800">
+      <div class="hero-stat">
+        <span class="hero-stat-num numeral">10<span class="plus">+</span></span>
+        <span class="hero-stat-label">Years shipping at the<br/>edge of design and systems.</span>
+      </div>
+      <span class="hero-stat-divider"><Mark name="cross" /></span>
+      <div class="hero-stat">
+        <span class="hero-stat-num numeral">06</span>
+        <span class="hero-stat-label">Open-source projects<br/>maintained in public.</span>
+      </div>
+      <span class="hero-stat-divider"><Mark name="cross" /></span>
+      <div class="hero-stat">
+        <span class="hero-stat-num numeral">N°1</span>
+        <span class="hero-stat-label">Recognition from the<br/>Ministry of Power &amp; Coal.</span>
+      </div>
+      <span class="hero-stat-divider"><Mark name="cross" /></span>
+      <div class="hero-stat">
+        <span class="hero-stat-num numeral">∞</span>
+        <span class="hero-stat-label">Claude-tokens burned<br/>so you don't have to.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Capability marquee at hero base -->
+  <div class="hero-marquee">
+    <div class="marquee">
+      <div class="marquee-track">
+        {capabilities.concat(capabilities).map(cap => (
+          <span class="marquee-item">
+            <span>{cap}</span>
+            <Mark name="asterisk" class="marquee-mark" />
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-top: clamp(6rem, 11vh, 9rem);
+  }
+
+  /* Background */
+  .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .hero-rules { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-corner { position: absolute; color: var(--ink); opacity: 0.45; width: 24px; height: 24px; }
+  .hero-corner-tl { top: 90px;  left: 28px; }
+  .hero-corner-tr { top: 90px;  right: 28px; }
+  .hero-corner-bl { bottom: 28px; left: 28px; }
+  .hero-corner-br { bottom: 28px; right: 28px; }
+
+  /* Inner */
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1480px;
+    margin: 0 auto;
+    padding-left: clamp(1.25rem, 4vw, 3rem);
+    padding-right: clamp(1.25rem, 4vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  /* Meta bar */
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed var(--border-strong);
+  }
+  .hero-meta-rule { width: 60px; height: 1px; background: var(--ink); opacity: 0.4; }
+  .hero-meta-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.0625rem;
+    color: var(--ink-2);
+  }
+  .hero-meta-spacer { flex: 1; }
+  .hero-meta-coords {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  /* ── Two-column grid ── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+    padding-top: clamp(0.5rem, 2vw, 1.5rem);
+  }
+
+  /* Headline column */
+  .hero-headline-wrap { position: relative; }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6.4vw, 6.5rem);
+    font-weight: 700;
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .hl-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.18em; }
+  .hl-row-2 { padding-left: clamp(0.5rem, 3vw, 3rem); }
+  .hl-row-3 { padding-left: clamp(0rem, 1.5vw, 1.5rem); }
+
+  .hl-amp {
+    color: var(--accent);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.05em;
+    transform: translateY(-0.06em);
+  }
+
+  .hl-circled {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.18em;
+  }
+  .hl-circled-inner {
+    color: var(--accent);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .hl-circle-mark {
+    position: absolute;
+    inset: -0.12em -0.4em -0.18em -0.42em;
+    color: var(--accent);
+    transform: rotate(-1.4deg);
+  }
+
+  .hl-strike { color: var(--muted); }
+  .hl-replaced {
+    position: relative;
+    display: inline-block;
+    color: var(--ink);
+  }
+  .hl-replaced-wave {
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: -0.18em;
+    width: 104%;
+    height: 0.28em;
+    color: var(--accent);
+  }
+  .hl-asterisk {
+    color: var(--accent);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.5em;
+    vertical-align: super;
+    margin-left: 0.05em;
+  }
+
+  /* Belt — lede + actions under headline */
+  .hero-belt {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: clamp(1.25rem, 2vw, 1.75rem);
+    border-top: 1px dashed var(--border-strong);
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    align-items: end;
+  }
+  .hero-lede {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 1.3vw, 1.1875rem);
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 480px;
+  }
+  .hero-lede em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--ink);
+  }
+  .hero-actions { display: flex; gap: 0.625rem; flex-wrap: wrap; justify-self: end; }
+  .btn-mark { width: 30px; height: 14px; }
+
+  /* ── Right aside ── */
+  .hero-aside {
+    position: relative;
+    display: grid;
+    grid-template-areas:
+      "mark"
+      "annotation"
+      "receipt";
+    gap: 1rem;
+    padding-top: 0.5rem;
+  }
+  .hero-mark-wrap {
+    grid-area: mark;
+    width: clamp(220px, 22vw, 320px);
+    height: clamp(220px, 22vw, 320px);
+    margin-left: auto;
+    transform: rotate(-2deg);
+  }
+  .hero-annotation {
+    grid-area: annotation;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin-left: auto;
+    margin-top: -1.5rem;
+    padding-right: clamp(1rem, 4vw, 4rem);
+    transform: rotate(-2deg);
+    color: var(--accent);
+    max-width: 220px;
+  }
+  .hero-anno-arrow {
+    color: var(--accent);
+    width: 70px;
+    height: 46px;
+    flex-shrink: 0;
+    transform: scaleY(-1) rotate(160deg);
+  }
+  .hero-annotation p {
+    font-family: var(--font-serif);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 0;
+    padding-top: 0.75rem;
+  }
+  .hero-annotation .serif-italic { color: var(--accent); }
+
+  .hero-receipt {
+    grid-area: receipt;
+    background: var(--bg);
+    border: 1.5px dashed var(--border-strong);
+    padding: 1rem 1.25rem;
+    transform: rotate(1.2deg);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    margin-top: 1rem;
+  }
+  .hero-receipt-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed var(--border-strong);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .hero-receipt-head .numeral { color: var(--accent); font-size: 0.95rem; }
+  .hero-receipt-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.6rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .hero-receipt-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--ink);
+    font-family: var(--font-serif);
+  }
+  .hero-receipt-list svg { width: 14px; height: 14px; color: var(--accent); }
+  .hero-receipt-foot {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--border-strong);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── Stat band ── */
+  .hero-stats {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: clamp(1.5rem, 3vw, 2rem);
+    border-top: 1.5px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+  .hero-stat { display: flex; flex-direction: column; gap: 0.5rem; }
+  .hero-stat-num {
+    font-size: clamp(2rem, 3.4vw, 2.75rem);
+    line-height: 0.9;
+    color: var(--ink);
+  }
+  .hero-stat-num .plus {
+    color: var(--accent);
+    font-size: 0.55em;
+    vertical-align: super;
+    margin-left: 0.05em;
+  }
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .hero-stat-divider {
+    align-self: center;
+    color: var(--accent);
+    opacity: 0.6;
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Marquee */
+  .hero-marquee {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(2.5rem, 4vw, 3rem);
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    padding: 1.25rem 0;
+    background: var(--bg-alt);
+  }
+  .hero-marquee .marquee-item {
+    font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+    color: var(--ink);
+    gap: 0.75rem;
+  }
+  .hero-marquee .marquee-mark { color: var(--accent); width: 24px; height: 24px; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-aside {
+      grid-template-areas:
+        "mark"
+        "receipt";
+      grid-template-rows: auto auto;
+    }
+    .hero-mark-wrap { margin-left: 0; transform: rotate(-1deg); width: 220px; height: 220px; }
+    .hero-annotation { display: none; }
+    .hero-receipt { transform: rotate(0deg); margin-top: 0; }
+    .hero-belt { grid-template-columns: 1fr; }
+    .hero-actions { justify-self: start; }
+    .hero-stats { grid-template-columns: repeat(4, 1fr); }
+    .hero-stat-divider { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-corner { display: none; }
+    .hl-row-2, .hl-row-3 { padding-left: 0; }
+    .hero-stats { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .hero-meta-coords { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-stats { grid-template-columns: 1fr; }
+  }
+</style>

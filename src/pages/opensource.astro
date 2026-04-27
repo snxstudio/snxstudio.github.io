@@ -1,0 +1,338 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const projects = [
+  {
+    name: 'promptbucket',
+    repo: 'promptbucket.co',
+    url: 'https://promptbucket.co',
+    description: 'An open library for collecting, versioning, and sharing prompts that survive contact with production. Built for the working AI engineer — no walled garden, no waitlist, no upsell.',
+    language: 'TypeScript',
+    color: '#3178C6',
+    license: 'MIT',
+    org: 'Studio',
+    stars: 'live',
+  },
+  {
+    name: 'searoute-ts',
+    repo: 'mayurrawte/searoute-ts',
+    url: 'https://github.com/mayurrawte/searoute-ts',
+    description: 'Open-source library that computes the shortest realistic sea-route between any two coordinates on Earth. Sub-5ms median compute, accurate around the world\'s major canals and chokepoints. Quietly powering production logistics platforms.',
+    language: 'TypeScript',
+    color: '#3178C6',
+    license: 'MIT',
+    org: 'Studio',
+    stars: 'production',
+  },
+  {
+    name: 'lit-pigeon',
+    repo: 'snxstudio/lit-pigeon',
+    url: 'https://github.com/mayurrawte',
+    description: 'Lightweight, type-safe pub/sub for modern TypeScript apps. Built around the patterns we kept reaching for, in the studio\'s production stack — and that we got tired of re-implementing.',
+    language: 'TypeScript',
+    color: '#3178C6',
+    license: 'MIT',
+    org: 'Studio',
+    stars: 'maintained',
+  },
+  {
+    name: 'github-angular-actions',
+    repo: 'mayurrawte/github-angular-actions',
+    url: 'https://github.com/mayurrawte/github-angular-actions',
+    description: 'GitHub Action that pre-installs Angular CLI and dependencies with configurable versions. Saves real CI minutes on real builds — boring infrastructure that earns its keep.',
+    language: 'TypeScript',
+    color: '#3178C6',
+    license: 'MIT',
+    org: 'Studio',
+    stars: 'maintained',
+  },
+  {
+    name: 'SherlockQA',
+    repo: 'mayurrawte/SherlockQA',
+    url: 'https://github.com/mayurrawte/SherlockQA',
+    description: 'A lightweight QA &amp; testing companion. Inspect, investigate, and validate apps with a detective\'s sense of suspicion.',
+    language: 'HTML',
+    color: '#E34C26',
+    license: 'MIT',
+    org: 'Studio',
+    stars: 'archived-ish',
+  },
+  {
+    name: 'whatsapp-hero',
+    repo: 'mayurrawte/whatsapp-hero',
+    url: 'https://github.com/mayurrawte/whatsapp-hero',
+    description: 'Python utility for working with WhatsApp data. Pragmatic, single-purpose, useful when you need it.',
+    language: 'Python',
+    color: '#3572A5',
+    license: 'MIT',
+    org: 'Studio',
+    stars: 'utility',
+  },
+];
+---
+
+<Layout title="Open Source — SNX Studio" description="The studio's open-source archive. Maritime routing, type-safe pub/sub, CI tooling, QA helpers, and a few utilities that earned their keep.">
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container-wide">
+        <span class="label label-mark animate-fade-in-up">Open source</span>
+        <h1 class="page-h1 animate-fade-in-up delay-200">
+          Built in the<br/>
+          <span class="serif-italic accent">open.</span>
+        </h1>
+        <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
+          Closed studios drift. Working in public is the cheapest accountability there is —
+          and most of what we ship is downstream of someone else doing the same.
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="oss-section">
+      <div class="container-wide">
+        <ol class="oss-list" role="list">
+          {projects.map((p, i) => (
+            <li class="oss-row reveal" style={`transition-delay: ${i * 60}ms`}>
+              <a href={p.url} target="_blank" rel="noopener noreferrer" class="oss-row-link">
+                <div class="oss-row-head">
+                  <span class="oss-row-num numeral">N°{String(i + 1).padStart(2, '0')}</span>
+                  <span class="oss-row-org">{p.org}</span>
+                  <span class="oss-row-license">{p.license}</span>
+                </div>
+
+                <div class="oss-row-body">
+                  <h2 class="oss-row-name">
+                    {p.name}
+                    <span class="oss-row-arrow" aria-hidden="true">↗</span>
+                  </h2>
+                  <p class="oss-row-desc" set:html={p.description}></p>
+                </div>
+
+                <div class="oss-row-meta">
+                  <span class="oss-row-lang">
+                    <span class="oss-lang-dot" style={`background-color: ${p.color}`}></span>
+                    {p.language}
+                  </span>
+                  <span class="oss-row-status">{p.stars}</span>
+                  <span class="oss-row-repo">{p.repo}</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Manifesto -->
+    <section class="section bg-surface-alt">
+      <div class="container-wide">
+        <div class="oss-manifesto reveal">
+          <aside class="manifesto-aside">
+            <span class="label label-mark">Why open source</span>
+            <span class="manifesto-num numeral">N°02</span>
+          </aside>
+          <blockquote class="manifesto-body">
+            <p>
+              Every tool we use stands on the shoulders of someone who chose to share what they built.
+              Open source is how we contribute back to that chain — releasing the small,
+              <span class="serif-italic">honest</span> utilities we built for ourselves and would
+              have wanted to find.
+            </p>
+            <p>
+              We don't open-source as marketing. We open-source because the act of writing code
+              that strangers might read keeps us honest, invites collaboration, and makes the
+              tool genuinely useful instead of merely demo-ready.
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- GitHub CTA -->
+    <section class="section">
+      <div class="container-wide oss-cta-row">
+        <div>
+          <h2 class="oss-cta-h2">
+            Find us on <span class="serif-italic accent">GitHub</span>.
+          </h2>
+          <p class="oss-cta-sub">
+            Star the things you use, file the issues you find, send the pull requests we deserved.
+          </p>
+        </div>
+        <div class="oss-cta-actions">
+          <a href="https://github.com/mayurrawte" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            github.com/mayurrawte
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7,7 17,7 17,17"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    margin-top: 1.5rem;
+  }
+  .page-h1 .accent { color: var(--accent); }
+
+  .oss-section { padding-bottom: clamp(4rem, 8vw, 7rem); }
+  .oss-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .oss-row { border-bottom: 1px solid var(--border); }
+  .oss-row-link {
+    display: block;
+    padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+    color: var(--ink);
+    transition: padding 0.4s ease;
+  }
+  .oss-row:hover .oss-row-link {
+    padding-left: clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+
+  .oss-row-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .oss-row-num { color: var(--accent); }
+  .oss-row-license { margin-left: auto; }
+
+  .oss-row-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    transition: color 0.3s ease;
+  }
+  .oss-row:hover .oss-row-name { color: var(--accent); }
+  .oss-row-arrow { color: var(--muted); font-size: 0.75em; transition: transform 0.3s ease, color 0.3s ease; }
+  .oss-row:hover .oss-row-arrow { transform: translate(4px, -4px); color: var(--accent); }
+
+  .oss-row-desc {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 760px;
+    margin-bottom: 1.5rem;
+  }
+
+  .oss-row-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .oss-row-lang { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ink-2); }
+  .oss-lang-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .oss-row-status { color: var(--accent); }
+  .oss-row-repo { margin-left: auto; }
+
+  /* Manifesto */
+  .oss-manifesto {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .manifesto-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .manifesto-num {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    color: var(--accent);
+    line-height: 0.9;
+  }
+  .manifesto-body {
+    margin: 0;
+    border-left: 1px solid var(--border);
+    padding-left: clamp(1.5rem, 3vw, 3rem);
+  }
+  .manifesto-body p {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    text-wrap: balance;
+  }
+  .manifesto-body .serif-italic { color: var(--accent); font-weight: 400; }
+
+  /* CTA */
+  .oss-cta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .oss-cta-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .oss-cta-h2 .accent { color: var(--accent); }
+  .oss-cta-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    color: var(--ink-2);
+    margin-top: 1rem;
+    max-width: 460px;
+  }
+  .oss-cta-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  @media (max-width: 880px) {
+    .oss-manifesto { grid-template-columns: 1fr; }
+    .manifesto-body { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 1.5rem; }
+    .manifesto-aside { flex-direction: row; justify-content: space-between; align-items: end; }
+    .oss-row-meta { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .oss-row-license, .oss-row-repo { margin-left: 0; }
+  }
+</style>

@@ -1,0 +1,353 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const principles = [
+  {
+    num: '01',
+    title: 'Senior people, only.',
+    desc: 'No staffing pyramid. The person scoping the work is the person shipping it. Costs more in the brochure, costs less in the runway.',
+  },
+  {
+    num: '02',
+    title: 'Opinions, then options.',
+    desc: 'We will tell you what we think you should build. Then we will hear your reasons, change our minds where they should be changed, and document the rest.',
+  },
+  {
+    num: '03',
+    title: 'Production from week one.',
+    desc: 'A vertical slice live in front of users in the first sprint. We refuse to spend a quarter behind closed doors before anyone touches it.',
+  },
+  {
+    num: '04',
+    title: 'Claude as a first-class platform.',
+    desc: 'We build on Claude — not as a wrapper, as a foundation. Prompt-cached pipelines, MCP-shaped tools, agents with hard guardrails.',
+  },
+  {
+    num: '05',
+    title: 'Teardowns, in public.',
+    desc: 'We write theses on broken systems — IRCTC Tatkal, smart-meter rollouts, freight tooling — because writing in public is the cheapest way to be honest.',
+  },
+];
+---
+
+<Layout title="Studio — SNX" description="A small, senior-led AI &amp; technology studio. We design, build, and ship the intelligent systems behind good products.">
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container-wide">
+        <span class="label label-mark animate-fade-in-up">Studio note</span>
+        <h1 class="page-h1 animate-fade-in-up delay-200">
+          A small studio.<br/>
+          <span class="serif-italic accent">Built like a workshop.</span>
+        </h1>
+        <p class="lede animate-fade-in-up delay-400" style="max-width: 620px; margin-top: 1.5rem;">
+          SNX is a senior-led AI &amp; technology partner. The same people scope, design,
+          architect, build, and stay on call after launch. The work is small because the
+          quality bar is non-negotiable.
+        </p>
+      </div>
+    </section>
+
+    <!-- Stats strip -->
+    <section class="stats-strip">
+      <div class="container-wide stats-strip-inner">
+        <div class="stat">
+          <span class="stat-num numeral">10<span class="plus">+</span></span>
+          <span class="stat-label">Years shipping<br/>at the edge of design and systems.</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num numeral">02</span>
+          <span class="stat-label">Continents the<br/>core team has shipped from.</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num numeral">04</span>
+          <span class="stat-label">Disciplines, one room.<br/>AI · IoT · Cloud · UX.</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num numeral">N°1</span>
+          <span class="stat-label">Recognition from the<br/>Ministry of Power &amp; Coal.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The X -->
+    <section class="section bg-surface-alt">
+      <div class="container-wide">
+        <div class="x-grid reveal">
+          <aside class="x-side">
+            <span class="label label-mark">The mark</span>
+            <h2 class="x-h2">
+              Why <span class="x-letter">X</span>
+            </h2>
+            <p class="x-sub serif-italic">
+              The X stands for the place where three things meet —
+              and the bet that the meeting point matters more than any one of them.
+            </p>
+          </aside>
+
+          <ol class="x-meanings" role="list">
+            <li>
+              <span class="meaning-num numeral">01</span>
+              <h3>Intersection</h3>
+              <p>
+                Where design meets engineering, where strategy meets execution,
+                where human intent meets technical possibility. We live there.
+              </p>
+            </li>
+            <li>
+              <span class="meaning-num numeral">02</span>
+              <h3>Multiplier</h3>
+              <p>
+                Technology should multiply human capability — not pile complexity
+                on top of work that was already hard. Every system we ship has to
+                pull its weight.
+              </p>
+            </li>
+            <li>
+              <span class="meaning-num numeral">03</span>
+              <h3>Forward</h3>
+              <p>
+                X marks where we're headed. The next problem, the next product,
+                the next genuinely new tool — and the one after that.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <section class="section">
+      <div class="container-wide">
+        <header class="principles-header reveal">
+          <span class="label label-mark">Operating principles</span>
+          <h2 class="principles-h2">
+            Five small commitments<br/>
+            <span class="serif-italic accent">we will not negotiate.</span>
+          </h2>
+        </header>
+
+        <ol class="principles-list" role="list">
+          {principles.map((p, i) => (
+            <li class="principle reveal" style={`transition-delay: ${i * 60}ms`}>
+              <span class="principle-num numeral">{p.num}</span>
+              <h3 class="principle-title">{p.title}</h3>
+              <p class="principle-desc">{p.desc}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Open source CTA -->
+    <section class="section bg-surface-alt">
+      <div class="container-wide oss-cta">
+        <div>
+          <span class="label label-mark">Open source</span>
+          <h2 class="oss-cta-h2">
+            We build in the <span class="serif-italic">open</span>,
+            because closed studios drift.
+          </h2>
+        </div>
+        <div class="oss-cta-actions">
+          <a href="/opensource" class="btn-primary">
+            Open-source archive
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7,7 17,7 17,17"/>
+            </svg>
+          </a>
+          <a href="https://github.com/mayurrawte" class="btn-ghost" target="_blank" rel="noopener noreferrer">
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    margin-top: 1.5rem;
+  }
+  .page-h1 .accent { color: var(--accent); }
+
+  /* Stats strip */
+  .stats-strip {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .stats-strip-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    padding: 0;
+  }
+  .stat {
+    padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.25rem, 2vw, 2rem);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    line-height: 0.9;
+    color: var(--ink);
+  }
+  .stat-num .plus { color: var(--accent); font-size: 0.5em; vertical-align: super; }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* X section */
+  .x-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .x-side { display: flex; flex-direction: column; gap: 1.25rem; }
+  .x-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 7vw, 6rem);
+    letter-spacing: -0.04em;
+  }
+  .x-letter { color: var(--accent); }
+  .x-sub {
+    color: var(--ink-2);
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    max-width: 360px;
+  }
+
+  .x-meanings {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+  .x-meanings li {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .meaning-num { font-size: 0.95rem; color: var(--accent); padding-top: 0.4rem; }
+  .x-meanings h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+  }
+  .x-meanings p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    grid-column: 2;
+  }
+
+  /* Principles */
+  .principles-header {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .principles-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+  .principles-h2 .accent { color: var(--accent); }
+  .principles-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .principle {
+    border-bottom: 1px solid var(--border);
+    padding: clamp(1.75rem, 3vw, 2.25rem) 0;
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr;
+    gap: clamp(1.25rem, 3vw, 3rem);
+    align-items: baseline;
+  }
+  .principle-num { color: var(--accent); font-size: 0.95rem; }
+  .principle-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.375rem, 2vw, 1.875rem);
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .principle-desc {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 620px;
+  }
+
+  /* OSS CTA */
+  .oss-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .oss-cta-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-top: 1.25rem;
+    max-width: 720px;
+  }
+  .oss-cta-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  @media (max-width: 1024px) {
+    .stats-strip-inner { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2n) { border-right: none; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+  }
+  @media (max-width: 768px) {
+    .x-grid { grid-template-columns: 1fr; }
+    .principle { grid-template-columns: 60px 1fr; }
+    .principle-desc { grid-column: 2; }
+  }
+  @media (max-width: 560px) {
+    .stats-strip-inner { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat:last-child { border-bottom: none; }
+  }
+</style>

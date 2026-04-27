@@ -1,0 +1,487 @@
+---
+import Mark from '../Marks.astro';
+
+const projects = [
+  {
+    idx: '01',
+    title: 'Logistics Intelligence Platform',
+    sector: 'Freight · AI · Multi-tenant SaaS',
+    year: '2024 — Now',
+    role: 'CTO & founding architect',
+    stamp: 'In production',
+    summary: 'A Claude-powered freight forwarding platform replacing decades-old TMS workflows. Quote in seconds, classify documents in milliseconds, automate the back-office.',
+    metrics: [
+      { value: '14×', label: 'Faster quoting cycle' },
+      { value: '92%', label: 'OCR-to-shipment automation' },
+      { value: 'SOC2', label: 'In flight, day one' },
+    ],
+    stack: ['Claude · Anthropic SDK', 'NestJS', 'Next.js', 'PostgreSQL', 'AWS'],
+    link: '/work',
+    tilt: -0.6,
+  },
+  {
+    idx: '02',
+    title: 'Smart Energy Telemetry',
+    sector: 'Industrial IoT · Embedded · Research',
+    year: '2017 — 2019',
+    role: 'Lead engineer & researcher',
+    stamp: 'Ministry recognised',
+    summary: 'A drop-in smart energy meter and analytics layer for legacy grids. Recognised by the Ministry of Power & Coal; published in IJCA. Smart India Hackathon finalist.',
+    metrics: [
+      { value: '99.9%', label: 'Telemetry uptime' },
+      { value: 'IJCA', label: 'Published research' },
+      { value: 'MoP', label: 'Ministry recognition' },
+    ],
+    stack: ['Embedded C', 'Raspberry Pi', 'MQTT', 'TimescaleDB', 'Angular'],
+    link: '/work',
+    tilt: 0.5,
+  },
+  {
+    idx: '03',
+    title: 'Maritime Routing Engine',
+    sector: 'Open Source · Geo · TypeScript',
+    year: '2023 — Now',
+    role: 'Author & maintainer',
+    stamp: 'MIT · in the wild',
+    summary: 'searoute-ts — an open-source library that computes the shortest realistic sea route between any two points on Earth. Trusted by logistics teams in production.',
+    metrics: [
+      { value: 'OSS', label: 'MIT-licensed, public NPM' },
+      { value: '60+', label: 'Production integrations' },
+      { value: '< 5ms', label: 'Median route compute' },
+    ],
+    stack: ['TypeScript', 'GeoJSON', 'Dijkstra', 'NPM', 'GitHub Actions'],
+    link: 'https://github.com/mayurrawte/searoute-ts',
+    external: true,
+    tilt: -0.4,
+  },
+  {
+    idx: '04',
+    title: 'Promptbucket',
+    sector: 'Open Source · AI · Web app',
+    year: '2025 — Now',
+    role: 'Designer & maintainer',
+    stamp: 'Open & free',
+    summary: 'promptbucket.co — an open library for collecting, versioning, and sharing prompts that actually survive contact with production. Built for the working AI engineer.',
+    metrics: [
+      { value: 'Free', label: 'Open to anyone' },
+      { value: 'OSS', label: 'Hosted on GitHub' },
+      { value: 'v1', label: 'Live & shipping' },
+    ],
+    stack: ['Next.js', 'Anthropic SDK', 'Tailwind', 'Postgres', 'Vercel'],
+    link: 'https://promptbucket.co',
+    external: true,
+    tilt: 0.6,
+  },
+  {
+    idx: '05',
+    title: 'Agritech Sensor Mesh',
+    sector: 'IoT · AgriTech · Research',
+    year: '2018',
+    role: 'Co-author & systems engineer',
+    stamp: 'Field-trialled',
+    summary: 'Soil-moisture and micro-climate sensor mesh for small-holder farms, paired with a low-bandwidth dashboard for regional advisors. Underlying research published.',
+    metrics: [
+      { value: '38%', label: 'Water-use reduction' },
+      { value: 'LoRa', label: 'Low-power mesh' },
+      { value: 'Paper', label: 'Published research' },
+    ],
+    stack: ['Arduino', 'LoRaWAN', 'Node.js', 'InfluxDB', 'Grafana'],
+    link: '/work',
+    tilt: -0.5,
+  },
+  {
+    idx: '06',
+    title: 'Last-Mile Cargo OS',
+    sector: 'Marketplace · Logistics · Mission',
+    year: '2019 — 2021',
+    role: 'Founding engineer',
+    stamp: 'Mission-led',
+    summary: 'A women-led, women-driven last-mile delivery platform. Built the dispatch core, payments, and operator app from zero — supporting hundreds of riders.',
+    metrics: [
+      { value: '0→1', label: 'Built from scratch' },
+      { value: '500+', label: 'Active riders' },
+      { value: 'Impact', label: 'Mission-led startup' },
+    ],
+    stack: ['Node.js', 'Angular', 'Firebase', 'GCP', 'Twilio'],
+    link: '/work',
+    tilt: 0.4,
+  },
+];
+---
+
+<section class="work section bg-surface-alt" id="selected-work">
+  <div class="container-wide">
+    <header class="work-header">
+      <span class="tape tape-tilt-l">— from the archive —</span>
+      <h2 class="work-h2">
+        Things that
+        <span class="work-h2-circled">
+          <span class="serif-italic">actually</span>
+          <span class="work-h2-mark"><Mark name="ink-circle" /></span>
+        </span>
+        shipped<span class="work-h2-dot">·</span>
+      </h2>
+      <p class="work-sub">
+        A working CTO doesn't get the luxury of vapourware. Every project below ran in
+        production, served real users, and survived the messy bit after launch.
+      </p>
+    </header>
+
+    <ol class="work-list" role="list">
+      {projects.map((p, i) => (
+        <li class="work-row reveal" style={`--tilt:${p.tilt}deg`}>
+          <a
+            href={p.link}
+            target={p.external ? '_blank' : undefined}
+            rel={p.external ? 'noopener noreferrer' : undefined}
+            class="work-link"
+          >
+            <!-- Top metadata row, like a folder tab -->
+            <div class="work-row-top">
+              <span class="work-folder-tab">
+                <span class="work-idx numeral">{p.idx}</span>
+                <span class="work-folder-rule"></span>
+                <span class="work-sector">{p.sector}</span>
+              </span>
+              <span class="work-row-meta">
+                <span>{p.year}</span>
+                <span class="work-row-meta-dot">·</span>
+                <span class="serif-italic">{p.role}</span>
+              </span>
+            </div>
+
+            <!-- Title + stamp -->
+            <div class="work-title-row">
+              <h3 class="work-title">
+                {p.title}
+                {p.external && (
+                  <span class="work-ext" aria-hidden="true">
+                    <Mark name="arrow-r" />
+                  </span>
+                )}
+              </h3>
+              <span class="work-stamp stamp">
+                {p.stamp}
+              </span>
+            </div>
+
+            <p class="work-summary">{p.summary}</p>
+
+            <div class="work-row-bottom">
+              <ul class="work-metrics receipt-strip" role="list">
+                {p.metrics.map(m => (
+                  <li>
+                    <span class="metric-val numeral">{m.value}</span>
+                    <span class="metric-label">{m.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <ul class="work-stack" role="list">
+                {p.stack.map(s => <li>{s}</li>)}
+              </ul>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ol>
+
+    <footer class="work-footer reveal">
+      <p class="work-footer-text">
+        <span class="serif-italic">More in the archive</span> — open-source repos,
+        smaller commissions, and teardown essays.
+      </p>
+      <div class="work-footer-actions">
+        <a href="/work" class="btn-ghost">Full archive</a>
+        <a href="/opensource" class="btn-ghost">Open source</a>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .work { color: var(--ink); }
+
+  .work-header {
+    max-width: 880px;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+  .work-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 6vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .work-h2-dot { color: var(--accent); }
+  .work-h2-circled {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.18em;
+  }
+  .work-h2-circled .serif-italic {
+    color: var(--accent);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .work-h2-mark {
+    position: absolute;
+    inset: -0.18em -0.4em -0.22em -0.45em;
+    color: var(--accent);
+    transform: rotate(-1.5deg);
+  }
+  .work-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.125rem, 1.8vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 620px;
+  }
+
+  /* List */
+  .work-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .work-row {
+    background: var(--bg);
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    transform: rotate(var(--tilt, 0deg));
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+    box-shadow: 0 4px 0 -2px var(--ink);
+    position: relative;
+  }
+  .work-row::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    width: 96px;
+    height: 18px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.18), transparent),
+      var(--tape);
+    border-left: 1px dashed var(--tape-edge);
+    border-right: 1px dashed var(--tape-edge);
+    transform: rotate(-3deg);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    z-index: 2;
+  }
+  .work-row:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: 0 12px 0 -2px var(--ink), 0 18px 30px rgba(0,0,0,0.12);
+  }
+
+  .work-link {
+    display: block;
+    padding: clamp(2rem, 3vw, 2.75rem) clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--ink);
+  }
+
+  /* Folder tab top */
+  .work-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border-strong);
+  }
+  .work-folder-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .work-idx {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .work-folder-rule { width: 28px; height: 1px; background: var(--accent); }
+
+  .work-row-meta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .work-row-meta .serif-italic {
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--ink-2);
+  }
+  .work-row-meta-dot { color: var(--accent); }
+
+  /* Title + stamp */
+  .work-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .work-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.875rem, 4.6vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .work-row:hover .work-title { color: var(--accent); }
+  .work-ext {
+    color: var(--accent);
+    width: 56px;
+    height: 18px;
+    transform: translateY(-0.1em);
+  }
+
+  .work-stamp {
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 0.4rem;
+  }
+
+  .work-summary {
+    font-size: clamp(1rem, 1.4vw, 1.1875rem);
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 760px;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-serif);
+  }
+
+  .work-row-bottom {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    align-items: end;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--border-strong);
+  }
+
+  .receipt-strip {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    background: var(--bg-alt);
+    border: 1px dashed var(--border-strong);
+    border-radius: 3px;
+  }
+  .receipt-strip li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.85rem 1rem;
+    border-right: 1px dashed var(--border-strong);
+  }
+  .receipt-strip li:last-child { border-right: none; }
+  .metric-val {
+    font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+    color: var(--ink);
+    line-height: 1;
+  }
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  .work-stack {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-self: end;
+  }
+  .work-stack li {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+  }
+
+  .work-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    flex-wrap: wrap;
+  }
+  .work-footer-text {
+    font-size: 1.125rem;
+    color: var(--ink-2);
+    max-width: 460px;
+  }
+  .work-footer-text .serif-italic {
+    color: var(--ink);
+    font-size: 1.2em;
+  }
+  .work-footer-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 880px) {
+    .work-row-bottom {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .work-stack { justify-self: start; }
+    .work-row { transform: rotate(0deg); }
+  }
+
+  @media (max-width: 560px) {
+    .receipt-strip { grid-template-columns: 1fr 1fr; }
+    .receipt-strip li:nth-child(2) { border-right: none; }
+    .receipt-strip li:last-child {
+      grid-column: 1 / -1;
+      border-top: 1px dashed var(--border-strong);
+    }
+  }
+</style>

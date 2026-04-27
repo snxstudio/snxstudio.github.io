@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+import InkTrail from '../components/InkTrail.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Technology studio designing and building what\'s next. Web apps, AI, IoT, cloud infrastructure, and strategic advisory.' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://snxstudio.com');
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="/fonts/Syne-Bold.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/PlusJakartaSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Editorial italic + monospace from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+  <!-- OG Tags -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content="/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" href={canonicalURL} />
+
+  <title>{title}</title>
+
+  <!-- Theme script — runs before paint to prevent flash -->
+  <script is:inline>
+    (function() {
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'dark' || (!stored && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+<body class="grain">
+  <InkTrail />
+  <slot />
+
+  <!-- Scroll reveal observer -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

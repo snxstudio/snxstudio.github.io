@@ -1,0 +1,198 @@
+---
+import Mark from '../Marks.astro';
+---
+
+<section class="philosophy section" id="philosophy">
+  <div class="container">
+    <!-- Giant hand-drawn quote -->
+    <div class="philosophy-stage">
+      <span class="quote-mark quote-mark-open" aria-hidden="true">&ldquo;</span>
+
+      <blockquote class="philosophy-quote reveal">
+        <p>
+          The best technology
+          <span class="phil-circled">
+            <span class="serif-italic">disappears.</span>
+            <span class="phil-circle-mark"><Mark name="ink-circle" /></span>
+          </span>
+          It doesn't announce itself with novelty or noise — it simply does the work,
+          precisely as intended,
+          <span class="serif-italic">leaving people the room to think.</span>
+        </p>
+        <footer class="philosophy-cite">
+          <Mark name="cross" class="cite-mark" />
+          <span class="cite-text">
+            <span class="serif-italic">Studio note · written between two production deploys</span>
+          </span>
+        </footer>
+      </blockquote>
+
+      <span class="quote-mark quote-mark-close" aria-hidden="true">&rdquo;</span>
+
+      <!-- Doodle: scribbly star floating off the corner -->
+      <span class="phil-doodle phil-doodle-1" aria-hidden="true"><Mark name="star" /></span>
+      <span class="phil-doodle phil-doodle-2" aria-hidden="true"><Mark name="asterisk" /></span>
+    </div>
+  </div>
+
+  <!-- Three-word marquee on the rule -->
+  <div class="philosophy-marquee" aria-hidden="true">
+    <div class="marquee marquee-slow">
+      <div class="marquee-track">
+        <span class="marquee-item outline">Make it work</span>
+        <span class="marquee-item">×</span>
+        <span class="marquee-item">Make it true</span>
+        <span class="marquee-item">×</span>
+        <span class="marquee-item outline">Make it disappear</span>
+        <span class="marquee-item">×</span>
+        <span class="marquee-item">Make it work</span>
+        <span class="marquee-item">×</span>
+        <span class="marquee-item">Make it true</span>
+        <span class="marquee-item">×</span>
+        <span class="marquee-item outline">Make it disappear</span>
+        <span class="marquee-item">×</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .philosophy {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg);
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 0;
+  }
+
+  .philosophy-stage {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  /* Giant serif quote marks */
+  .quote-mark {
+    position: absolute;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(8rem, 18vw, 16rem);
+    line-height: 0.6;
+    color: var(--accent);
+    user-select: none;
+    pointer-events: none;
+  }
+  .quote-mark-open {
+    top: -0.15em;
+    left: -0.15em;
+    transform: rotate(-6deg);
+  }
+  .quote-mark-close {
+    bottom: -0.05em;
+    right: -0.1em;
+    transform: rotate(6deg);
+  }
+
+  .philosophy-quote {
+    margin: 0;
+    padding: 0 clamp(1.5rem, 5vw, 5rem);
+    text-align: left;
+  }
+
+  .philosophy-quote p {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4.4vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .philosophy-quote .serif-italic {
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+
+  .phil-circled {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.18em;
+  }
+  .phil-circled .serif-italic {
+    color: var(--accent);
+  }
+  .phil-circle-mark {
+    position: absolute;
+    inset: -0.18em -0.4em -0.22em -0.45em;
+    color: var(--accent);
+    transform: rotate(-1.5deg);
+  }
+
+  .philosophy-cite {
+    margin-top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-left: 0.25rem;
+  }
+  .cite-mark {
+    color: var(--accent);
+    width: 22px;
+    height: 22px;
+  }
+  .cite-text {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cite-text .serif-italic {
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--ink-2);
+  }
+
+  /* Floating doodles */
+  .phil-doodle {
+    position: absolute;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+  .phil-doodle-1 {
+    top: 6%;
+    right: 10%;
+    width: 56px;
+    height: 56px;
+    color: var(--pen);
+    transform: rotate(15deg);
+    animation: spinSlow 28s linear infinite;
+  }
+  .phil-doodle-2 {
+    bottom: 32%;
+    left: 4%;
+    width: 38px;
+    height: 38px;
+    transform: rotate(-12deg);
+    animation: spinSlow 18s linear infinite reverse;
+  }
+
+  .philosophy-marquee {
+    border-top: 1.5px solid var(--ink);
+    padding: 1.5rem 0;
+    background-color: var(--bg-alt);
+  }
+  .philosophy-marquee .marquee-item {
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    line-height: 1;
+  }
+
+  @media (max-width: 768px) {
+    .quote-mark { font-size: clamp(6rem, 16vw, 10rem); }
+    .phil-doodle { display: none; }
+  }
+</style>

@@ -1,0 +1,282 @@
+---
+import Mark from '../Marks.astro';
+---
+
+<section class="cta section bg-deep" id="contact-cta">
+  <!-- Decorative background asterisk grid -->
+  <div class="cta-glyph" aria-hidden="true">
+    <Mark name="asterisk" />
+  </div>
+  <div class="cta-glyph cta-glyph-2" aria-hidden="true">
+    <Mark name="burst" />
+  </div>
+  <div class="cta-glyph cta-glyph-3" aria-hidden="true">
+    <Mark name="star" />
+  </div>
+
+  <div class="container cta-inner">
+    <!-- Tilted tape strip -->
+    <div class="cta-meta">
+      <span class="tape tape-tilt-r cta-tape">— Hand-written reply —</span>
+      <span class="cta-meta-text serif-italic">
+        Within one working day. From a real human.
+      </span>
+    </div>
+
+    <h2 class="cta-headline reveal">
+      Have something
+      <span class="cta-circled">
+        <span class="serif-italic">non-trivial</span>
+        <span class="cta-circled-mark"><Mark name="ink-circle" /></span>
+      </span>
+      <br/>
+      to <span class="accent">build?</span>
+    </h2>
+
+    <p class="cta-lede reveal">
+      A small number of partnerships open at any time — usually one ambitious AI build,
+      one platform engagement, and a UX teardown or two. Tell us where you are.
+    </p>
+
+    <div class="cta-actions reveal">
+      <a href="mailto:hello@wearesnx.studio" class="cta-btn-primary">
+        hello@wearesnx.studio
+        <Mark name="arrow-r" class="cta-arrow" />
+      </a>
+      <a href="/contact" class="cta-btn-ghost">
+        <span>Or use the proper form</span>
+        <Mark name="arrow-r" class="cta-arrow-small" />
+      </a>
+    </div>
+
+    <!-- Receipt-style block of audiences -->
+    <div class="cta-receipt receipt">
+      <div class="cta-receipt-row">
+        <div class="cta-receipt-col">
+          <span class="cta-col-label">For founders</span>
+          <span class="cta-col-text">
+            Architecture, hiring, technical DD,<br/>
+            fractional CTO engagements.
+          </span>
+        </div>
+        <div class="cta-receipt-col">
+          <span class="cta-col-label">For product teams</span>
+          <span class="cta-col-text">
+            AI features that ship,<br/>
+            design systems that hold up.
+          </span>
+        </div>
+        <div class="cta-receipt-col">
+          <span class="cta-col-label">For investors</span>
+          <span class="cta-col-text">
+            Independent technical due<br/>
+            diligence on portfolio bets.
+          </span>
+        </div>
+      </div>
+      <div class="cta-receipt-foot">
+        <span class="cta-receipt-stamp">— end of receipt —</span>
+        <span class="cta-receipt-stamp">SNX × YOU</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    overflow: hidden;
+    color: var(--bg);
+    --ink: #F0EBE0;
+    --ink-2: #C4BFB4;
+    --muted: #84807A;
+    --border: #2A2935;
+    --border-strong: #3A3744;
+    --bg: #EFEAD8;
+  }
+
+  .cta-glyph {
+    position: absolute;
+    color: rgba(240, 235, 224, 0.18);
+    pointer-events: none;
+  }
+  .cta-glyph svg { width: 100%; height: 100%; }
+  .cta-glyph:first-child {
+    top: 8%;
+    right: 10%;
+    width: 80px;
+    height: 80px;
+    transform: rotate(-12deg);
+  }
+  .cta-glyph-2 {
+    top: 50%;
+    right: 4%;
+    width: 140px;
+    height: 140px;
+    transform: rotate(18deg);
+    color: rgba(230, 74, 46, 0.45);
+    animation: spinSlow 36s linear infinite;
+  }
+  .cta-glyph-3 {
+    bottom: 12%;
+    left: 8%;
+    width: 60px;
+    height: 60px;
+    color: rgba(244, 211, 74, 0.35);
+    transform: rotate(-8deg);
+  }
+
+  .cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    color: var(--bg);
+  }
+
+  .cta-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .cta-tape {
+    color: var(--bg-deep);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.18), transparent),
+      var(--tape);
+  }
+  .cta-meta-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.0625rem;
+    color: rgba(240, 235, 224, 0.7);
+  }
+
+  .cta-headline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.75rem, 8vw, 7rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    color: var(--bg);
+    margin-bottom: 2rem;
+    text-wrap: balance;
+  }
+  .cta-headline .accent { color: var(--accent-deep); }
+
+  .cta-circled {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.18em;
+  }
+  .cta-circled .serif-italic {
+    color: rgba(240, 235, 224, 0.85);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .cta-circled-mark {
+    position: absolute;
+    inset: -0.18em -0.45em -0.2em -0.5em;
+    color: var(--accent-deep);
+    transform: rotate(-1.5deg);
+  }
+
+  .cta-lede {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+    line-height: 1.5;
+    color: rgba(240, 235, 224, 0.7);
+    max-width: 620px;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .cta-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1rem 1.5rem 1rem 1.75rem;
+    background: var(--accent-deep);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    border-radius: 999px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .cta-btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+  .cta-arrow { width: 32px; height: 14px; }
+
+  .cta-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1rem 1.5rem;
+    border: 1px dashed rgba(255,255,255,0.32);
+    color: var(--bg);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    border-radius: 999px;
+    background: transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .cta-btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.6); border-style: solid; }
+  .cta-arrow-small { width: 24px; height: 12px; }
+
+  /* Receipt block */
+  .cta-receipt {
+    background: var(--bg);
+    color: var(--ink);
+    padding: 2rem 1.75rem 1.25rem;
+    transform: rotate(-0.6deg);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    --bg: #EFEAD8;
+    --ink: #14131A;
+    --border-strong: #A89E83;
+  }
+  .cta-receipt-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed var(--border-strong);
+  }
+  .cta-receipt-col { display: flex; flex-direction: column; gap: 0.5rem; }
+  .cta-col-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .cta-col-text {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .cta-receipt-foot {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  @media (max-width: 768px) {
+    .cta-receipt-row { grid-template-columns: 1fr; gap: 1.25rem; }
+    .cta-glyph-2 { right: -10%; opacity: 0.6; }
+  }
+</style>
