@@ -1,0 +1,140 @@
+---
+// Paper page-turn between hero and the next section.
+// As the user scrolls past the hero, the bottom-right corner of the hero
+// "paper" curls upward — driven by a CSS variable updated from scroll
+// position. No library. Honors prefers-reduced-motion.
+---
+
+<div id="page-turn" class="page-turn" aria-hidden="true">
+  <div class="page-turn-curl">
+    <svg viewBox="0 0 320 320" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="curl-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%"  stop-color="var(--bg)"/>
+          <stop offset="55%" stop-color="var(--bg-alt)"/>
+          <stop offset="100%" stop-color="var(--aged-1)"/>
+        </linearGradient>
+        <linearGradient id="curl-shadow" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%"  stop-color="rgba(0,0,0,0.0)"/>
+          <stop offset="60%" stop-color="rgba(0,0,0,0.20)"/>
+          <stop offset="100%" stop-color="rgba(0,0,0,0.45)"/>
+        </linearGradient>
+      </defs>
+
+      <!-- The curling paper triangle -->
+      <path class="curl-paper"
+            d="M 320 320 L 320 80 Q 320 200, 80 320 Z"
+            fill="url(#curl-grad)"
+            stroke="var(--border-strong)"
+            stroke-width="1"/>
+      <!-- Soft drop-shadow under the curl -->
+      <path class="curl-shadow"
+            d="M 320 320 L 320 80 Q 320 200, 80 320 Z"
+            fill="url(#curl-shadow)"
+            opacity="0.35"/>
+
+      <!-- Pencil annotation on the curl: "turn the page →" -->
+      <g class="curl-note">
+        <text x="200" y="225" font-family="Instrument Serif, serif" font-style="italic"
+              font-size="22" fill="var(--accent)" transform="rotate(-38 200 225)" text-anchor="middle">
+          turn the page
+        </text>
+        <path d="M 232 248 C 252 252, 272 254, 286 250 M 280 244 C 284 248, 286 250, 286 250 C 282 250, 278 250, 274 252"
+              transform="rotate(-38 200 225)"
+              stroke="var(--accent)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- "Next page" peek strip — visible behind the curl as it lifts -->
+  <div class="page-turn-peek">
+    <span class="peek-label">N°02</span>
+    <span class="peek-title">Seven disciplines, one studio →</span>
+  </div>
+</div>
+
+<style>
+  .page-turn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: clamp(160px, 18vw, 280px);
+    height: clamp(160px, 18vw, 280px);
+    pointer-events: none;
+    z-index: 5;
+    --turn: 0;     /* 0 → flat, 1 → fully curled */
+    transform-origin: 100% 100%;
+  }
+
+  .page-turn-curl {
+    position: absolute;
+    inset: 0;
+    transform-origin: 100% 100%;
+    transform: scale(calc(0.55 + var(--turn) * 0.6)) rotate(calc(var(--turn) * -6deg));
+    transition: transform 0.05s linear;
+    filter: drop-shadow(calc(var(--turn) * -8px) calc(var(--turn) * -10px) calc(var(--turn) * 18px) rgba(0,0,0,0.22));
+  }
+  .page-turn-curl svg { width: 100%; height: 100%; display: block; }
+
+  .curl-note {
+    opacity: calc(var(--turn) * 1.2);
+    transition: opacity 0.05s linear;
+  }
+
+  /* Peek of the section underneath, revealed by the curl */
+  .page-turn-peek {
+    position: absolute;
+    right: clamp(20px, 3vw, 40px);
+    bottom: clamp(28px, 3vw, 44px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    opacity: calc(var(--turn) * 1);
+    transform: translateY(calc((1 - var(--turn)) * 8px));
+    transition: opacity 0.1s linear, transform 0.1s linear;
+  }
+  .peek-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .peek-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  @media (max-width: 768px), (prefers-reduced-motion: reduce) {
+    .page-turn { display: none; }
+  }
+</style>
+
+<script>
+  const el = document.getElementById('page-turn');
+  const hero = document.getElementById('hero');
+  if (el && hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let raf = 0;
+    function update() {
+      const rect = hero.getBoundingClientRect();
+      const total = rect.height || window.innerHeight;
+      // Start curling when the hero is 40% scrolled, fully curled when its bottom hits viewport top
+      const scrolled = -rect.top;                                 // 0 at top, grows
+      const startAt = total * 0.35;
+      const endAt = total * 0.92;
+      const t = Math.max(0, Math.min(1, (scrolled - startAt) / (endAt - startAt)));
+      el!.style.setProperty('--turn', String(t));
+      raf = 0;
+    }
+    window.addEventListener('scroll', () => {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+</script>
