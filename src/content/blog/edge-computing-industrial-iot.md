@@ -4,6 +4,7 @@ description: "How we architected a sensor network that processes data at the edg
 date: "2024-10-10"
 category: "IoT"
 featured: false
+draft: true
 ---
 
 Industrial IoT has a bandwidth problem. When 5,000 sensors each generate data points every second, pushing everything to the cloud isn't just expensive — it's architecturally fragile. A network hiccup between factory floor and cloud provider shouldn't mean lost data or delayed alerts.

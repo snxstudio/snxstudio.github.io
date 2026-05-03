@@ -4,6 +4,7 @@ description: "Lessons learned from designing data pipelines that handle 10M+ eve
 date: "2024-12-15"
 category: "Engineering"
 featured: true
+draft: true
 ---
 
 When we started building Meridian's analytics pipeline, the existing system processed events in batch — four-hour windows that left teams staring at stale data while making critical decisions. The brief was straightforward: make it real-time without sacrificing reliability.

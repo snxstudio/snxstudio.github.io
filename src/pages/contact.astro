@@ -58,7 +58,7 @@ import Footer from '../components/Footer.astro';
             <div class="form-group">
               <label for="kind" class="form-label"><span class="form-num">05</span> What are we talking about?</label>
               <div class="form-pills" role="group" aria-label="Project type">
-                {['Claude / AI build', 'IoT system', 'Web platform', 'Design system', 'UX audit', 'Fractional CTO', 'Something else'].map(t => (
+                {['AI build', 'IoT system', 'Web platform', 'Design system', 'UX audit', 'Technical advisory', 'Something else'].map(t => (
                   <label class="form-pill">
                     <input type="checkbox" name="kind" value={t} />
                     <span>{t}</span>
@@ -100,9 +100,9 @@ import Footer from '../components/Footer.astro';
             <div class="contact-block">
               <h3 class="contact-block-title">Already know what you need?</h3>
               <ul class="contact-block-list">
-                <li><a href="/services#ai" class="link-underline">Claude-native AI engagement</a></li>
+                <li><a href="/services#ai" class="link-underline">AI-native engagement</a></li>
                 <li><a href="/services#design" class="link-underline">UX teardown / audit</a></li>
-                <li><a href="/services#advisory" class="link-underline">Fractional CTO partnership</a></li>
+                <li><a href="/services#advisory" class="link-underline">Technical advisory partnership</a></li>
               </ul>
             </div>
 

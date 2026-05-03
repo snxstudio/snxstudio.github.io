@@ -4,6 +4,7 @@ description: "Why most design systems fail at adoption, and the architectural de
 date: "2024-11-28"
 category: "Design"
 featured: false
+draft: true
 ---
 
 Most design systems die not from technical failure, but from adoption failure. Teams stop using them when the system becomes more restrictive than helpful, when upgrading is painful, or when it simply doesn't match how people actually build.
