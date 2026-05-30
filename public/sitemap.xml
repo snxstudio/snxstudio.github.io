@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://wearesnx.studio/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://wearesnx.studio/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wearesnx.studio/services</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wearesnx.studio/work</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wearesnx.studio/opensource</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wearesnx.studio/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://wearesnx.studio/blog</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wearesnx.studio/blog/ai-and-the-stuff-we-hate</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://wearesnx.studio/blog/design-systems-that-actually-scale</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://wearesnx.studio/blog/irctc-tatkal-teardown</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://wearesnx.studio/blog/edge-computing-industrial-iot</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://wearesnx.studio/blog/claude-agent-billing</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://wearesnx.studio/blog/python-to-go-migration</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://wearesnx.studio/blog/building-resilient-data-pipelines</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+</urlset>

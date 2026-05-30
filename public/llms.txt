@@ -1,0 +1,20 @@
+# SNX Studio
+
+> SNX Studio is a technology studio designing and building what's next — web apps, AI, IoT, cloud infrastructure, and strategic advisory. Alongside client work the studio publishes open-source tools from its production stack.
+
+## Site
+- Home: https://wearesnx.studio/
+- About: https://wearesnx.studio/about
+- Services: https://wearesnx.studio/services
+- Work: https://wearesnx.studio/work
+- Open source: https://wearesnx.studio/opensource
+- Blog: https://wearesnx.studio/blog
+- Contact: https://wearesnx.studio/contact
+
+## Open-source projects
+- Lit Pigeon — open-source, framework-agnostic drag & drop email editor built with web components; design responsive emails visually and export clean MJML / HTML. Live demo: https://wearesnx.studio/lit-pigeon/ · Details for LLMs: https://wearesnx.studio/lit-pigeon/llms.txt · Source: https://github.com/snxstudio/lit-pigeon
+- promptbucket — open library for collecting, versioning, and sharing production prompts. https://promptbucket.co
+- searoute-ts — computes the shortest realistic sea-route between any two coordinates on Earth (sub-5ms median). https://github.com/mayurrawte/searoute-ts
+- github-angular-actions — GitHub Action that pre-installs Angular CLI and dependencies with configurable versions. https://github.com/mayurrawte/github-angular-actions
+- SherlockQA — a lightweight QA & testing companion. https://github.com/mayurrawte/SherlockQA
+- whatsapp-hero — Python utility for working with WhatsApp data. https://github.com/mayurrawte/whatsapp-hero
