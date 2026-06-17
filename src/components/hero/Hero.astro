@@ -19,11 +19,11 @@ const capabilities = [
   <!-- Paper rules background -->
   <div class="hero-bg" aria-hidden="true">
     <svg class="hero-rules" viewBox="0 0 1440 900" preserveAspectRatio="none">
-      <g stroke="var(--ink)" stroke-width="0.6" opacity="0.10">
-        <line x1="0" y1="180" x2="1440" y2="180" stroke-dasharray="3 6"/>
-        <line x1="0" y1="360" x2="1440" y2="360" stroke-dasharray="3 6"/>
-        <line x1="0" y1="540" x2="1440" y2="540" stroke-dasharray="3 6"/>
-        <line x1="0" y1="720" x2="1440" y2="720" stroke-dasharray="3 6"/>
+      <g stroke="var(--ink)" stroke-width="0.6" opacity="0.06">
+        <line x1="0" y1="180" x2="1440" y2="180"/>
+        <line x1="0" y1="360" x2="1440" y2="360"/>
+        <line x1="0" y1="540" x2="1440" y2="540"/>
+        <line x1="0" y1="720" x2="1440" y2="720"/>
       </g>
       <g stroke="var(--ink)" stroke-width="0.4" opacity="0.05">
         <line x1="320" y1="0" x2="320" y2="900"/>
@@ -41,13 +41,13 @@ const capabilities = [
   <div class="hero-inner">
     <!-- Top meta bar (full width) -->
     <div class="hero-meta animate-fade-in delay-100">
-      <span class="tape tape-tilt-l">Studio note · No°1</span>
+      <span class="tape">Studio note · No°1</span>
       <span class="hero-meta-rule" aria-hidden="true"></span>
-      <span class="hero-meta-text serif-italic">
+      <span class="hero-meta-text">
         Creative first · human second · AI for speed.
       </span>
       <span class="hero-meta-spacer"></span>
-      <span class="hero-meta-coords serif-italic">
+      <span class="hero-meta-coords">
         12.97°N · 77.59°E
       </span>
     </div>
@@ -59,14 +59,13 @@ const capabilities = [
         <h1 class="hero-headline">
           <span class="hl-row hl-row-1 animate-fade-in-up delay-200">
             We design, build
-            <span class="hl-amp serif-italic">&amp;</span>
+            <span class="hl-amp">&amp;</span>
           </span>
 
           <span class="hl-row hl-row-2 animate-fade-in-up delay-300">
             ship the
             <span class="hl-circled">
-              <span class="hl-circled-inner serif-italic">intelligent</span>
-              <span class="hl-circle-mark"><Mark name="ink-circle" /></span>
+              <span class="hl-circled-inner">intelligent</span>
             </span>
           </span>
 
@@ -101,16 +100,6 @@ const capabilities = [
       <aside class="hero-aside" aria-label="Studio mark">
         <div class="hero-mark-wrap animate-fade-in delay-300">
           <StudioMark />
-        </div>
-
-        <!-- Annotation arrow + footnote text pointing at the mark -->
-        <div class="hero-annotation animate-fade-in delay-1000">
-          <Mark name="arrow-curly" class="hero-anno-arrow" />
-          <p>
-            <span class="serif-italic">our mark.</span><br/>
-            drawn the moment<br/>
-            you arrived.
-          </p>
         </div>
 
         <!-- Receipt of disciplines -->
@@ -214,13 +203,13 @@ const capabilities = [
     gap: 1.25rem;
     flex-wrap: wrap;
     padding-bottom: 0.5rem;
-    border-bottom: 1px dashed var(--border-strong);
+    border-bottom: 1px solid var(--border);
   }
-  .hero-meta-rule { width: 60px; height: 1px; background: var(--ink); opacity: 0.4; }
+  .hero-meta-rule { width: 60px; height: 1px; background: var(--border-strong); }
   .hero-meta-text {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.0625rem;
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-size: 1rem;
     color: var(--ink-2);
   }
   .hero-meta-spacer { flex: 1; }
@@ -261,29 +250,20 @@ const capabilities = [
 
   .hl-amp {
     color: var(--accent);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.05em;
-    transform: translateY(-0.06em);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1em;
   }
 
   .hl-circled {
     position: relative;
     display: inline-block;
-    padding: 0 0.18em;
+    padding: 0 0.06em;
   }
   .hl-circled-inner {
     color: var(--accent);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-  }
-  .hl-circle-mark {
-    position: absolute;
-    inset: -0.12em -0.4em -0.18em -0.42em;
-    color: var(--accent);
-    transform: rotate(-1.4deg);
+    font-family: var(--font-display);
+    font-weight: 700;
   }
 
   .hl-strike { color: var(--muted); }
@@ -303,8 +283,7 @@ const capabilities = [
   }
   .hl-asterisk {
     color: var(--accent);
-    font-family: var(--font-serif);
-    font-style: italic;
+    font-family: var(--font-display);
     font-size: 0.5em;
     vertical-align: super;
     margin-left: 0.05em;
@@ -314,7 +293,7 @@ const capabilities = [
   .hero-belt {
     margin-top: clamp(2rem, 4vw, 3rem);
     padding-top: clamp(1.25rem, 2vw, 1.75rem);
-    border-top: 1px dashed var(--border-strong);
+    border-top: 1px solid var(--border);
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 2rem;
@@ -322,15 +301,16 @@ const capabilities = [
   }
   .hero-lede {
     margin: 0;
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: clamp(1rem, 1.3vw, 1.1875rem);
     line-height: 1.55;
     color: var(--ink-2);
     max-width: 480px;
   }
   .hero-lede em {
-    font-family: var(--font-serif);
-    font-style: italic;
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-weight: 600;
     color: var(--ink);
   }
   .hero-actions { display: flex; gap: 0.625rem; flex-wrap: wrap; justify-self: end; }
@@ -342,9 +322,8 @@ const capabilities = [
     display: grid;
     grid-template-areas:
       "mark"
-      "annotation"
       "receipt";
-    gap: 1rem;
+    gap: 1.5rem;
     padding-top: 0.5rem;
   }
   .hero-mark-wrap {
@@ -352,52 +331,22 @@ const capabilities = [
     width: clamp(220px, 22vw, 320px);
     height: clamp(220px, 22vw, 320px);
     margin-left: auto;
-    transform: rotate(-2deg);
   }
-  .hero-annotation {
-    grid-area: annotation;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.4rem;
-    margin-left: auto;
-    margin-top: -1.5rem;
-    padding-right: clamp(1rem, 4vw, 4rem);
-    transform: rotate(-2deg);
-    color: var(--accent);
-    max-width: 220px;
-  }
-  .hero-anno-arrow {
-    color: var(--accent);
-    width: 70px;
-    height: 46px;
-    flex-shrink: 0;
-    transform: scaleY(-1) rotate(160deg);
-  }
-  .hero-annotation p {
-    font-family: var(--font-serif);
-    font-size: 0.9375rem;
-    line-height: 1.4;
-    color: var(--ink);
-    margin: 0;
-    padding-top: 0.75rem;
-  }
-  .hero-annotation .serif-italic { color: var(--accent); }
 
   .hero-receipt {
     grid-area: receipt;
     background: var(--bg);
-    border: 1.5px dashed var(--border-strong);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     padding: 1rem 1.25rem;
-    transform: rotate(1.2deg);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-    margin-top: 1rem;
+    margin-top: 0;
   }
   .hero-receipt-head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     padding-bottom: 0.5rem;
-    border-bottom: 1px dashed var(--border-strong);
+    border-bottom: 1px solid var(--border);
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.12em;
@@ -419,14 +368,14 @@ const capabilities = [
     gap: 0.5rem;
     font-size: 0.875rem;
     color: var(--ink);
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
   }
   .hero-receipt-list svg { width: 14px; height: 14px; color: var(--accent); }
   .hero-receipt-foot {
     display: flex;
     justify-content: space-between;
     padding-top: 0.5rem;
-    border-top: 1px dashed var(--border-strong);
+    border-top: 1px solid var(--border);
     font-family: var(--font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.16em;
@@ -497,9 +446,8 @@ const capabilities = [
         "receipt";
       grid-template-rows: auto auto;
     }
-    .hero-mark-wrap { margin-left: 0; transform: rotate(-1deg); width: 220px; height: 220px; }
-    .hero-annotation { display: none; }
-    .hero-receipt { transform: rotate(0deg); margin-top: 0; }
+    .hero-mark-wrap { margin-left: 0; width: 220px; height: 220px; }
+    .hero-receipt { margin-top: 0; }
     .hero-belt { grid-template-columns: 1fr; }
     .hero-actions { justify-self: start; }
     .hero-stats { grid-template-columns: repeat(4, 1fr); }
