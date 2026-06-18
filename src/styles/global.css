@@ -31,69 +31,62 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ─────────────────────────────────────────────
    DESIGN TOKENS
    ───────────────────────────────────────────── */
 @theme {
-  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  /* Space Grotesk = headings (sharp/technical); Syne reserved for the SNX wordmark */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: 'Syne', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* ── Light: clean monochrome + electric accent ── */
-:root {
-  --bg: #FFFFFF;
-  --bg-alt: #F4F5F7;
-  --bg-deep: #0B0B0C;
-  --ink: #0B0B0C;
-  --ink-2: #3A3D42;
-  --muted: #8A8F98;
-  --border: #E6E8EB;
-  --border-strong: #CFD3D8;
-
-  --accent: #3B6FFF;        /* electric blue */
-  --accent-deep: #2554E6;
-  --accent-tint: #E7EDFF;
-  --accent-soft: rgba(59, 111, 255, 0.08);
-
-  /* legacy aliases — remapped to the new system */
-  --pen: #3B6FFF;
-  --pen-soft: rgba(59, 111, 255, 0.16);
-  --highlight: #E7EDFF;
-  --highlight-soft: rgba(59, 111, 255, 0.14);
-  --moss: #3A3D42;
-  --tape: #F4F5F7;
-  --tape-edge: #CFD3D8;
-  --aged-1: #CFD3D8;
-  --aged-2: #3A3D42;
-}
-
-/* ── Dark: near-black + brighter accent ── */
+/* ── All-black tankr-style canvas (single mode) ── */
+:root,
 .dark {
-  --bg: #0B0B0C;
-  --bg-alt: #141518;
-  --bg-deep: #050506;
+  --bg: #050506;          /* page background — matches hero */
+  --bg-alt: #111114;      /* raised panels / row hover */
+  --bg-deep: #000000;
   --ink: #F4F5F7;
-  --ink-2: #C2C6CC;
-  --muted: #7C828B;
-  --border: #232529;
-  --border-strong: #34373D;
+  --ink-2: #9097A0;       /* secondary text */
+  --muted: #6B7178;       /* mono labels / captions */
+  --border: #1E2024;      /* hairline dividers */
+  --border-strong: #2C2F35;
 
-  --accent: #5B86FF;
+  --accent: #5B86FF;      /* electric blue */
   --accent-deep: #87A5FF;
   --accent-tint: #16203B;
   --accent-soft: rgba(91, 134, 255, 0.14);
 
+  /* dotted-grid dot colour (shared by sections) */
+  --dot: rgba(255, 255, 255, 0.06);
+
+  /* legacy aliases — remapped to the dark system */
   --pen: #5B86FF;
   --pen-soft: rgba(91, 134, 255, 0.18);
   --highlight: #16203B;
   --highlight-soft: rgba(91, 134, 255, 0.16);
   --moss: #C2C6CC;
-  --tape: #1B1D22;
-  --tape-edge: #34373D;
-  --aged-1: #34373D;
+  --tape: #111114;
+  --tape-edge: #2C2F35;
+  --aged-1: #2C2F35;
   --aged-2: #C2C6CC;
 }
 

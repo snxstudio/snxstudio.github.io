@@ -40,17 +40,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://snxstudi
   <link rel="canonical" href={canonicalURL} />
 
   <title>{title}</title>
-
-  <!-- Theme script — runs before paint to prevent flash -->
-  <script is:inline>
-    (function() {
-      const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (stored === 'dark' || (!stored && prefersDark)) {
-        document.documentElement.classList.add('dark');
-      }
-    })();
-  </script>
 </head>
 <body>
   <slot />

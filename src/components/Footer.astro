@@ -17,7 +17,7 @@ const year = new Date().getFullYear();
       <!-- Brand -->
       <div class="footer-brand">
         <Logo />
-        <p class="footer-tagline serif-italic">
+        <p class="footer-tagline">
           An AI-native technology partner —
           built around senior engineering and an aversion to vapourware.
         </p>
@@ -72,7 +72,7 @@ const year = new Date().getFullYear();
     <div class="footer-bottom">
       <p class="footer-copy">
         <span>© {year} SNX Studio.</span>
-        <span class="footer-copy-rule serif-italic">Made between Bengaluru and the next deploy.</span>
+        <span class="footer-copy-rule">Made between Bengaluru and the next deploy.</span>
       </p>
       <div class="footer-legal">
         <a href="/about" class="footer-legal-link">Studio note</a>
@@ -118,7 +118,7 @@ const year = new Date().getFullYear();
     content: '';
     width: 5px;
     height: 5px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--accent);
   }
 
@@ -142,8 +142,10 @@ const year = new Date().getFullYear();
     gap: 1.25rem;
   }
   .footer-tagline {
-    font-size: 1.0625rem;
-    line-height: 1.5;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
     color: var(--ink-2);
   }
 
@@ -193,7 +195,7 @@ const year = new Date().getFullYear();
     color: var(--ink-2);
     transition: color 0.25s ease;
   }
-  .footer-link:hover { color: var(--accent); }
+  .footer-link:hover { color: var(--ink); }
 
   .footer-bottom {
     margin-top: clamp(3rem, 6vw, 5rem);
@@ -217,12 +219,12 @@ const year = new Date().getFullYear();
     flex-wrap: wrap;
   }
   .footer-copy-rule {
-    font-family: var(--font-serif);
-    font-style: italic;
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 0.95rem;
-    color: var(--ink-2);
+    font-family: var(--font-mono);
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    color: var(--muted);
   }
   .footer-legal {
     font-family: var(--font-mono);
@@ -234,7 +236,7 @@ const year = new Date().getFullYear();
     gap: 0.5rem;
   }
   .footer-legal-link { transition: color 0.25s ease; }
-  .footer-legal-link:hover { color: var(--accent); }
+  .footer-legal-link:hover { color: var(--ink); }
 
   /* Watermark */
   .footer-watermark {

@@ -53,7 +53,7 @@ const steps = [
             <span class="step-tick" aria-hidden="true">/</span>
           </div>
           <h3 class="step-title">{step.title}</h3>
-          <p class="step-role serif-italic">{step.role}</p>
+          <p class="step-role">{step.role}</p>
           <p class="step-desc">{step.desc}</p>
           <ul class="step-out" role="list">
             {step.out.map(o => (
@@ -101,7 +101,7 @@ const steps = [
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    border-top: 1px solid var(--ink);
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
 
@@ -123,14 +123,17 @@ const steps = [
     margin-bottom: 1rem;
   }
   .step-num {
-    font-size: 1.25rem;
-    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
   .step-tick {
-    font-family: var(--font-display);
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-weight: 400;
     color: var(--border-strong);
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   .step-title {
@@ -144,7 +147,9 @@ const steps = [
   }
 
   .step-role {
-    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-size: clamp(0.9375rem, 1.2vw, 1rem);
     color: var(--muted);
   }
 

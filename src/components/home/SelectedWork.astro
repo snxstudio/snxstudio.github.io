@@ -246,14 +246,13 @@ const projects = [
 
   .work-card {
     position: relative;
-    background: var(--bg);
+    background: var(--bg-alt);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-radius: 0;
+    transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .work-row:hover .work-card {
     border-color: var(--accent);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
     transform: translateY(-3px);
   }
 
@@ -275,9 +274,9 @@ const projects = [
   .work-sketch {
     position: relative;
     aspect-ratio: 200 / 140;
-    background: var(--bg-alt);
+    background: var(--bg-deep);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 0;
     padding: 0.75rem;
     color: var(--ink);
     overflow: hidden;
@@ -348,11 +347,11 @@ const projects = [
     justify-content: flex-end;
   }
   .work-role {
-    text-transform: none;
-    letter-spacing: 0;
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    color: var(--ink-2);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
   .work-row-meta-dot { color: var(--accent); }
 
@@ -415,9 +414,9 @@ const projects = [
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
-    background: var(--bg-alt);
+    background: var(--bg-deep);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 0;
   }
   .work-metrics li {
     display: flex;
@@ -458,7 +457,7 @@ const projects = [
     color: var(--muted);
     padding: 0.3rem 0.6rem;
     border: 1px solid var(--border);
-    border-radius: 999px;
+    border-radius: 0;
   }
 
   .work-footer {

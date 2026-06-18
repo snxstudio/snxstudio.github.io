@@ -44,7 +44,7 @@ const services = [
   },
   {
     num: '06',
-    title: 'AgriTech &amp; Sustainable Systems',
+    title: 'AgriTech & Sustainable Systems',
     role: 'Sensors, soil, sky — and the dashboard the field officer actually opens.',
     desc: 'Low-power sensor meshes, low-bandwidth dashboards, and decision tooling for small-holder agriculture. Built on the lessons from a published agritech research deployment.',
     stack: ['LoRaWAN', 'Arduino', 'InfluxDB', 'Grafana', 'Edge ML'],
@@ -95,7 +95,7 @@ const services = [
             <span class="service-num numeral">{service.num}</span>
             <div class="service-body">
               <h3 class="service-title">{service.title}</h3>
-              <p class="service-role serif-italic">{service.role}</p>
+              <p class="service-role">{service.role}</p>
             </div>
             <div class="service-desc">
               <p>{service.desc}</p>
@@ -215,8 +215,10 @@ const services = [
     line-height: 1.05;
   }
   .service-role {
+    font-family: var(--font-mono);
     color: var(--muted);
-    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+    letter-spacing: 0.02em;
   }
 
   .service-desc {
@@ -245,8 +247,8 @@ const services = [
     color: var(--muted);
     padding: 0.3rem 0.6rem;
     border: 1px solid var(--border);
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    border-radius: 0;
+    background: transparent;
   }
 
   .service-arrow {
