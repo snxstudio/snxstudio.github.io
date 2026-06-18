@@ -1,51 +1,185 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+
+const projectTypes = [
+  'AI build',
+  'IoT system',
+  'Web platform',
+  'Design system',
+  'UX audit',
+  'Technical advisory',
+  'Something else',
+];
 ---
 
 <Layout title="Contact — SNX Studio" description="Tell us what you're building. We reply within one working day, from a real human.">
-  <Nav />
   <main>
-    <!-- Hero -->
-    <section class="page-hero">
-      <div class="container-wide">
-        <span class="tape tape-tilt-l animate-fade-in">— send a real brief —</span>
-        <h1 class="page-h1 animate-fade-in-up delay-200">
-          Tell us what<br/>
-          <span class="serif-italic accent">you're building.</span>
-        </h1>
-        <p class="lede animate-fade-in-up delay-400" style="max-width: 640px; margin-top: 1.5rem;">
-          We pick a small number of partnerships each quarter. The more honest you can be in
-          this first message, the faster we can decide whether we're the right team for it.
-        </p>
+
+    <!-- ============================================================
+         HERO — type-led, no card, no centered symmetry
+    ============================================================ -->
+    <section class="contact-hero section">
+      <div class="wrap">
+        <div class="grid12">
+
+          <div class="hero-text-col reveal">
+            <p class="eyebrow">(00) — GET IN TOUCH</p>
+            <h1 class="display hero-display reveal reveal-d1">
+              Let's<br/>talk.
+            </h1>
+          </div>
+
+          <div class="hero-right reveal reveal-d2">
+            <p class="lede">
+              We pick a small number of partnerships each quarter. The more honest
+              you can be in this first message, the faster we can decide whether
+              we're the right team for it.
+            </p>
+
+            <div class="avail-strip">
+              <span class="chip"><span class="chip-dot"></span>Accepting 1 engagement — Q3 2026</span>
+            </div>
+
+            <a href="mailto:hello@wearesnx.studio" class="email-link link-underline">
+              hello@wearesnx.studio
+            </a>
+
+            <p class="reply-note">
+              We reply within one business day, in plain English, from a real person.
+            </p>
+
+            <dl class="studio-meta">
+              <div class="meta-row">
+                <dt class="mono">STUDIO</dt>
+                <dd>Bengaluru, India</dd>
+              </div>
+              <div class="meta-row">
+                <dt class="mono">TIMEZONE</dt>
+                <dd>IST — also working across GMT &amp; PST</dd>
+              </div>
+              <div class="meta-row">
+                <dt class="mono">OPEN WORK</dt>
+                <dd>
+                  <a
+                    href="https://github.com/mayurrawte"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-underline"
+                  >github.com/mayurrawte ↗</a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- Form + Sidebar -->
+    <hr class="rule" />
+
+    <!-- ============================================================
+         FORM — asymmetric, sharp-cornered, invert-on-submit
+    ============================================================ -->
     <section class="section-sm">
-      <div class="container-wide">
-        <div class="contact-grid">
-          <form class="contact-form reveal" id="contact-form" method="POST" action="#">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name" class="form-label"><span class="form-num">01</span> Your name</label>
-                <input type="text" id="name" name="name" required class="form-input" placeholder="Type your name" autocomplete="name" />
+      <div class="wrap">
+        <div class="grid12 form-layout">
+
+          <!-- Left: index + already-know column -->
+          <aside class="form-aside reveal">
+            <p class="eyebrow">(01) — WRITE A BRIEF</p>
+            <p class="aside-note">
+              No NDA needed to start the conversation. We keep everything shared
+              in confidence by default.
+            </p>
+
+            <div class="service-index">
+              <p class="mono service-label">ALREADY KNOW WHAT YOU NEED?</p>
+              <ul class="service-list">
+                <li>
+                  <a href="/services#ai" class="link-underline service-link">
+                    AI-native engagement
+                  </a>
+                </li>
+                <li>
+                  <a href="/services#design" class="link-underline service-link">
+                    UX teardown / audit
+                  </a>
+                </li>
+                <li>
+                  <a href="/services#advisory" class="link-underline service-link">
+                    Technical advisory partnership
+                  </a>
+                </li>
+                <li>
+                  <a href="/services#iot" class="link-underline service-link">
+                    IoT &amp; embedded systems
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Right: form -->
+          <form
+            class="contact-form reveal reveal-d1"
+            id="contact-form"
+            method="POST"
+            action="#"
+          >
+            <!-- Row 1 -->
+            <div class="field-row">
+              <div class="field">
+                <label for="name" class="field-label">
+                  <span class="field-num flare">01</span> Your name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="field-input"
+                  placeholder="Type your name"
+                  autocomplete="name"
+                />
               </div>
-              <div class="form-group">
-                <label for="email" class="form-label"><span class="form-num">02</span> Email</label>
-                <input type="email" id="email" name="email" required class="form-input" placeholder="you@company.com" autocomplete="email" />
+              <div class="field">
+                <label for="email" class="field-label">
+                  <span class="field-num flare">02</span> Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="field-input"
+                  placeholder="you@company.com"
+                  autocomplete="email"
+                />
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="company" class="form-label"><span class="form-num">03</span> Company <span class="form-optional">— optional</span></label>
-                <input type="text" id="company" name="company" class="form-input" placeholder="Where you work" autocomplete="organization" />
+            <!-- Row 2 -->
+            <div class="field-row">
+              <div class="field">
+                <label for="company" class="field-label">
+                  <span class="field-num flare">03</span> Company
+                  <span class="field-optional">— optional</span>
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  class="field-input"
+                  placeholder="Where you work"
+                  autocomplete="organization"
+                />
               </div>
-              <div class="form-group">
-                <label for="budget" class="form-label"><span class="form-num">04</span> Budget range</label>
-                <select id="budget" name="budget" class="form-input form-select">
+              <div class="field">
+                <label for="budget" class="field-label">
+                  <span class="field-num flare">04</span> Budget range
+                </label>
+                <select id="budget" name="budget" class="field-input field-select">
+                  <option value="">Select range</option>
                   <option>$25k — $50k</option>
                   <option>$50k — $100k</option>
                   <option>$100k — $250k</option>
@@ -55,105 +189,193 @@ import Footer from '../components/Footer.astro';
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="kind" class="form-label"><span class="form-num">05</span> What are we talking about?</label>
-              <div class="form-pills" role="group" aria-label="Project type">
-                {['AI build', 'IoT system', 'Web platform', 'Design system', 'UX audit', 'Technical advisory', 'Something else'].map(t => (
-                  <label class="form-pill">
+            <!-- Project type -->
+            <div class="field">
+              <p class="field-label">
+                <span class="field-num flare">05</span> What are we talking about?
+              </p>
+              <div class="type-grid" role="group" aria-label="Project type">
+                {projectTypes.map((t) => (
+                  <label class="type-chip">
                     <input type="checkbox" name="kind" value={t} />
-                    <span>{t}</span>
+                    <span class="type-chip-label">{t}</span>
                   </label>
                 ))}
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="message" class="form-label"><span class="form-num">06</span> The brief</label>
-              <textarea id="message" name="message" required class="form-input form-textarea" placeholder="What you're building, who it's for, and what's already broken." rows="6"></textarea>
+            <!-- Message -->
+            <div class="field">
+              <label for="message" class="field-label">
+                <span class="field-num flare">06</span> The brief
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                class="field-input field-textarea"
+                placeholder="What you're building, who it's for, and what's already broken."
+                rows="7"
+              ></textarea>
             </div>
 
-            <button type="submit" class="btn-primary form-submit">
-              Send the message
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"/>
-                <polyline points="7,7 17,7 17,17"/>
-              </svg>
-            </button>
+            <!-- Submit -->
+            <div class="form-footer">
+              <button type="submit" class="btn btn-flare form-submit">
+                Send the message
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"/>
+                  <polyline points="7,7 17,7 17,17"/>
+                </svg>
+              </button>
+              <p class="submit-note mono">NO SPAM. HUMAN EYES ONLY.</p>
+            </div>
           </form>
 
-          <aside class="contact-side reveal delay-200">
-            <div class="contact-block">
-              <h3 class="contact-block-title">Direct line</h3>
-              <a href="mailto:hello@wearesnx.studio" class="contact-block-mail">hello@wearesnx.studio</a>
-              <p class="contact-block-desc serif-italic">
-                We reply within one business day, in plain English, from a real person.
-              </p>
-            </div>
-
-            <div class="contact-block">
-              <h3 class="contact-block-title">Studio</h3>
-              <p class="contact-block-desc">
-                Bengaluru, India · Working with teams across IST, GMT &amp; PST.
-              </p>
-            </div>
-
-            <div class="contact-block">
-              <h3 class="contact-block-title">Already know what you need?</h3>
-              <ul class="contact-block-list">
-                <li><a href="/services#ai" class="link-underline">AI-native engagement</a></li>
-                <li><a href="/services#design" class="link-underline">UX teardown / audit</a></li>
-                <li><a href="/services#advisory" class="link-underline">Technical advisory partnership</a></li>
-              </ul>
-            </div>
-
-            <div class="contact-block">
-              <h3 class="contact-block-title">Open work</h3>
-              <a href="https://github.com/mayurrawte" target="_blank" rel="noopener noreferrer" class="link-underline">github.com/mayurrawte ↗</a>
-            </div>
-          </aside>
         </div>
       </div>
     </section>
+
   </main>
-  <Footer />
 </Layout>
 
 <style>
-  .page-hero {
-    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
-    padding-bottom: clamp(3rem, 6vw, 5rem);
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .contact-hero { padding-top: calc(78px + clamp(4rem, 8vw, 7rem)); }
+
+  .hero-text-col {
+    grid-column: 1 / 6;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-self: start;
   }
-  .page-h1 {
+
+  .hero-display {
+    margin-left: -0.04em;
+    /* deliberately let the big headline bleed past normal alignment */
+  }
+
+  .hero-right {
+    grid-column: 6 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    align-self: end;
+    padding-bottom: 0.5rem;
+  }
+
+  .avail-strip { display: flex; }
+
+  .email-link {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(3rem, 9vw, 8rem);
-    line-height: 0.96;
-    letter-spacing: -0.045em;
-    margin-top: 1.5rem;
+    font-size: clamp(1.125rem, 2.2vw, 2rem);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.1;
   }
-  .page-h1 .accent { color: var(--accent); }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: clamp(2.5rem, 5vw, 5rem);
+  .reply-note {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .studio-meta {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .meta-row:first-child { border-top: 1px solid var(--rule); }
+  .meta-row dt {
+    flex-shrink: 0;
+    color: var(--muted);
+  }
+  .meta-row dd {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+    text-align: right;
+  }
+  .meta-row dd a { color: var(--ink); }
+
+  /* ── Form layout ──────────────────────────────────────────── */
+  .form-layout {
     align-items: start;
-    border-top: 1px solid var(--ink);
-    padding-top: clamp(2.5rem, 5vw, 4rem);
+    gap: clamp(3rem, 5vw, 6rem);
   }
 
+  .form-aside {
+    grid-column: 1 / 4;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 0.25rem;
+  }
+
+  .aside-note {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  .service-index { display: flex; flex-direction: column; gap: 0.875rem; }
+  .service-label { color: var(--muted); display: block; margin-bottom: 0.25rem; }
+  .service-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .service-link {
+    font-size: 0.9375rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  /* ── Form ─────────────────────────────────────────────────── */
   .contact-form {
+    grid-column: 4 / -1;
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
   }
-  .form-row {
+
+  .field-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
   }
-  .form-group { display: flex; flex-direction: column; gap: 0.625rem; }
-  .form-label {
+
+  .field { display: flex; flex-direction: column; gap: 0.625rem; }
+
+  .field-label {
     display: inline-flex;
     align-items: baseline;
     gap: 0.5rem;
@@ -163,108 +385,102 @@ import Footer from '../components/Footer.astro';
     text-transform: uppercase;
     color: var(--ink-2);
   }
-  .form-num { color: var(--accent); }
-  .form-optional { color: var(--muted); text-transform: lowercase; letter-spacing: 0; }
 
-  .form-input {
+  .field-num { font-size: 0.7rem; }
+  .field-optional { color: var(--muted); text-transform: lowercase; letter-spacing: 0; }
+
+  .field-input {
     width: 100%;
     padding: 0.95rem 1rem;
     font-family: var(--font-sans);
     font-size: 1rem;
     color: var(--ink);
     background: transparent;
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .form-input::placeholder { color: var(--muted); }
-  .form-input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-soft);
-  }
-  .form-textarea { resize: vertical; min-height: 160px; }
-  .form-select {
+    border: 1px solid var(--rule);
+    border-radius: 0;
+    box-shadow: none;
+    transition: border-color 0.18s ease;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%2376747F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='1 1 6 6 11 1'/%3E%3C/svg%3E");
+  }
+  .field-input::placeholder { color: var(--muted); }
+  .field-input:focus {
+    outline: none;
+    border-color: var(--ink);
+  }
+  .field-textarea {
+    resize: vertical;
+    min-height: 160px;
+  }
+  .field-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23918B7E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='1 1 6 6 11 1'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 2.5rem;
-  }
-
-  .form-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .form-pill {
-    display: inline-flex;
     cursor: pointer;
   }
-  .form-pill input { display: none; }
-  .form-pill span {
-    padding: 0.55rem 0.95rem;
+
+  /* Project type checkboxes */
+  .type-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .type-chip { display: inline-flex; cursor: pointer; }
+  .type-chip input { display: none; }
+  .type-chip-label {
+    padding: 0.5rem 0.875rem;
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-2);
-    border: 1px solid var(--border-strong);
-    border-radius: 999px;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    border: 1px solid var(--rule);
+    border-radius: 0;
+    transition: background-color 0.15s var(--snap), color 0.15s var(--snap), border-color 0.15s var(--snap);
   }
-  .form-pill input:checked + span {
+  .type-chip input:checked + .type-chip-label {
     background: var(--ink);
-    color: var(--bg);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .type-chip:hover .type-chip-label {
+    background: var(--ink);
+    color: var(--paper);
     border-color: var(--ink);
   }
 
-  .form-submit { align-self: flex-start; margin-top: 0.5rem; }
-
-  /* Sidebar */
-  .contact-side {
+  /* Submit row */
+  .form-footer {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 1.75rem;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
   }
-  .contact-block { display: flex; flex-direction: column; gap: 0.625rem; }
-  .contact-block-title {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .form-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+  .submit-note {
+    font-size: 0.65rem;
     color: var(--muted);
-  }
-  .contact-block-mail {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    transition: color 0.25s ease;
-  }
-  .contact-block-mail:hover { color: var(--accent); }
-  .contact-block-desc {
-    font-size: 0.9375rem;
-    line-height: 1.55;
-    color: var(--ink-2);
-  }
-  .contact-block-list {
-    list-style: none;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .contact-block-list a {
-    font-size: 0.9375rem;
-    color: var(--accent);
   }
 
-  @media (max-width: 880px) {
-    .contact-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
+  /* ── Responsive ───────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .hero-text-col { grid-column: 1 / -1; }
+    .hero-right { grid-column: 1 / -1; }
+
+    .form-aside { grid-column: 1 / -1; }
+    .contact-form { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 640px) {
+    .field-row { grid-template-columns: 1fr; }
+    .form-footer { flex-direction: column; align-items: flex-start; }
+    .meta-row { flex-direction: column; gap: 0.25rem; }
+    .meta-row dd { text-align: left; }
   }
 </style>

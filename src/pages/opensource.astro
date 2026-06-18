@@ -1,338 +1,686 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
 
 const projects = [
   {
+    idx: '01',
+    name: 'Teamsly',
+    repo: 'snxstudio/teamsly',
+    url: 'https://github.com/snxstudio/teamsly',
+    description: 'A Model Context Protocol (MCP) server that gives AI agents structured access to Microsoft Teams — channels, chats, messages, and people — without touching the Graph API directly. The missing layer between your LLM and your organization.',
+    stack: ['TypeScript', 'MCP', 'MS Graph'],
+    license: 'MIT',
+    status: 'active',
+  },
+  {
+    idx: '02',
+    name: 'mcp-elements',
+    repo: 'snxstudio/mcp-elements',
+    url: 'https://github.com/snxstudio/mcp-elements',
+    description: 'A collection of typed, composable building blocks for authoring MCP servers. Reduces the ceremony around tool registration, resource schemas, and prompt templates so you can ship protocol-compliant servers faster.',
+    stack: ['TypeScript', 'MCP'],
+    license: 'MIT',
+    status: 'active',
+  },
+  {
+    idx: '03',
+    name: 'searoute-ts',
+    repo: 'mayurrawte/searoute-ts',
+    url: 'https://github.com/mayurrawte/searoute-ts',
+    description: 'Computes the shortest realistic sea-route between any two coordinates on Earth. Sub-5ms median compute, accurate around Suez, Panama, and Malacca. Quietly powering production logistics platforms.',
+    stack: ['TypeScript', 'GeoJSON', 'NPM'],
+    license: 'MIT',
+    status: 'production',
+  },
+  {
+    idx: '04',
+    name: 'lit-pigeon',
+    repo: 'snxstudio/lit-pigeon',
+    url: 'https://wearesnx.studio/lit-pigeon/',
+    description: 'A drag-and-drop email editor you embed directly into your own app — web components built with Lit that export clean, responsive MJML and HTML. The visual editor, without the proprietary SaaS attached.',
+    stack: ['TypeScript', 'Lit', 'MJML'],
+    license: 'MIT',
+    status: 'maintained',
+  },
+  {
+    idx: '05',
     name: 'promptbucket',
     repo: 'promptbucket.co',
     url: 'https://promptbucket.co',
     description: 'An open library for collecting, versioning, and sharing prompts that survive contact with production. Built for the working AI engineer — no walled garden, no waitlist, no upsell.',
-    language: 'TypeScript',
-    color: '#3178C6',
+    stack: ['TypeScript'],
     license: 'MIT',
-    org: 'Studio',
-    stars: 'live',
+    status: 'live',
   },
   {
-    name: 'searoute-ts',
-    repo: 'mayurrawte/searoute-ts',
-    url: 'https://github.com/mayurrawte/searoute-ts',
-    description: 'Open-source library that computes the shortest realistic sea-route between any two coordinates on Earth. Sub-5ms median compute, accurate around the world\'s major canals and chokepoints. Quietly powering production logistics platforms.',
-    language: 'TypeScript',
-    color: '#3178C6',
-    license: 'MIT',
-    org: 'Studio',
-    stars: 'production',
-  },
-  {
-    name: 'lit-pigeon',
-    repo: 'snxstudio/lit-pigeon',
-    url: 'https://wearesnx.studio/lit-pigeon/',
-    description: 'A drag &amp; drop email editor you embed in your own app — web components that export clean, responsive MJML and HTML. The visual editor, without the proprietary SaaS attached.',
-    language: 'TypeScript',
-    color: '#3178C6',
-    license: 'MIT',
-    org: 'Studio',
-    stars: 'maintained',
-  },
-  {
+    idx: '06',
     name: 'github-angular-actions',
     repo: 'mayurrawte/github-angular-actions',
     url: 'https://github.com/mayurrawte/github-angular-actions',
     description: 'GitHub Action that pre-installs Angular CLI and dependencies with configurable versions. Saves real CI minutes on real builds — boring infrastructure that earns its keep.',
-    language: 'TypeScript',
-    color: '#3178C6',
+    stack: ['TypeScript', 'GitHub Actions'],
     license: 'MIT',
-    org: 'Studio',
-    stars: 'maintained',
-  },
-  {
-    name: 'SherlockQA',
-    repo: 'mayurrawte/SherlockQA',
-    url: 'https://github.com/mayurrawte/SherlockQA',
-    description: 'A lightweight QA &amp; testing companion. Inspect, investigate, and validate apps with a detective\'s sense of suspicion.',
-    language: 'HTML',
-    color: '#E34C26',
-    license: 'MIT',
-    org: 'Studio',
-    stars: 'archived-ish',
-  },
-  {
-    name: 'whatsapp-hero',
-    repo: 'mayurrawte/whatsapp-hero',
-    url: 'https://github.com/mayurrawte/whatsapp-hero',
-    description: 'Python utility for working with WhatsApp data. Pragmatic, single-purpose, useful when you need it.',
-    language: 'Python',
-    color: '#3572A5',
-    license: 'MIT',
-    org: 'Studio',
-    stars: 'utility',
+    status: 'maintained',
   },
 ];
 ---
 
-<Layout title="Open Source — SNX Studio" description="The studio's open-source archive. An email editor, maritime routing, CI tooling, QA helpers, and a few utilities that earned their keep.">
-  <Nav />
+<Layout
+  title="Open Source — SNX Studio"
+  description="The studio's open-source archive — MCP servers, an email editor, maritime routing, CI tooling. Code that ships, not demos."
+>
   <main>
-    <!-- Hero -->
-    <section class="page-hero">
-      <div class="container-wide">
-        <span class="label label-mark animate-fade-in-up">Open source</span>
-        <h1 class="page-h1 animate-fade-in-up delay-200">
-          Built in the<br/>
-          <span class="serif-italic accent">open.</span>
-        </h1>
-        <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
-          Closed studios drift. Working in public is the cheapest accountability there is —
-          and most of what we ship is downstream of someone else doing the same.
-        </p>
+
+    <!-- ─── HERO ─────────────────────────────────────────── -->
+    <section class="section oss-hero">
+      <div class="wrap">
+        <div class="grid12">
+          <div class="hero-col-main">
+            <p class="eyebrow reveal">(03) &mdash; OPEN SOURCE</p>
+            <h1 class="display hero-headline reveal reveal-d1">
+              Built in<br/>
+              the <span class="flare">open.</span>
+            </h1>
+          </div>
+          <div class="hero-col-aside reveal reveal-d2">
+            <p class="lede hero-lede">
+              Closed studios drift. Working in public is the cheapest accountability there is —
+              and most of what we ship is downstream of someone else doing the same.
+            </p>
+            <div class="hero-meta mono">
+              <span>SNX STUDIO / BENGALURU</span>
+              <span class="hero-meta-sep"></span>
+              <span>EST. 2024</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Projects -->
-    <section class="oss-section">
-      <div class="container-wide">
-        <ol class="oss-list" role="list">
-          {projects.map((p, i) => (
-            <li class="oss-row reveal" style={`transition-delay: ${i * 60}ms`}>
-              <a href={p.url} target="_blank" rel="noopener noreferrer" class="oss-row-link">
-                <div class="oss-row-head">
-                  <span class="oss-row-num numeral">N°{String(i + 1).padStart(2, '0')}</span>
-                  <span class="oss-row-org">{p.org}</span>
-                  <span class="oss-row-license">{p.license}</span>
-                </div>
+    <hr class="rule" />
 
-                <div class="oss-row-body">
-                  <h2 class="oss-row-name">
-                    {p.name}
-                    <span class="oss-row-arrow" aria-hidden="true">↗</span>
-                  </h2>
-                  <p class="oss-row-desc" set:html={p.description}></p>
-                </div>
+    <!-- ─── MARQUEE ───────────────────────────────────────── -->
+    <div class="marquee marquee--slow oss-marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">TEAMSLY</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item marquee__item--outline">MCP-ELEMENTS</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item">SEAROUTE-TS</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item marquee__item--outline">LIT-PIGEON</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item">PROMPTBUCKET</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item marquee__item--outline">MIT LICENSED</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item">OPEN SOURCE</span>
+        <span class="marquee__sep"></span>
 
-                <div class="oss-row-meta">
-                  <span class="oss-row-lang">
-                    <span class="oss-lang-dot" style={`background-color: ${p.color}`}></span>
-                    {p.language}
+        <!-- duplicate for seamless loop -->
+        <span class="marquee__item">TEAMSLY</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item marquee__item--outline">MCP-ELEMENTS</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item">SEAROUTE-TS</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item marquee__item--outline">LIT-PIGEON</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item">PROMPTBUCKET</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item marquee__item--outline">MIT LICENSED</span>
+        <span class="marquee__sep"></span>
+        <span class="marquee__item">OPEN SOURCE</span>
+        <span class="marquee__sep"></span>
+      </div>
+    </div>
+
+    <hr class="rule" />
+
+    <!-- ─── PROJECT LIST ──────────────────────────────────── -->
+    <section class="section-sm oss-list-section">
+      <div class="wrap">
+        <div class="list-header grid12 reveal">
+          <div class="list-header-eyebrow">
+            <p class="eyebrow">(01) &mdash; REPOSITORY INDEX</p>
+          </div>
+          <div class="list-header-count">
+            <span class="numeral list-count">06</span>
+            <span class="mono list-count-label">PUBLIC REPOS</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="rule" />
+
+      <ol class="oss-list" role="list">
+        {projects.map((p) => (
+          <li class="oss-row row-invert reveal">
+            <a
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="oss-row-link wrap"
+              aria-label={`${p.name} — view on GitHub`}
+            >
+              <div class="oss-row-inner grid12">
+
+                <!-- Index + status col -->
+                <div class="oss-col-idx">
+                  <span class="oss-idx eyebrow">{p.idx}</span>
+                  <span class="oss-status">
+                    <span class="chip-dot-sq"></span>
+                    <span class="mono oss-status-text row-muted">{p.status}</span>
                   </span>
-                  <span class="oss-row-status">{p.stars}</span>
-                  <span class="oss-row-repo">{p.repo}</span>
                 </div>
-              </a>
-            </li>
-          ))}
-        </ol>
+
+                <!-- Name + description -->
+                <div class="oss-col-main">
+                  <h2 class="oss-name">
+                    {p.name}
+                    <span class="oss-arrow" aria-hidden="true">&#8599;</span>
+                  </h2>
+                  <p class="oss-desc row-muted">{p.description}</p>
+                </div>
+
+                <!-- Stack + meta col -->
+                <div class="oss-col-meta">
+                  <ul class="oss-stack" role="list">
+                    {p.stack.map(s => (
+                      <li class="oss-tag mono row-muted">{s}</li>
+                    ))}
+                  </ul>
+                  <div class="oss-repo-row">
+                    <span class="mono oss-license row-muted">{p.license}</span>
+                    <span class="oss-view-link mono row-muted">VIEW ON GITHUB &rarr;</span>
+                  </div>
+                </div>
+
+              </div>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- ─── ETHOS ──────────────────────────────────────────── -->
+    <section class="section ethos-section">
+      <div class="wrap">
+        <div class="grid12">
+          <div class="ethos-col-label">
+            <p class="eyebrow reveal">(02) &mdash; WHY WE SHIP IN PUBLIC</p>
+            <span class="ethos-numeral numeral reveal reveal-d1">02</span>
+          </div>
+          <div class="ethos-col-body reveal reveal-d2">
+            <blockquote class="ethos-quote">
+              <p>
+                Every tool we use stands on the shoulders of someone who chose to share
+                what they built. Open source is how we contribute back to that chain —
+                releasing the small, specific utilities we built for ourselves and would
+                have wanted to find.
+              </p>
+              <p>
+                We don't open-source as marketing. We do it because the act of writing code
+                that strangers might read keeps us honest, invites collaboration, and makes
+                the tool genuinely useful instead of merely demo-ready.
+              </p>
+            </blockquote>
+            <a
+              href="https://github.com/mayurrawte"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn ethos-btn"
+            >
+              github.com/mayurrawte
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7,7 17,7 17,17"/>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Manifesto -->
-    <section class="section bg-surface-alt">
-      <div class="container-wide">
-        <div class="oss-manifesto reveal">
-          <aside class="manifesto-aside">
-            <span class="label label-mark">Why open source</span>
-            <span class="manifesto-num numeral">N°02</span>
-          </aside>
-          <blockquote class="manifesto-body">
-            <p>
-              Every tool we use stands on the shoulders of someone who chose to share what they built.
-              Open source is how we contribute back to that chain — releasing the small,
-              <span class="serif-italic">honest</span> utilities we built for ourselves and would
-              have wanted to find.
-            </p>
-            <p>
-              We don't open-source as marketing. We open-source because the act of writing code
-              that strangers might read keeps us honest, invites collaboration, and makes the
-              tool genuinely useful instead of merely demo-ready.
-            </p>
-          </blockquote>
+    <hr class="rule" />
+
+    <!-- ─── GITHUB CTA ────────────────────────────────────── -->
+    <section class="section-sm cta-section">
+      <div class="wrap">
+        <div class="grid12 cta-inner reveal">
+          <div class="cta-text">
+            <p class="eyebrow">(03) &mdash; CONTRIBUTE</p>
+            <h2 class="cta-headline">
+              Star what you use.<br/>
+              File what you <span class="flare">find.</span>
+            </h2>
+          </div>
+          <div class="cta-actions">
+            <a
+              href="https://github.com/snxstudio"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-flare"
+            >
+              github.com/snxstudio
+            </a>
+            <a href="/contact" class="btn">
+              Work with us
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- GitHub CTA -->
-    <section class="section">
-      <div class="container-wide oss-cta-row">
-        <div>
-          <h2 class="oss-cta-h2">
-            Find us on <span class="serif-italic accent">GitHub</span>.
-          </h2>
-          <p class="oss-cta-sub">
-            Star the things you use, file the issues you find, send the pull requests we deserved.
-          </p>
-        </div>
-        <div class="oss-cta-actions">
-          <a href="https://github.com/mayurrawte" target="_blank" rel="noopener noreferrer" class="btn-primary">
-            github.com/mayurrawte
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7"/>
-              <polyline points="7,7 17,7 17,17"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
   </main>
-  <Footer />
 </Layout>
 
 <style>
-  .page-hero {
+  /* ── HERO ────────────────────────────────────────────── */
+  .oss-hero {
     padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
     padding-bottom: clamp(3rem, 6vw, 5rem);
   }
-  .page-h1 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(3rem, 9vw, 8rem);
-    line-height: 0.96;
-    letter-spacing: -0.045em;
-    margin-top: 1.5rem;
-  }
-  .page-h1 .accent { color: var(--accent); }
 
-  .oss-section { padding-bottom: clamp(4rem, 8vw, 7rem); }
-  .oss-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--ink);
-  }
-  .oss-row { border-bottom: 1px solid var(--border); }
-  .oss-row-link {
-    display: block;
-    padding: clamp(1.75rem, 3vw, 2.5rem) 0;
-    color: var(--ink);
-    transition: padding 0.4s ease;
-  }
-  .oss-row:hover .oss-row-link {
-    padding-left: clamp(0.5rem, 1.5vw, 1.25rem);
-  }
-
-  .oss-row-head {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .oss-row-num { color: var(--accent); }
-  .oss-row-license { margin-left: auto; }
-
-  .oss-row-name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.875rem, 4vw, 3rem);
-    line-height: 1;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-    transition: color 0.3s ease;
-  }
-  .oss-row:hover .oss-row-name { color: var(--accent); }
-  .oss-row-arrow { color: var(--muted); font-size: 0.75em; transition: transform 0.3s ease, color 0.3s ease; }
-  .oss-row:hover .oss-row-arrow { transform: translate(4px, -4px); color: var(--accent); }
-
-  .oss-row-desc {
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--ink-2);
-    max-width: 760px;
-    margin-bottom: 1.5rem;
-  }
-
-  .oss-row-meta {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-    padding-top: 1rem;
-    border-top: 1px dashed var(--border);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .oss-row-lang { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ink-2); }
-  .oss-lang-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .oss-row-status { color: var(--accent); }
-  .oss-row-repo { margin-left: auto; }
-
-  /* Manifesto */
-  .oss-manifesto {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: start;
-  }
-  .manifesto-aside {
+  .hero-col-main {
+    grid-column: 1 / 8;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
-  .manifesto-num {
-    font-size: clamp(3.5rem, 7vw, 6rem);
-    color: var(--accent);
-    line-height: 0.9;
+
+  .hero-headline {
+    /* allow bleed past right on large screens */
+    margin-right: -2rem;
   }
-  .manifesto-body {
+
+  .hero-col-aside {
+    grid-column: 8 / -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .hero-lede {
+    max-width: 34ch;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+  }
+  .hero-meta-sep {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--flare);
+    flex-shrink: 0;
+  }
+
+  /* ── MARQUEE STRIP ───────────────────────────────────── */
+  .oss-marquee {
+    padding-block: clamp(1.25rem, 3vw, 2rem);
+    background: var(--paper-2);
+  }
+
+  /* ── PROJECT LIST ────────────────────────────────────── */
+  .oss-list-section {
+    padding-top: 0;
+  }
+
+  .list-header {
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+    align-items: end;
+  }
+
+  .list-header-eyebrow {
+    grid-column: 1 / 7;
+    align-self: end;
+  }
+
+  .list-header-count {
+    grid-column: 10 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+
+  .list-count {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    line-height: 0.88;
+    color: var(--ink);
+  }
+
+  .list-count-label {
+    color: var(--muted);
+  }
+
+  /* list rows */
+  .oss-list {
+    list-style: none;
     margin: 0;
-    border-left: 1px solid var(--border);
-    padding-left: clamp(1.5rem, 3vw, 3rem);
+    padding: 0;
   }
-  .manifesto-body p {
+
+  .oss-row {
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+  }
+
+  .oss-row-link {
+    display: block;
+    padding-block: clamp(2rem, 3.5vw, 2.75rem);
+    color: inherit;
+  }
+
+  .oss-row-inner {
+    align-items: start;
+  }
+
+  /* index col */
+  .oss-col-idx {
+    grid-column: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 0.35rem;
+  }
+
+  .oss-idx {
+    color: var(--flare);
+  }
+
+  .oss-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .chip-dot-sq {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--flare);
+    flex-shrink: 0;
+    transition: background-color 0.18s var(--snap);
+  }
+
+  .oss-row:hover .chip-dot-sq {
+    background: var(--paper);
+  }
+
+  .oss-status-text {
+    color: var(--muted);
+  }
+
+  /* main content col */
+  .oss-col-main {
+    grid-column: 2 / 9;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .oss-name {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(1.5rem, 3.2vw, 2.5rem);
-    line-height: 1.15;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: inherit;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    transition: color 0.18s var(--snap);
+  }
+
+  .oss-arrow {
+    font-size: 0.65em;
+    color: var(--muted);
+    transition: transform 0.3s var(--ease), color 0.18s var(--snap);
+    display: inline-block;
+  }
+
+  .oss-row:hover .oss-arrow {
+    transform: translate(4px, -4px);
+    color: var(--paper);
+  }
+
+  .oss-desc {
+    font-family: var(--font-sans);
+    font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 66ch;
+    transition: color 0.18s var(--snap);
+  }
+
+  /* meta col */
+  .oss-col-meta {
+    grid-column: 9 / -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+    align-self: stretch;
+    padding-top: 0.25rem;
+  }
+
+  .oss-stack {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .oss-tag {
+    color: var(--ink-2);
+    transition: color 0.18s var(--snap);
+    border-left: 1px solid var(--rule);
+    padding-left: 0.625rem;
+  }
+
+  .oss-row:hover .oss-tag {
+    border-left-color: rgba(255,255,255,0.25);
+  }
+
+  .oss-repo-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: auto;
+  }
+
+  .oss-license {
+    color: var(--muted);
+    transition: color 0.18s var(--snap);
+  }
+
+  .oss-view-link {
+    color: var(--muted);
+    transition: color 0.18s var(--snap);
+    position: relative;
+    display: inline-block;
+  }
+
+  .oss-row:hover .oss-view-link {
+    color: var(--paper);
+  }
+
+  /* ── ETHOS SECTION ──────────────────────────────────── */
+  .ethos-section {
+    background: var(--paper-2);
+  }
+
+  .ethos-col-label {
+    grid-column: 1 / 4;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .ethos-numeral {
+    font-size: clamp(4rem, 8vw, 7rem);
+    color: var(--rule);
+    line-height: 0.88;
+  }
+
+  .ethos-col-body {
+    grid-column: 4 / -1;
+    border-left: 1px solid var(--rule);
+    padding-left: clamp(1.5rem, 3vw, 3.5rem);
+  }
+
+  .ethos-quote {
+    margin: 0 0 2.5rem;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .ethos-quote p {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    line-height: 1.2;
     letter-spacing: -0.025em;
     color: var(--ink);
-    margin-bottom: 1.25rem;
     text-wrap: balance;
   }
-  .manifesto-body .serif-italic { color: var(--accent); font-weight: 400; }
 
-  /* CTA */
-  .oss-cta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 2rem;
-    flex-wrap: wrap;
+  .ethos-btn {
+    align-self: flex-start;
   }
-  .oss-cta-h2 {
+
+  /* ── CTA SECTION ────────────────────────────────────── */
+  .cta-inner {
+    align-items: end;
+  }
+
+  .cta-text {
+    grid-column: 1 / 8;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .cta-headline {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(2rem, 5vw, 4rem);
-    letter-spacing: -0.04em;
+    letter-spacing: -0.035em;
     line-height: 1;
+    color: var(--ink);
   }
-  .oss-cta-h2 .accent { color: var(--accent); }
-  .oss-cta-sub {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
-    color: var(--ink-2);
-    margin-top: 1rem;
-    max-width: 460px;
-  }
-  .oss-cta-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
-  @media (max-width: 880px) {
-    .oss-manifesto { grid-template-columns: 1fr; }
-    .manifesto-body { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 1.5rem; }
-    .manifesto-aside { flex-direction: row; justify-content: space-between; align-items: end; }
-    .oss-row-meta { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-    .oss-row-license, .oss-row-repo { margin-left: 0; }
+  .cta-actions {
+    grid-column: 9 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .hero-col-main {
+      grid-column: 1 / -1;
+    }
+    .hero-col-aside {
+      grid-column: 1 / -1;
+    }
+    .hero-headline {
+      margin-right: 0;
+    }
+
+    .list-header-eyebrow {
+      grid-column: 1 / -1;
+    }
+    .list-header-count {
+      grid-column: 1 / -1;
+      align-items: flex-start;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .oss-col-idx {
+      grid-column: 1 / 2;
+    }
+    .oss-col-main {
+      grid-column: 2 / -1;
+    }
+    .oss-col-meta {
+      grid-column: 2 / -1;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .oss-stack {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .oss-tag {
+      border-left: none;
+      border-bottom: 1px solid var(--rule);
+      padding-left: 0;
+      padding-bottom: 0.2rem;
+    }
+    .oss-repo-row {
+      flex-direction: row;
+      gap: 1.25rem;
+    }
+
+    .ethos-col-label {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: end;
+      justify-content: space-between;
+    }
+    .ethos-col-body {
+      grid-column: 1 / -1;
+      border-left: none;
+      border-top: 1px solid var(--rule);
+      padding-left: 0;
+      padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .cta-text {
+      grid-column: 1 / -1;
+    }
+    .cta-actions {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .oss-col-idx {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .oss-col-main {
+      grid-column: 1 / -1;
+    }
+    .oss-col-meta {
+      grid-column: 1 / -1;
+    }
+    .oss-row-inner {
+      row-gap: 0.875rem;
+    }
   }
 </style>

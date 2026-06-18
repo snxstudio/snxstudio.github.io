@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
 
 const cases = [
   {
@@ -9,10 +7,10 @@ const cases = [
     title: 'Logistics Intelligence Platform',
     sector: 'Freight · AI · Multi-tenant SaaS',
     year: '2024 — Now',
-    role: 'Founding architect &amp; engineer',
+    role: 'Founding architect & engineer',
     challenge: 'A growing freight forwarder still ran the world\'s most expensive cargo on email threads and spreadsheets. Quoting took days, document handling took longer, and every customer felt it.',
     approach: 'An AI-native platform: agentic quoting that pulls live carrier data and explains its work, document classification with prompt-cached pipelines, multi-tenant operations console, and SOC2-shaped infra from day one.',
-    result: 'Quoting cycles dropped by 14×. 92% of inbound shipping documents are now classified end-to-end without a human. The platform now powers daily ops for a growing book of enterprise customers.',
+    result: 'Quoting cycles dropped by 14×. 92% of inbound shipping documents are now classified end-to-end without a human. The platform powers daily ops for a growing book of enterprise customers.',
     metrics: [
       { value: '14×', label: 'Faster quoting cycle' },
       { value: '92%', label: 'OCR-to-shipment automation' },
@@ -25,10 +23,10 @@ const cases = [
     title: 'Smart Energy Telemetry',
     sector: 'Industrial IoT · Embedded · Research',
     year: '2017 — 2019',
-    role: 'Lead engineer &amp; researcher',
+    role: 'Lead engineer & researcher',
     challenge: 'Legacy distribution grids in tier-2 cities had little real-time visibility on consumption, theft, or load. Replacing the meters wholesale was politically and economically impossible.',
     approach: 'A drop-in smart-energy meter — a small embedded board paired with the existing analogue meter — and a telemetry / analytics stack that ingested everything into a central operations dashboard.',
-    result: 'Recognition from the Ministry of Power &amp; Coal. Smart India Hackathon finalist. Underlying research published in IJCA (2017). Six years on, the architecture still reads cleanly.',
+    result: 'Recognition from the Ministry of Power & Coal. Smart India Hackathon finalist. Underlying research published in IJCA (2017). Six years on, the architecture still reads cleanly.',
     metrics: [
       { value: '99.9%', label: 'Telemetry uptime' },
       { value: 'IJCA', label: 'Published research' },
@@ -38,13 +36,13 @@ const cases = [
   },
   {
     idx: '03',
-    title: 'Maritime Routing Engine (OSS)',
+    title: 'Maritime Routing Engine',
     sector: 'Open Source · Geo · TypeScript',
     year: '2023 — Now',
-    role: 'Author &amp; maintainer',
-    challenge: 'Most sea-route libraries were either commercial, slow, or wildly inaccurate around canals and chokepoints. Logistics teams kept reinventing the same broken Dijkstra over and over.',
-    approach: 'Open-source it. searoute-ts ships an MIT-licensed library, sub-5ms median compute, accurate handling of canals (Suez, Panama, Malacca), and a stable NPM API used in production.',
-    result: 'Adopted into commercial logistics platforms across the world. Continues to be maintained — the open-source backbone of the studio\'s logistics work.',
+    role: 'Author & maintainer',
+    challenge: 'Most sea-route libraries were commercial, slow, or wildly inaccurate around canals and chokepoints. Logistics teams kept reinventing the same broken Dijkstra over and over.',
+    approach: 'Open-source it. searoute-ts ships an MIT-licensed library with sub-5ms median compute, accurate handling of canals (Suez, Panama, Malacca), and a stable NPM API used in production.',
+    result: 'Adopted into commercial logistics platforms worldwide. Continues to be maintained — the open-source backbone of the studio\'s logistics work.',
     metrics: [
       { value: 'OSS', label: 'MIT-licensed, public NPM' },
       { value: '60+', label: 'Production integrations' },
@@ -58,8 +56,8 @@ const cases = [
     title: 'Agritech Sensor Mesh',
     sector: 'IoT · AgriTech · Research',
     year: '2018',
-    role: 'Co-author &amp; systems engineer',
-    challenge: 'Small-holder farms could not justify the cost of conventional precision-agriculture stacks, but were exposed to climate volatility that the larger farms had instruments to ride out.',
+    role: 'Co-author & systems engineer',
+    challenge: 'Small-holder farms could not justify the cost of conventional precision-agriculture stacks, but were exposed to climate volatility that larger farms had instruments to ride out.',
     approach: 'A LoRa-powered sensor mesh — soil moisture, micro-climate, irrigation status — with a low-bandwidth dashboard for regional advisors who were the actual decision-makers, not the farmers.',
     result: 'Pilot reduced water use by ~38% across participating farms. The work led to a published research paper and influenced the design of larger agritech rollouts.',
     metrics: [
@@ -81,7 +79,7 @@ const cases = [
     metrics: [
       { value: '0→1', label: 'Built from scratch' },
       { value: '500+', label: 'Active riders' },
-      { value: 'Impact', label: 'Mission-led startup' },
+      { value: 'A-round', label: 'Platform scaled to Series A' },
     ],
     stack: ['Node.js', 'Angular', 'Firebase', 'GCP', 'Twilio'],
   },
@@ -97,7 +95,7 @@ const oss = [
   {
     name: 'lit-pigeon',
     desc: 'Drag & drop email editor as web components. Exports clean MJML and HTML. MIT.',
-    lang: 'TypeScript',
+    lang: 'TypeScript / Lit',
     url: 'https://wearesnx.studio/lit-pigeon/',
   },
   {
@@ -109,254 +107,505 @@ const oss = [
 ];
 ---
 
-<Layout title="Work — SNX Studio" description="Selected case studies and open-source contributions. AI freight, smart energy IoT, maritime routing, agritech sensors, last-mile cargo.">
-  <Nav />
-  <main>
-    <!-- Hero -->
-    <section class="page-hero">
-      <div class="container-wide">
-        <span class="label label-mark animate-fade-in-up">Selected work</span>
-        <h1 class="page-h1 animate-fade-in-up delay-200">
-          Things that<br/>
-          <span class="serif-italic accent">actually</span> shipped.
-        </h1>
-        <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
-          A working studio doesn't get the luxury of vapourware. Every project below ran in
-          production, served real users, and survived the messy bit after launch.
-        </p>
-      </div>
-    </section>
+<Layout
+  title="Work — SNX Studio"
+  description="Five production case studies from SNX Studio: AI freight systems, smart energy telemetry, maritime routing, agritech sensors, last-mile logistics."
+>
 
-    <!-- Cases -->
-    <section class="cases-section">
-      <div class="container-wide">
-        {cases.map((c) => (
-          <article class="case reveal">
-            <header class="case-head">
-              <span class="case-idx numeral">{c.idx}</span>
-              <div class="case-head-meta">
-                <span class="case-sector">{c.sector}</span>
-                <span class="case-year">{c.year}</span>
-                <span class="case-role serif-italic" set:html={`— ${c.role}`}></span>
-              </div>
-            </header>
-
-            <h2 class="case-title">
-              {c.title}
-              {c.external && (
-                <a href={c.external} target="_blank" rel="noopener noreferrer" class="case-ext" aria-label="Open repository">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"/>
-                    <polyline points="7,7 17,7 17,17"/>
-                  </svg>
-                </a>
-              )}
-            </h2>
-
-            <div class="case-body">
-              <div class="case-narrative">
-                <div class="case-section">
-                  <h4 class="case-label">Challenge</h4>
-                  <p set:html={c.challenge}></p>
-                </div>
-                <div class="case-section">
-                  <h4 class="case-label">Approach</h4>
-                  <p set:html={c.approach}></p>
-                </div>
-                <div class="case-section">
-                  <h4 class="case-label">Result</h4>
-                  <p set:html={c.result}></p>
-                </div>
-              </div>
-
-              <aside class="case-aside">
-                <ul class="case-metrics" role="list">
-                  {c.metrics.map(m => (
-                    <li>
-                      <span class="case-metric-val numeral">{m.value}</span>
-                      <span class="case-metric-label">{m.label}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <ul class="case-stack" role="list">
-                  {c.stack.map(s => <li>{s}</li>)}
-                </ul>
-              </aside>
+  <!-- PAGE HEADER -->
+  <section class="work-hero section">
+    <div class="wrap">
+      <div class="work-hero__grid grid12">
+        <div class="work-hero__left">
+          <p class="eyebrow reveal">(01) &mdash; SELECTED WORK</p>
+          <h1 class="display work-hero__h1 reveal reveal-d1">
+            Things that<br/>actually<br/><span class="flare">shipped.</span>
+          </h1>
+        </div>
+        <div class="work-hero__right reveal reveal-d2">
+          <p class="lede">
+            A working studio doesn't get the luxury of vapourware. Every project below ran in
+            production, served real users, and survived the messy bit after launch.
+          </p>
+          <div class="work-hero__meta">
+            <div class="work-hero__stat">
+              <span class="numeral work-hero__numeral">5</span>
+              <span class="mono work-hero__statlabel">Case studies</span>
             </div>
-          </article>
+            <div class="work-hero__stat">
+              <span class="numeral work-hero__numeral">7+</span>
+              <span class="mono work-hero__statlabel">Years shipping</span>
+            </div>
+            <div class="work-hero__stat">
+              <span class="numeral work-hero__numeral">3</span>
+              <span class="mono work-hero__statlabel">OSS libraries</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- MARQUEE STRIP -->
+  <div class="marquee marquee--fast" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__item">AI-native engineering</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item marquee__item--outline">Industrial IoT</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item">Web platforms</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item marquee__item--outline">Maritime routing</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item">AgriTech</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item marquee__item--outline">Cloud DevEx</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item">Strategy &amp; advisory</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item marquee__item--outline">Open Source</span>
+      <span class="marquee__sep"></span>
+
+      <!-- duplicate for seamless loop -->
+      <span class="marquee__item">AI-native engineering</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item marquee__item--outline">Industrial IoT</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item">Web platforms</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item marquee__item--outline">Maritime routing</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item">AgriTech</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item marquee__item--outline">Cloud DevEx</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item">Strategy &amp; advisory</span>
+      <span class="marquee__sep"></span>
+      <span class="marquee__item marquee__item--outline">Open Source</span>
+      <span class="marquee__sep"></span>
+    </div>
+  </div>
+
+  <hr class="rule" />
+
+  <!-- WORK INDEX (editorial table header) -->
+  <section class="section-sm">
+    <div class="wrap">
+      <div class="work-index-head grid12">
+        <div class="work-index-head__col1">
+          <span class="eyebrow">N&deg; &mdash; Project</span>
+        </div>
+        <div class="work-index-head__col2">
+          <span class="eyebrow">Sector</span>
+        </div>
+        <div class="work-index-head__col3">
+          <span class="eyebrow">Year</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- CASE STUDIES -->
+  <section class="cases-section">
+    {cases.map((c, i) => (
+      <article class="case reveal" id={`case-${c.idx}`}>
+        <div class="wrap">
+
+          <!-- Index row (clickable to expand visually) -->
+          <div class="case-index-row row-invert">
+            <div class="case-index-left">
+              <span class="case-num eyebrow">{c.idx}</span>
+              <h2 class="case-title">
+                {c.title}
+                {c.external && (
+                  <a href={c.external} target="_blank" rel="noopener noreferrer" class="case-ext-link" aria-label={`Open ${c.title} repository`}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="7" y1="17" x2="17" y2="7"/>
+                      <polyline points="7,7 17,7 17,17"/>
+                    </svg>
+                  </a>
+                )}
+              </h2>
+            </div>
+            <div class="case-index-right">
+              <span class="mono case-sector row-muted">{c.sector}</span>
+              <span class="mono case-year row-muted">{c.year}</span>
+            </div>
+          </div>
+
+          <!-- Detail body -->
+          <div class="case-body">
+            <div class="case-body__grid grid12">
+
+              <!-- Narrative: cols 1-8 -->
+              <div class="case-narrative">
+                <p class="mono case-role">&mdash; {c.role}</p>
+
+                <div class="case-block">
+                  <h3 class="case-block__label eyebrow">Challenge</h3>
+                  <p class="case-block__text" set:html={c.challenge}></p>
+                </div>
+                <div class="case-block">
+                  <h3 class="case-block__label eyebrow">Approach</h3>
+                  <p class="case-block__text" set:html={c.approach}></p>
+                </div>
+                <div class="case-block">
+                  <h3 class="case-block__label eyebrow">Result</h3>
+                  <p class="case-block__text" set:html={c.result}></p>
+                </div>
+              </div>
+
+              <!-- Aside: cols 9-12 -->
+              <aside class="case-aside">
+                <div class="case-metrics">
+                  {c.metrics.map(m => (
+                    <div class="case-metric">
+                      <span class="numeral case-metric__val">{m.value}</span>
+                      <span class="mono case-metric__label">{m.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <hr class="case-divider" />
+                <div class="case-stack">
+                  <span class="eyebrow case-stack__label">Stack</span>
+                  <ul class="case-stack__list" role="list">
+                    {c.stack.map(s => (
+                      <li class="chip">{s}</li>
+                    ))}
+                  </ul>
+                </div>
+              </aside>
+
+            </div>
+          </div>
+
+        </div>
+        <hr class="rule" />
+      </article>
+    ))}
+  </section>
+
+  <!-- OPEN SOURCE PREVIEW -->
+  <section class="section" id="open-source">
+    <div class="wrap">
+      <div class="oss-header grid12">
+        <div class="oss-header__left">
+          <p class="eyebrow reveal">(02) &mdash; OPEN SOURCE</p>
+          <h2 class="display oss-h2 reveal reveal-d1">
+            Tools we keep<br/>in the open.
+          </h2>
+        </div>
+        <div class="oss-header__right reveal reveal-d2">
+          <p class="oss-intro">
+            Code we wrote for our own builds that turned out general enough to share.
+            MIT-licensed, maintained, used in production.
+          </p>
+        </div>
+      </div>
+
+      <div class="oss-list reveal reveal-d2">
+        {oss.map((o, i) => (
+          <a href={o.url} target="_blank" rel="noopener noreferrer" class="oss-row row-invert">
+            <div class="oss-row__name">
+              <span class="mono oss-row__idx row-muted">{String(i + 1).padStart(2, '0')}</span>
+              <span class="oss-row__title">{o.name}</span>
+            </div>
+            <p class="oss-row__desc row-muted">{o.desc}</p>
+            <div class="oss-row__meta">
+              <span class="mono oss-row__lang row-muted">{o.lang}</span>
+              <span class="oss-row__arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"/>
+                  <polyline points="7,7 17,7 17,17"/>
+                </svg>
+              </span>
+            </div>
+          </a>
         ))}
       </div>
-    </section>
 
-    <!-- Open Source -->
-    <section class="section bg-surface-alt">
-      <div class="container-wide">
-        <header class="oss-header">
-          <span class="label label-mark">Open source</span>
-          <h2 class="oss-h2">
-            Tools we keep <span class="serif-italic accent">in the open.</span>
-          </h2>
-        </header>
-
-        <div class="oss-grid">
-          {oss.map(o => (
-            <a href={o.url} target="_blank" rel="noopener noreferrer" class="oss-card reveal">
-              <h3 class="oss-name">{o.name}</h3>
-              <p class="oss-desc">{o.desc}</p>
-              <div class="oss-meta">
-                <span class="oss-lang">{o.lang}</span>
-                <span class="oss-arrow" aria-hidden="true">↗</span>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        <a href="/opensource" class="oss-link">
-          See the full open-source archive
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="17" x2="17" y2="7"/>
-            <polyline points="7,7 17,7 17,17"/>
-          </svg>
+      <div class="oss-footer reveal">
+        <a href="/opensource" class="btn">
+          Full open-source archive
         </a>
       </div>
-    </section>
-  </main>
-  <Footer />
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- CLOSING CTA -->
+  <section class="section cta-section">
+    <div class="wrap">
+      <div class="cta-grid grid12">
+        <div class="cta-left reveal">
+          <p class="eyebrow">(03) &mdash; WHAT'S NEXT</p>
+          <h2 class="display cta-h2">
+            Got something<br/>worth building?
+          </h2>
+        </div>
+        <div class="cta-right reveal reveal-d2">
+          <p class="cta-text">
+            We take on a small number of projects where we can go deep.
+            If you have a hard problem in AI, IoT, or product engineering,
+            let's figure out if we're the right fit.
+          </p>
+          <div class="cta-actions">
+            <a href="/contact" class="btn btn-flare">Start a conversation</a>
+            <a href="/services" class="btn">View capabilities</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </Layout>
 
 <style>
-  .page-hero {
-    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
-    padding-bottom: clamp(3rem, 6vw, 5rem);
+  /* ─── HERO ─── */
+  .work-hero {
+    padding-top: calc(78px + clamp(3rem, 6vw, 6rem));
   }
-  .page-h1 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(3rem, 9vw, 8rem);
-    line-height: 0.96;
-    letter-spacing: -0.045em;
+
+  .work-hero__grid {
+    align-items: start;
+    gap: clamp(2rem, 4vw, 4rem) 2rem;
+  }
+
+  .work-hero__left {
+    grid-column: 1 / 7;
+  }
+
+  .work-hero__h1 {
     margin-top: 1.5rem;
   }
-  .page-h1 .accent { color: var(--accent); }
 
-  .cases-section { padding: 0 0 clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--ink); }
+  .work-hero__right {
+    grid-column: 7 / -1;
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .work-hero__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .work-hero__stat {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .work-hero__numeral {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .work-hero__statlabel {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+
+  /* ─── WORK INDEX HEADER ─── */
+  .work-index-head {
+    align-items: center;
+    padding: 0.75rem 0;
+  }
+
+  .work-index-head__col1 {
+    grid-column: 1 / 7;
+  }
+
+  .work-index-head__col2 {
+    grid-column: 7 / 10;
+  }
+
+  .work-index-head__col3 {
+    grid-column: 10 / -1;
+  }
+
+  /* ─── CASE STUDIES ─── */
+  .cases-section {
+    padding-bottom: 0;
+  }
 
   .case {
-    padding: clamp(3rem, 6vw, 5rem) 0;
-    border-bottom: 1px solid var(--border);
+    /* each case has its own rule at the bottom */
   }
-  .case-head {
+
+  /* Index row — the bold clickable/hoverable title row */
+  .case-index-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+    cursor: default;
+    border: none;
+    transition: background var(--snap, cubic-bezier(.7,0,.2,1)) 0.18s,
+                color var(--snap, cubic-bezier(.7,0,.2,1)) 0.18s;
+  }
+
+  .case-index-left {
     display: flex;
     align-items: baseline;
     gap: 1.5rem;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
+    min-width: 0;
   }
-  .case-idx {
-    font-size: 1rem;
-    color: var(--accent);
-  }
-  .case-head-meta {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 1rem;
-    flex-wrap: wrap;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .case-role {
-    text-transform: none;
-    letter-spacing: 0;
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    color: var(--ink-2);
+
+  .case-num {
+    flex-shrink: 0;
+    color: var(--flare);
   }
 
   .case-title {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.25rem, 6vw, 5rem);
-    line-height: 0.98;
-    letter-spacing: -0.04em;
-    color: var(--ink);
-    margin-bottom: 2rem;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 3.5rem);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    color: inherit;
     display: inline-flex;
     align-items: baseline;
-    gap: 0.6rem;
+    gap: 0.5rem;
+    min-width: 0;
   }
-  .case-ext { color: var(--muted); transition: color 0.3s ease, transform 0.3s ease; }
-  .case-ext:hover { color: var(--accent); transform: translate(4px, -4px); }
 
+  .case-ext-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--muted);
+    transition: color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .case-ext-link:hover {
+    color: var(--flare);
+    transform: translate(3px, -3px);
+  }
+
+  .case-index-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .case-sector,
+  .case-year {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    white-space: nowrap;
+    transition: color var(--snap, cubic-bezier(.7,0,.2,1)) 0.18s;
+  }
+
+  /* Case detail body */
   .case-body {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: clamp(2rem, 5vw, 4rem);
+    padding: clamp(1.5rem, 3vw, 3rem) 0 clamp(2rem, 4vw, 4rem);
+  }
+
+  .case-body__grid {
     align-items: start;
+    row-gap: 2rem;
   }
 
   .case-narrative {
+    grid-column: 1 / 9;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.75rem;
   }
-  .case-label {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
+
+  .case-role {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.14em;
     margin-bottom: 0.5rem;
   }
-  .case-section p {
-    font-size: 1rem;
+
+  .case-block__label {
+    color: var(--flare);
+    margin-bottom: 0.5rem;
+  }
+
+  .case-block__text {
+    font-size: clamp(0.95rem, 1.5vw, 1.0625rem);
     line-height: 1.7;
     color: var(--ink-2);
   }
 
+  /* Aside — metrics + stack */
   .case-aside {
+    grid-column: 9 / -1;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding: 1.75rem;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-  }
-  .case-metrics {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-  .case-metrics li {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px dashed var(--border);
-  }
-  .case-metrics li:last-child { border-bottom: none; padding-bottom: 0; }
-  .case-metric-val {
-    font-size: 2rem;
-    line-height: 1;
-    color: var(--ink);
-  }
-  .case-metric-label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
+    gap: 1.5rem;
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
   }
 
-  .case-stack {
+  .case-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .case-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .case-metric:first-child {
+    padding-top: 0;
+  }
+
+  .case-metric:last-child {
+    border-bottom: none;
+  }
+
+  .case-metric__val {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1;
+    color: var(--ink);
+    font-feature-settings: "tnum";
+  }
+
+  .case-metric__label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .case-divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 0;
+  }
+
+  .case-stack__label {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .case-stack__list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -364,85 +613,201 @@ const oss = [
     flex-wrap: wrap;
     gap: 0.4rem;
   }
-  .case-stack li {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    padding: 0.3rem 0.55rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: var(--bg);
+
+  /* ─── OPEN SOURCE SECTION ─── */
+  .oss-header {
+    margin-bottom: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+    gap: 2rem;
   }
 
-  /* OSS preview */
-  .oss-header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .oss-header__left {
+    grid-column: 1 / 7;
+  }
+
   .oss-h2 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2rem, 5vw, 4rem);
-    letter-spacing: -0.04em;
-    line-height: 1;
+    margin-top: 1.25rem;
+    font-size: clamp(2.2rem, 6vw, 6rem);
   }
-  .oss-h2 .accent { color: var(--accent); }
-  .oss-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-    margin-bottom: 2rem;
+
+  .oss-header__right {
+    grid-column: 7 / -1;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0.5rem;
   }
-  .oss-card {
+
+  .oss-intro {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 36ch;
+  }
+
+  .oss-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1.75rem;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    color: var(--ink);
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    border-top: 1px solid var(--rule);
   }
-  .oss-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .oss-name {
+
+  .oss-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--ink);
+    transition: background var(--snap, cubic-bezier(.7,0,.2,1)) 0.18s,
+                color var(--snap, cubic-bezier(.7,0,.2,1)) 0.18s,
+                padding var(--snap, cubic-bezier(.7,0,.2,1)) 0.18s;
+  }
+
+  .oss-row:hover {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .oss-row__name {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .oss-row__idx {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    flex-shrink: 0;
+  }
+
+  .oss-row__title {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: -0.025em;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    letter-spacing: -0.02em;
   }
-  .oss-desc {
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--ink-2);
-    flex: 1;
-  }
-  .oss-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .oss-arrow { color: var(--accent); font-size: 1rem; }
-  .oss-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 500;
-  }
-  .oss-link svg { transition: transform 0.3s ease; }
-  .oss-link:hover svg { transform: translate(3px, -3px); }
 
-  @media (max-width: 880px) {
-    .case-body { grid-template-columns: 1fr; }
-    .oss-grid { grid-template-columns: 1fr; }
+  .oss-row__desc {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+    transition: color var(--snap, cubic-bezier(.7,0,.2,1)) 0.18s;
+  }
+
+  .oss-row__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .oss-row__lang {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .oss-row__arrow {
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    transition: color 0.18s, transform 0.18s;
+  }
+
+  .oss-row:hover .oss-row__arrow {
+    color: currentColor;
+    transform: translate(3px, -3px);
+  }
+
+  .oss-footer {
+    margin-top: clamp(2rem, 3vw, 3rem);
+  }
+
+  /* ─── CLOSING CTA ─── */
+  .cta-section {
+    background: var(--paper-2);
+  }
+
+  .cta-grid {
+    align-items: start;
+    gap: 2rem;
+  }
+
+  .cta-left {
+    grid-column: 1 / 6;
+  }
+
+  .cta-h2 {
+    margin-top: 1.25rem;
+    font-size: clamp(2.4rem, 6vw, 6.5rem);
+  }
+
+  .cta-right {
+    grid-column: 6 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: flex-end;
+    padding-bottom: 0.5rem;
+  }
+
+  .cta-text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 38ch;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .work-hero__left { grid-column: 1 / -1; }
+    .work-hero__right { grid-column: 1 / -1; }
+
+    .work-index-head { display: none; }
+
+    .case-index-row {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .case-index-right {
+      gap: 1rem;
+    }
+
+    .case-narrative { grid-column: 1 / -1; }
+    .case-aside { grid-column: 1 / -1; }
+
+    .oss-header__left { grid-column: 1 / -1; }
+    .oss-header__right { grid-column: 1 / -1; }
+
+    .oss-row {
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 0.5rem 1rem;
+    }
+
+    .oss-row__desc {
+      grid-column: 1 / -1;
+    }
+
+    .cta-left { grid-column: 1 / -1; }
+    .cta-right { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 600px) {
+    .work-hero__meta {
+      flex-direction: column;
+    }
+
+    .case-title {
+      font-size: clamp(1.4rem, 7vw, 2rem);
+    }
   }
 </style>

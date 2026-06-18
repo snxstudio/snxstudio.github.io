@@ -1,290 +1,242 @@
 ---
-import Logo from './Logo.astro';
-import ThemeToggle from './ThemeToggle.astro';
-
-const currentPath = Astro.url.pathname;
-
 const links = [
-  { href: '/services', label: 'Services', num: '01' },
-  { href: '/work', label: 'Work', num: '02' },
-  { href: '/about', label: 'Studio', num: '03' },
-  { href: '/opensource', label: 'Open Source', num: '04' },
-  { href: '/blog', label: 'Field Notes', num: '05' },
+  { label: 'Work', href: '/work' },
+  { label: 'Services', href: '/services' },
+  { label: 'Open Source', href: '/opensource' },
+  { label: 'Journal', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
 ];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
 ---
 
-<nav id="main-nav" class="nav" role="navigation" aria-label="Main navigation">
-  <div class="nav-inner">
-    <div class="nav-left">
-      <Logo />
-      <span class="nav-stamp">
-        <span class="nav-stamp-num">N°XII</span>
-        <span class="nav-stamp-text serif-italic">studio · est. 2024</span>
+<header class="nav" id="site-nav">
+  <div class="wrap nav__bar">
+    <!-- Wordmark -->
+    <a href="/" class="nav__brand" aria-label="SNX Studio — home">
+      <span class="nav__mark">SNX</span>
+      <span class="nav__mark-detail">/STUDIO</span>
+    </a>
+
+    <!-- Desktop links -->
+    <nav class="nav__links" aria-label="Primary">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class="nav__link link-underline"
+          aria-current={isActive(l.href) ? 'page' : undefined}
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Right cluster -->
+    <div class="nav__right">
+      <span class="chip nav__chip">
+        <span class="chip-dot"></span>
+        Available — Q3
       </span>
-    </div>
-
-    <div class="nav-right">
-      <ul class="nav-links" role="list">
-        {links.map(link => (
-          <li>
-            <a
-              href={link.href}
-              class:list={['nav-link', { active: currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href + '/')) }]}
-            >
-              <span class="nav-link-num">{link.num}</span>
-              <span class="nav-link-label">{link.label}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <a href="/contact" class="nav-cta">
-        Start a project
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="7" y1="17" x2="17" y2="7"/>
-          <polyline points="7,7 17,7 17,17"/>
-        </svg>
-      </a>
-
-      <ThemeToggle />
-
-      <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Open menu" aria-expanded="false" type="button">
-        <span class="hamburger"><span></span><span></span><span></span></span>
+      <button
+        type="button"
+        class="nav__toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+      >
+        <span class="nav__toggle-label" data-open="Menu" data-close="Close">Menu</span>
       </button>
     </div>
   </div>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-    <ul role="list">
-      {links.map(link => (
-        <li>
-          <a href={link.href} class:list={['mobile-link', { active: currentPath === link.href }]}>
-            <span class="mobile-link-num">{link.num}</span>
-            <span>{link.label}</span>
-          </a>
-        </li>
-      ))}
-      <li>
-        <a href="/contact" class="mobile-link mobile-link-cta">
-          <span class="mobile-link-num">→</span>
-          <span>Start a project</span>
-        </a>
-      </li>
-    </ul>
+  <!-- Mobile fullscreen menu -->
+  <div class="nav__menu" id="nav-menu" hidden>
+    <nav class="wrap nav__menu-inner" aria-label="Mobile">
+      <ol class="nav__menu-list">
+        {links.map((l, i) => (
+          <li>
+            <a href={l.href} class="nav__menu-link" aria-current={isActive(l.href) ? 'page' : undefined}>
+              <span class="nav__menu-index">{String(i + 1).padStart(2, '0')}</span>
+              <span>{l.label}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <span class="chip nav__menu-chip">
+        <span class="chip-dot"></span>
+        Available — Q3
+      </span>
+    </nav>
   </div>
-</nav>
+</header>
 
 <style>
   .nav {
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 100;
-    transition: background-color 0.4s ease, border-color 0.4s ease;
-    border-bottom: 1px solid transparent;
+    background: transparent;
+    border-bottom: 1px solid var(--rule);
+    transition: background-color 0.3s ease;
   }
+  .nav.is-stuck { background: var(--paper); }
 
-  .nav.scrolled {
-    background-color: color-mix(in srgb, var(--bg) 82%, transparent);
-    border-bottom-color: var(--border);
-    backdrop-filter: blur(14px) saturate(180%);
-    -webkit-backdrop-filter: blur(14px) saturate(180%);
-  }
-
-  .nav-inner {
+  .nav__bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 78px;
-    padding-left: clamp(1.25rem, 4vw, 3rem);
-    padding-right: clamp(1.25rem, 4vw, 3rem);
-    max-width: 1480px;
-    margin: 0 auto;
+    gap: 1.5rem;
+    height: 4.25rem;
   }
 
-  .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  .nav-stamp {
+  /* Wordmark */
+  .nav__brand {
     display: inline-flex;
     align-items: baseline;
-    gap: 0.625rem;
-    padding-left: 1.25rem;
-    border-left: 1px solid var(--border);
-  }
-  .nav-stamp-num {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    color: var(--accent);
-  }
-  .nav-stamp-text {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
     gap: 0.4rem;
-    padding: 0.55rem 0.875rem;
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--ink-2);
-    border-radius: 999px;
-    transition: color 0.25s ease, background-color 0.25s ease;
+    line-height: 1;
   }
-
-  .nav-link-num {
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
-
-  .nav-link:hover {
-    color: var(--ink);
-    background-color: color-mix(in srgb, var(--ink) 5%, transparent);
-  }
-
-  .nav-link.active {
-    color: var(--ink);
-    background-color: color-mix(in srgb, var(--ink) 6%, transparent);
-  }
-  .nav-link.active .nav-link-num { color: var(--accent); }
-
-  .nav-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.55rem 0.875rem 0.55rem 1rem;
-    background: var(--ink);
-    color: var(--bg);
-    border-radius: 999px;
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    transition: background-color 0.25s ease, color 0.25s ease;
-  }
-  .nav-cta:hover { background: var(--accent); color: #fff; }
-  .nav-cta svg { transition: transform 0.25s ease; }
-  .nav-cta:hover svg { transform: translate(2px, -2px); }
-
-  .mobile-toggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .hamburger { display: flex; flex-direction: column; gap: 5px; width: 18px; }
-  .hamburger span {
-    display: block;
-    height: 1.4px;
-    background-color: var(--ink);
-    border-radius: 1px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-  .mobile-toggle[aria-expanded="true"] .hamburger span:nth-child(1) { transform: translateY(6.4px) rotate(45deg); }
-  .mobile-toggle[aria-expanded="true"] .hamburger span:nth-child(2) { opacity: 0; }
-  .mobile-toggle[aria-expanded="true"] .hamburger span:nth-child(3) { transform: translateY(-6.4px) rotate(-45deg); }
-
-  /* Mobile Menu */
-  .mobile-menu {
-    display: none;
-    position: absolute;
-    top: 78px;
-    left: 0;
-    right: 0;
-    background-color: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 0 1.5rem;
-  }
-  .mobile-menu.open { display: block; }
-  .mobile-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0 clamp(1.25rem, 4vw, 3rem);
-  }
-  .mobile-link {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    padding: 1rem 0;
+  .nav__mark {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 2rem;
-    letter-spacing: -0.025em;
+    font-size: 1.4rem;
+    letter-spacing: -0.04em;
     color: var(--ink);
-    border-bottom: 1px solid var(--border);
   }
-  .mobile-link-num {
+  .nav__mark-detail {
     font-family: var(--font-mono);
     font-weight: 500;
-    font-size: 0.7rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
     color: var(--muted);
-    width: 2.25rem;
-    letter-spacing: 0.06em;
-  }
-  .mobile-link.active { color: var(--accent); }
-  .mobile-link.mobile-link-cta { color: var(--accent); border-bottom: none; }
-  .mobile-menu ul li:last-child .mobile-link { border-bottom: none; }
-
-  @media (max-width: 1024px) {
-    .nav-stamp { display: none; }
-    .nav-link-num { display: none; }
   }
 
-  @media (max-width: 880px) {
-    .nav-links, .nav-cta { display: none; }
-    .mobile-toggle { display: flex; }
+  /* Desktop links */
+  .nav__links {
+    display: none;
+    align-items: center;
+    gap: 1.75rem;
+  }
+  .nav__link {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .nav__link[aria-current="page"] { color: var(--flare); }
+
+  .nav__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .nav__chip { display: none; }
+
+  /* Mobile toggle */
+  .nav__toggle {
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    padding: 0.5rem 0.875rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.18s var(--snap), color 0.18s var(--snap);
+  }
+  .nav__toggle:hover,
+  .nav__toggle[aria-expanded="true"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Mobile menu panel */
+  .nav__menu {
+    position: fixed;
+    inset: 4.25rem 0 0 0;
+    background: var(--paper);
+    z-index: 99;
+    border-top: 1px solid var(--rule);
+    overflow-y: auto;
+  }
+  .nav__menu[hidden] { display: none; }
+  .nav__menu-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-block: 2.5rem;
+  }
+  .nav__menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav__menu-list li { border-top: 1px solid var(--rule); }
+  .nav__menu-list li:last-child { border-bottom: 1px solid var(--rule); }
+  .nav__menu-link {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 11vw, 3.25rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    transition: color 0.18s var(--snap);
+  }
+  .nav__menu-link:hover,
+  .nav__menu-link[aria-current="page"] { color: var(--flare); }
+  .nav__menu-index {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .nav__menu-chip { align-self: flex-start; }
+
+  @media (min-width: 900px) {
+    .nav__links { display: flex; }
+    .nav__chip { display: inline-flex; }
+    .nav__toggle { display: none; }
+    .nav__menu { display: none !important; }
   }
 </style>
 
 <script>
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 24) nav?.classList.add('scrolled');
-    else nav?.classList.remove('scrolled');
-  }, { passive: true });
+  const nav = document.getElementById('site-nav');
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  const label = toggle?.querySelector('.nav__toggle-label') as HTMLElement | null;
 
-  const mobileToggle = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  mobileToggle?.addEventListener('click', () => {
-    const isOpen = mobileMenu?.classList.toggle('open');
-    mobileToggle.setAttribute('aria-expanded', String(isOpen));
-    mobileMenu?.setAttribute('aria-hidden', String(!isOpen));
-    mobileToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  function setOpen(open: boolean) {
+    if (!toggle || !menu) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.hidden = !open;
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (label) label.textContent = open ? label.dataset.close! : label.dataset.open!;
+  }
+
+  toggle?.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
   });
+
+  // close on link click + Escape
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+  // paper background once scrolled past the top hairline
+  const onScroll = () => nav?.classList.toggle('is-stuck', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 </script>

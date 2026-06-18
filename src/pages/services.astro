@@ -1,418 +1,417 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
 
-const services = [
+const capabilities = [
   {
     id: 'ai',
     num: '01',
-    title: 'AI-native Engineering',
-    lede: 'Build with the smartest model in the room — and the best architecture around it.',
+    title: 'AI / LLM Systems',
+    lede: 'Production AI that survives its second quarter — not a thin wrapper around a chat completion.',
     body: [
-      'We build production AI systems on modern foundation models as a first-class platform — not a thin wrapper around a chat completion. That means prompt-cached pipelines, MCP-shaped tool surfaces, structured outputs, and agents with explicit guardrails.',
-      'Whether you\'re embedding intelligence inside an existing product or shipping an agent from scratch, we bring the patterns that survived our own production builds — including a freight-forwarding platform that runs AI through every stage of the workflow.',
+      'We build agentic systems on modern foundation models with explicit tool boundaries, prompt-cached pipelines, structured outputs, and observability baked in from the first sprint. The patterns here come from our own shipped work — a freight platform where AI touches every stage of the workflow, from document ingestion to carrier negotiation.',
+      'MCP servers for proprietary data, eval harnesses, drift monitoring, cost and latency tuning across model families. If you need it to run at scale and be explainable to a sceptical CTO, that is the work.',
     ],
-    deliverables: [
-      'AI-native agents, with hard tool boundaries',
-      'Prompt-cached RAG pipelines',
-      'MCP servers for proprietary data',
-      'Evals, observability, drift monitoring',
-      'Cost &amp; latency tuning across model families',
-    ],
-    stack: ['Anthropic SDK', 'Agent SDK', 'MCP', 'TypeScript', 'Python'],
+    skills: ['Agentic systems', 'Prompt-cached RAG', 'MCP servers', 'Structured outputs', 'Evals & observability', 'Cost/latency tuning', 'Anthropic SDK', 'Agent SDK'],
   },
   {
     id: 'iot',
     num: '02',
-    title: 'Industrial IoT &amp; Edge Systems',
-    lede: 'Hardware to dashboard. No missing layer, no mystery telemetry.',
+    title: 'IoT & Edge Systems',
+    lede: 'Hardware to dashboard. No mystery telemetry, no missing layer.',
     body: [
-      'Connected devices generate enormous potential — and enormous complexity. We bridge the physical and the digital with reliable, observable pipelines: edge intelligence on cheap hardware, compressed transit over flaky networks, and dashboards that operations actually opens.',
-      'We bring the lessons from a smart-energy-meter platform recognised by the Ministry of Power &amp; Coal, and an agritech sensor mesh that landed a research paper.',
+      'Connected devices generate enormous potential and enormous complexity. We bridge the physical and the digital: edge intelligence on constrained hardware, compressed transit over flaky networks, time-series pipelines that hold up under 24/7 ingestion, and dashboards that operations actually opens.',
+      'We bring the lessons from a smart-energy-meter platform recognised by the Ministry of Power & Coal, and an agritech sensor mesh that landed a published research paper and a ~38% reduction in water use across pilot farms.',
     ],
-    deliverables: [
-      'Sensor &amp; gateway architecture',
-      'Edge compute with Rust / C++',
-      'MQTT &amp; LoRa transport',
-      'Time-series storage (TimescaleDB / InfluxDB)',
-      'Operations dashboards &amp; alerting',
-    ],
-    stack: ['Embedded C', 'Rust', 'MQTT', 'LoRaWAN', 'Kubernetes'],
+    skills: ['Sensor & gateway architecture', 'Edge compute (Rust / C++)', 'MQTT & LoRaWAN', 'TimescaleDB / InfluxDB', 'Operations dashboards', 'Embedded C', 'Raspberry Pi', 'Arduino'],
   },
   {
     id: 'web',
     num: '03',
-    title: 'Web Platforms &amp; Product Engineering',
-    lede: 'Type-safe, production-first, designed to outlast the team that built it.',
+    title: 'Web Platforms',
+    lede: 'Type-safe, production-first. Designed to outlast the team that built it.',
     body: [
-      'Modern web apps that perform under load and survive their fifth product manager. We pick the right tool per layer — Next.js when it earns its complexity, Astro when it doesn\'t, NestJS where structure pays off, edge functions where they actually cost less.',
-      'We pair architecture with thoughtful UI engineering, so the product feels considered the moment a user touches it.',
+      'Modern web applications that perform under load and survive their fifth product manager. We pick the right tool per layer: Next.js when it earns its complexity, Astro when it does not, NestJS where structure pays off, edge functions where they actually cost less.',
+      'We pair architecture with considered UI engineering — so the product feels deliberate from the moment a user touches it. Postgres schemas you will not regret, background jobs, queues, and a performance foundation that does not need retrofitting.',
     ],
-    deliverables: [
-      'Greenfield web platforms (Next.js / Astro)',
-      'Type-safe APIs (GraphQL, tRPC, REST)',
-      'Postgres schemas you won\'t regret',
-      'Background jobs, queues, schedulers',
-      'Performance &amp; SEO foundations',
-    ],
-    stack: ['Next.js', 'NestJS', 'Astro', 'PostgreSQL', 'GraphQL'],
-  },
-  {
-    id: 'design',
-    num: '04',
-    title: 'Design Systems &amp; UX Audits',
-    lede: 'Opinions backed by craft. Sometimes the kind that ends up as a public teardown.',
-    body: [
-      'Design systems aren\'t component libraries — they\'re shared languages. We build token-driven systems that encode brand, accessibility, and interaction at the same level as code.',
-      'We also do UX teardowns: structured, evidence-based audits of broken flows. The kind of work that becomes our public field-notes — like the IRCTC Tatkal solution document.',
-    ],
-    deliverables: [
-      'Token-driven design system',
-      'Component library &amp; Storybook',
-      'WCAG 2.2 audit',
-      'Heuristic UX review &amp; teardown',
-      'Figma libraries kept in sync with code',
-    ],
-    stack: ['Figma', 'Storybook', 'Design Tokens', 'WCAG 2.2', 'Tailwind'],
+    skills: ['Next.js / Astro', 'NestJS', 'Type-safe APIs (tRPC / GraphQL)', 'PostgreSQL', 'Background jobs & queues', 'Performance & SEO foundations', 'Edge functions', 'CI/CD'],
   },
   {
     id: 'cloud',
-    num: '05',
-    title: 'Cloud Infrastructure &amp; DevEx',
-    lede: 'Boring infra, beautiful pipelines. Invisible — until it saves you.',
+    num: '04',
+    title: 'Cloud & DevEx',
+    lede: 'Boring infrastructure. Beautiful pipelines. Invisible — until it saves you.',
     body: [
-      'Reliable infrastructure does its job and gets out of the way. We design cloud architectures that scale without surprises, with infrastructure-as-code, automated deploys, and observability that someone actually reads.',
-      'Cost optimisation, security and compliance are not bolt-ons. They are part of the bones.',
+      'Reliable infrastructure does its job and gets out of the way. We design cloud architectures that scale without surprises — infrastructure-as-code, automated deploys, and observability that someone actually reads rather than ignores.',
+      'Cost optimisation, security posture, and compliance are part of the bones. We have shipped SOC2-shaped infra from day one on production platforms, not as a retro-fit.',
     ],
-    deliverables: [
-      'AWS / GCP architecture',
-      'Terraform infrastructure-as-code',
-      'CI/CD pipelines that catch things',
-      'Container orchestration (Kubernetes)',
-      'Observability stack (Datadog · Grafana)',
+    skills: ['AWS / GCP architecture', 'Terraform IaC', 'CI/CD pipelines', 'Kubernetes', 'Observability (Datadog / Grafana)', 'SOC2 posture', 'Cost optimisation', 'Security hardening'],
+  },
+  {
+    id: 'strategy',
+    num: '05',
+    title: 'Strategy & Advisory',
+    lede: 'A senior brain in the room — on the decisions that compound.',
+    body: [
+      'For early-stage teams and investors: architecture reviews, independent technical due diligence, and a senior engineering perspective on the calls that matter. Not a consultancy with a deck.',
+      'We help you avoid the architectural decisions you will regret in 18 months, the hires you will regret in 6, and the integrations you will regret in 2. Engaged on specific questions, not on retainer theatre.',
     ],
-    stack: ['AWS', 'GCP', 'Terraform', 'Kubernetes', 'Datadog'],
+    skills: ['Architecture reviews', 'Technical due diligence', 'Engineering roadmaps', 'Investor-ready technical narratives', 'Workshops', 'Hiring assessment', 'Stack audits', 'Risk triage'],
+  },
+  {
+    id: 'design',
+    num: '06',
+    title: 'UI / UX & Design Systems',
+    lede: 'Opinions backed by craft. Sometimes the kind that end up as a public teardown.',
+    body: [
+      'Design systems are shared languages, not component libraries. We build token-driven systems that encode brand, accessibility, and interaction at the same level as code — Figma libraries kept in sync with production components.',
+      'We also do structured UX audits: evidence-based teardowns of broken flows. The kind of work that becomes public field-notes — like the IRCTC Tatkal solution document.',
+    ],
+    skills: ['Token-driven design systems', 'Component library & Storybook', 'WCAG 2.2 audits', 'Heuristic UX teardowns', 'Figma-to-code sync', 'Tailwind', 'Interaction design', 'Accessibility'],
   },
   {
     id: 'agritech',
-    num: '06',
-    title: 'AgriTech &amp; Sustainable Systems',
+    num: '07',
+    title: 'AgriTech Systems',
     lede: 'Sensors, soil, sky — and the dashboard the field officer actually opens.',
     body: [
       'Low-power sensor meshes, edge intelligence on cheap hardware, and dashboards built for the low-bandwidth realities of rural deployments. We treat the regional advisor as the primary user, not the farmer — because they are the one making the irrigation call.',
-      'We bring the lessons from a published agritech sensor deployment that delivered a ~38% water-use reduction across pilot farms.',
+      'We bring lessons from a published agritech sensor deployment that delivered a ~38% water-use reduction across pilot farms and influenced subsequent regional rollouts.',
     ],
-    deliverables: [
-      'LoRa / LoRaWAN sensor architecture',
-      'Soil moisture &amp; micro-climate telemetry',
-      'Low-bandwidth advisor dashboards',
-      'On-device decisioning &amp; alerts',
-      'Pilot design &amp; field instrumentation',
-    ],
-    stack: ['Arduino', 'LoRaWAN', 'InfluxDB', 'Grafana', 'Edge ML'],
+    skills: ['LoRa / LoRaWAN sensor architecture', 'Soil moisture & micro-climate telemetry', 'Low-bandwidth advisor dashboards', 'On-device decisioning', 'Pilot design & field instrumentation', 'Edge ML', 'InfluxDB', 'Grafana'],
   },
-  {
-    id: 'advisory',
-    num: '07',
-    title: 'Technical Advisory',
-    lede: 'A senior brain in the room when it matters — engaged on the questions that compound.',
-    body: [
-      'For early-stage teams and investors: architecture reviews, technical due diligence, and a senior engineering perspective on the decisions that compound — not a consultancy with a deck.',
-      'We help you avoid the architectural decisions you\'ll regret in 18 months, the hires you\'ll regret in 6, and the integrations you\'ll regret in 2.',
-    ],
-    deliverables: [
-      'Architecture &amp; tech-stack reviews',
-      'Independent technical due diligence',
-      'Engineering strategy &amp; planning',
-      'Investor-ready technical narratives',
-      'Workshops &amp; deep-dive sessions',
-    ],
-    stack: ['Audits', 'DD reports', 'Roadmaps', 'Reviews', 'Strategy'],
-  },
+];
+
+const marqueeItems = [
+  'AI / LLM SYSTEMS', 'IoT & EDGE', 'WEB PLATFORMS', 'CLOUD DEVEX', 'STRATEGY', 'UI / UX', 'AGRITECH',
+  'AI / LLM SYSTEMS', 'IoT & EDGE', 'WEB PLATFORMS', 'CLOUD DEVEX', 'STRATEGY', 'UI / UX', 'AGRITECH',
 ];
 ---
 
-<Layout title="Services — SNX Studio" description="AI-native systems, industrial IoT, web platforms, cloud, design systems &amp; UX audits, and senior technical advisory.">
-  <Nav />
+<Layout
+  title="Services — SNX Studio"
+  description="Seven engineering and design disciplines practised by a focused studio in Bengaluru. AI systems, IoT, web platforms, cloud, strategy, UX, and AgriTech."
+>
   <main>
-    <!-- Hero -->
-    <section class="page-hero">
-      <div class="container-wide">
-        <span class="label label-mark animate-fade-in-up">Services</span>
-        <h1 class="page-h1 animate-fade-in-up delay-200">
-          Seven disciplines.<br/>
-          <span class="serif-italic accent">One studio.</span> One brain.
-        </h1>
-        <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
-          We're not a generalist agency. We're a focused team built around senior engineering,
-          opinionated design, and a deep bet on AI as the foundation of the next decade.
-        </p>
-      </div>
-    </section>
 
-    <!-- Anchor nav -->
-    <section class="services-anchor-bar">
-      <div class="container-wide services-anchor-inner">
-        {services.map(s => (
-          <a href={`#${s.id}`} class="anchor">
-            <span class="anchor-num">{s.num}</span>
-            <span set:html={s.title}></span>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <!-- Service blocks -->
-    {services.map((s, i) => (
-      <section id={s.id} class={`service-block ${i % 2 === 1 ? 'bg-surface-alt' : ''}`}>
-        <div class="container-wide service-block-inner reveal">
-          <aside class="service-meta">
-            <span class="service-meta-num numeral">{s.num}</span>
-            <span class="label label-mark">Service</span>
-          </aside>
-
-          <div class="service-body-col">
-            <h2 class="service-h2" set:html={s.title}></h2>
-            <p class="service-lede serif-italic">{s.lede}</p>
-            {s.body.map(p => <p class="service-para" set:html={p}></p>)}
-
-            <div class="service-deliverables">
-              <h4 class="label">Deliverables</h4>
-              <ul role="list">
-                {s.deliverables.map(d => <li set:html={d}></li>)}
-              </ul>
-            </div>
-
-            <ul class="service-stack" role="list">
-              {s.stack.map(t => <li>{t}</li>)}
-            </ul>
+    <!-- ── HERO ─────────────────────────────────────────────────── -->
+    <section class="section" style="padding-top: calc(78px + clamp(3.5rem, 7vw, 6rem));">
+      <div class="wrap">
+        <div class="grid12">
+          <div style="grid-column: 1 / 11;" class="reveal">
+            <p class="eyebrow" style="margin-bottom: 2rem;">(00) — CAPABILITIES</p>
+            <h1 class="display" style="max-width: none;">
+              Seven disciplines.<br/>
+              <span style="color: var(--ink-2);">One studio.</span>
+            </h1>
+          </div>
+          <div style="grid-column: 1 / 8; margin-top: 2.5rem;" class="reveal reveal-d1">
+            <p class="lede">
+              Not a generalist agency. A focused team built around senior engineering,
+              opinionated design, and a deep bet on AI as the foundation of the next decade.
+              Based in Bengaluru, working with teams globally.
+            </p>
+          </div>
+          <div style="grid-column: 9 / -1; align-self: end; margin-top: 2.5rem;" class="reveal reveal-d2">
+            <p class="mono" style="margin-bottom: 1rem; color: var(--muted);">ESTABLISHED</p>
+            <p class="numeral" style="font-size: clamp(3rem, 6vw, 5rem); line-height: 0.9;">2024</p>
+            <p class="mono" style="margin-top: 0.75rem; color: var(--muted);">BENGALURU, IN</p>
           </div>
         </div>
-      </section>
-    ))}
-
-    <!-- CTA -->
-    <section class="section bg-deep services-cta">
-      <div class="container">
-        <h2 class="services-cta-h2">
-          Ready to <span class="serif-italic">try a real partner?</span>
-        </h2>
-        <p class="services-cta-sub">
-          Tell us what you're building — we reply within one working day, from a real person.
-        </p>
-        <a href="/contact" class="services-cta-btn">
-          Start a project
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="17" x2="17" y2="7"/>
-            <polyline points="7,7 17,7 17,17"/>
-          </svg>
-        </a>
       </div>
     </section>
+
+    <hr class="rule" />
+
+    <!-- ── MARQUEE ────────────────────────────────────────────────── -->
+    <div class="marquee" aria-hidden="true" style="padding: 1.25rem 0; border-bottom: 1px solid var(--rule); overflow: hidden;">
+      <div class="marquee__track">
+        {marqueeItems.map((item, i) => (
+          <>
+            <span class="marquee__item">{item}</span>
+            <span class="marquee__sep" aria-hidden="true"></span>
+          </>
+        ))}
+      </div>
+    </div>
+
+    <!-- ── CAPABILITY BLOCKS ─────────────────────────────────────── -->
+    {capabilities.map((cap, i) => (
+      <>
+        <section id={cap.id} class="section cap-block">
+          <div class="wrap">
+            <div class="grid12 cap-grid">
+
+              <!-- Index column -->
+              <div class="cap-index reveal" style="grid-column: 1 / 2;">
+                <p class="numeral cap-numeral">{cap.num}</p>
+              </div>
+
+              <!-- Main body column -->
+              <div class="cap-body reveal reveal-d1" style="grid-column: 2 / 10;">
+                <p class="eyebrow" style="margin-bottom: 1.5rem;">({cap.num}) — {cap.title.toUpperCase()}</p>
+                <h2 class="cap-h2">{cap.title}</h2>
+                <p class="cap-lede">{cap.lede}</p>
+                {cap.body.map(para => (
+                  <p class="cap-para">{para}</p>
+                ))}
+              </div>
+
+              <!-- Skills column -->
+              <div class="cap-skills reveal reveal-d2" style="grid-column: 10 / -1;">
+                <p class="mono" style="margin-bottom: 1rem; color: var(--muted);">SKILLS</p>
+                <ul class="skills-list" role="list">
+                  {cap.skills.map(skill => (
+                    <li class="skill-tag">{skill}</li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        <hr class="rule" />
+      </>
+    ))}
+
+    <!-- ── PROCESS NOTE ───────────────────────────────────────────── -->
+    <section class="section-sm">
+      <div class="wrap">
+        <div class="grid12">
+          <div style="grid-column: 1 / 5;" class="reveal">
+            <p class="eyebrow" style="margin-bottom: 2rem;">(08) — HOW WE ENGAGE</p>
+            <p class="numeral" style="font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.9; margin-bottom: 1rem;">3</p>
+            <p class="mono" style="color: var(--muted);">ENGAGEMENT MODES</p>
+          </div>
+          <div style="grid-column: 5 / -1;" class="reveal reveal-d1">
+            <ol class="engage-list" role="list">
+              <li class="engage-row row-invert">
+                <span class="eyebrow" style="color: var(--muted); min-width: 2.5rem;">I.</span>
+                <div>
+                  <p style="font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; margin-bottom: 0.25rem;">Project-based</p>
+                  <p class="row-muted" style="font-size: 0.9rem; line-height: 1.55; color: var(--ink-2);">Scoped delivery: a defined thing with a defined end. We scope tight, ship fast, and hand over clean.</p>
+                </div>
+              </li>
+              <li class="engage-row row-invert">
+                <span class="eyebrow" style="color: var(--muted); min-width: 2.5rem;">II.</span>
+                <div>
+                  <p style="font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; margin-bottom: 0.25rem;">Embedded</p>
+                  <p class="row-muted" style="font-size: 0.9rem; line-height: 1.55; color: var(--ink-2);">We join your team as a senior technical layer — architecture, decisions, code review, the things that compound.</p>
+                </div>
+              </li>
+              <li class="engage-row row-invert">
+                <span class="eyebrow" style="color: var(--muted); min-width: 2.5rem;">III.</span>
+                <div>
+                  <p style="font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; margin-bottom: 0.25rem;">Advisory</p>
+                  <p class="row-muted" style="font-size: 0.9rem; line-height: 1.55; color: var(--ink-2);">Technical due diligence, architecture review, hiring assessment. Engaged on a question, not a retainer.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- ── CTA ───────────────────────────────────────────────────── -->
+    <section class="section">
+      <div class="wrap">
+        <div class="grid12">
+          <div style="grid-column: 1 / 10;" class="reveal">
+            <p class="eyebrow" style="margin-bottom: 2.5rem;">(09) — START A PROJECT</p>
+            <h2 class="display" style="font-size: clamp(2.5rem, 7vw, 8rem);">
+              Tell us<br/>
+              what you<br/>
+              <span style="color: var(--flare);">are building.</span>
+            </h2>
+            <p style="font-family: var(--font-sans); font-size: clamp(1rem, 1.4vw, 1.2rem); color: var(--ink-2); line-height: 1.6; margin-top: 2rem; max-width: 42ch;">
+              We reply within one working day, from a real person.
+              No auto-responder, no discovery call that is actually a sales call.
+            </p>
+            <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+              <a href="/contact" class="btn btn-flare">Start a project</a>
+              <a href="/work" class="btn">See selected work</a>
+            </div>
+          </div>
+          <div style="grid-column: 10 / -1; align-self: end;" class="reveal reveal-d2">
+            <p class="mono" style="margin-bottom: 0.75rem; color: var(--muted);">CURRENTLY</p>
+            <div class="chip" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+              <span class="chip-dot"></span>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink);">Available — Q3</span>
+            </div>
+            <p class="mono" style="margin-top: 2rem; color: var(--muted);">SNX STUDIO</p>
+            <p class="mono" style="color: var(--muted);">BENGALURU, IN</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
-  <Footer />
 </Layout>
 
 <style>
-  .page-hero {
-    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
-    padding-bottom: clamp(3rem, 6vw, 5rem);
+  /* ── Capability blocks ───────────────────────────────────────────── */
+  .cap-block {
+    background: var(--paper);
   }
-  .page-h1 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(3rem, 9vw, 8rem);
-    line-height: 0.96;
-    letter-spacing: -0.045em;
-    margin-top: 1.5rem;
-  }
-  .page-h1 .accent { color: var(--accent); }
 
-  /* Anchor nav */
-  .services-anchor-bar {
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-    position: sticky;
-    top: 78px;
-    z-index: 50;
-    backdrop-filter: blur(10px);
-  }
-  .services-anchor-inner {
-    display: flex;
-    overflow-x: auto;
-    gap: 0;
-    scrollbar-width: none;
-  }
-  .services-anchor-inner::-webkit-scrollbar { display: none; }
-  .anchor {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 1rem 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    border-right: 1px solid var(--border);
-    white-space: nowrap;
-    transition: color 0.2s ease, background-color 0.2s ease;
-  }
-  .anchor-num { color: var(--accent); }
-  .anchor:last-child { border-right: none; }
-  .anchor:hover { color: var(--accent); background-color: var(--bg-alt); }
-
-  /* Service blocks */
-  .service-block {
-    padding: clamp(4rem, 8vw, 7rem) 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .service-block-inner {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: clamp(2rem, 5vw, 5rem);
+  .cap-grid {
     align-items: start;
-  }
-  .service-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    position: sticky;
-    top: 160px;
-  }
-  .service-meta-num {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(4rem, 9vw, 7rem);
-    line-height: 0.85;
-    color: var(--accent);
-    letter-spacing: -0.04em;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
   }
 
-  .service-body-col {
-    max-width: 760px;
-  }
-  .service-h2 {
+  .cap-numeral {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    line-height: 0.85;
+    color: var(--rule);
+    letter-spacing: -0.03em;
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.25rem, 5vw, 4rem);
-    line-height: 1;
-    letter-spacing: -0.035em;
-    margin-bottom: 1.25rem;
-    text-wrap: balance;
+    font-weight: 800;
+    padding-top: 0.35rem;
   }
-  .service-lede {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
-    line-height: 1.45;
-    color: var(--ink-2);
-    margin-bottom: 2rem;
+
+  .cap-h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1rem;
   }
-  .service-para {
-    font-size: 1rem;
+
+  .cap-lede {
+    font-family: var(--font-sans);
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.5;
+    color: var(--flare);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .cap-para {
+    font-family: var(--font-sans);
+    font-size: clamp(0.9375rem, 1vw, 1.05rem);
     line-height: 1.7;
     color: var(--ink-2);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.1rem;
+    max-width: 60ch;
   }
 
-  .service-deliverables {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px dashed var(--border);
+  .cap-index {
+    padding-top: 0.25rem;
   }
-  .service-deliverables h4 { display: inline-block; margin-bottom: 1rem; }
-  .service-deliverables ul {
+
+  /* ── Skills list ───────────────────────────────────────────────── */
+  .skills-list {
     list-style: none;
+    padding: 0;
     margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 0.5rem 1.5rem;
-  }
-  .service-deliverables li {
-    font-size: 0.9375rem;
-    color: var(--ink-2);
-    padding-left: 1.25rem;
-    position: relative;
-  }
-  .service-deliverables li::before {
-    content: '+';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-family: var(--font-display);
-    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .service-stack {
-    margin-top: 2rem;
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-  .service-stack li {
+  .skill-tag {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--muted);
-    padding: 0.3rem 0.6rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
+    color: var(--ink-2);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    line-height: 1.4;
+    transition: color var(--snap, cubic-bezier(.7,0,.2,1)) 0.15s, padding-left var(--snap, cubic-bezier(.7,0,.2,1)) 0.15s;
   }
 
-  /* CTA */
-  .services-cta { color: var(--bg); --ink: #F0EBE0; --ink-2: #C4BFB4; }
-  .services-cta-h2 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.5rem, 7vw, 6rem);
-    line-height: 0.96;
-    letter-spacing: -0.04em;
-    color: var(--bg);
-    margin-bottom: 1.5rem;
+  .skill-tag:first-child {
+    border-top: 1px solid var(--rule);
   }
-  .services-cta-sub {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.125rem, 1.6vw, 1.4rem);
-    line-height: 1.5;
-    color: rgba(240,235,224,0.7);
-    margin-bottom: 2rem;
-    max-width: 560px;
-  }
-  .services-cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    padding: 1rem 1.5rem 1rem 1.75rem;
-    background: var(--accent);
-    color: #fff;
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 0.9375rem;
-    border-radius: 999px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  .services-cta-btn:hover { background: var(--accent-deep); transform: translateY(-1px); }
-  .services-cta-btn svg { transition: transform 0.3s ease; }
-  .services-cta-btn:hover svg { transform: translate(2px, -2px); }
 
-  @media (max-width: 880px) {
-    .service-block-inner {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+  .skill-tag:hover {
+    color: var(--flare);
+    padding-left: 0.5rem;
+  }
+
+  /* ── Engagement list ────────────────────────────────────────────── */
+  .engage-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .engage-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    cursor: default;
+    transition: background var(--snap, cubic-bezier(.7,0,.2,1)) 0.15s, color var(--snap, cubic-bezier(.7,0,.2,1)) 0.15s;
+  }
+
+  .engage-row:first-child {
+    border-top: 1px solid var(--rule);
+  }
+
+  .engage-row:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .engage-row:hover p {
+    color: var(--paper);
+  }
+
+  .engage-row:hover .row-muted {
+    color: rgba(242, 238, 230, 0.65) !important;
+  }
+
+  .engage-row:hover .eyebrow {
+    color: var(--flare) !important;
+  }
+
+  /* ── Responsive overrides ───────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .cap-grid {
+      display: flex;
+      flex-direction: column;
     }
-    .service-meta {
-      position: static;
+
+    .cap-index {
+      display: none;
+    }
+
+    .cap-skills {
+      border-top: 1px solid var(--rule);
+      padding-top: 1.5rem;
+    }
+
+    .skills-list {
       flex-direction: row;
-      align-items: baseline;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-tag {
+      border: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.3rem 0.6rem;
+    }
+
+    .skill-tag:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .skill-tag:hover {
+      padding-left: 0.6rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .engage-row {
+      flex-direction: column;
+      gap: 0.5rem;
     }
   }
 </style>

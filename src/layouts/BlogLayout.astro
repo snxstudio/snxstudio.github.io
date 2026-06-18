@@ -1,7 +1,5 @@
 ---
 import Layout from './Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -21,144 +19,213 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 ---
 
 <Layout title={`${title} — SNX Studio`} description={description}>
-  <Nav />
   <main>
     <article class="post">
+      <!-- Post header -->
       <header class="post-header">
-        <div class="container-narrow">
-          <div class="post-meta animate-fade-in-up">
-            <span class="post-category">{category}</span>
-            <span aria-hidden="true">·</span>
-            <span>{formattedDate}</span>
-            {readTime && (<><span aria-hidden="true">·</span><span>{readTime}</span></>)}
+        <div class="wrap post-header-inner">
+          <div class="post-header__eyebrow">
+            <span class="eyebrow reveal" style="color: var(--flare);">{category}</span>
+            <span class="eyebrow reveal reveal-d1" style="color: var(--muted);">{formattedDate}</span>
+            {readTime && <span class="eyebrow reveal reveal-d1" style="color: var(--muted);">{readTime}</span>}
           </div>
-          <h1 class="post-title animate-fade-in-up delay-200">{title}</h1>
-          <p class="post-description animate-fade-in-up delay-300">{description}</p>
+          <h1 class="post-title reveal reveal-d1">{title}</h1>
+          <p class="post-description reveal reveal-d2">{description}</p>
         </div>
       </header>
 
+      <hr class="rule" />
+
+      <!-- Body -->
       <div class="post-content">
-        <div class="container-narrow">
-          <div class="prose">
-            <slot />
+        <div class="wrap">
+          <div class="post-grid">
+            <!-- Sidebar / meta -->
+            <aside class="post-sidebar reveal">
+              <div class="sidebar-meta">
+                <div class="sidebar-item">
+                  <span class="eyebrow" style="color: var(--muted);">CATEGORY</span>
+                  <span class="mono" style="color: var(--flare); margin-top: 0.25rem; display: block;">{category}</span>
+                </div>
+                <div class="sidebar-item">
+                  <span class="eyebrow" style="color: var(--muted);">PUBLISHED</span>
+                  <span class="mono" style="color: var(--ink-2); margin-top: 0.25rem; display: block;">{formattedDate}</span>
+                </div>
+                {readTime && (
+                  <div class="sidebar-item">
+                    <span class="eyebrow" style="color: var(--muted);">READ TIME</span>
+                    <span class="mono" style="color: var(--ink-2); margin-top: 0.25rem; display: block;">{readTime}</span>
+                  </div>
+                )}
+                <div class="sidebar-rule" aria-hidden="true"></div>
+                <a href="/blog" class="sidebar-back">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+                    <line x1="17" y1="12" x2="7" y2="12"/>
+                    <polyline points="11,7 7,12 11,17"/>
+                  </svg>
+                  <span class="eyebrow">ALL PIECES</span>
+                </a>
+              </div>
+            </aside>
+
+            <!-- Prose column -->
+            <div class="prose reveal reveal-d1">
+              <slot />
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="post-footer">
-        <div class="container-narrow post-footer-inner">
-          <a href="/blog" class="back-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <hr class="rule" />
+
+      <!-- Post footer -->
+      <footer class="post-footer">
+        <div class="wrap post-footer-inner">
+          <a href="/blog" class="footer-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
               <line x1="17" y1="12" x2="7" y2="12"/>
               <polyline points="11,7 7,12 11,17"/>
             </svg>
-            All field notes
+            <span class="eyebrow">BACK TO JOURNAL</span>
           </a>
-          <a href="/contact" class="back-cta">
-            Want a teardown of your product? <span class="serif-italic">Let's talk →</span>
+          <a href="/contact" class="footer-cta btn btn-flare">
+            Commission a teardown
           </a>
         </div>
-      </div>
+      </footer>
     </article>
   </main>
-  <Footer />
 </Layout>
 
 <style is:global>
+  /* ---- Prose styles ---- */
   .prose {
-    font-family: var(--font-serif);
-    font-size: clamp(1.125rem, 1.4vw, 1.3125rem);
-    line-height: 1.7;
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    line-height: 1.72;
     color: var(--ink-2);
+    max-width: 68ch;
   }
-  .prose > p:first-child::first-letter {
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--accent);
-    float: left;
-    font-size: 4.5em;
-    line-height: 0.85;
-    margin: 0.05em 0.12em 0 -0.05em;
-    letter-spacing: -0.05em;
-  }
+
   .prose h2 {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
     color: var(--ink);
-    margin: 3.5rem 0 1.25rem;
+    margin: 3.5rem 0 1rem;
     line-height: 1.05;
-    letter-spacing: -0.025em;
-    text-wrap: balance;
+    letter-spacing: -0.03em;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
   }
+
   .prose h3 {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
     color: var(--ink);
     margin: 2.5rem 0 0.75rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
   }
+
+  .prose h4 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 2rem 0 0.5rem;
+  }
+
   .prose p {
     margin-bottom: 1.5rem;
     color: var(--ink-2);
   }
+
   .prose strong {
-    font-family: var(--font-sans);
     font-weight: 600;
     color: var(--ink);
-    font-size: 0.92em;
   }
+
   .prose em {
-    font-family: var(--font-serif);
     font-style: italic;
     color: var(--ink);
   }
-  .prose ul, .prose ol {
-    margin: 0 0 1.5rem;
-    padding-left: 1.5rem;
+
+  .prose a {
+    color: var(--flare);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-thickness 0.15s;
   }
-  .prose li {
-    margin-bottom: 0.6rem;
+  .prose a:hover { text-decoration-thickness: 2px; }
+
+  .prose ul {
+    margin: 0 0 1.5rem;
+    padding-left: 1.25rem;
+    list-style: none;
+  }
+  .prose ul > li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
     color: var(--ink-2);
   }
+  .prose ul > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 5px;
+    height: 5px;
+    background: var(--flare);
+    flex-shrink: 0;
+  }
+
   .prose ol {
-    counter-reset: prose-list;
+    counter-reset: prose-ol;
     list-style: none;
+    margin: 0 0 1.5rem;
     padding-left: 0;
   }
   .prose ol > li {
-    counter-increment: prose-list;
-    padding-left: 2.25rem;
+    counter-increment: prose-ol;
+    padding-left: 2.5rem;
     position: relative;
+    margin-bottom: 0.6rem;
+    color: var(--ink-2);
   }
   .prose ol > li::before {
-    content: counter(prose-list, decimal-leading-zero);
+    content: counter(prose-ol, decimal-leading-zero);
     position: absolute;
     left: 0;
     top: 0.1em;
     font-family: var(--font-mono);
-    font-size: 0.75em;
-    letter-spacing: 0.06em;
-    color: var(--accent);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--flare);
     font-weight: 500;
+    line-height: 1.72;
   }
+
   .prose code {
     font-family: var(--font-mono);
-    font-size: 0.85em;
-    background-color: var(--bg-alt);
-    padding: 0.15em 0.45em;
-    border-radius: 4px;
+    font-size: 0.84em;
+    background-color: var(--paper-2);
+    padding: 0.12em 0.4em;
     color: var(--ink);
-    border: 1px solid var(--border);
+    border: 1px solid var(--rule);
   }
+
   .prose pre {
-    background-color: var(--bg-alt);
+    background-color: var(--ink);
+    color: var(--paper);
     padding: 1.5rem;
-    border-radius: 8px;
     overflow-x: auto;
     margin: 2rem 0;
-    border: 1px solid var(--border);
+    border: 1px solid var(--ink);
     font-family: var(--font-mono);
   }
   .prose pre code {
@@ -167,107 +234,189 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
     border: none;
     font-size: 0.875rem;
     line-height: 1.6;
+    color: var(--paper);
   }
+
   .prose blockquote {
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--flare);
     padding: 0.5rem 0 0.5rem 1.75rem;
-    margin: 2rem 0;
+    margin: 2.5rem 0;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.5rem;
-    line-height: 1.3;
+    font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+    line-height: 1.2;
     color: var(--ink);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
+
   .prose hr {
     border: none;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--rule);
     margin: 3rem 0;
   }
-  .prose a {
-    color: var(--accent);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-thickness: 1px;
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
   }
-  .prose a:hover { text-decoration-thickness: 2px; }
+  .prose th {
+    border-bottom: 2px solid var(--ink);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.6875rem;
+    color: var(--ink);
+  }
+  .prose td {
+    border-bottom: 1px solid var(--rule);
+    padding: 0.625rem 0.75rem;
+    color: var(--ink-2);
+    vertical-align: top;
+  }
 </style>
 
 <style>
+  /* ---- Post page layout ---- */
   .post-header {
-    padding-top: calc(78px + clamp(4rem, 8vw, 7rem));
-    padding-bottom: clamp(2rem, 4vw, 3rem);
-    border-bottom: 1px solid var(--border);
+    padding-top: calc(78px + clamp(3rem, 6vw, 5rem));
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
   }
-  .post-meta {
+  .post-header-inner {
+    max-width: 1320px;
+  }
+
+  .post-header__eyebrow {
     display: flex;
-    align-items: baseline;
-    gap: 0.625rem;
-    margin-bottom: 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
   }
-  .post-category { color: var(--accent); }
+
   .post-title {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.25rem, 6vw, 5rem);
-    line-height: 0.98;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 7vw, 5.5rem);
+    line-height: 0.93;
     letter-spacing: -0.04em;
     color: var(--ink);
-    margin-bottom: 1.25rem;
-    text-wrap: balance;
+    margin-bottom: 1.5rem;
+    max-width: 22ch;
   }
+
   .post-description {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.125rem, 1.6vw, 1.4rem);
-    line-height: 1.5;
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.6;
     color: var(--ink-2);
-    max-width: 720px;
+    max-width: 60ch;
   }
 
+  /* Content grid: sidebar + prose */
   .post-content {
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
   }
 
+  .post-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: start;
+  }
+
+  /* Sidebar */
+  .post-sidebar {
+    position: sticky;
+    top: calc(78px + 2rem);
+  }
+
+  .sidebar-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .sidebar-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-rule {
+    height: 1px;
+    background: var(--rule);
+    margin: 0.25rem 0;
+  }
+
+  .sidebar-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .sidebar-back:hover {
+    color: var(--flare);
+  }
+  .sidebar-back svg {
+    transition: transform 0.2s;
+  }
+  .sidebar-back:hover svg {
+    transform: translateX(-3px);
+  }
+
+  /* Post footer */
   .post-footer {
-    border-top: 1px solid var(--border);
-    padding: clamp(2rem, 4vw, 3rem) 0;
-    background: var(--bg-alt);
+    padding: clamp(1.5rem, 3vw, 2.5rem) 0;
   }
   .post-footer-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
   }
-  .back-link {
+
+  .footer-back {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
     color: var(--ink-2);
-    transition: color 0.25s ease;
+    text-decoration: none;
+    transition: color 0.15s;
   }
-  .back-link:hover { color: var(--accent); }
-  .back-link svg { transition: transform 0.25s ease; }
-  .back-link:hover svg { transform: translateX(-3px); }
+  .footer-back:hover {
+    color: var(--flare);
+  }
+  .footer-back svg {
+    transition: transform 0.2s;
+  }
+  .footer-back:hover svg {
+    transform: translateX(-3px);
+  }
 
-  .back-cta {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.125rem;
-    color: var(--ink);
-    transition: color 0.25s ease;
+  @media (max-width: 860px) {
+    .post-grid {
+      grid-template-columns: 1fr;
+    }
+    .post-sidebar {
+      position: static;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-meta {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .sidebar-rule {
+      display: none;
+    }
   }
-  .back-cta .serif-italic { color: var(--accent); font-weight: 400; }
-  .back-cta:hover { color: var(--accent); }
 </style>

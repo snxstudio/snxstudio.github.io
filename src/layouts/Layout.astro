@@ -1,13 +1,18 @@
 ---
 import '../styles/global.css';
-import InkTrail from '../components/InkTrail.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = 'Technology studio designing and building what\'s next. Web apps, AI, IoT, cloud infrastructure, and strategic advisory.' } = Astro.props;
+const {
+  title,
+  description = 'SNX Studio is a design and engineering studio in Bengaluru building AI, IoT, and web systems — est. 2024.',
+} = Astro.props;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://snxstudio.com');
 ---
 
@@ -21,14 +26,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://snxstudi
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <!-- Preload fonts -->
+  <!-- Preload local display + body faces -->
   <link rel="preload" href="/fonts/Syne-Bold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/PlusJakartaSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
 
-  <!-- Editorial italic + monospace from Google Fonts -->
+  <!-- JetBrains Mono (mono labels) from Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" />
 
   <!-- OG Tags -->
   <meta property="og:title" content={title} />
@@ -41,21 +46,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://snxstudi
   <link rel="canonical" href={canonicalURL} />
 
   <title>{title}</title>
-
-  <!-- Theme script — runs before paint to prevent flash -->
-  <script is:inline>
-    (function() {
-      const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (stored === 'dark' || (!stored && prefersDark)) {
-        document.documentElement.classList.add('dark');
-      }
-    })();
-  </script>
 </head>
-<body class="grain">
-  <InkTrail />
+<body>
+  <Nav />
   <slot />
+  <Footer />
 
   <!-- Scroll reveal observer -->
   <script>
