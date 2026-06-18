@@ -5,6 +5,39 @@ import Footer from '../components/Footer.astro';
 
 const projects = [
   {
+    name: 'mcp-elements/ui',
+    repo: 'mcp-elements/ui',
+    url: 'https://github.com/mcp-elements/ui',
+    description: 'A multi-framework component library for AI apps — 38 copy-paste components for React, Vue, and Angular, including MCP-native primitives: tool-call cards, schema-driven forms, and OAuth consent dialogs. Copy the code into your project and own it.',
+    language: 'TypeScript',
+    color: '#3178C6',
+    license: 'MIT',
+    org: 'Studio',
+    stars: 'live',
+  },
+  {
+    name: 'teamsly',
+    repo: 'teamsly.app',
+    url: 'https://teamsly.app/',
+    description: 'A keyboard-first Microsoft Teams client with AI thread summaries, a command palette, voice rooms, and an MCP server that lets Claude read and send messages — the Teams client developers actually want. Self-hostable.',
+    language: 'TypeScript',
+    color: '#3178C6',
+    license: 'AGPL-3.0',
+    org: 'Studio',
+    stars: 'live',
+  },
+  {
+    name: 'lit-pigeon',
+    repo: 'snxstudio/lit-pigeon',
+    url: 'https://lit-pigeon.wearesnx.studio/',
+    description: 'A drag &amp; drop email editor you embed in your own app — web components that export clean, responsive MJML and HTML. The visual editor, without the proprietary SaaS attached.',
+    language: 'TypeScript',
+    color: '#3178C6',
+    license: 'MIT',
+    org: 'Studio',
+    stars: 'live',
+  },
+  {
     name: 'promptbucket',
     repo: 'promptbucket.co',
     url: 'https://promptbucket.co',
@@ -25,17 +58,6 @@ const projects = [
     license: 'MIT',
     org: 'Studio',
     stars: 'production',
-  },
-  {
-    name: 'lit-pigeon',
-    repo: 'snxstudio/lit-pigeon',
-    url: 'https://wearesnx.studio/lit-pigeon/',
-    description: 'A drag &amp; drop email editor you embed in your own app — web components that export clean, responsive MJML and HTML. The visual editor, without the proprietary SaaS attached.',
-    language: 'TypeScript',
-    color: '#3178C6',
-    license: 'MIT',
-    org: 'Studio',
-    stars: 'maintained',
   },
   {
     name: 'github-angular-actions',
@@ -82,7 +104,7 @@ const projects = [
         <span class="label label-mark animate-fade-in-up">Open source</span>
         <h1 class="page-h1 animate-fade-in-up delay-200">
           Built in the<br/>
-          <span class="serif-italic accent">open.</span>
+          <span class="accent">open.</span>
         </h1>
         <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
           Closed studios drift. Working in public is the cheapest accountability there is —
@@ -99,7 +121,7 @@ const projects = [
             <li class="oss-row reveal" style={`transition-delay: ${i * 60}ms`}>
               <a href={p.url} target="_blank" rel="noopener noreferrer" class="oss-row-link">
                 <div class="oss-row-head">
-                  <span class="oss-row-num numeral">N°{String(i + 1).padStart(2, '0')}</span>
+                  <span class="oss-row-num numeral">{String(i + 1).padStart(2, '0')}</span>
                   <span class="oss-row-org">{p.org}</span>
                   <span class="oss-row-license">{p.license}</span>
                 </div>
@@ -133,7 +155,7 @@ const projects = [
         <div class="oss-manifesto reveal">
           <aside class="manifesto-aside">
             <span class="label label-mark">Why open source</span>
-            <span class="manifesto-num numeral">N°02</span>
+            <span class="manifesto-num numeral">02</span>
           </aside>
           <blockquote class="manifesto-body">
             <p>
@@ -256,7 +278,7 @@ const projects = [
     gap: 1.25rem;
     flex-wrap: wrap;
     padding-top: 1rem;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.06em;
@@ -319,8 +341,6 @@ const projects = [
   }
   .oss-cta-h2 .accent { color: var(--accent); }
   .oss-cta-sub {
-    font-family: var(--font-serif);
-    font-style: italic;
     font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
     color: var(--ink-2);
     margin-top: 1rem;

@@ -58,7 +58,7 @@ const categories = ['All', 'Teardown', 'AI', 'Engineering', 'IoT', 'Design'];
           <article class="featured reveal" data-post-category={featured.data.category.toLowerCase()}>
             <a href={`/blog/${featured.id}`} class="featured-link">
               <header class="featured-head">
-                <span class="featured-tag">★ Featured · {featured.data.category}</span>
+                <span class="featured-tag">Featured · {featured.data.category}</span>
                 <span class="featured-meta">
                   <span>{new Date(featured.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' })}</span>
                   {featured.data.readTime && <span>· {featured.data.readTime}</span>}
@@ -197,8 +197,6 @@ const categories = ['All', 'Teardown', 'AI', 'Engineering', 'IoT', 'Design'];
   }
   .featured:hover .featured-title { color: var(--accent); }
   .featured-desc {
-    font-family: var(--font-serif);
-    font-style: italic;
     font-size: clamp(1.125rem, 1.8vw, 1.5rem);
     line-height: 1.5;
     color: var(--ink-2);

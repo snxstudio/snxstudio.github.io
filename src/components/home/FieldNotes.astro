@@ -1,9 +1,7 @@
 ---
-import Mark from '../Marks.astro';
-
 const notes = [
   {
-    num: 'N°01',
+    num: '01',
     kicker: 'A solution document',
     title: 'IRCTC: diagnosing Tatkal and designing what should replace it',
     excerpt: 'The 10 AM Tatkal rush is the load-bearing wall — every other failure descends from it. A two-track lottery, a Booking Reputation Score, and an atomic booking pipeline that ends "money debited, no ticket". 12 pages, end-to-end.',
@@ -12,7 +10,7 @@ const notes = [
     status: 'Published',
   },
   {
-    num: 'N°02',
+    num: '02',
     kicker: 'A migration story',
     title: 'Why we ditched Python for Go',
     excerpt: 'A weekend rewrite of a hot FastAPI endpoint cut p99 latency 10×, dropped infrastructure cost by 68%, and made 3 AM pages stop. The honest story — including the three weeks of velocity we lost teaching the team a new language.',
@@ -21,7 +19,7 @@ const notes = [
     status: 'Published',
   },
   {
-    num: 'N°03',
+    num: '03',
     kicker: 'A note on AI',
     title: 'AI isn\'t here to replace developers — it\'s here to replace the stuff we secretly hate',
     excerpt: 'The most expensive bug we never shipped wasn\'t in the code — it was in how we worked. A note on PR review queues, the cost of context-switching, and the small AI tool that bought a team back its senior engineering hours.',
@@ -36,13 +34,10 @@ const notes = [
   <div class="container-wide">
     <header class="notes-header">
       <div>
-        <span class="tape tape-tilt-l">— field notes —</span>
+        <span class="label label-mark">Field notes</span>
         <h2 class="notes-h2">
           Theses, teardowns,<br/>
-          <span class="notes-circled">
-            <span class="serif-italic">and other opinions</span>
-            <span class="notes-mark"><Mark name="ink-circle" /></span>
-          </span><br/>
+          <span class="notes-accent">and other opinions</span><br/>
           you didn't ask for.
         </h2>
       </div>
@@ -110,18 +105,7 @@ const notes = [
     margin-top: 1.25rem;
   }
   .notes-h2 .accent { color: var(--accent); }
-  .notes-circled {
-    position: relative;
-    display: inline-block;
-    padding: 0 0.18em;
-  }
-  .notes-circled .serif-italic { color: var(--accent); }
-  .notes-mark {
-    position: absolute;
-    inset: -0.18em -0.4em -0.22em -0.45em;
-    color: var(--accent);
-    transform: rotate(-1.5deg);
-  }
+  .notes-accent { color: var(--accent); }
   .notes-sub {
     max-width: 460px;
     font-size: 1rem;
@@ -156,7 +140,7 @@ const notes = [
     align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
-    border-bottom: 1px dashed var(--border);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 1rem;
     margin-bottom: 0.5rem;
   }
@@ -191,7 +175,7 @@ const notes = [
     flex-direction: column;
     gap: 0.75rem;
     padding-top: 1rem;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
   }
   .note-tags {
     list-style: none;

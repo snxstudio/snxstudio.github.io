@@ -3,21 +3,9 @@ import Mark from '../Marks.astro';
 ---
 
 <section class="cta section bg-deep" id="contact-cta">
-  <!-- Decorative background asterisk grid -->
-  <div class="cta-glyph" aria-hidden="true">
-    <Mark name="asterisk" />
-  </div>
-  <div class="cta-glyph cta-glyph-2" aria-hidden="true">
-    <Mark name="burst" />
-  </div>
-  <div class="cta-glyph cta-glyph-3" aria-hidden="true">
-    <Mark name="star" />
-  </div>
-
   <div class="container cta-inner">
-    <!-- Tilted tape strip -->
     <div class="cta-meta">
-      <span class="tape tape-tilt-r cta-tape">— Hand-written reply —</span>
+      <span class="label label-mark">Direct reply</span>
       <span class="cta-meta-text serif-italic">
         Within one working day. From a real human.
       </span>
@@ -26,8 +14,7 @@ import Mark from '../Marks.astro';
     <h2 class="cta-headline reveal">
       Have something
       <span class="cta-circled">
-        <span class="serif-italic">non-trivial</span>
-        <span class="cta-circled-mark"><Mark name="ink-circle" /></span>
+        <span class="cta-accent">non-trivial</span>
       </span>
       <br/>
       to <span class="accent">build?</span>
@@ -74,10 +61,6 @@ import Mark from '../Marks.astro';
           </span>
         </div>
       </div>
-      <div class="cta-receipt-foot">
-        <span class="cta-receipt-stamp">— end of receipt —</span>
-        <span class="cta-receipt-stamp">SNX × YOU</span>
-      </div>
     </div>
   </div>
 </section>
@@ -95,37 +78,6 @@ import Mark from '../Marks.astro';
     --bg: #EFEAD8;
   }
 
-  .cta-glyph {
-    position: absolute;
-    color: rgba(240, 235, 224, 0.18);
-    pointer-events: none;
-  }
-  .cta-glyph svg { width: 100%; height: 100%; }
-  .cta-glyph:first-child {
-    top: 8%;
-    right: 10%;
-    width: 80px;
-    height: 80px;
-    transform: rotate(-12deg);
-  }
-  .cta-glyph-2 {
-    top: 50%;
-    right: 4%;
-    width: 140px;
-    height: 140px;
-    transform: rotate(18deg);
-    color: rgba(230, 74, 46, 0.45);
-    animation: spinSlow 36s linear infinite;
-  }
-  .cta-glyph-3 {
-    bottom: 12%;
-    left: 8%;
-    width: 60px;
-    height: 60px;
-    color: rgba(244, 211, 74, 0.35);
-    transform: rotate(-8deg);
-  }
-
   .cta-inner {
     position: relative;
     z-index: 2;
@@ -139,12 +91,6 @@ import Mark from '../Marks.astro';
     gap: 1.25rem;
     margin-bottom: 2.5rem;
     flex-wrap: wrap;
-  }
-  .cta-tape {
-    color: var(--bg-deep);
-    background:
-      linear-gradient(180deg, rgba(255,255,255,0.18), transparent),
-      var(--tape);
   }
   .cta-meta-text {
     font-family: var(--font-serif);
@@ -166,22 +112,10 @@ import Mark from '../Marks.astro';
   .cta-headline .accent { color: var(--accent-deep); }
 
   .cta-circled {
-    position: relative;
     display: inline-block;
     padding: 0 0.18em;
   }
-  .cta-circled .serif-italic {
-    color: rgba(240, 235, 224, 0.85);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-  }
-  .cta-circled-mark {
-    position: absolute;
-    inset: -0.18em -0.45em -0.2em -0.5em;
-    color: var(--accent-deep);
-    transform: rotate(-1.5deg);
-  }
+  .cta-accent { color: var(--accent); }
 
   .cta-lede {
     font-family: var(--font-serif);
@@ -221,7 +155,7 @@ import Mark from '../Marks.astro';
     align-items: center;
     gap: 0.625rem;
     padding: 1rem 1.5rem;
-    border: 1px dashed rgba(255,255,255,0.32);
+    border: 1px solid rgba(255,255,255,0.32);
     color: var(--bg);
     font-family: var(--font-sans);
     font-weight: 500;
@@ -233,23 +167,20 @@ import Mark from '../Marks.astro';
   .cta-btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.6); border-style: solid; }
   .cta-arrow-small { width: 24px; height: 12px; }
 
-  /* Receipt block */
+  /* Audiences card */
   .cta-receipt {
     background: var(--bg);
     color: var(--ink);
-    padding: 2rem 1.75rem 1.25rem;
-    transform: rotate(-0.6deg);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    padding: 2rem 1.75rem;
+    border: 1px solid var(--border);
     --bg: #EFEAD8;
     --ink: #14131A;
-    --border-strong: #A89E83;
+    --border: #A89E83;
   }
   .cta-receipt-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px dashed var(--border-strong);
   }
   .cta-receipt-col { display: flex; flex-direction: column; gap: 0.5rem; }
   .cta-col-label {
@@ -264,19 +195,7 @@ import Mark from '../Marks.astro';
     line-height: 1.5;
     color: var(--ink);
   }
-  .cta-receipt-foot {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 0.85rem;
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
   @media (max-width: 768px) {
     .cta-receipt-row { grid-template-columns: 1fr; gap: 1.25rem; }
-    .cta-glyph-2 { right: -10%; opacity: 0.6; }
   }
 </style>

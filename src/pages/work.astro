@@ -89,22 +89,22 @@ const cases = [
 
 const oss = [
   {
-    name: 'searoute-ts',
-    desc: 'Shortest sea-route between any two coordinates on Earth. MIT, production-grade.',
+    name: 'mcp-elements/ui',
+    desc: 'Copy-paste UI components for AI apps — 38 across React, Vue & Angular, including MCP-native primitives. MIT.',
     lang: 'TypeScript',
-    url: 'https://github.com/mayurrawte/searoute-ts',
+    url: 'https://github.com/mcp-elements/ui',
+  },
+  {
+    name: 'teamsly',
+    desc: 'Keyboard-first Microsoft Teams client with AI summaries and an MCP server for Claude. Self-hostable, AGPL-3.0.',
+    lang: 'TypeScript',
+    url: 'https://teamsly.app/',
   },
   {
     name: 'lit-pigeon',
     desc: 'Drag & drop email editor as web components. Exports clean MJML and HTML. MIT.',
     lang: 'TypeScript',
-    url: 'https://wearesnx.studio/lit-pigeon/',
-  },
-  {
-    name: 'github-angular-actions',
-    desc: 'GitHub Action that pre-installs Angular CLI for fast CI builds.',
-    lang: 'TypeScript',
-    url: 'https://github.com/mayurrawte/github-angular-actions',
+    url: 'https://lit-pigeon.wearesnx.studio/',
   },
 ];
 ---
@@ -118,7 +118,7 @@ const oss = [
         <span class="label label-mark animate-fade-in-up">Selected work</span>
         <h1 class="page-h1 animate-fade-in-up delay-200">
           Things that<br/>
-          <span class="serif-italic accent">actually</span> shipped.
+          <span class="accent">actually</span> shipped.
         </h1>
         <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
           A working studio doesn't get the luxury of vapourware. Every project below ran in
@@ -137,7 +137,7 @@ const oss = [
               <div class="case-head-meta">
                 <span class="case-sector">{c.sector}</span>
                 <span class="case-year">{c.year}</span>
-                <span class="case-role serif-italic" set:html={`— ${c.role}`}></span>
+                <span class="case-role" set:html={c.role}></span>
               </div>
             </header>
 
@@ -195,7 +195,7 @@ const oss = [
         <header class="oss-header">
           <span class="label label-mark">Open source</span>
           <h2 class="oss-h2">
-            Tools we keep <span class="serif-italic accent">in the open.</span>
+            Tools we keep <span class="accent">in the open.</span>
           </h2>
         </header>
 
@@ -271,8 +271,8 @@ const oss = [
   .case-role {
     text-transform: none;
     letter-spacing: 0;
-    font-family: var(--font-serif);
-    font-size: 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
     color: var(--ink-2);
   }
 
@@ -340,7 +340,7 @@ const oss = [
     flex-direction: column;
     gap: 0.25rem;
     padding-bottom: 1.25rem;
-    border-bottom: 1px dashed var(--border);
+    border-bottom: 1px solid var(--border);
   }
   .case-metrics li:last-child { border-bottom: none; padding-bottom: 0; }
   .case-metric-val {

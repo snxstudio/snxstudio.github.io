@@ -181,7 +181,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   }
   .prose hr {
     border: none;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
     margin: 3rem 0;
   }
   .prose a {
@@ -222,8 +222,6 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
     text-wrap: balance;
   }
   .post-description {
-    font-family: var(--font-serif);
-    font-style: italic;
     font-size: clamp(1.125rem, 1.6vw, 1.4rem);
     line-height: 1.5;
     color: var(--ink-2);

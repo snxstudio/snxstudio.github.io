@@ -17,9 +17,8 @@ const links = [
   <div class="nav-inner">
     <div class="nav-left">
       <Logo />
-      <span class="nav-stamp">
-        <span class="nav-stamp-num">N°XII</span>
-        <span class="nav-stamp-text serif-italic">studio · est. 2024</span>
+      <span class="nav-status">
+        <span class="nav-status-dot"></span>Available for work
       </span>
     </div>
 
@@ -110,25 +109,23 @@ const links = [
     gap: 1.25rem;
   }
 
-  .nav-stamp {
+  .nav-status {
     display: inline-flex;
-    align-items: baseline;
-    gap: 0.625rem;
+    align-items: center;
+    gap: 0.5rem;
     padding-left: 1.25rem;
     border-left: 1px solid var(--border);
-  }
-  .nav-stamp-num {
     font-family: var(--font-mono);
-    font-weight: 500;
     font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    color: var(--accent);
-  }
-  .nav-stamp-text {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--muted);
+  }
+  .nav-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--accent);
   }
 
   .nav-right {
@@ -262,7 +259,7 @@ const links = [
   .mobile-menu ul li:last-child .mobile-link { border-bottom: none; }
 
   @media (max-width: 1024px) {
-    .nav-stamp { display: none; }
+    .nav-status { display: none; }
     .nav-link-num { display: none; }
   }
 

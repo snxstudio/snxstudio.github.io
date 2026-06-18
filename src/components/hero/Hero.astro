@@ -1,7 +1,6 @@
 ---
 import Mark from '../Marks.astro';
 import StudioMark from '../StudioMark.astro';
-import PageTurn from '../PageTurn.astro';
 
 const capabilities = [
   'AI Native',
@@ -41,7 +40,7 @@ const capabilities = [
   <div class="hero-inner">
     <!-- Top meta bar (full width) -->
     <div class="hero-meta animate-fade-in delay-100">
-      <span class="tape">Studio note · No°1</span>
+      <span class="label label-mark">Studio</span>
       <span class="hero-meta-rule" aria-hidden="true"></span>
       <span class="hero-meta-text">
         Creative first · human second · AI for speed.
@@ -115,8 +114,8 @@ const capabilities = [
             <li><Mark name="check" /><span>Cloud, DevEx &amp; advisory</span></li>
           </ul>
           <div class="hero-receipt-foot">
-            <span>— one room —</span>
-            <span>SNX × YOU</span>
+            <span>One room</span>
+            <span>SNX</span>
           </div>
         </div>
       </aside>
@@ -135,7 +134,7 @@ const capabilities = [
       </div>
       <span class="hero-stat-divider"><Mark name="cross" /></span>
       <div class="hero-stat">
-        <span class="hero-stat-num numeral">N°1</span>
+        <span class="hero-stat-num numeral">1<span class="ord">st</span></span>
         <span class="hero-stat-label">Recognition from the<br/>Ministry of Power &amp; Coal.</span>
       </div>
       <span class="hero-stat-divider"><Mark name="cross" /></span>
@@ -146,21 +145,13 @@ const capabilities = [
     </div>
   </div>
 
-  <!-- Paper page-turn at the hero corner -->
-  <PageTurn />
-
-  <!-- Capability marquee at hero base -->
-  <div class="hero-marquee">
-    <div class="marquee">
-      <div class="marquee-track">
-        {capabilities.concat(capabilities).map(cap => (
-          <span class="marquee-item">
-            <span>{cap}</span>
-            <Mark name="asterisk" class="marquee-mark" />
-          </span>
-        ))}
-      </div>
-    </div>
+  <!-- Capability rail at hero base -->
+  <div class="hero-rail">
+    <ul class="hero-rail-track" role="list">
+      {capabilities.map(cap => (
+        <li class="hero-rail-item">{cap}</li>
+      ))}
+    </ul>
   </div>
 </section>
 
@@ -232,10 +223,10 @@ const capabilities = [
   }
 
   /* Headline column */
-  .hero-headline-wrap { position: relative; }
+  .hero-headline-wrap { position: relative; min-width: 0; }
   .hero-headline {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 6.4vw, 6.5rem);
+    font-size: clamp(2rem, 7vw, 6.5rem);
     font-weight: 700;
     line-height: 0.96;
     letter-spacing: -0.04em;
@@ -243,6 +234,8 @@ const capabilities = [
     margin: 0;
     display: flex;
     flex-direction: column;
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
   .hl-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.18em; }
   .hl-row-2 { padding-left: clamp(0.5rem, 3vw, 3rem); }
@@ -291,6 +284,7 @@ const capabilities = [
 
   /* Belt — lede + actions under headline */
   .hero-belt {
+    min-width: 0;
     margin-top: clamp(2rem, 4vw, 3rem);
     padding-top: clamp(1.25rem, 2vw, 1.75rem);
     border-top: 1px solid var(--border);
@@ -305,7 +299,7 @@ const capabilities = [
     font-size: clamp(1rem, 1.3vw, 1.1875rem);
     line-height: 1.55;
     color: var(--ink-2);
-    max-width: 480px;
+    max-width: min(480px, 100%);
   }
   .hero-lede em {
     font-family: var(--font-sans);
@@ -399,7 +393,8 @@ const capabilities = [
     line-height: 0.9;
     color: var(--ink);
   }
-  .hero-stat-num .plus {
+  .hero-stat-num .plus,
+  .hero-stat-num .ord {
     color: var(--accent);
     font-size: 0.55em;
     vertical-align: super;
@@ -420,26 +415,47 @@ const capabilities = [
     height: 16px;
   }
 
-  /* Marquee */
-  .hero-marquee {
+  /* Capability rail — static, clean */
+  .hero-rail {
     position: relative;
     z-index: 2;
     margin-top: clamp(2.5rem, 4vw, 3rem);
     border-top: 1.5px solid var(--ink);
-    border-bottom: 1.5px solid var(--ink);
-    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
     background: var(--bg-alt);
   }
-  .hero-marquee .marquee-item {
-    font-size: clamp(1.5rem, 3.2vw, 2.5rem);
-    color: var(--ink);
-    gap: 0.75rem;
+  .hero-rail-track {
+    list-style: none;
+    margin: 0;
+    padding: 1rem clamp(1.25rem, 4vw, 3rem);
+    max-width: 1480px;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2.5rem;
   }
-  .hero-marquee .marquee-mark { color: var(--accent); width: 24px; height: 24px; }
+  .hero-rail-item {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .hero-rail-item::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
 
   /* Responsive */
   @media (max-width: 1024px) {
-    .hero-grid { grid-template-columns: 1fr; }
+    .hero-grid { grid-template-columns: minmax(0, 1fr); }
     .hero-aside {
       grid-template-areas:
         "mark"
@@ -456,6 +472,11 @@ const capabilities = [
 
   @media (max-width: 768px) {
     .hero-corner { display: none; }
+    /* Let the headline reflow as normal wrapping text on phones so long
+       phrases don't overflow the flex rows. */
+    .hero-headline { display: block; font-size: clamp(1.85rem, 8.5vw, 3rem); }
+    .hl-row { display: inline; }
+    .hl-amp, .hl-circled, .hl-replaced, .hl-strike { display: inline; }
     .hl-row-2, .hl-row-3 { padding-left: 0; }
     .hero-stats { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .hero-meta-coords { display: none; }

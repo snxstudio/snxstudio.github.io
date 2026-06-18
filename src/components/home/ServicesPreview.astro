@@ -65,13 +65,10 @@ const services = [
   <div class="container-wide">
     <header class="services-header">
       <div class="services-header-left">
-        <span class="tape tape-tilt-l">— what we do —</span>
+        <span class="label label-mark">What we do</span>
         <h2 class="services-h2">
           Seven disciplines.<br/>
-          <span class="services-h2-circled">
-            <span class="serif-italic accent">One studio.</span>
-            <span class="services-h2-mark"><Mark name="ink-circle" /></span>
-          </span>
+          <span class="services-accent">One studio.</span>
           One brain.
         </h2>
       </div>
@@ -142,18 +139,7 @@ const services = [
     color: var(--ink);
     margin-top: 1.25rem;
   }
-  .services-h2 .accent { color: var(--accent); }
-  .services-h2-circled {
-    position: relative;
-    display: inline-block;
-    padding: 0 0.18em;
-  }
-  .services-h2-mark {
-    position: absolute;
-    inset: -0.18em -0.4em -0.22em -0.45em;
-    color: var(--accent);
-    transform: rotate(-1.5deg);
-  }
+  .services-accent { color: var(--accent); }
 
   .services-header-right {
     max-width: 460px;
