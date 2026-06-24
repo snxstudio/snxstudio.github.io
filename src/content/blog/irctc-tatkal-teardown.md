@@ -65,7 +65,7 @@ Tatkal is the most extreme expression of these assumptions colliding with realit
 
 The 10:00 AM math is unforgiving: lakhs of legitimate users, plus an industrial bot layer, all hitting a fixed pool of roughly 1,500 seats per popular train, against a platform-wide throughput ceiling of about **25,000 to 32,000 tickets per minute**.[^ddnews-capacity] During peak Tatkal minutes, traffic spikes are estimated at over ten times normal load.
 
-The four user-visible failure modes that consume most of the lived Tatkal experience — captcha rendering loops, login failure at the clock-tick, "session expired" mid-form, and multi-passenger forms resetting on submit — are all in the **fixability ≥ 3** zone, meaning they could be materially improved without a backend rewrite. The fact that they have not been is itself diagnostic: every reform to date has added gates at the front door rather than addressing the synchronised rush itself.
+The four user-visible failure modes that consume most of the lived Tatkal experience — captcha rendering loops, login failure at the clock-tick, "session expired" mid-form, and multi-passenger forms resetting on submit — could all be materially improved without a backend rewrite at all. The fact that they have not been is itself diagnostic: every reform to date has added gates at the front door rather than addressing the synchronised rush itself.
 
 ### 2.3 — Premium Tatkal: the dark pattern in plain sight
 
@@ -125,6 +125,10 @@ T         Train departs
 
 **Why this is better than a pure 24-hour bid/lottery.** A pure lottery loses the truly-last-minute case Tatkal was originally built for. Track B preserves it, in a controlled way.
 
+**On pricing — the honest counterargument.** Dynamic pricing is itself a rationing tool: a high enough price clears the market and, in theory, starves the agent economy. We reject it here for two reasons specific to public rail. First, a below-market fixed price is *not* what creates the resale market — a non-transferable, Aadhaar-locked ticket is what kills resale, and Track A tickets are exactly that. Second, rail is a public service where rationing scarce emergency travel purely by willingness-to-pay (the ₹10,100 SMVB fare in §2.3) is both politically untenable and, we'd argue, the wrong call. A fair lottery plus a modest, fixed surcharge is the defensible middle.
+
+**What this does not solve.** It is worth being blunt: a lottery does not create seats. On a route where 8,200 people want 1,500 berths, 6,700 still go without — that is a capacity problem only more trains and the CRIS throughput rewrite can touch. What desynchronisation *does* fix is the part within software's reach: it makes allocation **fair and predictable** — identity, not network speed or bot farms, decides — and dissolves the synchronised failure storm. We are solving the right problem, not pretending to solve scarcity.
+
 ### 3.2 — Booking Reputation Score (BRS): anti-bot through reputation, not gates
 
 **The problem to solve.** Every gate added so far (captcha, SMS-OTP, Aadhaar-OTP) punishes legitimate users (rendering loops, OTP delivery delay) without stopping determined adversaries. Adding more gates makes the user experience worse for humans without making it worse for bots.
@@ -137,11 +141,11 @@ T         Train departs
 |--------|--------|------------------------------|
 | Account age | + | Aging fake accounts costs real time and money |
 | Successful past bookings | ++ | Hard to fake at scale without real travel |
-| Travel completion (verified GPS or station scan) | +++ | Very hard to fake |
+| Travel completion (TTE / charting scan at boarding) | +++ | Hard to fake without actually travelling — and uses a scan the passenger already undergoes, never background GPS |
 | Cancellation rate | − | Excessive cancellations downweight the score |
 | Device-family consistency | + | Rotating device fingerprints flagged |
-| Behavioural fingerprint (typing cadence, scroll patterns, navigation) | ++ | Hard for headless browsers to mimic convincingly |
-| Network reputation (residential IP vs cloud / VPS) | + | VPS-origin traffic deeply downweighted |
+| Behavioural fingerprint (typing cadence, scroll, navigation) | + | Raises bot cost, though sophisticated bots can replay recorded human patterns |
+| Network reputation (datacentre / VPS origin) | + | VPS-origin traffic downweighted — but never on IP alone; carrier-grade NAT means millions of real users share a handful of IPs |
 | **Account-creation clustering** | −−− | **Multiple accounts from same IP / device family flagged at *creation* time, before booking** |
 
 **BRS friction tiers at Tatkal entry:**
@@ -153,7 +157,13 @@ T         Train departs
 | < 30 / new account | Aadhaar OTP + ₹10 refundable hold + extended wait |
 | Anomaly flag | Routed to manual-review queue; blocked from immediate booking |
 
-**Why this works.** A reputation system *rewards* genuine repeat users with smoother UX. Bot farms have to spend real money and time to age accounts, and account-creation-cluster detection catches them at the moment of creation, not at booking time. Behavioural fingerprinting catches sophisticated bots that pass Aadhaar but cannot mimic human navigation under load.
+**Why this works.** A reputation system *rewards* genuine repeat users with smoother UX. Bot farms have to spend real money and time to age accounts, and account-creation-cluster detection catches them at the moment of creation, not at booking time. Behavioural and device signals raise the cost of operating at scale even when individual bots pass Aadhaar.
+
+**Privacy and fairness are first-order constraints, not afterthoughts.** A reputation score on a *government* platform is only legitimate if it is auditable and structurally non-punitive to the people public rail exists to serve. Three hard rules bound the design:
+
+- **No covert tracking.** Travel-completion signals come only from the TTE/charting scan a passenger already undergoes — never from background location. No signal is collected that the user isn't told about.
+- **A floor, never a wall.** A new or infrequent user is never *blocked*. The lowest tier adds a small refundable hold and a short wait, so a genuine first-time or once-a-year traveller can always complete a booking. The system must not entrench a permanent underclass of "low-score" citizens — exactly the rural and first-time users rail should serve first.
+- **Never IP alone.** Because carrier-grade NAT makes millions of legitimate mobile users look like one origin, network signals only ever *combine* with account-level behaviour; origin never gates a booking by itself.
 
 ### 3.3 — Atomic booking pipeline (kill "money debited, no ticket")
 
