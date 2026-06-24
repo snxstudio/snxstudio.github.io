@@ -12,7 +12,9 @@
 - Contact: https://wearesnx.studio/contact
 
 ## Open-source projects
-- Lit Pigeon — open-source, framework-agnostic drag & drop email editor built with web components; design responsive emails visually and export clean MJML / HTML. Live demo: https://wearesnx.studio/lit-pigeon/ · Details for LLMs: https://wearesnx.studio/lit-pigeon/llms.txt · Source: https://github.com/snxstudio/lit-pigeon
+- mcp-elements/ui — multi-framework UI component library for AI apps; 38 copy-paste components for React, Vue & Angular, including MCP-native primitives (tool-call cards, schema-driven forms, OAuth consent). MIT. https://github.com/mcp-elements/ui
+- Teamsly — keyboard-first Microsoft Teams client with AI thread summaries, command palette, voice rooms, and an MCP server that lets Claude read and send messages. Self-hostable, AGPL-3.0. https://teamsly.app/
+- Lit Pigeon — open-source, framework-agnostic drag & drop email editor built with web components; design responsive emails visually and export clean MJML / HTML. Live demo: https://lit-pigeon.wearesnx.studio/ · Details for LLMs: https://lit-pigeon.wearesnx.studio/llms.txt · Source: https://github.com/snxstudio/lit-pigeon
 - promptbucket — open library for collecting, versioning, and sharing production prompts. https://promptbucket.co
 - searoute-ts — computes the shortest realistic sea-route between any two coordinates on Earth (sub-5ms median). https://github.com/mayurrawte/searoute-ts
 - github-angular-actions — GitHub Action that pre-installs Angular CLI and dependencies with configurable versions. https://github.com/mayurrawte/github-angular-actions

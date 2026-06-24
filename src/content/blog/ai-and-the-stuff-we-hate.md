@@ -5,6 +5,7 @@ date: "2026-02-06"
 category: "AI"
 readTime: "7 min"
 featured: false
+keywords: ["AI for developers", "AI coding tools", "developer productivity", "PR review automation", "AI engineering", "context switching", "AI pair programming"]
 ---
 
 Let me tell you about the most expensive bug we never shipped.

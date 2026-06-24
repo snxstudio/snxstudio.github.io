@@ -5,6 +5,7 @@ date: "2026-03-22"
 category: "AI"
 readTime: "11 min"
 featured: false
+keywords: ["Claude agent", "AI agents", "Anthropic Claude", "LLM tool use", "agent architecture", "structured output", "AI billing automation", "production AI agents", "human in the loop"]
 ---
 
 There is a natural arc to building any agent on Claude. You start by giving it three tools and a system prompt. Two demos in, you are giving it eight tools and a system prompt that has begun to sprout sub-headings. Six demos in, you are giving it twenty tools, the entire customer-support knowledge base, and a long list of things it must under no circumstances do.

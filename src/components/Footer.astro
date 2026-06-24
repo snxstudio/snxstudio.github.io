@@ -4,20 +4,12 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <!-- Top ticker -->
-  <div class="footer-ticker" aria-hidden="true">
-    <div class="marquee marquee-fast">
-      <div class="marquee-track">
-        <span class="footer-ticker-item">Bengaluru — IST</span><span class="footer-sep">★</span>
-        <span class="footer-ticker-item">Hand-shipped software</span><span class="footer-sep">★</span>
-        <span class="footer-ticker-item">AI-native builds</span><span class="footer-sep">★</span>
-        <span class="footer-ticker-item">UX teardowns welcome</span><span class="footer-sep">★</span>
-        <span class="footer-ticker-item">Bengaluru — IST</span><span class="footer-sep">★</span>
-        <span class="footer-ticker-item">Hand-shipped software</span><span class="footer-sep">★</span>
-        <span class="footer-ticker-item">AI-native builds</span><span class="footer-sep">★</span>
-        <span class="footer-ticker-item">UX teardowns welcome</span><span class="footer-sep">★</span>
-      </div>
-    </div>
+  <!-- Capability rail -->
+  <div class="footer-rail" aria-hidden="true">
+    <span class="footer-rail-item">Bengaluru · IST</span>
+    <span class="footer-rail-item">AI-native builds</span>
+    <span class="footer-rail-item">Senior engineering</span>
+    <span class="footer-rail-item">UX teardowns welcome</span>
   </div>
 
   <div class="container footer-inner">
@@ -25,11 +17,11 @@ const year = new Date().getFullYear();
       <!-- Brand -->
       <div class="footer-brand">
         <Logo />
-        <p class="footer-tagline serif-italic">
+        <p class="footer-tagline">
           An AI-native technology partner —
           built around senior engineering and an aversion to vapourware.
         </p>
-        <div class="footer-clock" aria-live="polite">
+        <div class="footer-clock" aria-live="off">
           <span class="footer-clock-label">Studio time</span>
           <span class="footer-clock-time" id="footer-clock">— : —</span>
           <span class="footer-clock-loc">Bengaluru · IST</span>
@@ -80,12 +72,12 @@ const year = new Date().getFullYear();
     <div class="footer-bottom">
       <p class="footer-copy">
         <span>© {year} SNX Studio.</span>
-        <span class="footer-copy-rule serif-italic">Made between Bengaluru and the next deploy.</span>
+        <span class="footer-copy-rule">Made between Bengaluru and the next deploy.</span>
       </p>
       <div class="footer-legal">
         <a href="/about" class="footer-legal-link">Studio note</a>
         <span aria-hidden="true">·</span>
-        <a href="mailto:hello@wearesnx.studio" class="footer-legal-link">Press &amp; Speaking</a>
+        <a href="mailto:hello@wearesnx.studio?subject=Press%20%2F%20speaking%20enquiry" class="footer-legal-link">Press &amp; speaking enquiries</a>
       </div>
     </div>
   </div>
@@ -104,25 +96,30 @@ const year = new Date().getFullYear();
     border-top: 1px solid var(--border);
   }
 
-  .footer-ticker {
+  .footer-rail {
     border-bottom: 1px solid var(--border);
-    background: var(--accent);
-    color: #fff;
-    padding: 0.6rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    padding: 0.9rem clamp(1.25rem, 5vw, 4rem);
   }
-  .footer-ticker .marquee-track { gap: 1.5rem; padding-right: 1.5rem; }
-  .footer-ticker-item {
+  .footer-rail-item {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     font-weight: 500;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
   }
-  .footer-sep {
-    color: rgba(255,255,255,0.65);
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    margin: 0 1rem;
+  .footer-rail-item::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 0;
+    background: var(--accent);
   }
 
   .footer-inner {
@@ -145,8 +142,10 @@ const year = new Date().getFullYear();
     gap: 1.25rem;
   }
   .footer-tagline {
-    font-size: 1.0625rem;
-    line-height: 1.5;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
     color: var(--ink-2);
   }
 
@@ -155,7 +154,7 @@ const year = new Date().getFullYear();
     align-items: center;
     gap: 0.625rem;
     padding-top: 1rem;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.08em;
@@ -196,7 +195,7 @@ const year = new Date().getFullYear();
     color: var(--ink-2);
     transition: color 0.25s ease;
   }
-  .footer-link:hover { color: var(--accent); }
+  .footer-link:hover { color: var(--ink); }
 
   .footer-bottom {
     margin-top: clamp(3rem, 6vw, 5rem);
@@ -220,12 +219,12 @@ const year = new Date().getFullYear();
     flex-wrap: wrap;
   }
   .footer-copy-rule {
-    font-family: var(--font-serif);
-    font-style: italic;
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 0.95rem;
-    color: var(--ink-2);
+    font-family: var(--font-mono);
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    color: var(--muted);
   }
   .footer-legal {
     font-family: var(--font-mono);
@@ -237,7 +236,7 @@ const year = new Date().getFullYear();
     gap: 0.5rem;
   }
   .footer-legal-link { transition: color 0.25s ease; }
-  .footer-legal-link:hover { color: var(--accent); }
+  .footer-legal-link:hover { color: var(--ink); }
 
   /* Watermark */
   .footer-watermark {

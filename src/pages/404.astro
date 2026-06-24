@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import Mark from '../components/Marks.astro';
 
 const suggestions = [
-  { num: '01', label: 'Studio (about)', href: '/about' },
+  { num: '01', label: 'Studio', href: '/about' },
   { num: '02', label: 'Selected work', href: '/work' },
   { num: '03', label: 'Services', href: '/services' },
   { num: '04', label: 'Open source', href: '/opensource' },
@@ -14,119 +14,59 @@ const suggestions = [
 ];
 ---
 
-<Layout title="404 — Page not found" description="That page seems to have walked off. Pick a different door.">
+<Layout title="404 — Page not found" description="That page walked off the grid. Pick a different door — the studio is still very much in." noindex={true}>
   <Nav />
   <main class="not-found">
-    <!-- Decorative paper rules -->
-    <div class="nf-bg" aria-hidden="true">
-      <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
-        <g stroke="var(--ink)" stroke-width="0.6" opacity="0.10">
-          <line x1="0" y1="180" x2="1440" y2="180" stroke-dasharray="3 6"/>
-          <line x1="0" y1="360" x2="1440" y2="360" stroke-dasharray="3 6"/>
-          <line x1="0" y1="540" x2="1440" y2="540" stroke-dasharray="3 6"/>
-          <line x1="0" y1="720" x2="1440" y2="720" stroke-dasharray="3 6"/>
-        </g>
-      </svg>
-    </div>
+    <div class="nf-grid-bg" aria-hidden="true"></div>
 
-    <section class="nf-section">
-      <div class="container-wide nf-grid">
-        <!-- Left: ransom-note title + suggestions -->
-        <div class="nf-left">
-          <span class="tape tape-tilt-l">— filed under: missing —</span>
-
-          <h1 class="nf-title">
-            <span class="nf-word nf-w1">This</span>
-            <span class="nf-word nf-w2 serif-italic">page</span>
-            <span class="nf-word nf-w3">has</span>
-            <span class="nf-word nf-w4">walked</span>
-            <span class="nf-word nf-w5 nf-w-circled">
-              off<span class="nf-w-mark"><Mark name="ink-circle" /></span>
-            </span>
-            <span class="nf-word nf-w6">.</span>
-          </h1>
-
-          <p class="nf-lede serif-italic">
-            Either the URL is wrong, the page was retired, or some other small
-            indignity has happened. Pick a different door — the studio is still
-            very much in.
-          </p>
-
-          <ol class="nf-suggestions" role="list">
-            {suggestions.map((s) => (
-              <li>
-                <a href={s.href} class="nf-suggestion">
-                  <span class="nf-sugg-num numeral">{s.num}</span>
-                  <span class="nf-sugg-label">{s.label}</span>
-                  <Mark name="arrow-r" class="nf-sugg-arrow" />
-                </a>
-              </li>
-            ))}
-          </ol>
-
-          <div class="nf-actions">
-            <a href="/" class="btn-primary">
-              Back to the front desk
-              <Mark name="arrow-r" class="btn-mark" />
-            </a>
-            <a href="/contact" class="btn-ghost">
-              Tell us what you were looking for
-            </a>
-          </div>
-        </div>
-
-        <!-- Right: giant stamped 404 -->
-        <aside class="nf-right" aria-hidden="true">
-          <div class="nf-stamp">
-            <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <filter id="stamp-rough" x="-5%" y="-5%" width="110%" height="110%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3"/>
-                  <feDisplacementMap in="SourceGraphic" scale="2"/>
-                </filter>
-              </defs>
-              <g filter="url(#stamp-rough)" stroke="var(--accent)" fill="none"
-                 stroke-linecap="round" stroke-linejoin="round">
-                <!-- Outer rough rectangle stamp -->
-                <rect x="14" y="14" width="292" height="292" rx="6" stroke-width="3.5"/>
-                <rect x="22" y="22" width="276" height="276" rx="4" stroke-width="1.4" opacity="0.55"/>
-
-                <!-- Header arc text mimic -->
-                <text x="160" y="58" text-anchor="middle"
-                      font-family="JetBrains Mono, monospace"
-                      font-size="14" letter-spacing="6"
-                      fill="var(--accent)" stroke="none">PAGE · NOT · FOUND</text>
-
-                <!-- Footer text -->
-                <text x="160" y="290" text-anchor="middle"
-                      font-family="JetBrains Mono, monospace"
-                      font-size="11" letter-spacing="4"
-                      fill="var(--accent)" stroke="none">SNX · STUDIO · ARCHIVE</text>
-
-                <!-- Divider rules -->
-                <line x1="32" y1="78" x2="288" y2="78" stroke-width="1.2"/>
-                <line x1="32" y1="262" x2="288" y2="262" stroke-width="1.2"/>
-              </g>
-
-              <!-- Big 404 numerals — display font, slight tilt -->
-              <g transform="translate(160 180) rotate(-3)">
-                <text text-anchor="middle"
-                      font-family="Syne, sans-serif" font-weight="700"
-                      font-size="160" letter-spacing="-8"
-                      fill="var(--accent)">404</text>
-              </g>
-
-              <!-- Cancellation strikes -->
-              <g stroke="var(--accent-deep)" stroke-width="2.5" stroke-linecap="round" opacity="0.55">
-                <line x1="44" y1="106" x2="276" y2="262"/>
-                <line x1="276" y1="106" x2="44" y2="262"/>
-              </g>
-            </svg>
-          </div>
-
-          <span class="nf-stamp-note serif-italic">— rejected by the archive —</span>
-        </aside>
+    <section class="nf-inner">
+      <!-- Top meta row -->
+      <div class="nf-top animate-fade-in delay-100">
+        <span class="nf-top-mark">ERROR&#8201;/&#8201;404</span>
+        <span class="nf-top-tag">Page not found</span>
       </div>
+
+      <!-- Full-bleed wordmark — middle zero is the accent -->
+      <h1 class="nf-word animate-fade-in-up delay-200" aria-label="404">
+        4<span class="nf-word-zero">0</span>4
+      </h1>
+
+      <!-- Caption rule -->
+      <div class="nf-caption animate-fade-in delay-300">
+        <span class="nf-caption-l">This page walked off the grid</span>
+        <span class="nf-caption-rule" aria-hidden="true"></span>
+        <span class="nf-caption-r">or never existed</span>
+      </div>
+
+      <!-- Belt: lede + actions -->
+      <div class="nf-belt animate-fade-in-up delay-400">
+        <p class="nf-lede">
+          Either the URL is wrong or the page has been retired. Use the index
+          below to find your way, or <em>head back to the homepage.</em>
+        </p>
+        <div class="nf-actions">
+          <a href="/" class="btn-primary">
+            Back to homepage
+            <Mark name="arrow-r" class="btn-mark" />
+          </a>
+          <a href="/contact" class="btn-ghost">Get in touch</a>
+        </div>
+      </div>
+
+      <!-- Index rail -->
+      <nav class="nf-index animate-fade-in delay-500" aria-label="Site index">
+        <ol role="list">
+          {suggestions.map((s) => (
+            <li>
+              <a href={s.href} class="nf-row">
+                <span class="nf-row-num numeral">{s.num}</span>
+                <span class="nf-row-label">{s.label}</span>
+                <Mark name="arrow-r" class="nf-row-arrow" />
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
     </section>
   </main>
   <Footer />
@@ -135,179 +75,188 @@ const suggestions = [
 <style>
   .not-found {
     position: relative;
-    padding-top: calc(78px + clamp(3rem, 6vw, 6rem));
-    padding-bottom: clamp(4rem, 8vw, 7rem);
-    overflow: hidden;
-  }
-
-  .nf-bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .nf-bg svg { width: 100%; height: 100%; }
-
-  .nf-section { position: relative; z-index: 2; }
-  .nf-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: start;
-  }
-
-  /* LEFT */
-  .nf-left { display: flex; flex-direction: column; gap: 1.5rem; }
-
-  .nf-title {
-    margin: 0.5rem 0 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.5rem, 7vw, 6rem);
-    line-height: 1;
-    letter-spacing: -0.04em;
+    overflow-x: clip;
+    background: var(--bg);
     color: var(--ink);
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0 0.32em;
+    flex-direction: column;
+    min-height: 100svh;
+    padding-top: clamp(5.5rem, 12vh, 8rem);
+    padding-bottom: clamp(3rem, 6vh, 5rem);
   }
-  .nf-word {
-    display: inline-block;
-    transform-origin: center;
-  }
-  /* Ransom-note alternating tilts and weights */
-  .nf-w1 { transform: rotate(-1.5deg); }
-  .nf-w2 {
-    color: var(--accent);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.15em;
-    transform: rotate(2deg) translateY(0.05em);
-  }
-  .nf-w3 {
-    transform: rotate(-1deg);
-    background: var(--ink);
-    color: var(--bg);
-    padding: 0 0.2em;
-  }
-  .nf-w4 { transform: rotate(2.5deg); }
-  .nf-w5 { transform: rotate(-2deg); position: relative; }
-  .nf-w-circled { padding: 0 0.18em; }
-  .nf-w-mark {
+
+  /* Dotted grid texture — matches hero */
+  .nf-grid-bg {
     position: absolute;
-    inset: -0.18em -0.4em -0.22em -0.45em;
-    color: var(--accent);
-    transform: rotate(-1.4deg);
-  }
-  .nf-w6 {
-    color: var(--accent);
-    transform: translateY(0.1em);
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(var(--dot) 1.4px, transparent 1.4px);
+    background-size: 24px 24px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 90%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 90%, transparent);
   }
 
-  .nf-lede {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
-    line-height: 1.5;
+  .nf-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  /* ── Top meta row ── */
+  .nf-top {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: var(--ink-2);
-    max-width: 560px;
+    padding-bottom: clamp(1rem, 4vh, 2.5rem);
+  }
+  .nf-top-mark { color: var(--ink); }
+  .nf-top-tag { flex: 1; text-align: right; }
+
+  /* ── Full-bleed wordmark ── */
+  .nf-word {
     margin: 0;
+    width: 100%;
+    min-width: 0;
+    overflow: clip;
+    font-family: var(--font-wordmark);
+    font-weight: 800;
+    font-size: clamp(7rem, 38vw, 30rem);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .nf-word-zero {
+    color: var(--accent);
+    position: relative;
   }
 
-  /* Suggestions */
-  .nf-suggestions {
+  /* ── Caption rule ── */
+  .nf-caption {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    margin-top: clamp(1rem, 3vh, 2rem);
+    font-family: var(--font-mono);
+    font-size: clamp(0.72rem, 1vw, 0.85rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .nf-caption-l { color: var(--ink); }
+  .nf-caption-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border-strong);
+  }
+  .nf-caption-r { white-space: nowrap; }
+
+  /* ── Belt: lede + actions ── */
+  .nf-belt {
+    margin-top: clamp(2rem, 5vh, 3.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) auto;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: end;
+  }
+  .nf-lede {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 56ch;
+  }
+  .nf-lede em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .nf-actions {
+    display: flex;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+    justify-self: end;
+  }
+  .btn-mark { width: 30px; height: 14px; }
+
+  /* ── Index rail ── */
+  .nf-index {
+    margin-top: clamp(2.5rem, 6vh, 4rem);
+  }
+  .nf-index ol {
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1.5px solid var(--ink);
-    margin-top: 0.5rem;
-  }
-  .nf-suggestions li {
-    border-bottom: 1px dashed var(--border-strong);
-  }
-  .nf-suggestion {
+    border-top: 1px solid var(--border-strong);
     display: grid;
-    grid-template-columns: 60px 1fr 64px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(1.5rem, 4vw, 3rem);
+  }
+  .nf-index li {
+    border-bottom: 1px solid var(--border);
+  }
+  .nf-row {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr 2.5rem;
     align-items: center;
     gap: 1rem;
-    padding: 0.875rem 0.5rem;
+    padding: 0.9rem 0.25rem;
     color: var(--ink);
     transition: padding 0.3s ease, background-color 0.3s ease;
   }
-  .nf-suggestion:hover {
-    padding-left: 1.25rem;
+  .nf-row:hover {
+    padding-left: 1rem;
     background: var(--bg-alt);
   }
-  .nf-sugg-num {
+  .nf-row-num {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     color: var(--accent);
   }
-  .nf-sugg-label {
+  .nf-row-label {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(1.125rem, 1.6vw, 1.4rem);
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
     letter-spacing: -0.02em;
   }
-  .nf-sugg-arrow {
-    color: var(--muted);
-    width: 56px;
-    height: 18px;
+  .nf-row-arrow {
+    width: 36px;
+    height: 14px;
     justify-self: end;
+    color: var(--muted);
     opacity: 0;
-    transform: translateX(-12px);
+    transform: translateX(-10px);
     transition: opacity 0.3s ease, color 0.3s ease, transform 0.4s ease;
   }
-  .nf-suggestion:hover .nf-sugg-arrow {
+  .nf-row:hover .nf-row-arrow {
     opacity: 1;
     color: var(--accent);
     transform: translateX(0);
   }
 
-  .nf-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 1.25rem;
-  }
-  .btn-mark { width: 30px; height: 14px; }
-
-  /* RIGHT — stamp */
-  .nf-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1rem;
-    padding-top: 1rem;
-  }
-  .nf-stamp {
-    width: clamp(240px, 30vw, 360px);
-    height: clamp(240px, 30vw, 360px);
-    transform: rotate(-4deg);
-    filter: drop-shadow(0 8px 22px rgba(0,0,0,0.18));
-    animation: nf-stamp-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  }
-  .nf-stamp svg { width: 100%; height: 100%; display: block; }
-  .nf-stamp-note {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.95rem;
-    color: var(--muted);
-    transform: rotate(-2deg);
-    padding-right: 0.75rem;
-  }
-
-  @keyframes nf-stamp-in {
-    0%   { transform: rotate(-22deg) scale(0.4); opacity: 0; }
-    60%  { transform: rotate(-1deg) scale(1.05); opacity: 1; }
-    100% { transform: rotate(-4deg) scale(1); opacity: 1; }
-  }
-
-  @media (max-width: 880px) {
-    .nf-grid { grid-template-columns: 1fr; }
-    .nf-right { align-items: flex-start; }
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nf-top { flex-wrap: wrap; gap: 0.5rem 1rem; }
+    .nf-top-tag { flex-basis: 100%; order: 3; text-align: left; }
+    .nf-word { font-size: clamp(5rem, 46vw, 12rem); }
+    .nf-caption { flex-wrap: wrap; gap: 0.5rem; }
+    .nf-caption-rule { flex-basis: 100%; }
+    .nf-belt { grid-template-columns: 1fr; align-items: start; }
+    .nf-actions { justify-self: start; }
+    .nf-index ol { grid-template-columns: 1fr; }
   }
 </style>

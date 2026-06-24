@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────
-   FONT FACES — local woff2 + Google Fonts serif
+   FONT FACES — local woff2 (display + sans)
    ───────────────────────────────────────────── */
 @font-face {
   font-family: 'Syne';
@@ -31,69 +31,63 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ─────────────────────────────────────────────
    DESIGN TOKENS
    ───────────────────────────────────────────── */
 @theme {
-  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+  /* Space Grotesk = headings (sharp/technical); Syne reserved for the SNX wordmark */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: 'Syne', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* ── Light: aged paper / ink-pen / marker ── */
-:root {
-  --bg: #EFEAD8;            /* aged manila paper */
-  --bg-alt: #E5DFCB;        /* darker fold */
-  --bg-deep: #16141C;
-  --ink: #14131A;
-  --ink-2: #3A3947;
-  --muted: #7A766A;
-  --border: #C9C1AA;
-  --border-strong: #A89E83;
-
-  --accent: #C9311E;        /* red marker / stamp ink */
-  --accent-deep: #9D2818;
-  --accent-tint: #F2C9C0;
-  --accent-soft: rgba(201, 49, 30, 0.10);
-
-  --pen: #1B3A6B;           /* ballpoint blue */
-  --pen-soft: rgba(27, 58, 107, 0.18);
-  --highlight: #F4D34A;     /* highlighter yellow */
-  --highlight-soft: #F4D34A55;
-  --moss: #4A6B3A;          /* sketchbook green */
-  --tape: #E8DDA0;          /* masking-tape yellow */
-  --tape-edge: #B8A570;
-  --aged-1: #A89882;
-  --aged-2: #5C5446;
-}
-
-/* ── Dark: deep ink / bone ── */
+/* ── All-black tankr-style canvas (single mode) ── */
+:root,
 .dark {
-  --bg: #16141C;
-  --bg-alt: #1F1D27;
-  --bg-deep: #0A090E;
-  --ink: #F0EBE0;
-  --ink-2: #C4BFB4;
-  --muted: #84807A;
-  --border: #2C2935;
-  --border-strong: #44404D;
+  --bg: #050506;          /* page background — matches hero */
+  --bg-alt: #111114;      /* raised panels / row hover */
+  --bg-deep: #000000;
+  --ink: #F4F5F7;
+  --ink-2: #9097A0;       /* secondary text */
+  --muted: #868D96;       /* mono labels / captions — ~4.7:1 on --bg for WCAG AA */
+  --border: #1E2024;      /* hairline dividers */
+  --border-strong: #2C2F35;
 
-  --accent: #E64A2E;
-  --accent-deep: #FF6A47;
-  --accent-tint: #3A1F15;
-  --accent-soft: rgba(230, 74, 46, 0.14);
+  --accent: #5B86FF;      /* electric blue */
+  --accent-deep: #87A5FF;
+  --accent-tint: #16203B;
+  --accent-soft: rgba(91, 134, 255, 0.14);
 
-  --pen: #6BA3FF;
-  --pen-soft: rgba(107, 163, 255, 0.18);
-  --highlight: #C9B854;
-  --highlight-soft: #C9B85455;
-  --moss: #7FAA68;
-  --tape: #6E5F30;
-  --tape-edge: #4A3F1E;
-  --aged-1: #6E6552;
-  --aged-2: #B5AB99;
+  /* dotted-grid dot colour (shared by sections) */
+  --dot: rgba(255, 255, 255, 0.06);
+
+  /* legacy aliases — remapped to the dark system */
+  --pen: #5B86FF;
+  --pen-soft: rgba(91, 134, 255, 0.18);
+  --highlight: #16203B;
+  --highlight-soft: rgba(91, 134, 255, 0.16);
+  --moss: #C2C6CC;
+  --tape: #111114;
+  --tape-edge: #2C2F35;
+  --aged-1: #2C2F35;
+  --aged-2: #C2C6CC;
 }
 
 /* ─────────────────────────────────────────────
@@ -134,12 +128,12 @@ h1 { font-size: clamp(3.25rem, 9vw, 8.5rem); }
 h2 { font-size: clamp(2.25rem, 5.5vw, 4.5rem); }
 h3 { font-size: clamp(1.5rem, 2.6vw, 2.25rem); letter-spacing: -0.025em; }
 
-/* The signature: editorial serif italic */
+/* Emphasis phrase — clean display, accent-toned (was editorial serif) */
 .serif-italic {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.015em;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .subheading {
@@ -184,13 +178,13 @@ h3 { font-size: clamp(1.5rem, 2.6vw, 2.25rem); letter-spacing: -0.025em; }
 }
 
 .lede {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
+  font-style: normal;
   font-weight: 400;
-  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-  line-height: 1.45;
+  font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+  line-height: 1.5;
   color: var(--ink-2);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 .numeral {
@@ -235,9 +229,9 @@ a {
   font-weight: 500;
   font-size: 0.875rem;
   letter-spacing: 0.01em;
-  border-radius: 999px;
+  border-radius: 8px;
   border: 1px solid var(--ink);
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
 }
 .btn-primary:hover {
@@ -246,7 +240,7 @@ a {
   color: #fff;
 }
 .btn-primary svg { transition: transform 0.3s ease; }
-.btn-primary:hover svg { transform: translateX(4px) rotate(-45deg); }
+.btn-primary:hover svg { transform: translateX(4px); }
 
 .btn-ghost {
   display: inline-flex;
@@ -259,15 +253,14 @@ a {
   font-weight: 500;
   font-size: 0.875rem;
   letter-spacing: 0.01em;
-  border-radius: 999px;
+  border-radius: 8px;
   background: transparent;
   transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
 }
 .btn-ghost:hover {
-  border-color: var(--ink);
-  background-color: var(--ink);
-  color: var(--bg);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* ─────────────────────────────────────────────
@@ -306,222 +299,130 @@ a {
 }
 
 /* ─────────────────────────────────────────────
-   PAPER TEXTURE — coarser, with fibre grain
+   TEXTURE — disabled (clean studio surface)
    ───────────────────────────────────────────── */
-.grain::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: 0.18;
-  mix-blend-mode: multiply;
-  background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.32  0 0 0 0 0.28  0 0 0 0 0.18  0 0 0 0.85 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 320px 320px;
-}
-.dark .grain::before {
-  opacity: 0.22;
-  mix-blend-mode: screen;
-}
-
-/* Subtle paper "fibre" grain — a second tighter layer */
-.grain::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9997;
-  pointer-events: none;
-  opacity: 0.05;
-  mix-blend-mode: multiply;
-  background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.18  0 0 0 0 0.14  0 0 0 0 0.08  0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 600px 600px;
-}
-.dark .grain::after { opacity: 0.08; mix-blend-mode: screen; }
+.grain::before,
+.grain::after { content: none; display: none; }
 
 /* ─────────────────────────────────────────────
-   HANDCRAFT UTILITIES — stamp, tape, mark, scribble
+   TAG / LABEL UTILITIES — clean studio equivalents
+   (class names kept; handcraft look removed)
    ───────────────────────────────────────────── */
 
-/* Rubber stamp: monospace, tilted, with subtle ink-bleed */
+/* Was a tilted rubber stamp → now a crisp mono tag */
 .stamp {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.45rem 0.75rem;
+  padding: 0.4rem 0.7rem;
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  border: 1.5px solid var(--accent);
-  border-radius: 2px;
-  background: transparent;
-  transform: rotate(-2.5deg);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--accent-soft);
+  transform: none;
   position: relative;
-  filter: contrast(1.05);
 }
-.stamp::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border: 1.5px solid var(--accent);
-  border-radius: 2px;
-  opacity: 0.35;
-  transform: translate(1px, 1.5px) rotate(0.5deg);
-  pointer-events: none;
-}
-.stamp.stamp-pen { color: var(--pen); border-color: var(--pen); }
-.stamp.stamp-pen::before { border-color: var(--pen); }
-.stamp.stamp-ink { color: var(--ink); border-color: var(--ink); }
-.stamp.stamp-ink::before { border-color: var(--ink); }
+.stamp::before { content: none; }
+.stamp.stamp-pen { color: var(--accent); border-color: var(--accent); }
+.stamp.stamp-ink { color: var(--ink); border-color: var(--border-strong); background: transparent; }
 
-/* Masking tape: rotated, semi-translucent, soft shadow */
+/* Was masking tape → now a clean chip */
 .tape {
   display: inline-block;
-  padding: 0.4rem 0.95rem;
+  padding: 0.4rem 0.85rem;
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 0.7rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.18), transparent),
-    var(--tape);
-  border-left: 1px dashed var(--tape-edge);
-  border-right: 1px dashed var(--tape-edge);
-  box-shadow:
-    0 1px 0 rgba(0,0,0,0.05),
-    0 4px 10px rgba(0,0,0,0.10);
-  transform: rotate(-1.6deg);
+  color: var(--ink-2);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: none;
+  transform: none;
   position: relative;
   z-index: 1;
 }
-.tape.tape-tilt-r { transform: rotate(2deg); }
-.tape.tape-tilt-l { transform: rotate(-3deg); }
+.tape.tape-tilt-r,
+.tape.tape-tilt-l { transform: none; }
 
-/* Highlighter mark — yellow marker swipe behind text */
-.marker {
-  background:
-    linear-gradient(105deg, transparent 1%, var(--highlight-soft) 2.5%, var(--highlight-soft) 96%, transparent 99%);
-  background-repeat: no-repeat;
-  background-size: 100% 60%;
-  background-position: 0 88%;
-  padding: 0 0.1em 0.05em;
-}
+/* Was a highlighter swipe → subtle accent-tint mark */
+.marker,
 .marker-strong {
-  background:
-    linear-gradient(105deg, transparent 1%, var(--highlight) 3%, var(--highlight) 96%, transparent 99%);
+  background: linear-gradient(transparent 62%, var(--accent-tint) 62%);
   background-repeat: no-repeat;
-  background-size: 100% 50%;
-  background-position: 0 84%;
-  padding: 0 0.1em 0.05em;
+  padding: 0 0.08em;
 }
 
-/* Scribble underline — wavy hand-drawn underline as SVG bg */
-.scribble {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M2 8 Q 25 2, 50 7 T 100 7 T 150 7 T 198 7' fill='none' stroke='%23C9311E' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+/* Was a hand-drawn scribble → clean accent underline */
+.scribble,
+.scribble-pen {
+  background-image: linear-gradient(var(--accent), var(--accent));
   background-repeat: no-repeat;
   background-position: 0 100%;
-  background-size: 100% 0.32em;
-  padding-bottom: 0.18em;
-}
-.scribble-pen {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M2 8 Q 25 2, 50 7 T 100 7 T 150 7 T 198 7' fill='none' stroke='%231B3A6B' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 100% 2px;
+  padding-bottom: 0.12em;
 }
 
-/* Hand-drawn ink circle around text */
+/* Was a hand-drawn ink circle → emphasis only, no circle */
 .ink-circle {
   display: inline-block;
   position: relative;
-  padding: 0.05em 0.3em;
+  padding: 0;
 }
-.ink-circle::before {
-  content: '';
-  position: absolute;
-  inset: -0.18em -0.4em -0.22em -0.45em;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80' preserveAspectRatio='none'%3E%3Cpath d='M28 14 C 70 4, 160 6, 200 18 C 218 28, 214 56, 188 66 C 130 78, 50 76, 18 60 C 2 50, 6 24, 28 14 Z' fill='none' stroke='%23C9311E' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  pointer-events: none;
-  transform: rotate(-1deg);
-}
+.ink-circle::before { content: none; }
 
-/* Hand-drawn strikethrough */
+/* Was a wavy hand strike → clean line-through */
 .ink-strike {
   position: relative;
   color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
 }
-.ink-strike::after {
-  content: '';
-  position: absolute;
-  left: -3%;
-  right: -3%;
-  top: 55%;
-  height: 0.16em;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 6' preserveAspectRatio='none'%3E%3Cpath d='M2 3 Q 50 0, 100 3 T 198 3' fill='none' stroke='%23C9311E' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  transform: rotate(-1.2deg);
-}
+.ink-strike::after { content: none; }
 
-/* Hand-drawn dashed rule */
+/* Was a deckle/wavy rule → straight hairline */
 .deckle-rule {
-  height: 8px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 8' preserveAspectRatio='none'%3E%3Cpath d='M2 4 Q 50 0, 100 5 T 200 4 T 300 5 T 400 4 T 500 5 T 598 4' fill='none' stroke='%2314131A' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  height: 1px;
+  background: var(--border);
   border: 0;
   margin: 0;
 }
 
-/* Receipt-style dashed border (use for cards / blocks) */
+/* Was a torn receipt → clean bordered card */
 .receipt {
-  border: 1.5px dashed var(--border-strong);
-  background:
-    repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(0,0,0,0.025) 24px, rgba(0,0,0,0.025) 25px),
-    var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
   position: relative;
 }
 .receipt::before,
-.receipt::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0;
-  height: 8px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L5 8 L10 0 L15 8 L20 0 L25 8 L30 0 L35 8 L40 0 L45 8 L50 0 L55 8 L60 0 L65 8 L70 0 L75 8 L80 0 L85 8 L90 0 L95 8 L100 0 Z' fill='%23EFEAD8'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-size: 14px 8px;
-  pointer-events: none;
-}
-.receipt::before { top: -1px; transform: scaleY(-1); }
-.receipt::after { bottom: -1px; }
+.receipt::after { content: none; }
 
-/* Tilt utilities — feel placed by hand */
-.tilt-l { transform: rotate(-1.5deg); }
-.tilt-r { transform: rotate(1.5deg); }
-.tilt-l-2 { transform: rotate(-3deg); }
-.tilt-r-2 { transform: rotate(3deg); }
+/* Tilt utilities → neutralised (kept as no-ops) */
+.tilt-l, .tilt-r, .tilt-l-2, .tilt-r-2 { transform: none; }
 
-/* Margin/footnote text — italic serif aside */
+/* Margin/footnote aside — clean */
 .margin-note {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
+  font-style: normal;
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--ink-2);
   position: relative;
   padding-left: 1rem;
-  border-left: 1.5px solid var(--accent);
+  border-left: 2px solid var(--accent);
 }
 
-/* "Drawn by hand" small ornament — rotating */
-.spin-mark { animation: spinSlow 22s linear infinite; transform-origin: center; }
+/* Ornament spin → static (kept as no-op) */
+.spin-mark { animation: none; transform-origin: center; }
 
 /* ─────────────────────────────────────────────
    LAYOUT
@@ -567,7 +468,7 @@ a {
 .text-muted { color: var(--muted); }
 .bg-surface { background-color: var(--bg); }
 .bg-surface-alt { background-color: var(--bg-alt); }
-.bg-deep { background-color: var(--bg-deep); color: var(--bg); }
+.bg-deep { background-color: var(--bg-deep); color: #F4F5F7; }
 .border-subtle { border-color: var(--border); }
 
 .divider {
@@ -585,12 +486,10 @@ a {
 .hairline-top { border-top: 1px solid var(--border); }
 .hairline-bottom { border-bottom: 1px solid var(--border); }
 
-/* Highlight-mark for words */
+/* Highlight-mark for words — subtle accent tint */
 .mark {
-  background-image: linear-gradient(120deg, var(--accent-tint) 0%, var(--accent-tint) 100%);
+  background-image: linear-gradient(transparent 60%, var(--accent-tint) 60%);
   background-repeat: no-repeat;
-  background-size: 100% 38%;
-  background-position: 0 88%;
   padding: 0 0.05em;
 }
 
@@ -598,8 +497,8 @@ a {
    SELECTION + SCROLLBAR
    ───────────────────────────────────────────── */
 ::selection {
-  background-color: var(--ink);
-  color: var(--bg);
+  background-color: var(--accent);
+  color: #fff;
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -741,13 +640,12 @@ a {
 }
 
 /* ─────────────────────────────────────────────
-   ASTERISK / ORNAMENTS
+   ASTERISK / ORNAMENTS — static
    ───────────────────────────────────────────── */
 .asterisk {
   display: inline-block;
   color: var(--accent);
   font-family: var(--font-display);
-  animation: spinSlow 12s linear infinite;
 }
 
 .divider-asterisk {
@@ -765,7 +663,7 @@ a {
 }
 
 /* ─────────────────────────────────────────────
-   HOVER MAGNETIC HINT (cursor)
+   HOVER HINT
    ───────────────────────────────────────────── */
 .hoverable {
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);

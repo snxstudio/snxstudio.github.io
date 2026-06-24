@@ -12,10 +12,10 @@ const cases = [
     role: 'Founding architect &amp; engineer',
     challenge: 'A growing freight forwarder still ran the world\'s most expensive cargo on email threads and spreadsheets. Quoting took days, document handling took longer, and every customer felt it.',
     approach: 'An AI-native platform: agentic quoting that pulls live carrier data and explains its work, document classification with prompt-cached pipelines, multi-tenant operations console, and SOC2-shaped infra from day one.',
-    result: 'Quoting cycles dropped by 14×. 92% of inbound shipping documents are now classified end-to-end without a human. The platform now powers daily ops for a growing book of enterprise customers.',
+    result: 'Quoting that used to take days now takes seconds, and most inbound shipping documents are classified end-to-end without a human. The platform now powers daily ops for a growing book of enterprise customers.',
     metrics: [
-      { value: '14×', label: 'Faster quoting cycle' },
-      { value: '92%', label: 'OCR-to-shipment automation' },
+      { value: 'Hours→sec', label: 'Quoting turnaround' },
+      { value: 'Hands-off', label: 'Document classification' },
       { value: 'SOC2', label: 'Compliance in flight' },
     ],
     stack: ['Anthropic SDK', 'Agent SDK', 'NestJS', 'Next.js', 'PostgreSQL', 'AWS'],
@@ -47,7 +47,7 @@ const cases = [
     result: 'Adopted into commercial logistics platforms across the world. Continues to be maintained — the open-source backbone of the studio\'s logistics work.',
     metrics: [
       { value: 'OSS', label: 'MIT-licensed, public NPM' },
-      { value: '60+', label: 'Production integrations' },
+      { value: 'Dozens', label: 'Production integrations' },
       { value: '< 5ms', label: 'Median route compute' },
     ],
     stack: ['TypeScript', 'GeoJSON', 'Dijkstra', 'NPM', 'GitHub Actions'],
@@ -61,9 +61,9 @@ const cases = [
     role: 'Co-author &amp; systems engineer',
     challenge: 'Small-holder farms could not justify the cost of conventional precision-agriculture stacks, but were exposed to climate volatility that the larger farms had instruments to ride out.',
     approach: 'A LoRa-powered sensor mesh — soil moisture, micro-climate, irrigation status — with a low-bandwidth dashboard for regional advisors who were the actual decision-makers, not the farmers.',
-    result: 'Pilot reduced water use by ~38% across participating farms. The work led to a published research paper and influenced the design of larger agritech rollouts.',
+    result: 'The pilot cut water use by roughly a third across participating farms. The work led to a published research paper and influenced the design of larger agritech rollouts.',
     metrics: [
-      { value: '38%', label: 'Water-use reduction' },
+      { value: '~⅓', label: 'Less water used' },
       { value: 'LoRa', label: 'Low-power mesh' },
       { value: 'Paper', label: 'Published research' },
     ],
@@ -89,27 +89,27 @@ const cases = [
 
 const oss = [
   {
-    name: 'searoute-ts',
-    desc: 'Shortest sea-route between any two coordinates on Earth. MIT, production-grade.',
+    name: 'mcp-elements/ui',
+    desc: 'Copy-paste UI components for AI apps — 38 across React, Vue & Angular, including MCP-native primitives. MIT.',
     lang: 'TypeScript',
-    url: 'https://github.com/mayurrawte/searoute-ts',
+    url: 'https://github.com/mcp-elements/ui',
+  },
+  {
+    name: 'teamsly',
+    desc: 'Keyboard-first Microsoft Teams client with AI summaries and an MCP server for Claude. Self-hostable, AGPL-3.0.',
+    lang: 'TypeScript',
+    url: 'https://teamsly.app/',
   },
   {
     name: 'lit-pigeon',
     desc: 'Drag & drop email editor as web components. Exports clean MJML and HTML. MIT.',
     lang: 'TypeScript',
-    url: 'https://wearesnx.studio/lit-pigeon/',
-  },
-  {
-    name: 'github-angular-actions',
-    desc: 'GitHub Action that pre-installs Angular CLI for fast CI builds.',
-    lang: 'TypeScript',
-    url: 'https://github.com/mayurrawte/github-angular-actions',
+    url: 'https://lit-pigeon.wearesnx.studio/',
   },
 ];
 ---
 
-<Layout title="Work — SNX Studio" description="Selected case studies and open-source contributions. AI freight, smart energy IoT, maritime routing, agritech sensors, last-mile cargo.">
+<Layout title="Work — SNX Studio" description="Selected case studies and open-source contributions. AI freight, smart energy IoT, maritime routing, agritech sensors, last-mile cargo." keywords="SNX Studio work, case studies, AI freight platform, logistics intelligence, smart energy IoT, maritime routing, searoute-ts, agritech sensors, last-mile delivery, portfolio">
   <Nav />
   <main>
     <!-- Hero -->
@@ -118,7 +118,7 @@ const oss = [
         <span class="label label-mark animate-fade-in-up">Selected work</span>
         <h1 class="page-h1 animate-fade-in-up delay-200">
           Things that<br/>
-          <span class="serif-italic accent">actually</span> shipped.
+          <span class="accent">actually</span> shipped.
         </h1>
         <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
           A working studio doesn't get the luxury of vapourware. Every project below ran in
@@ -137,7 +137,7 @@ const oss = [
               <div class="case-head-meta">
                 <span class="case-sector">{c.sector}</span>
                 <span class="case-year">{c.year}</span>
-                <span class="case-role serif-italic" set:html={`— ${c.role}`}></span>
+                <span class="case-role" set:html={c.role}></span>
               </div>
             </header>
 
@@ -195,7 +195,7 @@ const oss = [
         <header class="oss-header">
           <span class="label label-mark">Open source</span>
           <h2 class="oss-h2">
-            Tools we keep <span class="serif-italic accent">in the open.</span>
+            Tools we keep <span class="accent">in the open.</span>
           </h2>
         </header>
 
@@ -271,8 +271,8 @@ const oss = [
   .case-role {
     text-transform: none;
     letter-spacing: 0;
-    font-family: var(--font-serif);
-    font-size: 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
     color: var(--ink-2);
   }
 
@@ -340,7 +340,7 @@ const oss = [
     flex-direction: column;
     gap: 0.25rem;
     padding-bottom: 1.25rem;
-    border-bottom: 1px dashed var(--border);
+    border-bottom: 1px solid var(--border);
   }
   .case-metrics li:last-child { border-bottom: none; padding-bottom: 0; }
   .case-metric-val {

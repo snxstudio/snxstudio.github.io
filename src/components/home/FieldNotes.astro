@@ -1,48 +1,35 @@
 ---
-import Mark from '../Marks.astro';
+import { getCollection } from 'astro:content';
 
-const notes = [
-  {
-    num: 'N°01',
-    kicker: 'A solution document',
-    title: 'IRCTC: diagnosing Tatkal and designing what should replace it',
-    excerpt: 'The 10 AM Tatkal rush is the load-bearing wall — every other failure descends from it. A two-track lottery, a Booking Reputation Score, and an atomic booking pipeline that ends "money debited, no ticket". 12 pages, end-to-end.',
-    tags: ['UX teardown', 'Public systems', 'Queueing'],
-    read: '30 min',
-    status: 'Published',
-  },
-  {
-    num: 'N°02',
-    kicker: 'A migration story',
-    title: 'Why we ditched Python for Go',
-    excerpt: 'A weekend rewrite of a hot FastAPI endpoint cut p99 latency 10×, dropped infrastructure cost by 68%, and made 3 AM pages stop. The honest story — including the three weeks of velocity we lost teaching the team a new language.',
-    tags: ['Go', 'FastAPI', 'Performance'],
-    read: '9 min',
-    status: 'Published',
-  },
-  {
-    num: 'N°03',
-    kicker: 'A note on AI',
-    title: 'AI isn\'t here to replace developers — it\'s here to replace the stuff we secretly hate',
-    excerpt: 'The most expensive bug we never shipped wasn\'t in the code — it was in how we worked. A note on PR review queues, the cost of context-switching, and the small AI tool that bought a team back its senior engineering hours.',
-    tags: ['AI', 'Engineering ops', 'Open source'],
-    read: '7 min',
-    status: 'Published',
-  },
-];
+// Sourced from the blog collection (single source of truth) so these
+// cards never drift from the real posts. Featured first, then newest.
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const featured = posts.find(p => p.data.featured);
+const ordered = featured ? [featured, ...posts.filter(p => p !== featured)] : posts;
+
+const notes = ordered.slice(0, 3).map((p, i) => ({
+  num: String(i + 1).padStart(2, '0'),
+  kicker: p.data.category,
+  title: p.data.title,
+  excerpt: p.data.description,
+  tags: [p.data.category],
+  read: p.data.readTime ?? '',
+  status: 'Published',
+  href: `/blog/${p.id}`,
+}));
 ---
 
 <section class="notes section" id="field-notes">
   <div class="container-wide">
     <header class="notes-header">
       <div>
-        <span class="tape tape-tilt-l">— field notes —</span>
+        <span class="label label-mark">Field notes</span>
         <h2 class="notes-h2">
           Theses, teardowns,<br/>
-          <span class="notes-circled">
-            <span class="serif-italic">and other opinions</span>
-            <span class="notes-mark"><Mark name="ink-circle" /></span>
-          </span><br/>
+          <span class="notes-accent">and other opinions</span><br/>
           you didn't ask for.
         </h2>
       </div>
@@ -55,10 +42,10 @@ const notes = [
 
     <div class="notes-grid">
       {notes.map((n, i) => (
-        <article class={`note-card reveal ${i === 0 ? 'note-card-feature' : ''}`} style={`transition-delay: ${i * 80}ms`}>
+        <a href={n.href} class={`note-card reveal ${i === 0 ? 'note-card-feature' : ''}`} style={`transition-delay: ${i * 80}ms`}>
           <header class="note-card-head">
-            <span class="note-num numeral">{n.num}</span>
-            <span class="note-kicker serif-italic">{n.kicker}</span>
+            <span class="note-num">{n.num}</span>
+            <span class="note-kicker">{n.kicker}</span>
           </header>
 
           <h3 class="note-title">{n.title}</h3>
@@ -76,7 +63,7 @@ const notes = [
               </span>
             </div>
           </footer>
-        </article>
+        </a>
       ))}
     </div>
 
@@ -110,20 +97,10 @@ const notes = [
     margin-top: 1.25rem;
   }
   .notes-h2 .accent { color: var(--accent); }
-  .notes-circled {
-    position: relative;
-    display: inline-block;
-    padding: 0 0.18em;
-  }
-  .notes-circled .serif-italic { color: var(--accent); }
-  .notes-mark {
-    position: absolute;
-    inset: -0.18em -0.4em -0.22em -0.45em;
-    color: var(--accent);
-    transform: rotate(-1.5deg);
-  }
+  .notes-accent { color: var(--accent); }
   .notes-sub {
     max-width: 460px;
+    font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.7;
     color: var(--ink-2);
@@ -143,9 +120,12 @@ const notes = [
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    transition: background-color 0.4s ease;
+    transition: border-color 0.25s ease, transform 0.25s ease;
   }
-  .note-card:hover { background: var(--bg); }
+  .note-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
   .note-card-feature { background: var(--bg); }
   .note-card-feature .note-title {
     font-size: clamp(1.625rem, 2.5vw, 2.25rem);
@@ -156,16 +136,22 @@ const notes = [
     align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
-    border-bottom: 1px dashed var(--border);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 1rem;
     margin-bottom: 0.5rem;
   }
   .note-num {
-    font-size: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--accent);
   }
   .note-kicker {
-    font-size: 1.05rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--muted);
   }
 
@@ -180,6 +166,7 @@ const notes = [
   }
 
   .note-excerpt {
+    font-family: var(--font-sans);
     font-size: 0.9375rem;
     line-height: 1.65;
     color: var(--ink-2);
@@ -191,7 +178,7 @@ const notes = [
     flex-direction: column;
     gap: 0.75rem;
     padding-top: 1rem;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
   }
   .note-tags {
     list-style: none;
@@ -204,19 +191,19 @@ const notes = [
   .note-tags li {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
     padding: 0.3rem 0.6rem;
     border: 1px solid var(--border);
-    border-radius: 999px;
+    border-radius: 0;
   }
   .note-meta {
     display: flex;
     justify-content: space-between;
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
   }
@@ -229,9 +216,8 @@ const notes = [
   .status-pulse {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--accent);
-    box-shadow: 0 0 0 0 var(--accent-soft);
     animation: pulseDot 2.4s ease-out infinite;
   }
 
@@ -240,16 +226,22 @@ const notes = [
     display: inline-flex;
     align-items: center;
     gap: 0.625rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.125rem, 1.6vw, 1.4rem);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--ink);
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 0.4rem;
-    transition: color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid var(--border-strong);
+    padding: 0.75rem 1.25rem;
+    transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
   }
-  .notes-link:hover { color: var(--accent); border-color: var(--accent); }
-  .notes-link svg { transition: transform 0.3s ease; }
+  .notes-link:hover {
+    color: #050506;
+    background-color: var(--accent);
+    border-color: var(--accent);
+  }
+  .notes-link svg { transition: transform 0.25s ease; }
   .notes-link:hover svg { transform: translate(3px, -3px); }
 
   @media (max-width: 1024px) {

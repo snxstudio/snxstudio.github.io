@@ -1,11 +1,9 @@
 ---
 import Mark from '../Marks.astro';
-import ProjectSketch from '../ProjectSketch.astro';
 
 const projects = [
   {
     idx: '01',
-    sketch: 'logistics',
     title: 'Logistics Intelligence Platform',
     sector: 'Freight · AI · Multi-tenant SaaS',
     year: '2024 — Now',
@@ -13,17 +11,15 @@ const projects = [
     stamp: 'In production',
     summary: 'An AI-native freight forwarding platform replacing decades-old TMS workflows. Quote in seconds, classify documents in milliseconds, automate the back-office.',
     metrics: [
-      { value: '14×', label: 'Faster quoting cycle' },
-      { value: '92%', label: 'OCR-to-shipment automation' },
+      { value: 'Hours→sec', label: 'Quoting turnaround' },
+      { value: 'Hands-off', label: 'Document classification' },
       { value: 'SOC2', label: 'In flight, day one' },
     ],
     stack: ['Anthropic SDK', 'NestJS', 'Next.js', 'PostgreSQL', 'AWS'],
     link: '/work',
-    tilt: -0.6,
   },
   {
     idx: '02',
-    sketch: 'meter',
     title: 'Smart Energy Telemetry',
     sector: 'Industrial IoT · Embedded · Research',
     year: '2017 — 2019',
@@ -37,11 +33,9 @@ const projects = [
     ],
     stack: ['Embedded C', 'Raspberry Pi', 'MQTT', 'TimescaleDB', 'Angular'],
     link: '/work',
-    tilt: 0.5,
   },
   {
     idx: '03',
-    sketch: 'searoute',
     title: 'Maritime Routing Engine',
     sector: 'Open Source · Geo · TypeScript',
     year: '2023 — Now',
@@ -50,17 +44,15 @@ const projects = [
     summary: 'searoute-ts — an open-source library that computes the shortest realistic sea route between any two points on Earth. Trusted by logistics teams in production.',
     metrics: [
       { value: 'OSS', label: 'MIT-licensed, public NPM' },
-      { value: '60+', label: 'Production integrations' },
+      { value: 'Dozens', label: 'Production integrations' },
       { value: '< 5ms', label: 'Median route compute' },
     ],
     stack: ['TypeScript', 'GeoJSON', 'Dijkstra', 'NPM', 'GitHub Actions'],
     link: 'https://github.com/mayurrawte/searoute-ts',
     external: true,
-    tilt: -0.4,
   },
   {
     idx: '04',
-    sketch: 'prompt',
     title: 'Promptbucket',
     sector: 'Open Source · AI · Web app',
     year: '2025 — Now',
@@ -75,11 +67,9 @@ const projects = [
     stack: ['Next.js', 'Anthropic SDK', 'Tailwind', 'Postgres', 'Vercel'],
     link: 'https://promptbucket.co',
     external: true,
-    tilt: 0.6,
   },
   {
     idx: '05',
-    sketch: 'agritech',
     title: 'Agritech Sensor Mesh',
     sector: 'IoT · AgriTech · Research',
     year: '2018',
@@ -87,17 +77,15 @@ const projects = [
     stamp: 'Field-trialled',
     summary: 'Soil-moisture and micro-climate sensor mesh for small-holder farms, paired with a low-bandwidth dashboard for regional advisors. Underlying research published.',
     metrics: [
-      { value: '38%', label: 'Water-use reduction' },
+      { value: '~⅓', label: 'Less water used' },
       { value: 'LoRa', label: 'Low-power mesh' },
       { value: 'Paper', label: 'Published research' },
     ],
     stack: ['Arduino', 'LoRaWAN', 'Node.js', 'InfluxDB', 'Grafana'],
     link: '/work',
-    tilt: -0.5,
   },
   {
     idx: '06',
-    sketch: 'lastmile',
     title: 'Last-Mile Cargo OS',
     sector: 'Marketplace · Logistics · Mission',
     year: '2019 — 2021',
@@ -111,7 +99,6 @@ const projects = [
     ],
     stack: ['Node.js', 'Angular', 'Firebase', 'GCP', 'Twilio'],
     link: '/work',
-    tilt: 0.4,
   },
 ];
 ---
@@ -119,14 +106,11 @@ const projects = [
 <section class="work section bg-surface-alt" id="selected-work">
   <div class="container-wide">
     <header class="work-header">
-      <span class="tape tape-tilt-l">— from the archive —</span>
+      <span class="label label-mark">Selected work</span>
       <h2 class="work-h2">
         Things that
-        <span class="work-h2-circled">
-          <span class="serif-italic">actually</span>
-          <span class="work-h2-mark"><Mark name="ink-circle" /></span>
-        </span>
-        shipped<span class="work-h2-dot">·</span>
+        <span class="work-h2-accent">actually</span>
+        shipped<span class="work-h2-dot">.</span>
       </h2>
       <p class="work-sub">
         A working studio doesn't get the luxury of vapourware. Every project below ran in
@@ -134,32 +118,17 @@ const projects = [
       </p>
     </header>
 
-    <p class="work-hint serif-italic">
-      <Mark name="arrow-r" class="work-hint-arrow" />
-      <span>Drag a card. Throw it. The studio cleans up after itself.</span>
-    </p>
-
     <ol class="work-list" role="list" id="work-list">
-      {projects.map((p, i) => (
-        <li class="work-row reveal" style={`--tilt:${p.tilt}deg`} data-draggable>
+      {projects.map((p) => (
+        <li class="work-row reveal">
           <article class="work-card">
-            <!-- Drag handle / grab bar -->
-            <span class="work-grab" aria-hidden="true" data-grab>
-              <span class="grab-dot"></span>
-              <span class="grab-dot"></span>
-              <span class="grab-dot"></span>
-              <span class="grab-dot"></span>
-              <span class="grab-dot"></span>
-              <span class="grab-dot"></span>
-            </span>
-
             <a
               href={p.link}
               target={p.external ? '_blank' : undefined}
               rel={p.external ? 'noopener noreferrer' : undefined}
               class="work-link"
             >
-              <!-- Top metadata row, like a folder tab -->
+              <!-- Top metadata row -->
               <div class="work-row-top">
                 <span class="work-folder-tab">
                   <span class="work-idx numeral">{p.idx}</span>
@@ -169,17 +138,12 @@ const projects = [
                 <span class="work-row-meta">
                   <span>{p.year}</span>
                   <span class="work-row-meta-dot">·</span>
-                  <span class="serif-italic">{p.role}</span>
+                  <span class="work-role">{p.role}</span>
                 </span>
               </div>
 
-              <!-- Two-column body: sketch + content -->
+              <!-- Body -->
               <div class="work-body">
-                <div class="work-sketch">
-                  <ProjectSketch name={p.sketch} />
-                  <span class="work-sketch-tag">— sketch · ledger —</span>
-                </div>
-
                 <div class="work-content">
                   <div class="work-title-row">
                     <h3 class="work-title">
@@ -196,7 +160,7 @@ const projects = [
                   <p class="work-summary">{p.summary}</p>
 
                   <div class="work-row-bottom">
-                    <ul class="work-metrics receipt-strip" role="list">
+                    <ul class="work-metrics" role="list">
                       {p.metrics.map(m => (
                         <li>
                           <span class="metric-val numeral">{m.value}</span>
@@ -218,7 +182,7 @@ const projects = [
 
     <footer class="work-footer reveal">
       <p class="work-footer-text">
-        <span class="serif-italic">More in the archive</span> — open-source repos,
+        <span class="work-footer-lead">More in the archive</span> — open-source repos,
         smaller commissions, and teardown essays.
       </p>
       <div class="work-footer-actions">
@@ -248,26 +212,8 @@ const projects = [
     color: var(--ink);
   }
   .work-h2-dot { color: var(--accent); }
-  .work-h2-circled {
-    position: relative;
-    display: inline-block;
-    padding: 0 0.18em;
-  }
-  .work-h2-circled .serif-italic {
-    color: var(--accent);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-  }
-  .work-h2-mark {
-    position: absolute;
-    inset: -0.18em -0.4em -0.22em -0.45em;
-    color: var(--accent);
-    transform: rotate(-1.5deg);
-  }
+  .work-h2-accent { color: var(--accent); }
   .work-sub {
-    font-family: var(--font-serif);
-    font-style: italic;
     font-size: clamp(1.125rem, 1.8vw, 1.4rem);
     line-height: 1.5;
     color: var(--ink-2);
@@ -281,96 +227,22 @@ const projects = [
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+    gap: clamp(1.25rem, 2.5vw, 2rem);
   }
 
-  .work-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 0 1.5rem;
-    padding: 0.45rem 0.85rem;
-    border: 1px dashed var(--border-strong);
-    border-radius: 999px;
-    background: var(--bg);
-    color: var(--ink-2);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.95rem;
-  }
-  .work-hint-arrow { color: var(--accent); width: 36px; height: 14px; }
-
-  .work-row {
-    position: relative;
-    transform: rotate(var(--tilt, 0deg));
-    transition:
-      transform 0.45s cubic-bezier(0.2, 0.85, 0.2, 1),
-      box-shadow 0.45s ease;
-    will-change: transform;
-  }
-  .work-row.dragging {
-    transition: none;
-    cursor: grabbing;
-    z-index: 50;
-  }
-  .work-row.settling {
-    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
+  .work-row { position: relative; }
 
   .work-card {
     position: relative;
-    background: var(--bg);
-    border: 1.5px solid var(--ink);
-    border-radius: 4px;
-    box-shadow: 0 4px 0 -2px var(--ink);
-    transition: box-shadow 0.4s ease;
-  }
-  .work-card::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 24px;
-    width: 96px;
-    height: 18px;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,0.18), transparent),
-      var(--tape);
-    border-left: 1px dashed var(--tape-edge);
-    border-right: 1px dashed var(--tape-edge);
-    transform: rotate(-3deg);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-    z-index: 2;
-    pointer-events: none;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .work-row:hover .work-card {
-    box-shadow: 0 14px 0 -2px var(--ink), 0 20px 36px rgba(0,0,0,0.14);
+    border-color: var(--accent);
+    transform: translateY(-3px);
   }
-
-  /* Grab handle — six dots in the top-right corner */
-  .work-grab {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    display: grid;
-    grid-template-columns: repeat(2, 4px);
-    gap: 4px;
-    padding: 8px;
-    background: var(--bg-alt);
-    border: 1px dashed var(--border-strong);
-    border-radius: 3px;
-    cursor: grab;
-    z-index: 5;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-  }
-  .work-grab:hover { background: var(--accent-tint); border-color: var(--accent); }
-  .work-grab:active, .work-row.dragging .work-grab { cursor: grabbing; background: var(--accent); border-color: var(--accent); }
-  .grab-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--ink);
-  }
-  .work-row.dragging .grab-dot { background: var(--bg); }
 
   .work-link {
     display: block;
@@ -378,53 +250,11 @@ const projects = [
     color: var(--ink);
   }
 
-  /* Two-column body */
-  .work-body {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
-    align-items: start;
-  }
-
-  /* Sketch panel */
-  .work-sketch {
-    position: relative;
-    aspect-ratio: 200 / 140;
-    background: var(--bg-alt);
-    border: 1px dashed var(--border-strong);
-    border-radius: 3px;
-    padding: 0.75rem;
-    color: var(--ink);
-    transform: rotate(-1deg);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-    overflow: hidden;
-  }
-  .work-sketch::before {
-    /* faint blueprint grid */
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(to right, rgba(20,19,26,0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(20,19,26,0.05) 1px, transparent 1px);
-    background-size: 16px 16px;
-    pointer-events: none;
-  }
-  .work-sketch-tag {
-    position: absolute;
-    bottom: 6px;
-    right: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .work-row:hover .work-sketch { color: var(--accent); }
-
+  /* Body */
+  .work-body { display: block; }
   .work-content { min-width: 0; }
 
-  /* Folder tab top */
+  /* Metadata top */
   .work-row-top {
     display: flex;
     justify-content: space-between;
@@ -432,7 +262,7 @@ const projects = [
     gap: 1rem;
     margin-bottom: 1.25rem;
     padding-bottom: 1rem;
-    border-bottom: 1px dashed var(--border-strong);
+    border-bottom: 1px solid var(--border);
   }
   .work-folder-tab {
     display: inline-flex;
@@ -464,12 +294,12 @@ const projects = [
     flex-wrap: wrap;
     justify-content: flex-end;
   }
-  .work-row-meta .serif-italic {
-    text-transform: none;
-    letter-spacing: 0;
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    color: var(--ink-2);
+  .work-role {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
   .work-row-meta-dot { color: var(--accent); }
 
@@ -514,7 +344,6 @@ const projects = [
     color: var(--ink-2);
     max-width: 760px;
     margin-bottom: 1.5rem;
-    font-family: var(--font-serif);
   }
 
   .work-row-bottom {
@@ -523,28 +352,28 @@ const projects = [
     gap: clamp(1rem, 3vw, 2.5rem);
     align-items: end;
     padding-top: 1.25rem;
-    border-top: 1px dashed var(--border-strong);
+    border-top: 1px solid var(--border);
   }
 
-  .receipt-strip {
+  .work-metrics {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
-    background: var(--bg-alt);
-    border: 1px dashed var(--border-strong);
-    border-radius: 3px;
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: 0;
   }
-  .receipt-strip li {
+  .work-metrics li {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
     padding: 0.85rem 1rem;
-    border-right: 1px dashed var(--border-strong);
+    border-right: 1px solid var(--border);
   }
-  .receipt-strip li:last-child { border-right: none; }
+  .work-metrics li:last-child { border-right: none; }
   .metric-val {
     font-size: clamp(1.375rem, 2.4vw, 1.875rem);
     color: var(--ink);
@@ -575,8 +404,8 @@ const projects = [
     text-transform: uppercase;
     color: var(--muted);
     padding: 0.3rem 0.6rem;
-    border: 1px solid var(--border-strong);
-    border-radius: 999px;
+    border: 1px solid var(--border);
+    border-radius: 0;
   }
 
   .work-footer {
@@ -592,18 +421,14 @@ const projects = [
     color: var(--ink-2);
     max-width: 460px;
   }
-  .work-footer-text .serif-italic {
+  .work-footer-lead {
     color: var(--ink);
-    font-size: 1.2em;
+    font-weight: 600;
   }
   .work-footer-actions {
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
-  }
-
-  @media (max-width: 1024px) {
-    .work-body { grid-template-columns: 160px 1fr; gap: 1.5rem; }
   }
 
   @media (max-width: 880px) {
@@ -612,139 +437,14 @@ const projects = [
       gap: 1.25rem;
     }
     .work-stack { justify-self: start; }
-    .work-row { transform: rotate(0deg); }
-    .work-body { grid-template-columns: 1fr; }
-    .work-sketch { max-width: 240px; }
-    .work-grab { display: none; }
   }
 
   @media (max-width: 560px) {
-    .receipt-strip { grid-template-columns: 1fr 1fr; }
-    .receipt-strip li:nth-child(2) { border-right: none; }
-    .receipt-strip li:last-child {
+    .work-metrics { grid-template-columns: 1fr 1fr; }
+    .work-metrics li:nth-child(2) { border-right: none; }
+    .work-metrics li:last-child {
       grid-column: 1 / -1;
-      border-top: 1px dashed var(--border-strong);
+      border-top: 1px solid var(--border);
     }
   }
 </style>
-
-<script>
-  // Drag physics — grab a card by its handle, drag it around, throw it.
-  // It rotates with horizontal velocity, then springs back to its original
-  // tilt (set in --tilt) when released. Pointer events only, no library.
-
-  type DragState = {
-    el: HTMLElement;
-    startX: number;
-    startY: number;
-    lastX: number;
-    lastY: number;
-    lastT: number;
-    vx: number;
-    vy: number;
-    baseTilt: number;
-    pointerId: number;
-  };
-
-  const list = document.getElementById('work-list');
-  if (list && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let active: DragState | null = null;
-
-    function readBaseTilt(el: HTMLElement): number {
-      const v = getComputedStyle(el).getPropertyValue('--tilt').trim();
-      const num = parseFloat(v);
-      return Number.isFinite(num) ? num : 0;
-    }
-
-    function applyTransform(el: HTMLElement, dx: number, dy: number, rot: number) {
-      el.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
-    }
-
-    list.addEventListener('pointerdown', (e) => {
-      const target = e.target as HTMLElement;
-      const grab = target.closest<HTMLElement>('[data-grab]');
-      if (!grab) return;
-      const row = grab.closest<HTMLElement>('[data-draggable]');
-      if (!row) return;
-
-      e.preventDefault();
-      grab.setPointerCapture((e as PointerEvent).pointerId);
-
-      const baseTilt = readBaseTilt(row);
-      row.classList.add('dragging');
-      row.classList.remove('settling');
-
-      active = {
-        el: row,
-        startX: e.clientX,
-        startY: e.clientY,
-        lastX: e.clientX,
-        lastY: e.clientY,
-        lastT: performance.now(),
-        vx: 0,
-        vy: 0,
-        baseTilt,
-        pointerId: (e as PointerEvent).pointerId,
-      };
-    });
-
-    window.addEventListener('pointermove', (e) => {
-      if (!active) return;
-      const dx = e.clientX - active.startX;
-      const dy = e.clientY - active.startY;
-      const now = performance.now();
-      const dt = Math.max(8, now - active.lastT);
-      active.vx = (e.clientX - active.lastX) / dt;
-      active.vy = (e.clientY - active.lastY) / dt;
-      active.lastX = e.clientX;
-      active.lastY = e.clientY;
-      active.lastT = now;
-
-      // Rotation: base tilt + horizontal velocity influence + slight drag bias
-      const rot = active.baseTilt + (active.vx * 8) + (dx * 0.02);
-      applyTransform(active.el, dx, dy, Math.max(-22, Math.min(22, rot)));
-    }, { passive: true });
-
-    function release() {
-      if (!active) return;
-      const a = active;
-      active = null;
-
-      // Throw — short physics run that decays, then settle back to origin
-      let dx = a.lastX - a.startX;
-      let dy = a.lastY - a.startY;
-      let vx = a.vx * 14;       // ms-velocity → px/frame-ish at 60fps
-      let vy = a.vy * 14;
-
-      const friction = 0.92;
-      const settleAfter = 220;  // ms of physics before springing home
-      const tStart = performance.now();
-
-      function step() {
-        const t = performance.now() - tStart;
-        if (t < settleAfter && Math.hypot(vx, vy) > 0.4) {
-          dx += vx;
-          dy += vy;
-          vx *= friction;
-          vy *= friction;
-          const rot = a.baseTilt + vx * 4 + dx * 0.02;
-          applyTransform(a.el, dx, dy, rot);
-          requestAnimationFrame(step);
-        } else {
-          // Spring back to origin tilt
-          a.el.classList.remove('dragging');
-          a.el.classList.add('settling');
-          a.el.style.transform = `rotate(${a.baseTilt}deg)`;
-          setTimeout(() => {
-            a.el.classList.remove('settling');
-            a.el.style.transform = '';
-          }, 750);
-        }
-      }
-      step();
-    }
-
-    window.addEventListener('pointerup', release);
-    window.addEventListener('pointercancel', release);
-  }
-</script>

@@ -101,7 +101,7 @@ const services = [
     lede: 'Sensors, soil, sky — and the dashboard the field officer actually opens.',
     body: [
       'Low-power sensor meshes, edge intelligence on cheap hardware, and dashboards built for the low-bandwidth realities of rural deployments. We treat the regional advisor as the primary user, not the farmer — because they are the one making the irrigation call.',
-      'We bring the lessons from a published agritech sensor deployment that delivered a ~38% water-use reduction across pilot farms.',
+      'We bring the lessons from a published agritech sensor deployment that cut water use by roughly a third across pilot farms.',
     ],
     deliverables: [
       'LoRa / LoRaWAN sensor architecture',
@@ -133,7 +133,7 @@ const services = [
 ];
 ---
 
-<Layout title="Services — SNX Studio" description="AI-native systems, industrial IoT, web platforms, cloud, design systems &amp; UX audits, and senior technical advisory.">
+<Layout title="Services — SNX Studio" description="AI-native systems, industrial IoT, web platforms, cloud, design systems &amp; UX audits, and senior technical advisory." keywords="AI development services, AI-native systems, industrial IoT development, web platform engineering, cloud architecture, design systems, UX audit, technical advisory, software consulting India">
   <Nav />
   <main>
     <!-- Hero -->
@@ -304,8 +304,6 @@ const services = [
     text-wrap: balance;
   }
   .service-lede {
-    font-family: var(--font-serif);
-    font-style: italic;
     font-size: clamp(1.25rem, 1.8vw, 1.5rem);
     line-height: 1.45;
     color: var(--ink-2);
@@ -321,7 +319,7 @@ const services = [
   .service-deliverables {
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
   }
   .service-deliverables h4 { display: inline-block; margin-bottom: 1rem; }
   .service-deliverables ul {
@@ -378,8 +376,6 @@ const services = [
     margin-bottom: 1.5rem;
   }
   .services-cta-sub {
-    font-family: var(--font-serif);
-    font-style: italic;
     font-size: clamp(1.125rem, 1.6vw, 1.4rem);
     line-height: 1.5;
     color: rgba(240,235,224,0.7);
