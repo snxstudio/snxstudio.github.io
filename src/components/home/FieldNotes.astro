@@ -1,33 +1,25 @@
 ---
-const notes = [
-  {
-    num: '01',
-    kicker: 'A solution document',
-    title: 'IRCTC: diagnosing Tatkal and designing what should replace it',
-    excerpt: 'The 10 AM Tatkal rush is the load-bearing wall — every other failure descends from it. A two-track lottery, a Booking Reputation Score, and an atomic booking pipeline that ends "money debited, no ticket". 12 pages, end-to-end.',
-    tags: ['UX teardown', 'Public systems', 'Queueing'],
-    read: '30 min',
-    status: 'Published',
-  },
-  {
-    num: '02',
-    kicker: 'A migration story',
-    title: 'Why we ditched Python for Go',
-    excerpt: 'A weekend rewrite of a hot FastAPI endpoint cut p99 latency 10×, dropped infrastructure cost by 68%, and made 3 AM pages stop. The honest story — including the three weeks of velocity we lost teaching the team a new language.',
-    tags: ['Go', 'FastAPI', 'Performance'],
-    read: '9 min',
-    status: 'Published',
-  },
-  {
-    num: '03',
-    kicker: 'A note on AI',
-    title: 'AI isn\'t here to replace developers — it\'s here to replace the stuff we secretly hate',
-    excerpt: 'The most expensive bug we never shipped wasn\'t in the code — it was in how we worked. A note on PR review queues, the cost of context-switching, and the small AI tool that bought a team back its senior engineering hours.',
-    tags: ['AI', 'Engineering ops', 'Open source'],
-    read: '7 min',
-    status: 'Published',
-  },
-];
+import { getCollection } from 'astro:content';
+
+// Sourced from the blog collection (single source of truth) so these
+// cards never drift from the real posts. Featured first, then newest.
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const featured = posts.find(p => p.data.featured);
+const ordered = featured ? [featured, ...posts.filter(p => p !== featured)] : posts;
+
+const notes = ordered.slice(0, 3).map((p, i) => ({
+  num: String(i + 1).padStart(2, '0'),
+  kicker: p.data.category,
+  title: p.data.title,
+  excerpt: p.data.description,
+  tags: [p.data.category],
+  read: p.data.readTime ?? '',
+  status: 'Published',
+  href: `/blog/${p.id}`,
+}));
 ---
 
 <section class="notes section" id="field-notes">
@@ -50,7 +42,7 @@ const notes = [
 
     <div class="notes-grid">
       {notes.map((n, i) => (
-        <article class={`note-card reveal ${i === 0 ? 'note-card-feature' : ''}`} style={`transition-delay: ${i * 80}ms`}>
+        <a href={n.href} class={`note-card reveal ${i === 0 ? 'note-card-feature' : ''}`} style={`transition-delay: ${i * 80}ms`}>
           <header class="note-card-head">
             <span class="note-num">{n.num}</span>
             <span class="note-kicker">{n.kicker}</span>
@@ -71,7 +63,7 @@ const notes = [
               </span>
             </div>
           </footer>
-        </article>
+        </a>
       ))}
     </div>
 
