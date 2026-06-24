@@ -3,17 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
-// Static site (GitHub Pages) has no backend, so the form posts to Formspree.
-// ⚠️ ACTION REQUIRED: create a form at https://formspree.io and replace
-// `YOUR_FORM_ID` below with the real id (looks like `xayzbwqr`). Until then
-// the form falls back to opening the visitor's email client via `mailto:`.
-const FORMSPREE_ID = 'YOUR_FORM_ID';
-const FORM_ACTION =
-  FORMSPREE_ID === 'YOUR_FORM_ID'
-    ? 'mailto:hello@wearesnx.studio'
-    : `https://formspree.io/f/${FORMSPREE_ID}`;
-const FORM_METHOD = FORM_ACTION.startsWith('mailto:') ? 'GET' : 'POST';
-const FORM_ENCTYPE = FORM_ACTION.startsWith('mailto:') ? 'text/plain' : undefined;
+// Static site (GitHub Pages) has no backend, so the form opens the visitor's
+// email client pre-addressed to the studio inbox via `mailto:`.
+const CONTACT_EMAIL = 'rawte.mayur@gmail.com';
+const FORM_ACTION = `mailto:${CONTACT_EMAIL}`;
+const FORM_METHOD = 'GET';
+const FORM_ENCTYPE = 'text/plain';
 ---
 
 <Layout title="Contact — SNX Studio" description="Tell us what you're building. We reply within one working day, from a real human.">
