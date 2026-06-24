@@ -9,18 +9,56 @@ interface Props {
   date: string;
   category: string;
   readTime?: string;
+  keywords?: string[];
 }
 
-const { title, description, date, category, readTime } = Astro.props;
+const { title, description, date, category, readTime, keywords } = Astro.props;
 
 const formattedDate = new Date(date).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
+
+const SITE = Astro.site || 'https://wearesnx.studio';
+const postURL = new URL(Astro.url.pathname, SITE).toString();
+const ogImage = new URL('/og-image.png', SITE).toString();
+
+// Article + breadcrumb structured data — strong signals for blog SEO.
+const articleSchema = [
+  {
+    '@type': 'BlogPosting',
+    '@id': `${postURL}#article`,
+    headline: title,
+    description,
+    datePublished: date,
+    dateModified: date,
+    url: postURL,
+    mainEntityOfPage: postURL,
+    image: ogImage,
+    articleSection: category,
+    ...(keywords && keywords.length ? { keywords: keywords.join(', ') } : {}),
+    author: { '@type': 'Organization', name: 'SNX Studio', url: SITE.toString() },
+    publisher: { '@id': `${SITE}#organization` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Field Notes', item: new URL('/blog', SITE).toString() },
+      { '@type': 'ListItem', position: 2, name: title, item: postURL },
+    ],
+  },
+];
 ---
 
-<Layout title={`${title} — SNX Studio`} description={description}>
+<Layout
+  title={`${title} — SNX Studio`}
+  description={description}
+  keywords={keywords && keywords.length ? keywords.join(', ') : undefined}
+  ogType="article"
+  publishedTime={date}
+  extraSchema={articleSchema}
+>
   <Nav />
   <main>
     <article class="post">

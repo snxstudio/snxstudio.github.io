@@ -5,6 +5,7 @@ date: "2026-04-26"
 category: "Teardown"
 readTime: "30 min"
 featured: true
+keywords: ["IRCTC", "Tatkal", "IRCTC Tatkal booking", "Tatkal ticket booking", "IRCTC problems", "Premium Tatkal", "train ticket booking India", "IRCTC PRS", "railway reservation system", "CRIS", "Tatkal lottery", "money debited no ticket"]
 ---
 
 *Diagnosing Tatkal and designing what should replace it.*

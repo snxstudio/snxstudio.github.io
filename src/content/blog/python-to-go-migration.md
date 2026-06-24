@@ -5,6 +5,7 @@ date: "2025-09-15"
 category: "Engineering"
 readTime: "9 min"
 featured: false
+keywords: ["Python to Go migration", "Go vs Python", "FastAPI performance", "p99 latency", "Golang rewrite", "backend performance", "infrastructure cost reduction"]
 ---
 
 There's a particular kind of bug that doesn't show up in staging, doesn't reproduce on demand, and doesn't have a clean stack trace. It just shows up in production at 2 AM, eats your weekend, and disappears before anyone can pin it down.
