@@ -6,15 +6,8 @@ const { class: className = '' } = Astro.props;
 ---
 
 <a href="/" class:list={['logo', className]} aria-label="SNX Studio — Home">
-  <span class="logo-mark" aria-hidden="true">
-    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-      <path d="M9 9 L23 23 M23 9 L9 23" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="16" cy="16" r="2.4" fill="var(--accent)"/>
-    </svg>
-  </span>
   <span class="logo-word">
-    <span class="logo-sn">SN</span><span class="logo-x">X</span><span class="logo-studio">/Studio</span>
+    <span class="logo-sn">SNX</span><span class="logo-dot">.</span><span class="logo-studio">/Studio</span>
   </span>
 </a>
 
@@ -33,16 +26,8 @@ const { class: className = '' } = Astro.props;
   }
   .logo:hover { opacity: 0.78; }
 
-  .logo-mark {
-    display: inline-flex;
-    width: 26px;
-    height: 26px;
-    color: var(--ink);
-  }
-  .logo-mark svg { width: 100%; height: 100%; }
-
   .logo-word { display: inline-flex; align-items: baseline; }
-  .logo-x { color: var(--accent); }
+  .logo-dot { color: var(--accent); }
   .logo-studio {
     font-family: var(--font-mono);
     font-weight: 500;

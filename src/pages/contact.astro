@@ -2,6 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+
+// Static site (GitHub Pages) has no backend, so the form posts to Formspree.
+// ⚠️ ACTION REQUIRED: create a form at https://formspree.io and replace
+// `YOUR_FORM_ID` below with the real id (looks like `xayzbwqr`). Until then
+// the form falls back to opening the visitor's email client via `mailto:`.
+const FORMSPREE_ID = 'YOUR_FORM_ID';
+const FORM_ACTION =
+  FORMSPREE_ID === 'YOUR_FORM_ID'
+    ? 'mailto:hello@wearesnx.studio'
+    : `https://formspree.io/f/${FORMSPREE_ID}`;
+const FORM_METHOD = FORM_ACTION.startsWith('mailto:') ? 'GET' : 'POST';
+const FORM_ENCTYPE = FORM_ACTION.startsWith('mailto:') ? 'text/plain' : undefined;
 ---
 
 <Layout title="Contact — SNX Studio" description="Tell us what you're building. We reply within one working day, from a real human.">
@@ -26,7 +38,8 @@ import Footer from '../components/Footer.astro';
     <section class="section-sm">
       <div class="container-wide">
         <div class="contact-grid">
-          <form class="contact-form reveal" id="contact-form" method="POST" action="#">
+          <form class="contact-form reveal" id="contact-form" method={FORM_METHOD} action={FORM_ACTION} enctype={FORM_ENCTYPE}>
+            <input type="hidden" name="_subject" value="New brief via wearesnx.studio" />
             <div class="form-row">
               <div class="form-group">
                 <label for="name" class="form-label"><span class="form-num">01</span> Your name</label>

@@ -26,5 +26,5 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://wearesnx.studio/sitemap.xml
+Sitemap: https://wearesnx.studio/sitemap-index.xml
 Sitemap: https://lit-pigeon.wearesnx.studio/sitemap.xml

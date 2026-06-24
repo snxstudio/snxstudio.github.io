@@ -16,9 +16,6 @@ const links = [
   <div class="nav-inner">
     <div class="nav-left">
       <Logo />
-      <span class="nav-status">
-        <span class="nav-status-dot"></span>Available for work
-      </span>
     </div>
 
     <div class="nav-right">
@@ -29,7 +26,6 @@ const links = [
               href={link.href}
               class:list={['nav-link', { active: currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href + '/')) }]}
             >
-              <span class="nav-link-num">{link.num}</span>
               <span class="nav-link-label">{link.label}</span>
             </a>
           </li>
@@ -100,25 +96,6 @@ const links = [
     gap: 1.25rem;
   }
 
-  .nav-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding-left: 1.25rem;
-    border-left: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .nav-status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: var(--accent);
-  }
-
   .nav-right {
     display: flex;
     align-items: center;
@@ -147,9 +124,6 @@ const links = [
     color: var(--ink-2);
     transition: color 0.25s ease;
   }
-
-  /* leading-zero numbering removed — too editorial */
-  .nav-link-num { display: none; }
 
   .nav-link:hover { color: var(--ink); }
   .nav-link.active { color: var(--accent); }
@@ -237,10 +211,6 @@ const links = [
   .mobile-link.mobile-link-cta { color: var(--accent); border-bottom: none; }
   .mobile-menu ul li:last-child .mobile-link { border-bottom: none; }
 
-  @media (max-width: 1024px) {
-    .nav-status { display: none; }
-    .nav-link-num { display: none; }
-  }
 
   @media (max-width: 880px) {
     .nav-links, .nav-cta { display: none; }

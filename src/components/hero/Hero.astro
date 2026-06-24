@@ -17,9 +17,8 @@ const capabilities = [
   <div class="hero-inner">
     <!-- Top meta row -->
     <div class="hero-top animate-fade-in delay-100">
-      <span class="hero-top-mark">SNX&#8201;°&#8201;STUDIO</span>
+      <span class="hero-top-mark">SNX&#8201;/&#8201;STUDIO</span>
       <span class="hero-top-tag">AI-native technology &amp; design</span>
-      <span class="hero-top-coords">12.97°N&#8201;·&#8201;77.59°E</span>
     </div>
 
     <!-- Full-bleed wordmark -->
@@ -112,8 +111,7 @@ const capabilities = [
     padding-bottom: clamp(1.5rem, 5vh, 3rem);
   }
   .hero-top-mark { color: var(--hero-ink); }
-  .hero-top-tag { flex: 1; }
-  .hero-top-coords { color: var(--hero-ink-2); }
+  .hero-top-tag { flex: 1; text-align: right; }
 
   /* ── Full-bleed wordmark ── */
   .hero-word {
@@ -245,8 +243,7 @@ const capabilities = [
   @media (max-width: 768px) {
     .hero { min-height: auto; padding-bottom: 0; }
     .hero-top { flex-wrap: wrap; gap: 0.5rem 1rem; }
-    .hero-top-tag { flex-basis: 100%; order: 3; }
-    .hero-top-coords { display: none; }
+    .hero-top-tag { flex-basis: 100%; order: 3; text-align: left; }
     .hero-word { font-size: clamp(4.5rem, 42vw, 12rem); }
     .hero-caption { flex-wrap: wrap; gap: 0.5rem; }
     .hero-caption-rule { flex-basis: 100%; }

@@ -66,7 +66,7 @@
   --bg-deep: #000000;
   --ink: #F4F5F7;
   --ink-2: #9097A0;       /* secondary text */
-  --muted: #6B7178;       /* mono labels / captions */
+  --muted: #868D96;       /* mono labels / captions — ~4.7:1 on --bg for WCAG AA */
   --border: #1E2024;      /* hairline dividers */
   --border-strong: #2C2F35;
 

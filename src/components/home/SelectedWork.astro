@@ -1,11 +1,9 @@
 ---
 import Mark from '../Marks.astro';
-import ProjectSketch from '../ProjectSketch.astro';
 
 const projects = [
   {
     idx: '01',
-    sketch: 'logistics',
     title: 'Logistics Intelligence Platform',
     sector: 'Freight · AI · Multi-tenant SaaS',
     year: '2024 — Now',
@@ -22,7 +20,6 @@ const projects = [
   },
   {
     idx: '02',
-    sketch: 'meter',
     title: 'Smart Energy Telemetry',
     sector: 'Industrial IoT · Embedded · Research',
     year: '2017 — 2019',
@@ -39,7 +36,6 @@ const projects = [
   },
   {
     idx: '03',
-    sketch: 'searoute',
     title: 'Maritime Routing Engine',
     sector: 'Open Source · Geo · TypeScript',
     year: '2023 — Now',
@@ -57,7 +53,6 @@ const projects = [
   },
   {
     idx: '04',
-    sketch: 'prompt',
     title: 'Promptbucket',
     sector: 'Open Source · AI · Web app',
     year: '2025 — Now',
@@ -75,7 +70,6 @@ const projects = [
   },
   {
     idx: '05',
-    sketch: 'agritech',
     title: 'Agritech Sensor Mesh',
     sector: 'IoT · AgriTech · Research',
     year: '2018',
@@ -92,7 +86,6 @@ const projects = [
   },
   {
     idx: '06',
-    sketch: 'lastmile',
     title: 'Last-Mile Cargo OS',
     sector: 'Marketplace · Logistics · Mission',
     year: '2019 — 2021',
@@ -149,13 +142,8 @@ const projects = [
                 </span>
               </div>
 
-              <!-- Two-column body: sketch + content -->
+              <!-- Body -->
               <div class="work-body">
-                <div class="work-sketch">
-                  <ProjectSketch name={p.sketch} />
-                  <span class="work-sketch-tag">Sketch</span>
-                </div>
-
                 <div class="work-content">
                   <div class="work-title-row">
                     <h3 class="work-title">
@@ -262,48 +250,8 @@ const projects = [
     color: var(--ink);
   }
 
-  /* Two-column body */
-  .work-body {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
-    align-items: start;
-  }
-
-  /* Sketch panel */
-  .work-sketch {
-    position: relative;
-    aspect-ratio: 200 / 140;
-    background: var(--bg-deep);
-    border: 1px solid var(--border);
-    border-radius: 0;
-    padding: 0.75rem;
-    color: var(--ink);
-    overflow: hidden;
-  }
-  .work-sketch::before {
-    /* faint blueprint grid */
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(to right, rgba(20,19,26,0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(20,19,26,0.05) 1px, transparent 1px);
-    background-size: 16px 16px;
-    pointer-events: none;
-  }
-  .work-sketch-tag {
-    position: absolute;
-    bottom: 6px;
-    right: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .work-row:hover .work-sketch { color: var(--accent); }
-
+  /* Body */
+  .work-body { display: block; }
   .work-content { min-width: 0; }
 
   /* Metadata top */
@@ -483,18 +431,12 @@ const projects = [
     flex-wrap: wrap;
   }
 
-  @media (max-width: 1024px) {
-    .work-body { grid-template-columns: 160px 1fr; gap: 1.5rem; }
-  }
-
   @media (max-width: 880px) {
     .work-row-bottom {
       grid-template-columns: 1fr;
       gap: 1.25rem;
     }
     .work-stack { justify-self: start; }
-    .work-body { grid-template-columns: 1fr; }
-    .work-sketch { max-width: 240px; }
   }
 
   @media (max-width: 560px) {

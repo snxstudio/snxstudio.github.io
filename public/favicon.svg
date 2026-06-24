@@ -1,5 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="#1A1A2E"/>
-  <text x="4" y="22" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#E8E8ED">SN</text>
-  <text x="20" y="22" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#2563EB">X</text>
+  <rect width="32" height="32" fill="#050506"/>
+  <text x="15" y="21.5" text-anchor="middle"
+        font-family="'Syne', 'Space Grotesk', system-ui, sans-serif"
+        font-size="13" font-weight="800" letter-spacing="-0.6"
+        fill="#F4F5F7">SNX<tspan fill="#5B86FF">.</tspan></text>
 </svg>

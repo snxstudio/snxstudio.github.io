@@ -7,7 +7,35 @@ interface Props {
 }
 
 const { title, description = 'Technology studio designing and building what\'s next. Web apps, AI, IoT, cloud infrastructure, and strategic advisory.' } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://snxstudio.com');
+const SITE = Astro.site || 'https://wearesnx.studio';
+const canonicalURL = new URL(Astro.url.pathname, SITE);
+const ogImage = new URL('/og-image.png', SITE);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE}#organization`,
+      name: 'SNX Studio',
+      url: SITE.toString(),
+      logo: new URL('/favicon.svg', SITE).toString(),
+      description: 'AI-native technology & design studio building SaaS, open-source, and commissioned work.',
+      sameAs: [
+        'https://github.com/mayurrawte',
+        'https://in.linkedin.com/in/mayurrawte',
+        'https://medium.com/@rawte.mayur',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}#website`,
+      url: SITE.toString(),
+      name: 'SNX Studio',
+      publisher: { '@id': `${SITE}#organization` },
+    },
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -34,10 +62,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://snxstudi
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonicalURL} />
-  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:site_name" content="SNX Studio" />
+  <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
 
   <link rel="canonical" href={canonicalURL} />
+
+  <!-- Structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- No-JS fallback: scroll-reveal elements default to hidden; make them
+       visible (and skip the transform) when JavaScript is unavailable so
+       no content — including the contact form — is ever stranded. -->
+  <noscript>
+    <style>
+      .reveal { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
 
   <title>{title}</title>
 </head>
