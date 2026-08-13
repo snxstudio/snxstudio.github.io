@@ -6,84 +6,105 @@ import Footer from '../components/Footer.astro';
 const cases = [
   {
     idx: '01',
-    title: 'Logistics Intelligence Platform',
-    sector: 'Freight · AI · Multi-tenant SaaS',
-    year: '2024 — Now',
-    role: 'Founding architect &amp; engineer',
-    challenge: 'A growing freight forwarder still ran the world\'s most expensive cargo on email threads and spreadsheets. Quoting took days, document handling took longer, and every customer felt it.',
-    approach: 'An AI-native platform: agentic quoting that pulls live carrier data and explains its work, document classification with prompt-cached pipelines, multi-tenant operations console, and SOC2-shaped infra from day one.',
-    result: 'Quoting that used to take days now takes seconds, and most inbound shipping documents are classified end-to-end without a human. The platform now powers daily ops for a growing book of enterprise customers.',
-    metrics: [
-      { value: 'Hours→sec', label: 'Quoting turnaround' },
-      { value: 'Hands-off', label: 'Document classification' },
-      { value: 'SOC2', label: 'Compliance in flight' },
-    ],
-    stack: ['Anthropic SDK', 'Agent SDK', 'NestJS', 'Next.js', 'PostgreSQL', 'AWS'],
-  },
-  {
-    idx: '02',
-    title: 'Smart Energy Telemetry',
-    sector: 'Industrial IoT · Embedded · Research',
-    year: '2017 — 2019',
-    role: 'Lead engineer &amp; researcher',
-    challenge: 'Legacy distribution grids in tier-2 cities had little real-time visibility on consumption, theft, or load. Replacing the meters wholesale was politically and economically impossible.',
-    approach: 'A drop-in smart-energy meter — a small embedded board paired with the existing analogue meter — and a telemetry / analytics stack that ingested everything into a central operations dashboard.',
-    result: 'Recognition from the Ministry of Power &amp; Coal. Smart India Hackathon finalist. Underlying research published in IJCA (2017). Six years on, the architecture still reads cleanly.',
-    metrics: [
-      { value: '99.9%', label: 'Telemetry uptime' },
-      { value: 'IJCA', label: 'Published research' },
-      { value: 'MoP', label: 'Ministry recognition' },
-    ],
-    stack: ['Embedded C', 'Raspberry Pi', 'MQTT', 'TimescaleDB', 'Angular'],
-  },
-  {
-    idx: '03',
-    title: 'Maritime Routing Engine (OSS)',
-    sector: 'Open Source · Geo · TypeScript',
-    year: '2023 — Now',
+    title: 'Maritime Routing Engine',
+    sector: 'Open Source · Geospatial · TypeScript',
+    year: '2022 — Now',
     role: 'Author &amp; maintainer',
-    challenge: 'Most sea-route libraries were either commercial, slow, or wildly inaccurate around canals and chokepoints. Logistics teams kept reinventing the same broken Dijkstra over and over.',
-    approach: 'Open-source it. searoute-ts ships an MIT-licensed library, sub-5ms median compute, accurate handling of canals (Suez, Panama, Malacca), and a stable NPM API used in production.',
-    result: 'Adopted into commercial logistics platforms across the world. Continues to be maintained — the open-source backbone of the studio\'s logistics work.',
+    challenge: 'Sea-route libraries were either commercial, unmaintained, or quietly wrong around the places that matter most — canals and chokepoints. Logistics teams kept rebuilding the same flawed shortest-path over the same bad graph.',
+    approach: 'Open-source it properly. searoute-ts ships the 2025 Eurostat maritime network, canal and strait restrictions (Suez, Panama, Bab-el-Mandeb), vessel-draft gating, K-shortest alternatives, multi-leg waypoints, and ETA from speed — behind a stable, MIT-licensed npm API.',
+    result: 'Now downloaded roughly 13,000 times a month and actively maintained. It is the open-source backbone of everything else we do in logistics.',
     metrics: [
-      { value: 'OSS', label: 'MIT-licensed, public NPM' },
-      { value: 'Dozens', label: 'Production integrations' },
-      { value: '< 5ms', label: 'Median route compute' },
+      { value: '13.4k', label: 'npm downloads / month' },
+      { value: 'MIT', label: 'Free, forever' },
+      { value: '2022', label: 'Maintained since' },
     ],
-    stack: ['TypeScript', 'GeoJSON', 'Dijkstra', 'NPM', 'GitHub Actions'],
+    stack: ['TypeScript', 'GeoJSON', 'Eurostat network', 'npm', 'GitHub Actions'],
     external: 'https://github.com/mayurrawte/searoute-ts',
   },
   {
-    idx: '04',
-    title: 'Agritech Sensor Mesh',
-    sector: 'IoT · AgriTech · Research',
-    year: '2018',
-    role: 'Co-author &amp; systems engineer',
-    challenge: 'Small-holder farms could not justify the cost of conventional precision-agriculture stacks, but were exposed to climate volatility that the larger farms had instruments to ride out.',
-    approach: 'A LoRa-powered sensor mesh — soil moisture, micro-climate, irrigation status — with a low-bandwidth dashboard for regional advisors who were the actual decision-makers, not the farmers.',
-    result: 'The pilot cut water use by roughly a third across participating farms. The work led to a published research paper and influenced the design of larger agritech rollouts.',
+    idx: '02',
+    title: 'Teamsly — Teams, Rebuilt',
+    sector: 'Product · MCP · Microsoft Graph',
+    year: '2026 — Now',
+    role: 'Author &amp; maintainer',
+    challenge: 'Microsoft Teams is unavoidable in enterprise and unloved by the people who live in it all day. Slow, mouse-bound, and completely closed to the AI tooling everyone now works alongside.',
+    approach: 'A keyboard-first client built directly on the Graph API — AI thread summaries, voice rooms, themes, disappearing DMs — plus an MCP server so Claude and Cursor can read and send Teams messages as first-class tools.',
+    result: 'Open-source and self-hostable, distributed through a Homebrew tap. One of the first Teams clients to expose itself over MCP.',
     metrics: [
-      { value: '~⅓', label: 'Less water used' },
-      { value: 'LoRa', label: 'Low-power mesh' },
-      { value: 'Paper', label: 'Published research' },
+      { value: 'MCP', label: 'Native Claude &amp; Cursor tools' },
+      { value: 'Graph', label: 'Direct Microsoft API' },
+      { value: 'OSS', label: 'Self-hostable' },
     ],
-    stack: ['Arduino', 'LoRaWAN', 'Node.js', 'InfluxDB', 'Grafana'],
+    stack: ['TypeScript', 'Next.js', 'Electron', 'Microsoft Graph', 'MCP'],
+    external: 'https://teamsly.app/',
+  },
+  {
+    idx: '03',
+    title: 'Lit Pigeon — Email, Unlocked',
+    sector: 'Developer Platform · Web Components',
+    year: '2026 — Now',
+    role: 'Author &amp; maintainer',
+    challenge: 'Every email editor on the market is either locked inside someone\'s SaaS or welded to one frontend framework. Teams end up rebuilding the same drag-and-drop composer for the third time, in a fourth framework.',
+    approach: 'Build the editor once as framework-agnostic web components, then ship thin wrappers for React, Vue, Angular and Svelte over a shared core — with MJML parsing and rendering, SSR, a REST adapter, pre-flight linting, Figma import, and an MCP server for authoring emails from an AI client.',
+    result: 'Fourteen MIT-licensed packages on npm covering the full pipeline from Figma frame to rendered, spam-checked HTML.',
+    metrics: [
+      { value: '14', label: 'npm packages, MIT' },
+      { value: '5', label: 'Frameworks supported' },
+      { value: 'MJML', label: 'Parse, render, lint' },
+    ],
+    stack: ['TypeScript', 'Lit', 'MJML', 'React / Vue / Angular / Svelte', 'MCP'],
+    external: 'https://github.com/snxstudio/lit-pigeon',
+  },
+  {
+    idx: '04',
+    title: 'mcp-elements — UI for AI Apps',
+    sector: 'Design System · MCP · Multi-framework',
+    year: '2026 — Now',
+    role: 'Author &amp; maintainer',
+    challenge: 'Every team building on MCP reinvents the same interface problems from zero: how do you render a tool call, ask for OAuth consent, show a scope inspector, or generate a form from a JSON Schema — without it looking like a debug view?',
+    approach: 'A copy-paste component library in the shadcn tradition — the CLI writes source into your project rather than adding a dependency. Framework-agnostic state machines in the core, with React, Vue and Angular implementations over a shared Tailwind v4 OKLCH token layer.',
+    result: 'Thirty-eight components across three frameworks, including MCP-native primitives no other library ships.',
+    metrics: [
+      { value: '38', label: 'Components' },
+      { value: '3', label: 'Frameworks, one core' },
+      { value: 'MIT', label: 'Copy-paste, no lock-in' },
+    ],
+    stack: ['TypeScript', 'React', 'Vue', 'Angular', 'Tailwind v4', 'MCP'],
+    external: 'https://github.com/mcp-elements/ui',
   },
   {
     idx: '05',
-    title: 'Last-Mile Cargo OS',
-    sector: 'Marketplace · Logistics · Mission',
-    year: '2019 — 2021',
-    role: 'Founding engineer',
-    challenge: 'A women-led, women-driven last-mile delivery startup needed a dispatch core, payments, and operator app — built fast, cheap, and reliable enough to put real income in real hands.',
-    approach: 'Built the platform from zero: order routing, dispatch, payments, partner integrations, rider-facing PWA. Architected for low-spec phones and patchy networks.',
-    result: 'Hundreds of riders onboarded. Platform supported the operating model through scale-up and into a Series A. Arguably the most rewarding code we\'ve shipped.',
+    title: 'ELIOT — Smart Energy Telemetry',
+    sector: 'Industrial IoT · Embedded · Research',
+    year: '2017 — 2019',
+    role: 'Lead engineer &amp; co-author',
+    challenge: 'Distribution grids in tier-2 Indian cities had almost no real-time visibility into consumption or load, and wholesale meter replacement was neither politically nor economically possible.',
+    approach: 'A drop-in device that reads an existing analogue meter by counting its kWh pulse LED, reports hourly usage over MQTT, and gates supply on a prepaid balance — recharged through a web portal, with a 24-hour grace period at zero.',
+    result: 'Published in the International Journal of Computer Applications (August 2017). Second Runner-up at Smart India Hackathon 2018, where it was recognised by India\'s Ministry of Power &amp; Coal as a best electricity-monitoring solution.',
     metrics: [
-      { value: '0→1', label: 'Built from scratch' },
-      { value: '500+', label: 'Active riders' },
-      { value: 'Impact', label: 'Mission-led startup' },
+      { value: 'IJCA', label: 'Peer-reviewed, Aug 2017' },
+      { value: 'MoP', label: 'Ministry recognition' },
+      { value: 'SIH', label: '2nd Runner-up, 2018' },
     ],
-    stack: ['Node.js', 'Angular', 'Firebase', 'GCP', 'Twilio'],
+    stack: ['Embedded C', 'NodeMCU / ESP8266', 'Lua', 'MQTT', 'TypeScript'],
+    external: 'https://github.com/mayurrawte/EliotV27',
+  },
+  {
+    idx: '06',
+    title: 'Developer Tooling',
+    sector: 'Open Source · Developer Experience',
+    year: '2019 — Now',
+    role: 'Author &amp; maintainer',
+    challenge: 'The same small frictions cost engineering teams real hours: PR review queues that rot, HTTP failures you cannot reproduce, CI that rebuilds everything on every push.',
+    approach: 'A set of narrow tools, each built because we hit the problem first. SherlockQA reviews pull requests with AI and leaves inline comments. httpx-debug turns any failing Python request into a paste-able, secret-redacted curl. Angular Setup and Nx Affected cut monorepo CI down to what actually changed.',
+    result: 'All MIT-licensed and published — on the GitHub Marketplace, npm, and PyPI.',
+    metrics: [
+      { value: 'MIT', label: 'Every tool, open' },
+      { value: '3', label: 'Registries published to' },
+      { value: 'Own itch', label: 'Every one of them' },
+    ],
+    stack: ['TypeScript', 'Python', 'GitHub Actions', 'Nx', 'Anthropic SDK'],
+    external: 'https://github.com/mayurrawte',
   },
 ];
 
@@ -109,7 +130,7 @@ const oss = [
 ];
 ---
 
-<Layout title="Work — SNX Studio" description="Selected case studies and open-source contributions. AI freight, smart energy IoT, maritime routing, agritech sensors, last-mile cargo." keywords="SNX Studio work, case studies, AI freight platform, logistics intelligence, smart energy IoT, maritime routing, searoute-ts, agritech sensors, last-mile delivery, portfolio">
+<Layout title="Work — SNX Studio" description="Things we built and still run: searoute-ts maritime routing, Teamsly, Lit Pigeon, mcp-elements, and the ELIOT smart energy meter." keywords="SNX Studio work, searoute-ts, maritime routing, Teamsly, MCP, Model Context Protocol, Lit Pigeon, email editor, mcp-elements, smart energy IoT, open source, portfolio">
   <Nav />
   <main>
     <!-- Hero -->
@@ -121,8 +142,8 @@ const oss = [
           <span class="accent">actually</span> shipped.
         </h1>
         <p class="lede animate-fade-in-up delay-400" style="max-width: 660px; margin-top: 1.5rem;">
-          A working studio doesn't get the luxury of vapourware. Every project below ran in
-          production, served real users, and survived the messy bit after launch.
+          A working studio doesn't get the luxury of vapourware. Everything below is public —
+          the repository, the licence, the download count. Click any of it and check.
         </p>
       </div>
     </section>
