@@ -1,6 +1,6 @@
 # SNX Studio
 
-> SNX Studio is a technology studio designing and building what's next — web apps, AI, IoT, cloud infrastructure, and strategic advisory. Alongside client work the studio publishes open-source tools from its production stack.
+> SNX Studio is a small, senior-led technology studio in Bengaluru, India, designing and building web apps, AI systems, IoT, cloud infrastructure, and strategic advisory. It is led by Mayur Rawte, CTO at Shipthis. The studio's portfolio is the software it has built and maintains in the open — every claim on the site links to a public repository, licence, or download count.
 
 ## Site
 - Home: https://wearesnx.studio/
@@ -16,7 +16,7 @@
 - Teamsly — keyboard-first Microsoft Teams client with AI thread summaries, command palette, voice rooms, and an MCP server that lets Claude read and send messages. Self-hostable, AGPL-3.0. https://teamsly.app/
 - Lit Pigeon — open-source, framework-agnostic drag & drop email editor built with web components; design responsive emails visually and export clean MJML / HTML. Live demo: https://lit-pigeon.wearesnx.studio/ · Details for LLMs: https://lit-pigeon.wearesnx.studio/llms.txt · Source: https://github.com/snxstudio/lit-pigeon
 - promptbucket — open library for collecting, versioning, and sharing production prompts. https://promptbucket.co
-- searoute-ts — computes the shortest realistic sea-route between any two coordinates on Earth (sub-5ms median). https://github.com/mayurrawte/searoute-ts
+- searoute-ts — computes the shortest realistic sea-route between any two coordinates on Earth, using the 2025 Eurostat maritime network with canal/strait restrictions and vessel-draft gating. MIT; ~13,000 npm downloads per month. https://github.com/mayurrawte/searoute-ts
 - github-angular-actions — GitHub Action that pre-installs Angular CLI and dependencies with configurable versions. https://github.com/mayurrawte/github-angular-actions
 - SherlockQA — a lightweight QA & testing companion. https://github.com/mayurrawte/SherlockQA
 - whatsapp-hero — Python utility for working with WhatsApp data. https://github.com/mayurrawte/whatsapp-hero
