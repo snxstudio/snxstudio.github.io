@@ -1,0 +1,106 @@
+---
+import LogRow from './LogRow.astro';
+import type { LogVerb, LogStatus } from './LogRow.astro';
+
+interface Entry {
+  timestamp: string;
+  verb: LogVerb;
+  target: string;
+  meta?: string;
+  status?: LogStatus;
+}
+
+const entries: Entry[] = [
+  { timestamp: '2026-05-14T04:08:00Z', verb: 'push',    target: 'Improved our farm-grid platform (AgriGrid).',                              meta: 'edge runtime',     status: 'ok'   },
+  { timestamp: '2026-05-14T02:41:00Z', verb: 'ship',    target: 'Released v1.4 of the IRCTC report.',                                        meta: 'public report',    status: 'ok'   },
+  { timestamp: '2026-05-13T17:10:00Z', verb: 'deploy',  target: 'Pushed an error-tracking tool to production.',                              meta: 'internal',         status: 'ok'   },
+  { timestamp: '2026-05-13T11:52:00Z', verb: 'note',    target: 'Reviewed benchmarks for substation-grade edge inference.',                                            status: 'note' },
+  { timestamp: '2026-05-13T08:35:00Z', verb: 'meeting', target: 'Discovery call with a new energy-sector client.',                           meta: 'Q3 prospect',      status: 'note' },
+  { timestamp: '2026-05-12T06:00:00Z', verb: 'push',    target: 'Refactored our internal command-line tool.',                                meta: 'snx-cli',          status: 'ok'   },
+  { timestamp: '2026-05-11T03:44:00Z', verb: 'ship',    target: 'Patched AgriGrid (v2.3.1) - fixed an irrigation logic bug.',                                          status: 'ok'   },
+  { timestamp: '2026-05-10T15:32:00Z', verb: 'note',    target: 'Re-read Kleppmann ch.7 - distributed systems consistency.',                                           status: 'note' },
+  { timestamp: '2026-05-09T13:15:00Z', verb: 'deploy',  target: 'Staged a preview build of the IRCTC report.',                                                         status: 'ok'   },
+  { timestamp: '2026-05-08T04:30:00Z', verb: 'meeting', target: 'Follow-up with the Ministry of Power & Coal.',                                                        status: 'note' },
+];
+---
+
+<section class="lf noc-frame">
+  <header class="lf-head">
+    <div class="lf-title-wrap">
+      <h2 class="lf-title">What we're working on</h2>
+      <span class="lf-sub">event-log · last 10</span>
+    </div>
+    <span class="lf-spacer"></span>
+    <a href="/log" class="lf-more">view all →</a>
+  </header>
+  <div class="lf-body">
+    {entries.map(e => <LogRow {...e} />)}
+  </div>
+  <footer class="lf-foot">
+    <span>
+      <span class="noc-dot ok live" aria-hidden="true"></span>
+      static seed · real feed pending
+    </span>
+    <span class="lf-foot-right">cursor at 2026-05-14 09:42 IST</span>
+  </footer>
+</section>
+
+<style>
+  .lf-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ink);
+    background: var(--bg);
+  }
+  .lf-title-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .lf-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+  .lf-sub {
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .lf-spacer { flex: 1; }
+  .lf-more {
+    font-size: 11px;
+    color: var(--ink-2);
+    letter-spacing: 0;
+    border-bottom: 1px solid var(--rule-strong);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .lf-more:hover { color: var(--ink); border-color: var(--ink); }
+  .lf-body { background: var(--bg-panel); }
+  .lf-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--rule);
+    background: var(--bg);
+    font-size: 11px;
+    color: var(--ink-2);
+    letter-spacing: 0;
+  }
+  .lf-foot > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lf-foot-right {
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+</style>

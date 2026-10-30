@@ -1,0 +1,132 @@
+---
+const data = {
+  acceptingCount: 1,
+  quarter: 'Q3 2026',
+  cells: [
+    { label: 'live',         value: 2, state: 'ok'    as const },
+    { label: 'discovery',    value: 1, state: 'watch' as const },
+    { label: 'maintenance',  value: 0, state: 'idle'  as const },
+  ],
+};
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="eng noc-frame">
+  <header class="eng-head">
+    <div class="eng-title-wrap">
+      <h2 class="eng-title">Taking new work?</h2>
+      <span class="eng-sub">current-engagements</span>
+    </div>
+    <span class="eng-meta">updated daily</span>
+  </header>
+
+  <div class="eng-cta">
+    <span class="noc-dot ok live" aria-hidden="true"></span>
+    <span class="eng-cta-text">
+      ACCEPTING <strong>{data.acceptingCount}</strong> NEW PROJECT / {data.quarter}
+    </span>
+    <a href="/contact" class="eng-cta-link">talk to us →</a>
+  </div>
+
+  <dl class="eng-grid">
+    {data.cells.map(c => (
+      <div class="eng-cell">
+        <dt>
+          <span class={`noc-dot ${c.state}`} aria-hidden="true"></span>
+          {c.label}
+        </dt>
+        <dd class="noc-numeral">{pad(c.value)}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<style>
+  .eng-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ink);
+    background: var(--bg);
+  }
+  .eng-title-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .eng-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+  .eng-sub {
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .eng-meta {
+    font-size: 11px;
+    color: var(--ink-2);
+    letter-spacing: 0.04em;
+  }
+
+  .eng-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 12px;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--rule);
+  }
+  .eng-cta-text { flex: 1; color: var(--ink); }
+  .eng-cta-text strong {
+    font-weight: 700;
+    color: var(--signal-ok);
+  }
+  .eng-cta-link {
+    color: var(--ink-2);
+    font-size: 11px;
+    letter-spacing: 0;
+    border-bottom: 1px solid var(--rule-strong);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .eng-cta-link:hover { color: var(--ink); border-color: var(--ink); }
+
+  .eng-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-panel);
+  }
+  .eng-cell {
+    padding: 14px 16px;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .eng-cell:last-child { border-right: 0; }
+  .eng-cell dt {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .eng-cell dd {
+    margin: 0;
+    font-size: clamp(28px, 4.5vw, 40px);
+    color: var(--ink);
+  }
+</style>

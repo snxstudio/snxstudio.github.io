@@ -1,0 +1,88 @@
+---
+interface Props {
+  value: string;
+  unit?: string;
+  label: string;
+  note?: string;
+  trend?: string;
+}
+
+const { value, unit, label, note, trend } = Astro.props;
+---
+
+<div class="mt">
+  <div class="mt-head">
+    <span class="mt-label">{label}</span>
+    {trend && <span class="mt-trend">{trend}</span>}
+  </div>
+  <div class="mt-value">
+    <span class="noc-numeral mt-num">{value}</span>
+    {unit && <span class="mt-unit">{unit}</span>}
+  </div>
+  {note && <div class="mt-note">{note}</div>}
+</div>
+
+<style>
+  .mt {
+    padding: 16px;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 148px;
+    background: var(--bg-panel);
+    justify-content: space-between;
+  }
+  .mt:last-child { border-right: 0; }
+
+  .mt-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mt-label {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .mt-trend {
+    font-size: 10px;
+    letter-spacing: 0;
+    color: var(--signal-ok);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mt-value {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .mt-num {
+    font-size: clamp(54px, 7vw, 82px);
+    color: var(--ink);
+  }
+  .mt-unit {
+    font-size: 14px;
+    color: var(--ink-2);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .mt-note {
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0;
+  }
+
+  @media (max-width: 720px) {
+    .mt {
+      border-right: 0;
+      border-bottom: 1px solid var(--rule);
+      min-height: auto;
+    }
+    .mt:last-child { border-bottom: 0; }
+  }
+</style>

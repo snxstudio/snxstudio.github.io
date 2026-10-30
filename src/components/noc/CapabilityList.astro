@@ -1,0 +1,103 @@
+---
+type State = 'ok' | 'watch' | 'alert' | 'idle';
+
+interface Capability {
+  name: string;
+  state: State;
+  load: string;
+}
+
+const capabilities: Capability[] = [
+  { name: 'ai/llm systems',     state: 'ok',    load: 'active'  },
+  { name: 'industrial iot',     state: 'ok',    load: 'active'  },
+  { name: 'edge compute',       state: 'ok',    load: 'active'  },
+  { name: 'cloud / devex',      state: 'ok',    load: 'active'  },
+  { name: 'web platforms',      state: 'ok',    load: 'active'  },
+  { name: 'agritech systems',   state: 'watch', load: 'limited' },
+  { name: 'technical advisory', state: 'idle',  load: 'on-call' },
+];
+
+const activeCount = capabilities.filter(c => c.state === 'ok').length;
+---
+
+<section class="cap noc-frame">
+  <header class="cap-head">
+    <div class="cap-title-wrap">
+      <h2 class="cap-title">What we build</h2>
+      <span class="cap-sub">capability-matrix</span>
+    </div>
+    <span class="cap-meta">×0{activeCount} active</span>
+  </header>
+  <ul class="cap-list" role="list">
+    {capabilities.map(c => (
+      <li class="cap-item">
+        <span class={`noc-dot ${c.state}`} aria-hidden="true"></span>
+        <span class="cap-name">{c.name}</span>
+        <span class={`cap-load cap-load-${c.state}`}>{c.load}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .cap-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ink);
+    background: var(--bg);
+  }
+  .cap-title-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .cap-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+  .cap-sub {
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cap-meta {
+    font-size: 11px;
+    color: var(--ink-2);
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .cap-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    background: var(--bg-panel);
+  }
+  .cap-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  .cap-item:last-child { border-bottom: 0; }
+  .cap-name { font-weight: 500; }
+  .cap-load {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .cap-load-ok    { color: var(--signal-ok); }
+  .cap-load-watch { color: var(--signal-watch); }
+  .cap-load-alert { color: var(--signal-alert); }
+  .cap-load-idle  { color: var(--ink-3); }
+</style>

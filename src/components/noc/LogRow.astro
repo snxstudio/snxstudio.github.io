@@ -1,0 +1,115 @@
+---
+export type LogVerb = 'push' | 'ship' | 'deploy' | 'note' | 'meeting' | 'incident';
+export type LogStatus = 'ok' | 'watch' | 'alert' | 'note';
+
+interface Props {
+  timestamp: string;        // ISO string
+  verb: LogVerb;
+  target: string;
+  meta?: string;
+  status?: LogStatus;
+}
+
+const { timestamp, verb, target, meta, status = 'ok' } = Astro.props;
+
+const d = new Date(timestamp);
+const parts = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Asia/Kolkata',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+}).formatToParts(d);
+const getPart = (type: string) => parts.find(p => p.type === type)?.value || '';
+const formatted = `${getPart('year')}-${getPart('month')}-${getPart('day')} ${getPart('hour')}:${getPart('minute')}`;
+---
+
+<div class="lr">
+  <time class="lr-time" datetime={timestamp}>{formatted}</time>
+  <span class={`lr-verb lr-verb-${verb}`}>{verb}</span>
+  <span class="lr-target">{target}</span>
+  {meta && <span class="lr-meta">{meta}</span>}
+  <span class="lr-spacer"></span>
+  <span class={`lr-status lr-status-${status}`}>{status === 'note' ? '--' : status}</span>
+</div>
+
+<style>
+  .lr {
+    display: grid;
+    grid-template-columns: 132px 76px minmax(0, 1fr) auto auto auto;
+    align-items: baseline;
+    gap: 14px;
+    padding: 9px 16px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 12px;
+    line-height: 1.4;
+    transition: background-color 0.15s ease;
+  }
+  .lr:last-child  { border-bottom: 0; }
+  .lr:hover { background: rgba(11, 12, 14, 0.025); }
+
+  .lr-time {
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+    font-size: 11px;
+  }
+  .lr-verb {
+    color: var(--ink-2);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+  .lr-verb-push     { color: var(--ink); }
+  .lr-verb-ship     { color: var(--signal-ok); }
+  .lr-verb-deploy   { color: var(--signal-ok); }
+  .lr-verb-note     { color: var(--ink-2); }
+  .lr-verb-meeting  { color: var(--ink-2); }
+  .lr-verb-incident { color: var(--signal-alert); }
+
+  .lr-target {
+    color: var(--ink);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .lr-meta {
+    color: var(--ink-3);
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+  .lr-spacer { width: 0; }
+  .lr-status {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .lr-status-ok    { color: var(--signal-ok); }
+  .lr-status-watch { color: var(--signal-watch); }
+  .lr-status-alert { color: var(--signal-alert); }
+  .lr-status-note  { color: var(--ink-3); }
+
+  @media (max-width: 720px) {
+    .lr {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas:
+        "time   verb   status"
+        "target target target"
+        "meta   meta   meta";
+      gap: 4px 12px;
+      padding: 10px 14px;
+    }
+    .lr-time   { grid-area: time; }
+    .lr-verb   { grid-area: verb; }
+    .lr-target { grid-area: target; white-space: normal; }
+    .lr-meta   { grid-area: meta; }
+    .lr-status { grid-area: status; justify-self: end; }
+    .lr-spacer { display: none; }
+  }
+</style>
