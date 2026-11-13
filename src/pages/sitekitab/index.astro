@@ -1,0 +1,216 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const features = [
+  {
+    num: '01',
+    title: 'Work progress, stage by stage',
+    desc: 'Every site starts with the usual house stages, from foundation to finishing. Tap a stage to mark it started or done and the site shows how far along it is, and whether it is on time for the finish date.',
+  },
+  {
+    num: '02',
+    title: 'Attendance in one screen',
+    desc: 'Mark who came today, full day or half. The day rate is copied onto each entry, so changing a rate later never changes old days.',
+  },
+  {
+    num: '03',
+    title: 'A khata for every person',
+    desc: 'Thekedars, workers and material shops each get their own account on the site: work done, material taken, payments made and what is still due.',
+  },
+  {
+    num: '04',
+    title: 'Pay everyone on payday',
+    desc: 'One list of who is owed what this week. Pay in cash or UPI, with a photo of the slip if you want one.',
+  },
+  {
+    num: '05',
+    title: 'Contract and agreement',
+    desc: 'Record a per-square-foot or lump-sum contract, what the owner has paid and what is left. Print a one-page agreement as a PDF.',
+  },
+  {
+    num: '06',
+    title: 'Share a site, show only their part',
+    desc: 'Send a painter or a thekedar an invite code by SMS. They see their own work and their own account on that site, and nothing else.',
+  },
+];
+
+const promises = [
+  { title: 'Nothing is overwritten', desc: 'Entries are never edited. A mistake is cancelled with a visible correction, the way it is done in a paper ledger.' },
+  { title: 'Photos stay on your phone', desc: 'Bills, slips and site photos are kept on the phone that took them and in your own backup file.' },
+  { title: 'No ads, no selling data', desc: 'The app has no advertising and no tracking. Your account can be deleted from inside the app.' },
+];
+---
+
+<Layout
+  title="SiteKitab — site management for house-building contractors | SNX Studio"
+  description="SiteKitab is an Android app for contractors who build houses: work progress, attendance, payments, material and a khata for every person on site. In Hindi and English."
+  keywords="SiteKitab, contractor app, site hisab, construction site management India, thekedar khata, attendance app for contractors, Hindi construction app"
+>
+  <Nav />
+  <main>
+    <section class="page-hero">
+      <div class="container-wide sk-hero">
+        <div>
+          <span class="label label-mark animate-fade-in-up">Android app · In testing</span>
+          <h1 class="page-h1 animate-fade-in-up delay-200">
+            SiteKitab<br/>
+            <span class="accent">the site's own book.</span>
+          </h1>
+          <p class="lede animate-fade-in-up delay-400" style="max-width: 620px; margin-top: 1.5rem;">
+            For contractors who build houses. Work progress, attendance, payments and material
+            for every site, in place of the diary and the photos on WhatsApp. In Hindi and English.
+          </p>
+          <div class="sk-actions animate-fade-in-up delay-400">
+            <a href="mailto:hello@wearesnx.studio?subject=SiteKitab" class="btn-primary">Ask to try it</a>
+            <a href="/sitekitab/privacy" class="sk-link">Privacy policy</a>
+          </div>
+          <p class="sk-note">Coming to Google Play. Made by SNX Studio.</p>
+        </div>
+        <img src="/sitekitab/icon.png" alt="SiteKitab app icon" class="sk-icon" width="160" height="160" />
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container-wide sk-shots">
+        <figure class="reveal">
+          <img src="/sitekitab/home.png" alt="SiteKitab home screen showing progress across two sites" width="599" height="1200" loading="lazy" />
+          <figcaption>All sites and how far each has come</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img src="/sitekitab/site.png" alt="A site in SiteKitab with its current stage, actions and work stages" width="599" height="1200" loading="lazy" />
+          <figcaption>One site: current stage, attendance, payments</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img src="/sitekitab/people.png" alt="The people directory in SiteKitab with trades, day rates and dues" width="599" height="1200" loading="lazy" />
+          <figcaption>Your people, their rates and what is due</figcaption>
+        </figure>
+      </div>
+      <p class="container-wide sk-caption">Screens show sample data.</p>
+    </section>
+
+    <section class="section bg-surface-alt">
+      <div class="container-wide">
+        <span class="label label-mark">What it does</span>
+        <ol class="sk-features" role="list">
+          {features.map((f) => (
+            <li class="reveal">
+              <span class="numeral sk-num">{f.num}</span>
+              <h2>{f.title}</h2>
+              <p>{f.desc}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-wide">
+        <span class="label label-mark">How it treats your records</span>
+        <ul class="sk-promises" role="list">
+          {promises.map((p) => (
+            <li class="reveal">
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </li>
+          ))}
+        </ul>
+        <p class="sk-foot">
+          Questions or a site you would like to try it on:
+          <a href="mailto:hello@wearesnx.studio?subject=SiteKitab">hello@wearesnx.studio</a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .sk-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+  .sk-icon {
+    border-radius: 36px;
+    border: 1px solid var(--border-strong);
+  }
+  .sk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .sk-link {
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .sk-link:hover { color: var(--ink); }
+  .sk-note {
+    margin-top: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .sk-shots {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 3vw, 2.5rem);
+  }
+  .sk-shots figure { margin: 0; }
+  .sk-shots img {
+    width: 100%;
+    height: auto;
+    border-radius: 28px;
+    border: 1px solid var(--border-strong);
+  }
+  .sk-shots figcaption,
+  .sk-caption {
+    margin-top: 0.9rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .sk-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem 3rem;
+    margin-top: 3rem;
+    padding: 0;
+    list-style: none;
+  }
+  .sk-num { color: var(--accent); font-size: 0.9rem; }
+  .sk-features h2,
+  .sk-promises h3 {
+    margin: 0.6rem 0 0.5rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+  .sk-features p,
+  .sk-promises p {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .sk-promises {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem 3rem;
+    margin-top: 2.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  .sk-foot { margin-top: 3.5rem; color: var(--muted); }
+  .sk-foot a { color: var(--accent); }
+
+  @media (max-width: 860px) {
+    .sk-hero { grid-template-columns: 1fr; }
+    .sk-icon { width: 96px; height: 96px; border-radius: 22px; order: -1; }
+    .sk-shots { grid-template-columns: 1fr; max-width: 360px; }
+    .sk-features,
+    .sk-promises { grid-template-columns: 1fr; }
+  }
+</style>
