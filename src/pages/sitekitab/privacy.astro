@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="SiteKitab privacy policy | SNX Studio"
+  description="What the SiteKitab app stores, where it is kept, who can see it and how to delete it."
+  keywords="SiteKitab privacy policy, SiteKitab delete account"
+>
+  <Nav />
+  <main>
+    <section class="page-hero">
+      <div class="container-narrow">
+        <span class="label label-mark">SiteKitab</span>
+        <h1 class="page-h1">Privacy policy</h1>
+        <p class="lede" style="margin-top: 1.5rem;">
+          SiteKitab is an Android app made by SNX Studio for contractors to keep the records of their
+          building sites. This page says what the app stores, where, who can see it and how to delete it.
+        </p>
+        <p class="pp-date">Last updated: 13 November 2026</p>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container-narrow pp">
+        <h2>What the app stores</h2>
+        <ul>
+          <li><strong>Your Google account:</strong> your email address, name and Google account ID, used only to sign you in.</li>
+          <li><strong>Your profile:</strong> the name or firm name, mobile number and kind of work that you type in. The mobile number is optional.</li>
+          <li><strong>Your site records:</strong> everything you enter about your sites. This includes site names, contract details, work stages and notes, attendance, payments, material and expenses.</li>
+          <li><strong>People on your sites:</strong> the names, phone numbers and day rates of house owners, thekedars, workers and shops that you add.</li>
+          <li><strong>Photos:</strong> photos of bills, payment slips, agreements and work that you attach.</li>
+        </ul>
+
+        <h2>Where it is kept</h2>
+        <ul>
+          <li>Your records are kept on your phone and in your SiteKitab account online, so that they are not lost with the phone and can be opened on another phone. The online copy is stored with Google Firebase (Google Cloud).</li>
+          <li><strong>Photos are not uploaded.</strong> They stay on the phone that took them, and in a backup file if you make one.</li>
+          <li>A backup file is made only when you ask for it, and is saved where you choose.</li>
+        </ul>
+
+        <h2>Who can see it</h2>
+        <ul>
+          <li>Only you, signed in to your Google account.</li>
+          <li><strong>People you invite.</strong> If you share a site with someone using an invite code, that person can see their own work stages and their own account on that site. They cannot see the contract, the owner's payments or anyone else's account. You can stop sharing at any time.</li>
+          <li>We do not sell your data or share it with advertisers. The app has no advertising and no usage tracking.</li>
+          <li>We may access stored data only when needed to fix a problem you report to us, or when the law requires it.</li>
+        </ul>
+
+        <h2>What the app can reach on your phone</h2>
+        <ul>
+          <li><strong>Contacts:</strong> the app does not read your address book. When you choose "pick from contacts", your phone's own picker opens and the app receives only the one contact you tap.</li>
+          <li><strong>Camera and gallery:</strong> used only when you attach a photo.</li>
+          <li><strong>SMS:</strong> the app does not read or send SMS. An invite opens your own messaging app with the text ready, and you send it yourself.</li>
+          <li><strong>App lock:</strong> uses your phone's own screen lock. The app never sees your PIN, pattern or fingerprint.</li>
+        </ul>
+
+        <h2 id="delete">Deleting your data</h2>
+        <ul>
+          <li><strong>In the app:</strong> open the Profile tab and choose "Delete my account and data" at the bottom. This removes your account and all its records from our servers and from that phone. It cannot be undone.</li>
+          <li><strong>Without the app:</strong> email <a href="mailto:hello@wearesnx.studio?subject=Delete%20my%20SiteKitab%20account">hello@wearesnx.studio</a> from the Google address you signed in with and ask for your SiteKitab account to be deleted. We will delete it within 30 days.</li>
+          <li>Signing out removes the records from that phone but keeps them in your account.</li>
+          <li>Backup files and photos saved outside the app are yours to delete.</li>
+        </ul>
+
+        <h2>Other people's details</h2>
+        <p>
+          You decide whose names and phone numbers you enter. Please enter them only for people you work with,
+          and remove a person from the app if they ask you to.
+        </p>
+
+        <h2>Children</h2>
+        <p>SiteKitab is a work tool and is not meant for anyone under 18.</p>
+
+        <h2>Changes and contact</h2>
+        <p>
+          If this policy changes, the new version will be on this page with a new date. For any question about
+          your data, write to <a href="mailto:hello@wearesnx.studio?subject=SiteKitab">hello@wearesnx.studio</a>.
+        </p>
+        <p><a href="/sitekitab">Back to SiteKitab</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding-top: calc(78px + clamp(3rem, 6vw, 5rem));
+    padding-bottom: clamp(1rem, 3vw, 2rem);
+  }
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-top: 1.5rem;
+  }
+  .pp-date {
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .pp h2 {
+    margin: 2.75rem 0 1rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .pp h2:first-child { margin-top: 0; }
+  .pp ul { padding-left: 1.2rem; list-style: disc; }
+  .pp li,
+  .pp p {
+    margin-bottom: 0.8rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .pp strong { color: var(--ink); font-weight: 600; }
+  .pp a { color: var(--accent); }
+</style>
