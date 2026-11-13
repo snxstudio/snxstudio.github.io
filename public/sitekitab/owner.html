@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Site progress | SiteKitab</title>
+  <link rel="icon" href="/sitekitab/icon.png" />
+  <style>
+    :root {
+      --bg: #f3f4f6; --card: #ffffff; --ink: #14161a; --muted: #5b6068; --edge: #e1e4e9;
+      --blue: #2447d8; --blue-top: #4a76ff; --blue-bottom: #1f3fd0; --green: #1b7f4b; --amber: #8a5a00; --red: #b3261e;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1012; --card: #1b1d21; --ink: #f1f2f4; --muted: #a3a7ae; --edge: #2c2f36;
+        --blue: #8fa9ff; --green: #6fd8a0; --amber: #f2c14e; --red: #ffb4ab;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Devanagari", sans-serif; line-height: 1.45;
+    }
+    main { max-width: 560px; margin: 0 auto; padding: 16px 16px 40px; }
+    .hero {
+      display: flex; align-items: center; gap: 16px; padding: 22px; border-radius: 28px; color: #fff;
+      background: linear-gradient(135deg, var(--blue-top), var(--blue-bottom));
+    }
+    .hero h1 { margin: 2px 0 0; font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.02em; }
+    .hero p { margin: 0; opacity: 0.85; }
+    .hero .grow { flex: 1; min-width: 0; }
+    .ring { width: 96px; height: 96px; flex: none; }
+    .ring text { font-size: 22px; font-weight: 700; fill: #fff; }
+    .card { margin-top: 12px; padding: 16px; border-radius: 24px; background: var(--card); border: 1px solid var(--edge); }
+    h2 { margin: 0 0 8px; font-size: 1.1rem; }
+    .row { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; }
+    .row span:first-child { color: var(--muted); }
+    .row b { font-weight: 600; text-align: right; }
+    .stage { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+    .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--muted); flex: none; }
+    .dot.s1 { background: var(--amber); border-color: var(--amber); }
+    .dot.s2 { background: var(--green); border-color: var(--green); }
+    .stage .name { flex: 1; font-weight: 600; }
+    .stage .st { font-size: 0.9rem; color: var(--muted); }
+    .stage .st.s1 { color: var(--amber); }
+    .stage .st.s2 { color: var(--green); }
+    .pay { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--edge); }
+    .pay small { display: block; color: var(--muted); }
+    .due b { color: var(--red); }
+    .call {
+      display: block; margin-top: 12px; padding: 14px; border-radius: 18px; text-align: center; text-decoration: none;
+      font-weight: 600; color: #fff; background: var(--blue-bottom);
+    }
+    .note { margin-top: 20px; text-align: center; font-size: 0.85rem; color: var(--muted); }
+    .note a { color: var(--blue); }
+    .msg { margin-top: 64px; text-align: center; color: var(--muted); }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<main>
+  <p class="msg" id="msg">…</p>
+  <div id="page" hidden>
+    <section class="hero">
+      <div class="grow">
+        <p id="contractor"></p>
+        <h1 id="site"></h1>
+        <p id="now"></p>
+      </div>
+      <svg class="ring" viewBox="0 0 96 96" role="img" aria-label="progress">
+        <circle cx="48" cy="48" r="41" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="12" />
+        <circle id="arc" cx="48" cy="48" r="41" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"
+                transform="rotate(-90 48 48)" stroke-dasharray="0 258" />
+        <text id="pct" x="48" y="56" text-anchor="middle"></text>
+      </svg>
+    </section>
+
+    <section class="card" id="datesCard" hidden>
+      <div class="row" id="startRow"><span data-t="start"></span><b id="start"></b></div>
+      <div class="row" id="targetRow"><span data-t="target"></span><b id="target"></b></div>
+    </section>
+
+    <section class="card" id="stagesCard" hidden>
+      <h2 data-t="stages"></h2>
+      <div id="stages"></div>
+    </section>
+
+    <section class="card">
+      <h2 data-t="money"></h2>
+      <div class="row" id="contractRow"><span data-t="contract"></span><b id="contract"></b></div>
+      <div class="row"><span data-t="paid"></span><b id="paid"></b></div>
+      <div class="row due" id="dueRow"><span data-t="due"></span><b id="due"></b></div>
+      <div id="payments"></div>
+    </section>
+
+    <a class="call" id="call" hidden></a>
+    <p class="note"><span id="updated"></span><br /><a href="/sitekitab">SiteKitab</a> · SNX Studio</p>
+  </div>
+</main>
+<script>
+  // The page shows one ready-made summary that the contractor's phone publishes. The token in the link is the
+  // only key to it; the page reads nothing else and writes nothing.
+  var hindi = (navigator.language || '').toLowerCase().indexOf('hi') === 0;
+  var words = hindi ? {
+    stages: 'काम के चरण', money: 'पैसे का हिसाब', contract: 'कुल ठेका', paid: 'आपने अब तक दिया', due: 'बाकी',
+    start: 'काम शुरू', target: 'पूरा करने की तारीख', s0: 'शुरू नहीं', s1: 'चालू', s2: 'पूरा', call: 'कॉल करें: ',
+    updated: 'अपडेट: ', none: 'यह लिंक बंद है या गलत है। अपने कॉन्ट्रैक्टर से नया लिंक माँगें।', fail: 'पेज नहीं खुल सका। इंटरनेट जाँचें और दोबारा खोलें।',
+    cash: 'नकद', upi: 'UPI'
+  } : {
+    stages: 'Work stages', money: 'Payments', contract: 'Contract amount', paid: 'You have paid', due: 'Balance',
+    start: 'Work started', target: 'To be finished by', s0: 'Not started', s1: 'In progress', s2: 'Done', call: 'Call ',
+    updated: 'Updated ', none: 'This link is switched off or wrong. Ask your contractor for a new one.', fail: 'Could not open the page. Check the internet and try again.',
+    cash: 'Cash', upi: 'UPI'
+  };
+  document.documentElement.lang = hindi ? 'hi' : 'en';
+  document.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = words[el.getAttribute('data-t')]; });
+  var $ = function (id) { return document.getElementById(id); };
+
+  // Firestore's REST format wraps every value in its type; this unwraps it.
+  function plain(v) {
+    if (v == null) return null;
+    if ('stringValue' in v) return v.stringValue;
+    if ('integerValue' in v) return Number(v.integerValue);
+    if ('doubleValue' in v) return v.doubleValue;
+    if ('booleanValue' in v) return v.booleanValue;
+    if ('arrayValue' in v) return (v.arrayValue.values || []).map(plain);
+    if ('mapValue' in v) return fields(v.mapValue.fields || {});
+    return null;
+  }
+  function fields(f) { var out = {}; Object.keys(f).forEach(function (k) { out[k] = plain(f[k]); }); return out; }
+  function rupees(paise) { return '₹' + Math.round(paise / 100).toLocaleString('en-IN'); }
+  function day(epochDay) {
+    return new Date(epochDay * 86400000).toLocaleDateString(hindi ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  var token = new URLSearchParams(location.search).get('t') || '';
+  if (!/^[a-z0-9]{16,40}$/.test(token)) {
+    $('msg').textContent = words.none;
+  } else {
+    fetch('https://firestore.googleapis.com/v1/projects/sitekitab/databases/(default)/documents/public/' + token)
+      .then(function (r) { if (r.status === 404 || r.status === 403) throw 'none'; if (!r.ok) throw 'fail'; return r.json(); })
+      .then(function (doc) {
+        var d = fields(doc.fields || {});
+        document.title = d.siteName + ' | SiteKitab';
+        $('site').textContent = d.siteName;
+        $('contractor').textContent = d.contractor || '';
+        var stages = d.stages || [];
+        var current = stages.filter(function (s) { return s.status === 1; })[0] || stages.filter(function (s) { return s.status === 0; })[0];
+        $('now').textContent = current ? current.name : '';
+        var pct = d.percent || 0;
+        $('pct').textContent = pct + '%';
+        $('arc').setAttribute('stroke-dasharray', (258 * pct / 100) + ' 258');
+
+        if (d.startDay != null || d.targetDay != null) {
+          $('datesCard').hidden = false;
+          if (d.startDay != null) $('start').textContent = day(d.startDay); else $('startRow').hidden = true;
+          if (d.targetDay != null) $('target').textContent = day(d.targetDay); else $('targetRow').hidden = true;
+        }
+        if (stages.length) {
+          $('stagesCard').hidden = false;
+          stages.forEach(function (s) {
+            var row = el('div', 'stage');
+            row.appendChild(el('span', 'dot s' + s.status));
+            row.appendChild(el('span', 'name', s.name));
+            row.appendChild(el('span', 'st s' + s.status, words['s' + s.status]));
+            $('stages').appendChild(row);
+          });
+        }
+        var paid = d.paidPaise || 0;
+        $('paid').textContent = rupees(paid);
+        if (d.contractPaise) {
+          $('contract').textContent = rupees(d.contractPaise);
+          $('due').textContent = rupees(Math.max(d.contractPaise - paid, 0));
+        } else {
+          $('contractRow').hidden = true;
+          $('dueRow').hidden = true;
+        }
+        (d.payments || []).slice().reverse().forEach(function (p) {
+          var row = el('div', 'pay');
+          var left = el('div', null, day(p.day));
+          var detail = [p.mode === 'UPI' ? words.upi : p.mode === 'CASH' ? words.cash : null, p.note].filter(Boolean).join(' · ');
+          if (detail) left.appendChild(el('small', null, detail));
+          row.appendChild(left);
+          row.appendChild(el('b', null, rupees(p.amountPaise)));
+          $('payments').appendChild(row);
+        });
+        if (d.phone) {
+          $('call').hidden = false;
+          $('call').href = 'tel:+91' + d.phone;
+          $('call').textContent = words.call + (d.contractor || '');
+        }
+        $('updated').textContent = words.updated + new Date(d.updatedAt).toLocaleString(hindi ? 'hi-IN' : 'en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+        $('msg').hidden = true;
+        $('page').hidden = false;
+      })
+      .catch(function (why) { $('msg').textContent = why === 'none' ? words.none : words.fail; });
+  }
+</script>
+</body>
+</html>
