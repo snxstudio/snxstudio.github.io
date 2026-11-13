@@ -87,6 +87,18 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <style>
+  .page-hero {
+    padding-top: calc(78px + clamp(3rem, 6vw, 5rem));
+    padding-bottom: clamp(1rem, 3vw, 2rem);
+  }
+  .page-h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-top: 1.5rem;
+  }
   .pp-date {
     margin-top: 1rem;
     font-family: var(--font-mono);
@@ -96,7 +108,9 @@ import Footer from '../../components/Footer.astro';
   .pp h2 {
     margin: 2.75rem 0 1rem;
     font-family: var(--font-display);
+    font-weight: 700;
     font-size: 1.5rem;
+    letter-spacing: -0.02em;
   }
   .pp h2:first-child { margin-top: 0; }
   .pp ul { padding-left: 1.2rem; list-style: disc; }
@@ -104,7 +118,7 @@ import Footer from '../../components/Footer.astro';
   .pp p {
     margin-bottom: 0.8rem;
     line-height: 1.65;
-    color: var(--muted);
+    color: var(--ink-2);
   }
   .pp strong { color: var(--ink); font-weight: 600; }
   .pp a { color: var(--accent); }
